@@ -1,0 +1,15 @@
+@use '~normalize.css' as normalize;
+@use 'assets/scss/modules/fonts';
+
+// font size
+$font-xs: 11px;
+$font-sm: 12px;
+$font-md: 16px;
+$font-lg: 20px;
+$font-xl: 32px;
+
+body {
+  font-family: Spartan, sans-serif;
+  font-size: $font-sm;
+  font-weight: 500;
+}
