@@ -1,5 +1,6 @@
 @use '~normalize.css' as normalize;
 @use 'assets/scss/modules/fonts';
+@use 'assets/scss/modules/themes';
 
 // font size
 $font-xs: 11px;
@@ -8,8 +9,50 @@ $font-md: 16px;
 $font-lg: 20px;
 $font-xl: 32px;
 
+// global styles
 body {
-  font-family: Spartan, sans-serif;
+  font-family: Spartan, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
   font-size: $font-sm;
   font-weight: 500;
+  background-color: var(--background-color);
+}
+
+*,
+::after,
+::before {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+img {
+  display: block;
+  width: 100%;
+  object-fit: cover;
+}
+
+button {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+input {
+  margin: 0;
 }
