@@ -1,0 +1,11 @@
+.light-theme {
+  --color-white: hsl(0deg 0% 100%);
+  --color-base: hsl(228deg 29% 7%);
+  --background-color: hsl(240deg 27% 98%);
+}
+
+.dark-theme {
+  --color-white: hsl(0deg 0% 100%);
+  --color-base: hsl(0deg 0% 100%);
+  --background-color: hsl(233deg 30% 11%);
+}
