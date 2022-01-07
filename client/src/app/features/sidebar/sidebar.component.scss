@@ -1,0 +1,128 @@
+@use 'vars';
+@use 'breakpoints' as bp;
+
+aside {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  min-height: 4.5rem;
+  background-color: var(--sidebar-background);
+
+  @include bp.md {
+    min-height: 5rem;
+  }
+
+  @include bp.xl {
+    flex-direction: column;
+    max-width: 6.4375rem;
+    min-height: 100vh;
+    border-top-right-radius: 1.25rem;
+    border-bottom-right-radius: 1.25rem;
+  }
+}
+
+.container {
+  display: flex;
+  align-items: center;
+
+  @include bp.xl {
+    flex-direction: column;
+  }
+}
+
+.logo-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 4.5rem;
+  overflow: hidden;
+  background-color: var(--primary);
+  border-radius: 0 1.25rem 1.25rem 0;
+
+  &::after {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    content: '';
+    background-color: var(--primary-light);
+    border-radius: 1.25rem 0 0 1.25rem;
+  }
+
+  @include bp.md {
+    min-width: 5rem;
+  }
+
+  @include bp.xl {
+    width: 100%;
+    min-height: 6.4375rem;
+  }
+}
+
+.logo {
+  z-index: vars.$z-logo;
+  display: inline-block;
+  width: 1.8125rem;
+  height: 1.6875rem;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  @include bp.md {
+    width: 1.9375rem;
+    height: 1.8125rem;
+  }
+
+  @include bp.lg {
+    width: 2.5rem;
+    height: 2.375rem;
+  }
+}
+
+.theme-icon {
+  margin-right: 1.5rem;
+  cursor: pointer;
+
+  @include bp.md {
+    margin-right: 2rem;
+  }
+
+  @include bp.xl {
+    margin-right: 0;
+    margin-bottom: 2rem;
+  }
+}
+
+.user-icon {
+  padding: 1.25rem 1.5rem;
+  border-left: 1px solid var(--sidebar-border);
+
+  @include bp.md {
+    padding: 1.5rem 2rem;
+  }
+
+  @include bp.xl {
+    border-top: 1px solid var(--sidebar-border);
+    border-left: none;
+  }
+}
+
+.user-icon img {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+
+  @include bp.xl {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+}
