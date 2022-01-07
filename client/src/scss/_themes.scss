@@ -1,19 +1,10 @@
-.light-theme {
-  --color-white: hsl(0deg 0% 100%);
-  --color-base: hsl(228deg 29% 7%);
-  --color-primary: hsl(252deg 94% 67%);
-  --color-primary-light: hsl(252deg 100% 73%);
-  --background-color: hsl(240deg 27% 98%);
-  --sidebar-bg-color: hsl(231deg 20% 27%);
-  --sidebar-border-color: hsl(232deg 20% 36%);
-}
-
-.dark-theme {
-  --color-white: hsl(0deg 0% 100%);
-  --color-base: hsl(0deg 0% 100%);
-  --color-primary: hsl(252deg 94% 67%);
-  --color-primary-light: hsl(252deg 100% 73%);
-  --background-color: hsl(233deg 30% 11%);
-  --sidebar-bg-color: hsl(233deg 31% 17%);
-  --sidebar-border-color: hsl(232deg 20% 36%);
+:root {
+  /* Colors */
+  --primary: hsl(252deg 94% 67%);
+  --primary-light: hsl(252deg 100% 73%);
+  --white: hsl(0deg 0% 100%);
+  --base: hsl(228deg 29% 7%);
+  --background-primary: hsl(240deg 27% 98%);
+  --sidebar-background: hsl(231deg 20% 27%);
+  --sidebar-border: hsl(232deg 20% 36%);
 }

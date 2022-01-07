@@ -9,7 +9,7 @@ aside {
   display: flex;
   justify-content: space-between;
   min-height: 4.5rem;
-  background-color: var(--sidebar-bg-color);
+  background-color: var(--sidebar-background);
 
   @include bp.md {
     min-height: 5rem;
@@ -40,7 +40,7 @@ aside {
   justify-content: center;
   min-width: 4.5rem;
   overflow: hidden;
-  background-color: var(--color-primary);
+  background-color: var(--primary);
   border-radius: 0 1.25rem 1.25rem 0;
 
   &::after {
@@ -52,7 +52,7 @@ aside {
     width: 100%;
     height: 100%;
     content: '';
-    background-color: var(--color-primary-light);
+    background-color: var(--primary-light);
     border-radius: 1.25rem 0 0 1.25rem;
   }
 
@@ -104,14 +104,14 @@ aside {
 
 .user-icon {
   padding: 1.25rem 1.5rem;
-  border-left: 1px solid var(--sidebar-border-color);
+  border-left: 1px solid var(--sidebar-border);
 
   @include bp.md {
     padding: 1.5rem 2rem;
   }
 
   @include bp.xl {
-    border-top: 1px solid var(--sidebar-border-color);
+    border-top: 1px solid var(--sidebar-border);
     border-left: none;
   }
 }
