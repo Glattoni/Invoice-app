@@ -8,6 +8,9 @@
     "stylelint-order"
   ],
   "rules": {
-    "function-url-quotes": "single"
+    "function-url-quotes": "single",
+    "selector-pseudo-element-no-unknown": [true, {
+      "ignorePseudoElements": ["ng-deep"]
+    }]
   }
 }
