@@ -1,0 +1,4 @@
+<button [ngClass]="withIcon ? 'with-icon' : variant ? variant : ''">
+  <svg-icon src="assets/icons/icon-plus.svg" *ngIf="withIcon"></svg-icon>
+  <ng-content></ng-content>
+</button>
