@@ -4,12 +4,15 @@ button {
   display: inline-flex;
   align-items: center;
   padding: 1rem 1.5rem;
-  margin: 100px 0 30px 40px;
   font-weight: bold;
   color: var(--white);
   letter-spacing: -0.25px;
   background-color: var(--primary);
   border-radius: 1.5rem;
+
+  &.with-icon {
+    padding: 0.5rem 1rem 0.5rem 0.5rem;
+  }
 
   &:hover {
     background-color: var(--primary-light);
@@ -41,10 +44,40 @@ svg-icon {
   }
 }
 
-.with-icon {
-  padding: 0.5rem 1rem 0.5rem 0.5rem;
+.edit {
+  color: var(--button-3-fg);
+  background-color: var(--button-3-bg);
+
+  &:hover {
+    color: var(--button-3-fg-hover);
+    background-color: var(--button-3-bg-hover);
+  }
 }
 
-.item {
-  border: 4px solid yellow;
+.save {
+  color: var(--button-4-fg);
+  background-color: var(--button-4-bg);
+
+  &:hover {
+    color: var(--button-4-fg-hover);
+    background-color: var(--button-4-bg-hover);
+  }
+}
+
+.delete {
+  background-color: var(--danger);
+
+  &:hover {
+    background-color: var(--danger-light);
+  }
+}
+
+.add {
+  color: var(--button-4-fg);
+  background-color: var(--button-4-bg);
+
+  &:hover {
+    color: var(--button-4-fg-hover);
+    background-color: var(--button-4-bg-hover);
+  }
 }
