@@ -1,0 +1,50 @@
+@use 'breakpoints' as bp;
+
+button {
+  display: inline-flex;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  margin: 100px 0 30px 40px;
+  font-weight: bold;
+  color: var(--white);
+  letter-spacing: -0.25px;
+  background-color: var(--primary);
+  border-radius: 1.5rem;
+
+  &:hover {
+    background-color: var(--primary-light);
+  }
+}
+
+:host ::ng-deep span {
+  display: none;
+
+  @include bp.md {
+    display: inline;
+  }
+
+  padding-left: 0.25rem;
+}
+
+svg-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  margin-right: 0.5rem;
+  background-color: var(--white);
+  border-radius: 50%;
+
+  @include bp.md {
+    margin-right: 1rem;
+  }
+}
+
+.with-icon {
+  padding: 0.5rem 1rem 0.5rem 0.5rem;
+}
+
+.item {
+  border: 4px solid yellow;
+}
