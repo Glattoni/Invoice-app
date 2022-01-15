@@ -1,0 +1,93 @@
+@use 'breakpoints' as bp;
+
+.wrapper {
+  position: relative;
+  width: 8rem;
+  margin-left: 6rem;
+  text-align: center;
+
+  @include bp.md {
+    width: 12rem;
+  }
+}
+
+.container {
+  position: absolute;
+  top: 2.5rem;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 8rem;
+  padding: 1.5rem;
+  font-weight: bold;
+  background-color: var(--background-secondary);
+  border-radius: 0.5rem;
+  box-shadow: 0 0.625rem 1.25rem var(--box-shadow-primary);
+
+  @include bp.md {
+    width: 12rem;
+  }
+}
+
+button {
+  font-weight: bold;
+
+  span {
+    display: none;
+    @include bp.md {
+      display: inline;
+    }
+  }
+
+  svg-icon {
+    margin-left: 0.75rem;
+    @include bp.md {
+      margin-left: 1rem;
+    }
+  }
+}
+
+.fake-radio {
+  position: relative;
+  display: flex;
+  align-items: ceter;
+  justify-content: center;
+  width: 1rem;
+  height: 1rem;
+  background-color: var(--radio-background);
+  border-radius: 0.125rem;
+
+  svg-icon {
+    opacity: 0;
+  }
+}
+
+input {
+  display: none;
+}
+
+input:checked + label span {
+  background-color: var(--primary);
+
+  svg-icon {
+    opacity: 1;
+  }
+}
+
+label {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  font-weight: bold;
+  text-transform: capitalize;
+  cursor: pointer;
+
+  &:hover .fake-radio {
+    border: 2px solid var(--primary);
+  }
+}
+
+input:checked + label:hover .fake-radio {
+  border: none;
+}

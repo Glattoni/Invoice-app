@@ -1,10 +1,11 @@
 :root {
-  /* Colors */
+  /* COLORS */
   --primary: hsl(252deg 94% 67%);
   --primary-light: hsl(252deg 100% 73%);
   --white: hsl(0deg 0% 100%);
   --base: hsl(228deg 29% 7%);
   --background-primary: hsl(240deg 27% 98%);
+  --background-secondary: hsl(0deg 0% 100%);
   --sidebar-background: hsl(231deg 20% 27%);
   --sidebar-border: hsl(232deg 20% 36%);
   --danger: hsl(0deg 80% 63%);
@@ -21,4 +22,11 @@
   --button-6-fg: hsl(231deg 36% 63%);
   --button-6-bg-hover: hsl(231deg 73% 93%);
   --button-6-fg-hover: hsl(231deg 36% 63%);
+  --header-foreground: hsl(231deg 28% 7%);
+  --radio-background: hsl(231deg 73% 93%);
+
+  /* BOX SHADOWS */
+  /* stylelint-disable */
+  --box-shadow-primary: hsla(231, 38%, 45%, 0.25);
+  /* stylelint-enable */
 }
