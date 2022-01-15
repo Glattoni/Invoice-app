@@ -1,0 +1,20 @@
+<div class="wrapper">
+  <button (click)="toggleIsVisible()">
+    Filter <span>by status</span>
+    <svg-icon
+      [svgStyle]="{ transform: isVisible ? 'rotate(180deg)' : 'rotate(0deg)' }"
+      src="assets/icons/icon-arrow.svg"
+    ></svg-icon>
+  </button>
+  <ul class="container" [ngStyle]="{ display: isVisible ? 'flex' : 'none' }">
+    <li *ngFor="let status of statuses">
+      <input type="radio" name="option" [id]="status" />
+      <label [attr.for]="status">
+        <span class="fake-radio">
+          <svg-icon src="assets/icons/icon-check.svg"></svg-icon>
+        </span>
+        {{ status }}
+      </label>
+    </li>
+  </ul>
+</div>
