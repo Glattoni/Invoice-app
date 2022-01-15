@@ -1,6 +1,7 @@
 @use 'fonts';
 @use 'vars';
 @use 'themes';
+@use 'breakpoints' as bp;
 
 *,
 ::after,
@@ -16,12 +17,59 @@ body {
     sans-serif;
   font-size: vars.$font-sm;
   font-weight: 500;
-  color: var(--color-base);
-  background-color: var(--background-color);
+  line-height: 0.9375rem;
+  color: var(--base);
+  letter-spacing: -0.25px;
+  background-color: var(--background-primary);
 }
 
 main {
   min-height: 100vh;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--header-foreground);
+}
+
+h1 {
+  font-size: vars.$font-lg;
+  line-height: 1.375rem;
+  letter-spacing: -0.625px;
+
+  @include bp.md {
+    font-size: vars.$font-xl;
+    line-height: 2.25rem;
+    letter-spacing: -1px;
+  }
+}
+
+h2 {
+  font-size: vars.$font-lg;
+  line-height: 1.375rem;
+  letter-spacing: -0.625px;
+}
+
+h3 {
+  font-size: vars.$font-md;
+  line-height: 1.5rem;
+  letter-spacing: -0.8px;
+}
+
+h4 {
+  font-size: 0.9375rem;
+  line-height: 1.25rem;
+  letter-spacing: -0.3125px;
+}
+
+h5 {
+  font-size: vars.$font-sm;
+  line-height: 0.9375rem;
+  letter-spacing: -0.25px;
 }
 
 a {
