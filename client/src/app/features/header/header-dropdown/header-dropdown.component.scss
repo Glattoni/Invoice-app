@@ -3,7 +3,6 @@
 .wrapper {
   position: relative;
   width: 8rem;
-  margin-left: 6rem;
   text-align: center;
 
   @include bp.md {
@@ -32,6 +31,7 @@
 
 button {
   font-weight: bold;
+  letter-spacing: -0.25px;
 
   span {
     display: none;
@@ -41,7 +41,7 @@ button {
   }
 
   svg-icon {
-    margin-left: 0.75rem;
+    margin-left: 0.5rem;
     @include bp.md {
       margin-left: 1rem;
     }

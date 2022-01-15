@@ -1,9 +1,19 @@
+@use 'breakpoints' as bp;
+
 main {
-  padding-top: 6rem;
+  padding-top: 6.5rem;
+
+  @include bp.md {
+    padding-top: 8.5rem;
+  }
+
+  @include bp.xxl {
+    padding-top: 6rem;
+  }
 }
 
 .container {
   width: 87.5vw;
-  max-width: 45rem;
+  max-width: 45.625rem;
   margin: 0 auto;
 }

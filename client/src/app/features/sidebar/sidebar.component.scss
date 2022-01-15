@@ -15,7 +15,7 @@ aside {
     min-height: 5rem;
   }
 
-  @include bp.xl {
+  @include bp.xxl {
     flex-direction: column;
     max-width: 6.4375rem;
     min-height: 100vh;
@@ -28,7 +28,7 @@ aside {
   display: flex;
   align-items: center;
 
-  @include bp.xl {
+  @include bp.xxl {
     flex-direction: column;
   }
 }
@@ -60,7 +60,7 @@ aside {
     min-width: 5rem;
   }
 
-  @include bp.xl {
+  @include bp.xxl {
     width: 100%;
     min-height: 6.4375rem;
   }
@@ -96,7 +96,7 @@ aside {
     margin-right: 2rem;
   }
 
-  @include bp.xl {
+  @include bp.xxl {
     margin-right: 0;
     margin-bottom: 2rem;
   }
@@ -110,7 +110,7 @@ aside {
     padding: 1.5rem 2rem;
   }
 
-  @include bp.xl {
+  @include bp.xxl {
     border-top: 1px solid var(--sidebar-border);
     border-left: none;
   }
@@ -121,7 +121,7 @@ aside {
   height: 2rem;
   border-radius: 50%;
 
-  @include bp.xl {
+  @include bp.xxl {
     width: 2.5rem;
     height: 2.5rem;
   }
