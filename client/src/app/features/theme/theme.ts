@@ -11,6 +11,7 @@ export const light: Theme = {
     '--white': 'hsl(0deg 0% 100%)',
     '--base': 'hsl(228deg 29% 7%)',
     '--background-primary': 'hsl(240deg 27% 98%)',
+    '--background-secondary': 'hsl(0deg 0% 100%)',
     '--sidebar-background': 'hsl(231deg 20% 27%)',
     '--sidebar-border': 'hsl(232deg 20% 36%)',
     '--danger': 'hsl(0deg 80% 63%)',
@@ -27,6 +28,9 @@ export const light: Theme = {
     '--button-6-fg': 'hsl(231deg 36% 63%)',
     '--button-6-bg-hover': 'hsl(231deg 73% 93%)',
     '--button-6-fg-hover': 'hsl(231deg 36% 63%)',
+    '--header-foreground': 'hsl(231deg 28% 7%)',
+    '--radio-background': 'hsl(231deg 73% 93%)',
+    '--box-shadow-primary': 'hsla(232, 38%, 45%, 0.25)',
   },
 };
 
@@ -38,6 +42,7 @@ export const dark: Theme = {
     '--white': 'hsl(0deg 0% 100%)',
     '--base': 'hsl(0deg 0% 100%)',
     '--background-primary': 'hsl(233deg 30% 11%)',
+    '--background-secondary': 'hsl(233deg 30% 21%)',
     '--sidebar-background': 'hsl(233deg 31% 17%)',
     '--sidebar-border': 'hsl(232deg 20% 36%)',
     '--danger': 'hsl(0deg 80% 63%)',
@@ -54,5 +59,8 @@ export const dark: Theme = {
     '--button-6-fg': 'hsl(231deg 36% 63%)',
     '--button-6-bg-hover': 'hsl(231deg 73% 93%)',
     '--button-6-fg-hover': 'hsl(231deg 36% 63%)',
+    '--header-foreground': 'hsl(0deg 0% 100%)',
+    '--radio-background': 'hsl(233deg 31% 17%)',
+    '--box-shadow-primary': 'hsla(0, 0%, 0%, 0.25)',
   },
 };
