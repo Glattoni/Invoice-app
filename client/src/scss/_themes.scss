@@ -1,16 +1,21 @@
+/* stylelint-disable */
 :root {
   /* COLORS */
   --primary: hsl(252deg 94% 67%);
   --primary-light: hsl(252deg 100% 73%);
   --white: hsl(0deg 0% 100%);
   --base: hsl(228deg 29% 7%);
+  --shamrock: hsl(160deg 67% 52%);
+  --shamrock-light: hsla(160, 67%, 52%, 0.06);
+  --pizazz: hsl(34deg 100% 50%);
+  --pizazz-light: hsla(34, 100%, 50%, 0.06);
+  --danger: hsl(0deg 80% 63%);
+  --danger-light: hsl(0deg 100% 80%);
   --background-primary: hsl(240deg 27% 98%);
   --background-secondary: hsl(0deg 0% 100%);
   --foreground-primary: hsl(231deg 20% 61%);
   --sidebar-background: hsl(231deg 20% 27%);
   --sidebar-border: hsl(232deg 20% 36%);
-  --danger: hsl(0deg 80% 63%);
-  --danger-light: hsl(0deg 100% 80%);
   --button-3-bg: hsl(231deg 67% 99%);
   --button-3-fg: hsl(231deg 36% 63%);
   --button-3-bg-hover: hsl(231deg 73% 91%);
@@ -25,9 +30,9 @@
   --button-6-fg-hover: hsl(231deg 36% 63%);
   --header-foreground: hsl(231deg 28% 7%);
   --radio-background: hsl(231deg 73% 93%);
+  --draft-background: hsla(231, 20%, 27%, 0.07);
+  --draft-foreground: hsl(231deg 20% 27%);
 
   /* BOX SHADOWS */
-  /* stylelint-disable */
   --box-shadow-primary: hsla(231, 38%, 45%, 0.25);
-  /* stylelint-enable */
 }
