@@ -107,7 +107,7 @@
               "src/styles.scss"
             ],
             "stylePreprocessorOptions": {
-              "includePaths": ["src/scss"]
+              "includePaths": ["src/assets/scss"]
             },
             "scripts": []
           }
