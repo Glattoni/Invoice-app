@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from './components/button/button.component';
+import { InvoiceStateComponent } from './components/invoice-state/invoice-state.component';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 
 @NgModule({
-  declarations: [ButtonComponent],
+  declarations: [ButtonComponent, InvoiceStateComponent],
   imports: [CommonModule, AngularSvgIconModule],
-  exports: [ButtonComponent],
+  exports: [ButtonComponent, InvoiceStateComponent],
 })
-export class ButtonsModule {}
+export class SharedModule {}

@@ -5,15 +5,16 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SidebarComponent } from '@features/sidebar/sidebar.component';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
-  declarations: [AppComponent, SidebarComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     AngularSvgIconModule.forRoot(),
+    CoreModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

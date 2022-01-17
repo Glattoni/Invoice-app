@@ -1,4 +1,3 @@
-@use 'vars';
 @use 'breakpoints' as bp;
 
 header {
@@ -44,6 +43,6 @@ p {
   }
 
   app-button {
-    z-index: vars.$z-header-button;
+    z-index: var(--z-header-button);
   }
 }
