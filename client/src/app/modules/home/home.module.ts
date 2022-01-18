@@ -6,9 +6,15 @@ import { HeaderComponent } from './components/header/header.component';
 import { HeaderDropdownComponent } from './components/header-dropdown/header-dropdown.component';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { SharedModule } from '@shared/shared.module';
+import { InvoiceComponent } from './components/invoice/invoice.component';
 
 @NgModule({
-  declarations: [HomeViewComponent, HeaderComponent, HeaderDropdownComponent],
+  declarations: [
+    HomeViewComponent,
+    HeaderComponent,
+    HeaderDropdownComponent,
+    InvoiceComponent,
+  ],
   imports: [
     CommonModule,
     HomeRoutingModule,
