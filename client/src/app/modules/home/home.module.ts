@@ -7,6 +7,7 @@ import { HeaderDropdownComponent } from './components/header-dropdown/header-dro
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { SharedModule } from '@shared/shared.module';
 import { InvoiceComponent } from './components/invoice/invoice.component';
+import { PlaceholderComponent } from './components/placeholder/placeholder.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { InvoiceComponent } from './components/invoice/invoice.component';
     HeaderComponent,
     HeaderDropdownComponent,
     InvoiceComponent,
+    PlaceholderComponent,
   ],
   imports: [
     CommonModule,

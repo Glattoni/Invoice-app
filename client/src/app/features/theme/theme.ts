@@ -40,6 +40,7 @@ export const light: Theme = {
     '--hash-symbol': 'hsl(231deg 36% 63%)',
     '--payer': 'hsl(231deg 23% 61%)',
     '--payment-due': 'hsl(231deg 36% 63%)',
+    '--invoice-placeholder': 'hsl(231deg 20% 61%)',
     // box-shadows
     '--box-shadow-primary': 'hsla(232, 38%, 45%, 0.25)',
     '--box-shadow-secondary': 'hsla(232, 38%, 45%, 0.1)',
@@ -83,6 +84,7 @@ export const dark: Theme = {
     '--hash-symbol': 'hsl(231deg 20% 61%)',
     '--payer': 'hsl(0deg 0% 100%)',
     '--payment-due': 'hsl(231deg 75% 93%)',
+    '--invoice-placeholder': 'hsl(231deg 75% 93%)',
     // box-shadows
     '--box-shadow-primary': 'hsla(0, 0%, 0%, 0.25)',
     '--box-shadow-secondary': 'hsla(232, 38%, 45%, 0.1)',
