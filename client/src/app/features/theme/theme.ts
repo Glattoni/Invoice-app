@@ -37,8 +37,12 @@ export const light: Theme = {
     '--radio-background': 'hsl(231deg 73% 93%)',
     '--draft-background': 'hsla(231, 20%, 27%, 0.06)',
     '--draft-foreground': 'hsl(231deg 20% 27%)',
+    '--hash-symbol': 'hsl(231deg 36% 63%)',
+    '--payer': 'hsl(231deg 23% 61%)',
+    '--payment-due': 'hsl(231deg 36% 63%)',
     // box-shadows
     '--box-shadow-primary': 'hsla(232, 38%, 45%, 0.25)',
+    '--box-shadow-secondary': 'hsla(232, 38%, 45%, 0.1)',
   },
 };
 
@@ -76,7 +80,11 @@ export const dark: Theme = {
     '--radio-background': 'hsl(233deg 31% 17%)',
     '--draft-background': 'hsla(231, 75%, 93%, 0.06)',
     '--draft-foreground': 'hsl(231deg 75% 93%)',
+    '--hash-symbol': 'hsl(231deg 20% 61%)',
+    '--payer': 'hsl(0deg 0% 100%)',
+    '--payment-due': 'hsl(231deg 75% 93%)',
     // box-shadows
     '--box-shadow-primary': 'hsla(0, 0%, 0%, 0.25)',
+    '--box-shadow-secondary': 'hsla(232, 38%, 45%, 0.1)',
   },
 };
