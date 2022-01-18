@@ -1,0 +1,104 @@
+@use 'fonts';
+@use 'variables';
+@use 'themes';
+@use 'breakpoints' as bp;
+
+*,
+::after,
+::before {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: Spartan, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  font-size: var(--font-sm);
+  font-weight: 500;
+  line-height: 0.9375rem;
+  color: var(--base);
+  letter-spacing: -0.25px;
+  background-color: var(--background-primary);
+}
+
+main {
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  color: var(--header-foreground);
+}
+
+h1 {
+  font-size: var(--font-lg);
+  line-height: 1.375rem;
+  letter-spacing: -0.625px;
+
+  @include bp.md {
+    font-size: var(--font-xl);
+    line-height: 2.25rem;
+    letter-spacing: -1px;
+  }
+}
+
+h2 {
+  font-size: var(--font-lg);
+  line-height: 1.375rem;
+  letter-spacing: -0.625px;
+}
+
+h3 {
+  font-size: var(--font-md);
+  line-height: 1.5rem;
+  letter-spacing: -0.8px;
+}
+
+h4 {
+  font-size: 0.9375rem;
+  line-height: 1.25rem;
+  letter-spacing: -0.3125px;
+}
+
+h5 {
+  font-size: var(--font-sm);
+  line-height: 0.9375rem;
+  letter-spacing: -0.25px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+img {
+  display: block;
+  width: 100%;
+  object-fit: cover;
+}
+
+button {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+input {
+  margin: 0;
+}

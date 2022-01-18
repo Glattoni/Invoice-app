@@ -1,0 +1,48 @@
+@use 'breakpoints' as bp;
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+h1 {
+  margin-bottom: 0.5rem;
+}
+
+p {
+  color: var(--foreground-primary);
+}
+
+.full-info {
+  display: none;
+
+  @include bp.md {
+    display: block;
+  }
+}
+
+.shortened-info {
+  display: static;
+
+  @include bp.md {
+    display: none;
+  }
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+
+  app-header-dropdown {
+    margin-right: -1.25rem;
+
+    @include bp.md {
+      margin-right: 0;
+    }
+  }
+
+  app-button {
+    z-index: var(--z-header-button);
+  }
+}
