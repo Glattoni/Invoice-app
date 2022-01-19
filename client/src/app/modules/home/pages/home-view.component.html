@@ -1,19 +1,16 @@
 <main>
   <div class="container">
     <app-header></app-header>
-    <!-- <ul class="invoice-list">
+    <ul class="invoice-list" *ngFor="let invoice of invoices">
       <li>
-        <app-invoice></app-invoice>
+        <app-invoice
+          [paymentDue]="invoice.paymentDue"
+          [clientName]="invoice.clientName"
+          [total]="invoice.total"
+          [status]="invoice.status"
+        ></app-invoice>
       </li>
-      <li>
-        <app-invoice></app-invoice>
-      </li>
-      <li>
-        <app-invoice></app-invoice>
-      </li>
-    </ul> -->
-
-    <app-placeholder></app-placeholder>
-    <!-- <app-invoice-state></app-invoice-state> -->
+    </ul>
+    <app-placeholder *ngIf="!invoices"></app-placeholder>
   </div>
 </main>
