@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, tap } from 'rxjs';
+import { Observable, map } from 'rxjs';
+import { Invoice } from './invoice';
 
 @Injectable({
   providedIn: 'root',
@@ -15,9 +16,9 @@ export class InvoiceService {
 
   constructor(private http: HttpClient) {}
 
-  getInvoices(): Observable<any> {
+  getInvoices(): Observable<Invoice[]> {
     return this.http
-      .get<any>(`${this.baseUrl}/invoices`)
-      .pipe(tap((_) => console.log('fetched heroes')));
+      .get<{ invoices: Invoice[] }>(`${this.baseUrl}/invoices`)
+      .pipe(map((value) => value.invoices));
   }
 }
