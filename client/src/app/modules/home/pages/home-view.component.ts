@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { InvoiceService } from '@core/services/invoice.service';
+import { InvoiceService } from '../services/invoice.service';
+import { Invoice } from '../services/invoice';
 
 @Component({
   selector: 'app-home-view',
@@ -7,7 +8,7 @@ import { InvoiceService } from '@core/services/invoice.service';
   styleUrls: ['./home-view.component.scss'],
 })
 export class HomeViewComponent implements OnInit {
-  invoices: any;
+  invoices: Invoice[] = [];
   constructor(private invoiceService: InvoiceService) {}
 
   ngOnInit(): void {
@@ -17,6 +18,6 @@ export class HomeViewComponent implements OnInit {
   getInvoices(): void {
     this.invoiceService
       .getInvoices()
-      .subscribe((value) => (this.invoices = value.invoices));
+      .subscribe((value) => (this.invoices = value));
   }
 }
