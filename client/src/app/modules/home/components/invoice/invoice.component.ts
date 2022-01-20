@@ -8,7 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class InvoiceComponent implements OnInit {
   @Input() clientName: string = '';
   @Input() paymentDue: string = '';
-  @Input() total: string = '';
+  @Input() total: number = 0;
   @Input() status: string = '';
   constructor() {}
 

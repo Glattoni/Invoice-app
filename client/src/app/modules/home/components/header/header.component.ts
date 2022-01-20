@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { InvoiceService } from 'src/app/core/services/invoice.service';
+import { InvoiceService } from '../../services/invoice.service';
 
 @Component({
   selector: 'app-header',
@@ -17,6 +17,6 @@ export class HeaderComponent implements OnInit {
   getInvoiceCount(): void {
     this.invoiceService
       .getInvoices()
-      .subscribe((value) => (this.count = value.count));
+      .subscribe((value) => (this.count = value.length));
   }
 }

@@ -4,7 +4,7 @@ const { StatusCodes } = require('http-status-codes');
 
 const getAllInvoices = async (req, res) => {
   const invoices = await Invoice.find();
-  res.status(StatusCodes.OK).json({ invoices, count: invoices.length });
+  res.status(StatusCodes.OK).json({ invoices });
 };
 
 const getInvoice = async (req, res) => {
