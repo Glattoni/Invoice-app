@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { catchError, Observable, of } from 'rxjs';
 import { Invoice } from '../../models/invoice.model';
 
 @Injectable({
@@ -18,6 +18,19 @@ export class InvoiceService {
 
   getInvoices(): Observable<Invoice[]> {
     return this.http.get<Invoice[]>(this.invoicesUrl);
-    // .pipe(map((value) => value));
+  }
+
+  getInvoice(id: string): Observable<Invoice> {
+    const url = `${this.invoicesUrl}/${id}`;
+    return this.http
+      .get<Invoice>(url)
+      .pipe(catchError(this.handleError<Invoice>()));
+  }
+
+  private handleError<T>(result?: T) {
+    return (error: any): Observable<T> => {
+      console.log(error);
+      return of(result as T);
+    };
   }
 }
