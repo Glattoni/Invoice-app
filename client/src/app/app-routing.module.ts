@@ -7,6 +7,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./modules/home/home.module').then((m) => m.HomeModule),
   },
+  {
+    path: 'invoices/:slug',
+    loadChildren: () =>
+      import('./modules/view-invoice.module').then((m) => m.ViewInvoiceModule),
+  },
 ];
 
 @NgModule({

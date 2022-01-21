@@ -6,6 +6,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./invoice.component.scss'],
 })
 export class InvoiceComponent implements OnInit {
+  @Input() slug: string = '';
   @Input() clientName: string = '';
   @Input() paymentDue: string = '';
   @Input() total: number = 0;
