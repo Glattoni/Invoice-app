@@ -16,6 +16,7 @@ export const light: Theme = {
     '--pizazz-light': 'hsla(34, 100%, 50%, 0.06)',
     '--background-primary': 'hsl(240deg 27% 98%)',
     '--background-secondary': 'hsl(0deg 0% 100%)',
+    '--background-tetriary': 'hsl(0deg 0% 100%)',
     '--foreground-primary': 'hsl(231deg 20% 61%)',
     '--sidebar-background': 'hsl(231deg 20% 27%)',
     '--sidebar-border': 'hsl(232deg 20% 36%)',
@@ -41,6 +42,7 @@ export const light: Theme = {
     '--payer': 'hsl(231deg 23% 61%)',
     '--payment-due': 'hsl(231deg 36% 63%)',
     '--invoice-placeholder': 'hsl(231deg 20% 61%)',
+    '--invoice-details': 'hsl(231deg 23% 61%)',
     // box-shadows
     '--box-shadow-primary': 'hsla(232, 38%, 45%, 0.25)',
     '--box-shadow-secondary': 'hsla(232, 38%, 45%, 0.1)',
@@ -60,6 +62,7 @@ export const dark: Theme = {
     '--pizazz-light': 'hsla(34, 100%, 50%, 0.06)',
     '--background-primary': 'hsl(233deg 30% 11%)',
     '--background-secondary': 'hsl(233deg 30% 21%)',
+    '--background-tetriary': 'hsl(231deg 31% 17%)',
     '--foreground-primary': 'hsl(231deg 75% 93%)',
     '--sidebar-background': 'hsl(233deg 31% 17%)',
     '--sidebar-border': 'hsl(232deg 20% 36%)',
@@ -85,6 +88,7 @@ export const dark: Theme = {
     '--payer': 'hsl(0deg 0% 100%)',
     '--payment-due': 'hsl(231deg 75% 93%)',
     '--invoice-placeholder': 'hsl(231deg 75% 93%)',
+    '--invoice-details': 'hsl(231deg 75% 93%)',
     // box-shadows
     '--box-shadow-primary': 'hsla(0, 0%, 0%, 0.25)',
     '--box-shadow-secondary': 'hsla(232, 38%, 45%, 0.1)',

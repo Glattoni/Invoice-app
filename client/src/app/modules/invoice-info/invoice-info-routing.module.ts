@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TopPanelComponent } from './view-invoice/components/top-panel/top-panel.component';
+import { InvoiceViewComponent } from './pages/invoice-view.component';
 
-const routes: Routes = [{ path: '', component: TopPanelComponent }];
+const routes: Routes = [{ path: '', component: InvoiceViewComponent }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

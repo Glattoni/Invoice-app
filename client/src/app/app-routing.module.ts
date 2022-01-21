@@ -10,7 +10,9 @@ const routes: Routes = [
   {
     path: 'invoices/:slug',
     loadChildren: () =>
-      import('./modules/view-invoice.module').then((m) => m.ViewInvoiceModule),
+      import('./modules/invoice-info/invoice-info.module').then(
+        (m) => m.ViewInvoiceModule
+      ),
   },
 ];
 
