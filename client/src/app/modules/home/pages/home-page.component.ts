@@ -3,11 +3,10 @@ import { Invoice } from '@shared/models/invoice.model';
 import { InvoiceService } from '@shared/services/invoice/invoice.service';
 
 @Component({
-  selector: 'app-home-view',
-  templateUrl: './home-view.component.html',
-  styleUrls: ['./home-view.component.scss'],
+  templateUrl: './home-page.component.html',
+  styleUrls: ['./home-page.component.scss'],
 })
-export class HomeViewComponent implements OnInit {
+export class HomePageComponent implements OnInit {
   invoices: Invoice[] = [];
   constructor(private invoiceService: InvoiceService) {}
 

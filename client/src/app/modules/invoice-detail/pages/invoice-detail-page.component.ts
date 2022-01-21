@@ -1,15 +1,15 @@
-import { Location } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
+
 import { Invoice } from '@shared/models/invoice.model';
 import { InvoiceService } from '@shared/services/invoice/invoice.service';
 
 @Component({
-  selector: 'app-invoice-view',
-  templateUrl: './invoice-view.component.html',
-  styleUrls: ['./invoice-view.component.scss'],
+  templateUrl: './invoice-detail-page.component.html',
+  styleUrls: ['./invoice-detail-page.component.scss'],
 })
-export class InvoiceViewComponent implements OnInit {
+export class InvoiceDetailPageComponent implements OnInit {
   @Input() invoice?: Invoice;
   constructor(
     private route: ActivatedRoute,
