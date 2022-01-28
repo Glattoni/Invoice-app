@@ -1,0 +1,99 @@
+@use 'breakpoints' as bp;
+
+.billing-info {
+  display: grid;
+  grid-template-areas:
+    'slug .'
+    'paymentAddress .'
+    'terms billingAddress'
+    'email email';
+  grid-gap: 2rem;
+  color: var(--invoice-detail);
+
+  @include bp.md {
+    grid-template-areas:
+      'slug . . paymentAddress'
+      'terms billingAddress email email';
+    grid-gap: 1.25rem;
+  }
+}
+
+.slug-block {
+  grid-area: slug;
+
+  h3 {
+    margin-bottom: 0.25rem;
+    font-size: inherit;
+    line-height: inherit;
+
+    span {
+      color: var(--invoice-detail);
+    }
+
+    @include bp.md {
+      margin-bottom: 0.5rem;
+      font-size: initial;
+      line-height: initial;
+    }
+  }
+}
+
+.address-block {
+  display: flex;
+  flex-direction: column;
+  grid-area: paymentAddress;
+  font-size: var(--font-xs);
+  line-height: 1.125rem;
+
+  @include bp.md {
+    text-align: right;
+  }
+}
+
+.terms-block {
+  display: grid;
+  grid-area: terms;
+  grid-gap: 2rem;
+
+  @include bp.md {
+    padding-right: 3.25rem;
+  }
+
+  @include bp.lg {
+    padding-right: 4rem;
+  }
+}
+
+.billing-address-block {
+  grid-area: billingAddress;
+  font-size: var(--font-xs);
+  line-height: 1.125rem;
+
+  .recepient {
+    margin-bottom: 0.5rem;
+  }
+
+  @include bp.md {
+    padding-right: 3.5rem;
+  }
+
+  @include bp.lg {
+    padding-right: 4.25rem;
+  }
+}
+
+.email-block {
+  grid-area: email;
+}
+
+.key-item {
+  font-size: 0.9375rem;
+  font-weight: bold;
+  line-height: 1.25rem;
+  color: var(--base);
+  letter-spacing: -0.3125px;
+}
+
+.label {
+  margin-bottom: 0.75rem;
+}

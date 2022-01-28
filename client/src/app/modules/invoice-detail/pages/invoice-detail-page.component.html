@@ -1,11 +1,9 @@
-<button (click)="goBack()">
-  <svg-icon
-    [svgStyle]="{ transform: 'rotate(90deg)' }"
-    src="assets/icons/icon-arrow.svg"
-  ></svg-icon>
-  <span>Go back</span>
-</button>
-<br />
-<br />
-<br />
-<app-header [state]="invoice?.status"></app-header>
+<div class="app-container">
+  <app-go-back-button [offset]="'0 0 2rem'"></app-go-back-button>
+  <app-header [state]="invoice?.status"></app-header>
+  <section>
+    <app-body></app-body>
+    <app-table></app-table>
+  </section>
+</div>
+<app-footer></app-footer>

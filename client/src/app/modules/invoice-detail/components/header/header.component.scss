@@ -4,7 +4,7 @@
   padding: 1.5rem;
   background-color: var(--background-tetriary);
   border-radius: 0.5rem;
-  box-shadow: 0 10px 10px -10px var(--box-shadow-secondary);
+  box-shadow: 0 0.625rem 0.625rem -0.625rem var(--box-shadow-secondary);
 
   @include bp.md {
     display: flex;
@@ -16,7 +16,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: var(--invoice-details);
+  color: var(--invoice-detail);
 
   @include bp.md {
     gap: 1rem;
