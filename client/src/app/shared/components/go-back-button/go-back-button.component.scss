@@ -1,7 +1,8 @@
-button {
-  display: flex;
+a {
+  display: inline-flex;
   gap: 1rem;
   align-items: center;
+  cursor: pointer;
 }
 
 p {
