@@ -1,0 +1,11 @@
+<div class="wrapper">
+  <div class="status">
+    <p>Status</p>
+    <app-invoice-state [variant]="state || 'N/A'"></app-invoice-state>
+  </div>
+  <div class="controls">
+    <app-button [variant]="'edit'">Edit</app-button>
+    <app-button [variant]="'delete'">Delete</app-button>
+    <app-button>Mark as paid</app-button>
+  </div>
+</div>
