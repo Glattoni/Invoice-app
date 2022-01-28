@@ -1,0 +1,17 @@
+<div *ngIf="invoice" class="app-container">
+  <app-go-back-button [offset]="'0 0 2rem'"></app-go-back-button>
+  <app-header [state]="invoice.status"></app-header>
+  <section>
+    <app-body
+      [createdAt]="invoice.createdAt"
+      [paymentDue]="invoice.paymentDue"
+      [description]="invoice.description"
+      [clientName]="invoice.clientName"
+      [clientEmail]="invoice.clientEmail"
+      [senderAddress]="invoice.senderAddress"
+      [clientAddress]="invoice.clientAddress"
+    ></app-body>
+    <app-table [items]="invoice.items" [total]="invoice.total"></app-table>
+  </section>
+</div>
+<app-footer></app-footer>

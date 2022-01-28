@@ -13,6 +13,7 @@
   --danger-light: hsl(0deg 100% 80%);
   --background-primary: hsl(240deg 27% 98%);
   --background-secondary: hsl(0deg 0% 100%);
+  --background-tetriary: hsl(0deg 0% 100%);
   --foreground-primary: hsl(231deg 20% 61%);
   --sidebar-background: hsl(231deg 20% 27%);
   --sidebar-border: hsl(232deg 20% 36%);
@@ -35,6 +36,12 @@
   --hash-symbol: hsl(231deg 36% 63%);
   --payer: hsl(231deg 23% 61%);
   --payment-due: hsl(231deg 36% 63%);
+  --invoice-placeholder: hsl(231deg 20% 61%);
+  --invoice-status: hsl(231deg 23% 61%);
+  --invoice-detail: hsl(231deg 36% 63%);
+  --invoice-table-body: hsl(231deg 67% 99%);
+  --invoice-grand-total: hsl(231deg 20% 27%);
+  --invoice-item-title: hsl(231deg 36% 63%);
 
   /* BOX SHADOWS */
   --box-shadow-primary: hsla(231, 38%, 45%, 0.25);

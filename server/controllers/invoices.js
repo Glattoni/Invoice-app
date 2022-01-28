@@ -1,10 +1,10 @@
 const Invoice = require('../models/Invoice');
-const { NotFoundError, BadRequestError } = require('../erorrs');
+const { NotFoundError } = require('../erorrs');
 const { StatusCodes } = require('http-status-codes');
 
 const getAllInvoices = async (req, res) => {
   const invoices = await Invoice.find();
-  res.status(StatusCodes.OK).json({ invoices, count: invoices.length });
+  res.status(StatusCodes.OK).json(invoices);
 };
 
 const getInvoice = async (req, res) => {
@@ -19,7 +19,7 @@ const getInvoice = async (req, res) => {
 const createInvoice = async (req, res) => {
   const invoice = new Invoice(req.body);
   await invoice.save();
-  res.status(StatusCodes.CREATED).json({ invoice });
+  res.status(StatusCodes.CREATED).json(invoice);
 };
 
 const updateInvoice = async (req, res) => {
@@ -28,7 +28,7 @@ const updateInvoice = async (req, res) => {
   if (!invoice) {
     throw new NotFoundError(`There is no invoice with an id of "${id}"`);
   }
-  res.status(StatusCodes.OK).json({ invoice });
+  res.status(StatusCodes.OK).json(invoice);
 };
 
 const deleteInvoice = async (req, res) => {
@@ -37,7 +37,7 @@ const deleteInvoice = async (req, res) => {
   if (!invoice) {
     throw new NotFoundError(`There is no invoice with an id of "${id}"`);
   }
-  res.status(StatusCodes.OK).json({ invoice });
+  res.status(StatusCodes.OK).json(invoice);
 };
 
 module.exports = {

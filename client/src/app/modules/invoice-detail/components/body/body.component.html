@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="slug-container">
+    <h3><span>#</span>XM9141</h3>
+    <p>{{ description }}</p>
+  </div>
+  <div *ngIf="senderAddress" class="address-container">
+    <p>{{ senderAddress.street }}</p>
+    <p>{{ senderAddress.city }}</p>
+    <p>{{ senderAddress.postCode }}</p>
+    <p>{{ senderAddress.country }}</p>
+  </div>
+  <div class="terms-container">
+    <div>
+      <p class="label">invoice date</p>
+      <span *ngIf="createdAt" class="accent">{{
+        createdAt | date: 'shortened'
+      }}</span>
+    </div>
+    <div>
+      <p class="label">payment due</p>
+      <span *ngIf="paymentDue" class="accent">{{
+        paymentDue | date: 'shortened'
+      }}</span>
+    </div>
+  </div>
+  <div class="client-address-container">
+    <p class="label">bill to</p>
+    <p class="accent recepient">{{ clientName }}</p>
+    <div *ngIf="clientAddress">
+      <p>{{ clientAddress.street }}</p>
+      <p>{{ clientAddress.city }}</p>
+      <p>{{ clientAddress.postCode }}</p>
+      <p>{{ clientAddress.country }}</p>
+    </div>
+  </div>
+  <div class="email-container">
+    <p class="label">sent to</p>
+    <p class="accent">{{ clientEmail }}</p>
+  </div>
+</div>

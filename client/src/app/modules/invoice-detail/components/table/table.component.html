@@ -1,0 +1,25 @@
+<div class="wrapper">
+  <div class="container">
+    <div class="header">
+      <p class="header-name">Item name</p>
+      <p class="header-quantity">QTY.</p>
+      <p class="header-price">Price</p>
+      <p class="header-total">Total</p>
+    </div>
+    <div class="item" *ngFor="let item of items">
+      <h5 class="item-name">{{ item.name }}</h5>
+      <p class="item-quantity">{{ item.quantity }}</p>
+      <div class="item-price">
+        <span>{{ item.quantity }} x</span>
+        <p class="item-price-value">
+          {{ item.price | currency: 'GBP' }}
+        </p>
+      </div>
+      <p class="item-total">{{ item.total | currency: 'GBP' }}</p>
+    </div>
+  </div>
+  <div class="amount-due">
+    <p>Amount Due</p>
+    <p class="grand-total">{{ total | currency: 'GBP' }}</p>
+  </div>
+</div>

@@ -1,13 +1,13 @@
 @use 'breakpoints' as bp;
 
-header {
+.container {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
 h1 {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.4rem;
 }
 
 p {

@@ -5,6 +5,7 @@ const express = require('express');
 const app = express();
 const errorHandlerMiddleware = require('./middleware/error-handler');
 const notFoundMiddleware = require('./middleware/not-found');
+const cors = require('cors');
 
 //connectDB
 const connectDB = require('./db/connect');
@@ -13,6 +14,7 @@ const connectDB = require('./db/connect');
 const invoicesRouter = require('./routes/invoices');
 
 //middleware
+app.use(cors());
 app.use(express.json());
 
 //routes

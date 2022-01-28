@@ -12,9 +12,7 @@
 }
 
 body {
-  font-family: Spartan, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-    Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: Spartan, Roboto, Ubuntu, sans-serif;
   font-size: var(--font-sm);
   font-weight: 500;
   line-height: 0.9375rem;
@@ -101,4 +99,10 @@ button {
 
 input {
   margin: 0;
+}
+
+.app-container {
+  width: 87.5vw;
+  max-width: 45.625rem;
+  margin: 0 auto;
 }
