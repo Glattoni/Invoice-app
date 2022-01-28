@@ -4,7 +4,7 @@
   display: grid;
   grid-template-areas:
     'slug clientName' 'paymentDue status'
-    'totalAmount status';
+    'total status';
   grid-template-rows: 1.5fr 1fr 1fr;
   padding: 1.5rem;
   cursor: pointer;
@@ -14,7 +14,7 @@
 
   @include bp.md {
     grid-template-rows: none;
-    grid-template-columns: 1.4fr 1.95fr 1.9fr 2fr 2.3fr 0.4fr;
+    grid-template-columns: 1.4fr 1.95fr 1.8fr 2fr 2.3fr 0.4fr;
     align-items: center;
     padding: 1rem 1.5rem;
   }
@@ -64,11 +64,15 @@
 }
 
 .total {
-  grid-area: totalAmount;
+  grid-area: total;
   font-size: 1rem;
   font-weight: bold;
   line-height: 1.5rem;
   letter-spacing: -0.8px;
+
+  &::first-letter {
+    padding-right: 0.25rem;
+  }
 
   @include bp.md {
     grid-area: unset;
