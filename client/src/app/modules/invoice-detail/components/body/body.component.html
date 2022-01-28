@@ -1,36 +1,40 @@
-<div class="billing-info">
-  <div class="slug-block">
+<div class="container">
+  <div class="slug-container">
     <h3><span>#</span>XM9141</h3>
-    <p>Graphic design</p>
+    <p>{{ description }}</p>
   </div>
-  <div class="address-block">
-    <p>19 Union Terrace</p>
-    <p>London</p>
-    <p>E1 3EZ</p>
-    <p>United Kingdom</p>
+  <div *ngIf="senderAddress" class="address-container">
+    <p>{{ senderAddress.street }}</p>
+    <p>{{ senderAddress.city }}</p>
+    <p>{{ senderAddress.postCode }}</p>
+    <p>{{ senderAddress.country }}</p>
   </div>
-  <div class="terms-block">
+  <div class="terms-container">
     <div>
-      <p class="label">Invoice date</p>
-      <span class="key-item">21 Aug 2021</span>
+      <p class="label">invoice date</p>
+      <span *ngIf="createdAt" class="accent">{{
+        createdAt | date: 'shortened'
+      }}</span>
     </div>
     <div>
-      <p class="label">Payment Due</p>
-      <span class="key-item">20 Sep 2021</span>
+      <p class="label">payment due</p>
+      <span *ngIf="paymentDue" class="accent">{{
+        paymentDue | date: 'shortened'
+      }}</span>
     </div>
   </div>
-  <div class="billing-address-block">
-    <p class="label">Bill To</p>
-    <p class="key-item recepient">Alex Grim</p>
-    <div class="billing-address">
-      <p>19 Union Terrace</p>
-      <p>London</p>
-      <p>E1 3EZ</p>
-      <p>United Kingdom</p>
+  <div class="client-address-container">
+    <p class="label">bill to</p>
+    <p class="accent recepient">{{ clientName }}</p>
+    <div *ngIf="clientAddress">
+      <p>{{ clientAddress.street }}</p>
+      <p>{{ clientAddress.city }}</p>
+      <p>{{ clientAddress.postCode }}</p>
+      <p>{{ clientAddress.country }}</p>
     </div>
   </div>
-  <div class="email-block">
-    <p class="label">Sent to</p>
-    <p class="key-item">alexgrim@gmail.com</p>
+  <div class="email-container">
+    <p class="label">sent to</p>
+    <p class="accent">{{ clientEmail }}</p>
   </div>
 </div>

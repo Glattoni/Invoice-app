@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 
 import { Invoice } from '@shared/models/invoice.model';
@@ -13,7 +12,6 @@ export class InvoiceDetailPageComponent implements OnInit {
   @Input() invoice?: Invoice;
   constructor(
     private route: ActivatedRoute,
-    private location: Location,
     private invoiceService: InvoiceService
   ) {}
 
@@ -26,9 +24,5 @@ export class InvoiceDetailPageComponent implements OnInit {
     this.invoiceService
       .getInvoice(id)
       .subscribe((invoice) => (this.invoice = invoice));
-  }
-
-  goBack(): void {
-    this.location.back();
   }
 }

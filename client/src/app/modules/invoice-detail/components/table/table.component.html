@@ -6,21 +6,20 @@
       <p class="header-price">Price</p>
       <p class="header-total">Total</p>
     </div>
-    <div class="item">
-      <h5 class="item-name">Banner design</h5>
-      <p class="item-quantity">1</p>
-      <p class="item-price"><span>1 x</span> $156.00</p>
-      <p class="item-total">$ 156.00</p>
-    </div>
-    <div class="item">
-      <h5 class="item-name">Banner design</h5>
-      <p class="item-quantity">1</p>
-      <p class="item-price"><span>1 x</span> $156.00</p>
-      <p class="item-total">$ 156.00</p>
+    <div class="item" *ngFor="let item of items">
+      <h5 class="item-name">{{ item.name }}</h5>
+      <p class="item-quantity">{{ item.quantity }}</p>
+      <div class="item-price">
+        <span>{{ item.quantity }} x</span>
+        <p class="item-price-value">
+          {{ item.price | currency: 'GBP' }}
+        </p>
+      </div>
+      <p class="item-total">{{ item.total | currency: 'GBP' }}</p>
     </div>
   </div>
   <div class="amount-due">
     <p>Amount Due</p>
-    <p class="grand-total">$ 556.00</p>
+    <p class="grand-total">{{ total | currency: 'GBP' }}</p>
   </div>
 </div>

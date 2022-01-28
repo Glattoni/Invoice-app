@@ -1,24 +1,24 @@
 @use 'breakpoints' as bp;
 
-.billing-info {
+.container {
   display: grid;
   grid-template-areas:
     'slug .'
-    'paymentAddress .'
-    'terms billingAddress'
+    'senderAddress .'
+    'terms clientAddress'
     'email email';
   grid-gap: 2rem;
   color: var(--invoice-detail);
 
   @include bp.md {
     grid-template-areas:
-      'slug . . paymentAddress'
-      'terms billingAddress email email';
+      'slug . . senderAddress'
+      'terms clientAddress email email';
     grid-gap: 1.25rem;
   }
 }
 
-.slug-block {
+.slug-container {
   grid-area: slug;
 
   h3 {
@@ -26,22 +26,22 @@
     font-size: inherit;
     line-height: inherit;
 
-    span {
-      color: var(--invoice-detail);
-    }
-
     @include bp.md {
       margin-bottom: 0.5rem;
       font-size: initial;
       line-height: initial;
     }
   }
+
+  h3 span {
+    color: var(--invoice-detail);
+  }
 }
 
-.address-block {
+.address-container {
   display: flex;
   flex-direction: column;
-  grid-area: paymentAddress;
+  grid-area: senderAddress;
   font-size: var(--font-xs);
   line-height: 1.125rem;
 
@@ -50,7 +50,7 @@
   }
 }
 
-.terms-block {
+.terms-container {
   display: grid;
   grid-area: terms;
   grid-gap: 2rem;
@@ -64,8 +64,8 @@
   }
 }
 
-.billing-address-block {
-  grid-area: billingAddress;
+.client-address-container {
+  grid-area: clientAddress;
   font-size: var(--font-xs);
   line-height: 1.125rem;
 
@@ -82,11 +82,11 @@
   }
 }
 
-.email-block {
+.email-container {
   grid-area: email;
 }
 
-.key-item {
+.accent {
   font-size: 0.9375rem;
   font-weight: bold;
   line-height: 1.25rem;
@@ -96,4 +96,5 @@
 
 .label {
   margin-bottom: 0.75rem;
+  text-transform: capitalize;
 }

@@ -7,6 +7,7 @@
 
 .container {
   padding: 1.5rem;
+
   @include bp.md {
     padding: 2rem 2rem 2.5rem;
   }
@@ -17,7 +18,6 @@
   grid-template-columns: 3.5fr 1fr 1.25fr 1.25fr;
   margin-bottom: 2rem;
   text-align: right;
-  background-color: var(--);
 
   &-name {
     text-align: left;
@@ -26,6 +26,7 @@
   &-quantity {
     text-align: center;
   }
+
   @include bp.md {
     display: grid;
   }
@@ -41,6 +42,7 @@
 
   &-name {
     grid-area: name;
+
     @include bp.md {
       grid-area: unset;
       text-align: left;
@@ -49,6 +51,7 @@
 
   &-quantity {
     display: none;
+
     @include bp.md {
       display: block;
       text-align: center;
@@ -59,6 +62,11 @@
     grid-area: total;
     align-self: center;
     text-align: right;
+
+    &::first-letter {
+      margin-right: 0.15rem;
+    }
+
     @include bp.md {
       grid-area: unset;
     }
@@ -67,22 +75,36 @@
   &-price {
     grid-area: price;
     color: var(--invoice-item-title);
+
+    p {
+      display: inline-block;
+    }
+
+    &-value::first-letter {
+      margin: 0 0.15rem;
+    }
+
     @include bp.md {
       grid-area: unset;
       color: var(--base);
       text-align: right;
+
+      &::first-letter {
+        margin-right: 0.15rem;
+      }
     }
   }
 
   &:not(:last-child) {
     margin-bottom: 2rem;
   }
+
   @include bp.md {
     grid-template-areas: none;
     grid-template-columns: 3.5fr 1fr 1.25fr 1.25fr;
     grid-gap: 0;
 
-    &-price span {
+    &-price span:first-child {
       display: none;
     }
   }
@@ -96,14 +118,19 @@
   color: var(--white);
   background-color: var(--invoice-grand-total);
   border-radius: 0 0 0.5rem 0.5rem;
-  @include bp.md {
-    padding: 1.5rem 2rem;
-  }
 
   .grand-total {
     font-size: 1.25rem;
     font-weight: bold;
     line-height: 2rem;
     letter-spacing: -0.4px;
+
+    &::first-letter {
+      margin-right: 0.25rem;
+    }
+  }
+
+  @include bp.md {
+    padding: 1.5rem 2rem;
   }
 }
