@@ -5,9 +5,9 @@ import { Months } from './months';
   name: 'date',
 })
 export class DatePipe implements PipeTransform {
-  transform(value: string): string {
+  transform(value: string, type?: string): string {
     let [year, month, day] = value.split('-');
     month = Months.get(Number(month))?.slice(0, 3)!;
-    return `Due ${day} ${month} ${year}`;
+    return `${type === 'shortened' ? '' : 'Due'} ${day} ${month} ${year}`;
   }
 }
