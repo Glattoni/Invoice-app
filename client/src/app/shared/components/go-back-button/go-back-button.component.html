@@ -1,4 +1,9 @@
-<a role="button" [ngStyle]="{ margin: offset }" (click)="goBack()">
+<a
+  [ngStyle]="{ margin: offset }"
+  (click)="goBack()"
+  (keypress)="goBack()"
+  tabindex="0"
+>
   <svg-icon
     [svgStyle]="{ transform: 'rotate(90deg)' }"
     src="assets/icons/icon-arrow.svg"
