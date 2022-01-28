@@ -1,11 +1,13 @@
 <header>
-  <div>
-    <h1>Invoices</h1>
-    <p class="full-info">There are total {{ count }} invoices</p>
-    <p class="shortened-info">{{ count || 'No' }} invoices</p>
-  </div>
-  <div class="header-controls">
-    <app-dropdown></app-dropdown>
-    <app-button [hasIcon]="true">New <span>Invoice</span></app-button>
+  <div class="app-container container">
+    <div>
+      <h1>Invoices</h1>
+      <p class="full-info">There are total {{ count }} invoices</p>
+      <p class="shortened-info">{{ count || 'No' }} invoices</p>
+    </div>
+    <div class="header-controls">
+      <app-dropdown></app-dropdown>
+      <app-button [hasIcon]="true">New <span>Invoice</span></app-button>
+    </div>
   </div>
 </header>

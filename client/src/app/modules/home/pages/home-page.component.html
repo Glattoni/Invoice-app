@@ -1,13 +1,15 @@
 <app-header></app-header>
-<ul class="invoices">
-  <li *ngFor="let invoice of invoices">
-    <app-invoice
-      [slug]="invoice._id"
-      [paymentDue]="invoice.paymentDue"
-      [clientName]="invoice.clientName"
-      [total]="invoice.total"
-      [status]="invoice.status"
-    ></app-invoice>
-  </li>
-</ul>
-<app-placeholder *ngIf="!invoices.length"></app-placeholder>
+<div class="app-container">
+  <ul class="invoices">
+    <li *ngFor="let invoice of invoices">
+      <app-invoice
+        [slug]="invoice._id"
+        [paymentDue]="invoice.paymentDue"
+        [clientName]="invoice.clientName"
+        [total]="invoice.total"
+        [status]="invoice.status"
+      ></app-invoice>
+    </li>
+  </ul>
+  <app-placeholder *ngIf="!invoices.length"></app-placeholder>
+</div>
