@@ -42,7 +42,10 @@ export const light: Theme = {
     '--payer': 'hsl(231deg 23% 61%)',
     '--payment-due': 'hsl(231deg 36% 63%)',
     '--invoice-placeholder': 'hsl(231deg 20% 61%)',
-    '--invoice-details': 'hsl(231deg 23% 61%)',
+    '--invoice-detail': 'hsl(231deg 36% 63%)',
+    '--invoice-table-body': 'hsl(231deg 67% 99%)',
+    '--invoice-grand-total': 'hsl(231deg 20% 27%)',
+    '--invoice-item-title': 'hsl(231deg 36% 63%)',
     // box-shadows
     '--box-shadow-primary': 'hsla(232, 38%, 45%, 0.25)',
     '--box-shadow-secondary': 'hsla(232, 38%, 45%, 0.1)',
@@ -88,7 +91,10 @@ export const dark: Theme = {
     '--payer': 'hsl(0deg 0% 100%)',
     '--payment-due': 'hsl(231deg 75% 93%)',
     '--invoice-placeholder': 'hsl(231deg 75% 93%)',
-    '--invoice-details': 'hsl(231deg 75% 93%)',
+    '--invoice-detail': 'hsl(231deg 75% 93%)',
+    '--invoice-table-body': 'hsl(233deg 30% 21%)',
+    '--invoice-grand-total': 'hsl(231deg 28% 7%)',
+    '--invoice-item-title': 'hsl(231deg 20% 61%)',
     // box-shadows
     '--box-shadow-primary': 'hsla(0, 0%, 0%, 0.25)',
     '--box-shadow-secondary': 'hsla(232, 38%, 45%, 0.1)',
