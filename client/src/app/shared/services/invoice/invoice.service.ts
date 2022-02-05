@@ -35,6 +35,11 @@ export class InvoiceService {
       .pipe(catchError(this.handleError<Invoice>()));
   }
 
+  markAsPaidInvoice(id: string): Observable<Invoice> {
+    const url = `${this.invoicesUrl}/${id}`;
+    return this.http.patch<Invoice>(url, { status: 'paid' }, this.httpOptions);
+  }
+
   private handleError<T>(result?: T) {
     return (error: any): Observable<T> => {
       console.log(error);
