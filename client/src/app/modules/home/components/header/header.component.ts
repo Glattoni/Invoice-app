@@ -8,6 +8,7 @@ import { InvoiceService } from '@shared/services/invoice/invoice.service';
 })
 export class HeaderComponent implements OnInit {
   count: number = 0;
+
   constructor(private invoiceService: InvoiceService) {}
 
   ngOnInit(): void {

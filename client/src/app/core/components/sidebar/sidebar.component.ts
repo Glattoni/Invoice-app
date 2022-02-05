@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ThemeService } from '@features/theme/theme.service';
 
 @Component({
@@ -6,10 +6,8 @@ import { ThemeService } from '@features/theme/theme.service';
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
 })
-export class SidebarComponent implements OnInit {
+export class SidebarComponent {
   constructor(private themeService: ThemeService) {}
-
-  ngOnInit(): void {}
 
   setThemeIcon(): string {
     if (this.themeService.isDarkTheme()) {

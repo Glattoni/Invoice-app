@@ -11,6 +11,7 @@ import { ModalService } from '@shared/services/modal/modal.service';
 })
 export class InvoiceDetailPageComponent implements OnInit {
   @Input() invoice?: Invoice;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -35,7 +36,7 @@ export class InvoiceDetailPageComponent implements OnInit {
     this.router.navigate(['']);
   }
 
-  //TODO refresh the route if the data does not change after invoice deletion
+  //TODO: refresh the route if the data does not change after invoice deletion
   /* reloadCurrentRoute(): void {
     this.router
       .navigateByUrl('/', { skipLocationChange: true })

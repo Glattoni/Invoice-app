@@ -1,6 +1,6 @@
 <div *ngIf="invoice" class="app-container container">
   <app-go-back-button [offset]="'0 0 2rem'"></app-go-back-button>
-  <app-header [state]="invoice.status"></app-header>
+  <app-header [invoice]="invoice" [state]="invoice.status"></app-header>
   <section>
     <app-body
       [slug]="invoice.slug"
