@@ -8,6 +8,7 @@ import { Invoice } from '../../models/invoice.model';
 })
 export class InvoiceService {
   private invoicesUrl = 'http://localhost:3000/api/v1/invoices';
+
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -24,6 +25,13 @@ export class InvoiceService {
     const url = `${this.invoicesUrl}/${id}`;
     return this.http
       .get<Invoice>(url)
+      .pipe(catchError(this.handleError<Invoice>()));
+  }
+
+  deleteInvoice(id: string): Observable<Invoice> {
+    const url = `${this.invoicesUrl}/${id}`;
+    return this.http
+      .delete<Invoice>(url, this.httpOptions)
       .pipe(catchError(this.handleError<Invoice>()));
   }
 
