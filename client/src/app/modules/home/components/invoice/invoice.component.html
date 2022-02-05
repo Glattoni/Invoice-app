@@ -1,6 +1,6 @@
-<a [routerLink]="['/invoices', slug]">
+<a [routerLink]="['/invoices', id]">
   <div class="container">
-    <h3 class="slug"><span>#</span>RT3080</h3>
+    <h3 class="slug"><span>#</span>{{ slug }}</h3>
     <p class="payer">{{ clientName }}</p>
     <p class="payment-due">{{ paymentDue | date }}</p>
     <p class="total">{{ total | currency: 'GBP' }}</p>
