@@ -6,6 +6,7 @@ import {
   OnInit,
   ViewEncapsulation,
 } from '@angular/core';
+
 import { ModalService } from '@shared/services/modal/modal.service';
 
 @Component({
@@ -15,8 +16,9 @@ import { ModalService } from '@shared/services/modal/modal.service';
   encapsulation: ViewEncapsulation.None,
 })
 export class ModalComponent implements OnInit, OnDestroy {
-  @Input() id: string = 'custom-modal-1';
   private element: any;
+
+  @Input() id: string = 'custom-modal-1';
 
   constructor(private modalService: ModalService, private el: ElementRef) {
     this.element = el.nativeElement;

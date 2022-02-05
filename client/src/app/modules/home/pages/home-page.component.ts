@@ -8,6 +8,7 @@ import { InvoiceService } from '@shared/services/invoice/invoice.service';
 })
 export class HomePageComponent implements OnInit {
   invoices: Invoice[] = [];
+
   constructor(private invoiceService: InvoiceService) {}
 
   ngOnInit(): void {
