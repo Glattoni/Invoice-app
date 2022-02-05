@@ -1,5 +1,6 @@
 export interface Invoice {
   _id: string;
+  slug: string;
   createdAt: string;
   paymentDue: string;
   description: string;

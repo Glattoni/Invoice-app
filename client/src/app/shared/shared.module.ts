@@ -6,6 +6,7 @@ import { InvoiceStateComponent } from './components/invoice-state/invoice-state.
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { DatePipe } from './pipes/date/date.pipe';
 import { GoBackButtonComponent } from './components/go-back-button/go-back-button.component';
+import { ModalComponent } from './components/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { GoBackButtonComponent } from './components/go-back-button/go-back-butto
     InvoiceStateComponent,
     DatePipe,
     GoBackButtonComponent,
+    ModalComponent,
   ],
   imports: [CommonModule, AngularSvgIconModule],
   exports: [
@@ -20,6 +22,7 @@ import { GoBackButtonComponent } from './components/go-back-button/go-back-butto
     InvoiceStateComponent,
     DatePipe,
     GoBackButtonComponent,
+    ModalComponent,
   ],
 })
 export class SharedModule {}
