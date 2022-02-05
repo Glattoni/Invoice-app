@@ -15,7 +15,7 @@ import { ModalService } from '@shared/services/modal/modal.service';
   encapsulation: ViewEncapsulation.None,
 })
 export class ModalComponent implements OnInit, OnDestroy {
-  @Input() id: string = '';
+  @Input() id: string = 'custom-modal-1';
   private element: any;
 
   constructor(private modalService: ModalService, private el: ElementRef) {

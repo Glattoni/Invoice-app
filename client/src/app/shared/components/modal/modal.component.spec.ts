@@ -8,9 +8,8 @@ describe('ModalComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ModalComponent ]
-    })
-    .compileComponents();
+      declarations: [ModalComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -20,6 +19,7 @@ describe('ModalComponent', () => {
   });
 
   it('should create', () => {
+    expect(component.id).toBe('custom-modal-1');
     expect(component).toBeTruthy();
   });
 });
