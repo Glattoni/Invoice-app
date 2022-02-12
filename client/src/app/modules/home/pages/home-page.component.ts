@@ -17,4 +17,8 @@ export class HomePageComponent implements OnInit {
   ngOnInit(): void {
     this.invoiceService.getInvoices();
   }
+
+  trackByInvoiceId(index: number, invoice: Invoice) {
+    return invoice._id;
+  }
 }
