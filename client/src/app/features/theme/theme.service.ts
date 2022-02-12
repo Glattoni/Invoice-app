@@ -1,41 +1,44 @@
 import { Injectable } from '@angular/core';
 import { Theme, light, dark } from './theme';
+import { LocalStorageService } from '@shared/services/local-storage/local-storage.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ThemeService {
-  private active: Theme = light;
-  private availableThemes: Theme[] = [light, dark];
+  private active: Theme;
 
-  getAvailableTheme(): Theme[] {
-    return this.availableThemes;
+  constructor(private localStorageService: LocalStorageService) {
+    this.active = this.checkLocalStorage() || light;
+    this.setActiveTheme(this.active);
   }
 
   getActiveTheme(): Theme {
     return this.active;
   }
 
-  isDarkTheme(): boolean {
-    return this.active.name === dark.name;
+  checkLocalStorage() {
+    const theme = this.localStorageService.getItem('theme');
+    if (!theme) return light;
+    return JSON.parse(theme);
   }
 
   setDarkTheme(): void {
     this.setActiveTheme(dark);
+    this.localStorageService.setItem('theme', dark);
   }
 
   setLightTheme(): void {
     this.setActiveTheme(light);
+    this.localStorageService.setItem('theme', light);
   }
 
   setActiveTheme(theme: Theme): void {
     this.active = theme;
+    const documentStyle = document.documentElement.style;
 
-    Object.keys(this.active.properties).forEach((property) => {
-      document.documentElement.style.setProperty(
-        property,
-        this.active.properties[property]
-      );
+    Object.keys(this.active.properties).forEach((prop) => {
+      documentStyle.setProperty(prop, this.active.properties[prop]);
     });
   }
 }
