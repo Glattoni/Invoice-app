@@ -9,18 +9,15 @@ import { ThemeService } from '@features/theme/theme.service';
 export class SidebarComponent {
   constructor(private themeService: ThemeService) {}
 
-  setThemeIcon(): string {
-    if (this.themeService.isDarkTheme()) {
-      return 'assets/icons/icon-sun.svg';
-    }
-    return 'assets/icons/icon-moon.svg';
+  getThemeIconPath(): string {
+    const theme = this.themeService.getActiveTheme();
+    return `assets/icons/icon-${theme.name === 'light' ? 'moon' : 'sun'}.svg`;
   }
 
   toggleTheme(): void {
-    if (this.themeService.isDarkTheme()) {
-      this.themeService.setLightTheme();
-    } else {
-      this.themeService.setDarkTheme();
-    }
+    const theme = this.themeService.getActiveTheme();
+    theme.name === 'light'
+      ? this.themeService.setDarkTheme()
+      : this.themeService.setLightTheme();
   }
 }
