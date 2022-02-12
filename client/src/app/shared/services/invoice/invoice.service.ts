@@ -1,6 +1,14 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, of } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+import {
+  Observable,
+  ReplaySubject,
+  BehaviorSubject,
+  of,
+  catchError,
+} from 'rxjs';
+
 import { Invoice } from '../../models/invoice.model';
 
 @Injectable({
@@ -8,6 +16,12 @@ import { Invoice } from '../../models/invoice.model';
 })
 export class InvoiceService {
   private invoicesUrl = 'http://localhost:3000/api/v1/invoices';
+
+  private invoice = new ReplaySubject<Invoice>();
+  private invoices = new BehaviorSubject<Invoice[]>([]);
+
+  readonly invoice$ = this.invoice.asObservable();
+  readonly invoices$ = this.invoices.asObservable();
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -17,27 +31,41 @@ export class InvoiceService {
 
   constructor(private http: HttpClient) {}
 
-  getInvoices(): Observable<Invoice[]> {
-    return this.http.get<Invoice[]>(this.invoicesUrl);
+  getInvoices() {
+    this.http
+      .get<Invoice[]>(this.invoicesUrl)
+      .subscribe((val) => this.invoices.next(val));
   }
 
-  getInvoice(id: string): Observable<Invoice> {
+  getInvoice(id: string) {
     const url = `${this.invoicesUrl}/${id}`;
-    return this.http
+
+    this.http
       .get<Invoice>(url)
-      .pipe(catchError(this.handleError<Invoice>()));
+      .pipe(catchError(this.handleError<Invoice>()))
+      .subscribe((val) => this.invoice.next(val));
   }
 
-  deleteInvoice(id: string): Observable<Invoice> {
+  deleteInvoice(id: string) {
     const url = `${this.invoicesUrl}/${id}`;
-    return this.http
+    const currentValue = this.invoices.getValue();
+
+    this.http
       .delete<Invoice>(url, this.httpOptions)
-      .pipe(catchError(this.handleError<Invoice>()));
+      .pipe(catchError(this.handleError<Invoice>()))
+      .subscribe((value) => {
+        const newValue = currentValue.filter((inv) => inv._id !== value._id);
+        this.invoices.next(newValue);
+      });
   }
 
-  markAsPaidInvoice(id: string): Observable<Invoice> {
+  markAsPaidInvoice(id: string) {
     const url = `${this.invoicesUrl}/${id}`;
-    return this.http.patch<Invoice>(url, { status: 'paid' }, this.httpOptions);
+
+    this.http
+      .patch<Invoice>(url, { status: 'paid' }, this.httpOptions)
+      .pipe(catchError(this.handleError<Invoice>()))
+      .subscribe((val) => this.invoice.next(val));
   }
 
   private handleError<T>(result?: T) {
