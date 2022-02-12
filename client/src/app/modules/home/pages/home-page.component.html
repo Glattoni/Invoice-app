@@ -1,7 +1,8 @@
 <app-header></app-header>
+
 <div class="app-container">
-  <ul class="invoices">
-    <li *ngFor="let invoice of invoices">
+  <ul *ngIf="invoices$ | async as invoices">
+    <li *ngFor="let invoice of invoices; trackBy: trackByInvoiceId">
       <app-invoice
         [id]="invoice._id"
         [slug]="invoice.slug"
@@ -12,5 +13,5 @@
       ></app-invoice>
     </li>
   </ul>
-  <app-placeholder *ngIf="!invoices.length"></app-placeholder>
+  <app-placeholder *ngIf="(invoices$ | async)?.length === 0"></app-placeholder>
 </div>

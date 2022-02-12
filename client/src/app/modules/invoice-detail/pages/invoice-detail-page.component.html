@@ -1,4 +1,4 @@
-<div *ngIf="invoice" class="app-container container">
+<div *ngIf="invoice$ | async as invoice" class="app-container container">
   <app-go-back-button [offset]="'0 0 2rem'"></app-go-back-button>
   <app-header [invoice]="invoice" [state]="invoice.status"></app-header>
   <section>
@@ -16,7 +16,7 @@
   </section>
 </div>
 
-<app-modal *ngIf="invoice" id="delete-prompt">
+<app-modal *ngIf="invoice$ | async as invoice" id="delete-prompt">
   <h2 class="modal-title">confirm deletion</h2>
   <p class="modal-text">
     Are you sure you want to delete invoice #{{ invoice.slug }}? This action

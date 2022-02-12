@@ -26,6 +26,6 @@ export class HeaderComponent {
 
   markAsPaid(): void {
     const id = String(this.route.snapshot.paramMap.get('slug'));
-    this.invoiceService.markAsPaidInvoice(id).subscribe();
+    this.invoiceService.markAsPaidInvoice(id);
   }
 }
