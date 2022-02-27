@@ -46,6 +46,8 @@ export const light: Theme = {
     '--invoice-table-body': 'hsl(231deg 67% 99%)',
     '--invoice-grand-total': 'hsl(231deg 20% 27%)',
     '--invoice-item-title': 'hsl(231deg 36% 63%)',
+    '--input-inner-border': 'hsl(231deg 75% 93%)',
+    '--label-foreground': 'hsl(231deg 36% 63%)',
     // box-shadows
     '--box-shadow-primary': 'hsla(232, 38%, 45%, 0.25)',
     '--box-shadow-secondary': 'hsla(232, 38%, 45%, 0.1)',
@@ -95,6 +97,8 @@ export const dark: Theme = {
     '--invoice-table-body': 'hsl(233deg 30% 21%)',
     '--invoice-grand-total': 'hsl(231deg 28% 7%)',
     '--invoice-item-title': 'hsl(231deg 20% 61%)',
+    '--input-inner-border': 'hsl(233deg 20% 21%)',
+    '--label-foreground': 'hsl(231deg 75% 93%)',
     // box-shadows
     '--box-shadow-primary': 'hsla(0, 0%, 0%, 0.25)',
     '--box-shadow-secondary': 'hsla(232, 38%, 45%, 0.1)',

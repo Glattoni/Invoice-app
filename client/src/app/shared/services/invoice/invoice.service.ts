@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import {
+  of,
+  catchError,
   Observable,
   ReplaySubject,
   BehaviorSubject,
-  of,
-  catchError,
 } from 'rxjs';
 
 import { Invoice } from '../../models/invoice.model';
@@ -34,7 +34,8 @@ export class InvoiceService {
   getInvoices() {
     this.http
       .get<Invoice[]>(this.invoicesUrl)
-      .subscribe((val) => this.invoices.next(val));
+      .pipe(catchError(this.handleError<Invoice[]>()))
+      .subscribe((value) => this.invoices.next(value));
   }
 
   getInvoice(id: string) {
@@ -43,7 +44,7 @@ export class InvoiceService {
     this.http
       .get<Invoice>(url)
       .pipe(catchError(this.handleError<Invoice>()))
-      .subscribe((val) => this.invoice.next(val));
+      .subscribe((value) => this.invoice.next(value));
   }
 
   deleteInvoice(id: string) {
@@ -54,8 +55,10 @@ export class InvoiceService {
       .delete<Invoice>(url, this.httpOptions)
       .pipe(catchError(this.handleError<Invoice>()))
       .subscribe((value) => {
-        const newValue = currentValue.filter((inv) => inv._id !== value._id);
-        this.invoices.next(newValue);
+        const updatedValue = currentValue.filter(
+          (invoice) => invoice._id !== value._id
+        );
+        this.invoices.next(updatedValue);
       });
   }
 
@@ -65,7 +68,7 @@ export class InvoiceService {
     this.http
       .patch<Invoice>(url, { status: 'paid' }, this.httpOptions)
       .pipe(catchError(this.handleError<Invoice>()))
-      .subscribe((val) => this.invoice.next(val));
+      .subscribe((value) => this.invoice.next(value));
   }
 
   private handleError<T>(result?: T) {
