@@ -4,9 +4,10 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { BillingFormComponent } from './components/billing-form/billing-form.component';
 import { TextFieldComponent } from './components/form-elements/text-field/text-field.component';
+import { DropdownComponent } from './components/form-elements/dropdown/dropdown.component';
 
 @NgModule({
-  declarations: [SidebarComponent, BillingFormComponent, TextFieldComponent],
+  declarations: [SidebarComponent, BillingFormComponent, TextFieldComponent, DropdownComponent],
   imports: [CommonModule, AngularSvgIconModule],
   exports: [SidebarComponent, BillingFormComponent],
 })

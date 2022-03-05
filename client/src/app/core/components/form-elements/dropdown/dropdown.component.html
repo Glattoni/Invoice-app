@@ -1,0 +1,22 @@
+<div class="container" (blur)="toggleVisibility()" [attr.tabindex]="0">
+  <div
+    class="selected-option"
+    [class.focused]="isVisible === true"
+    (click)="toggleVisibility()"
+  >
+    {{ selectedOption?.label }}
+    <svg-icon
+      [svgStyle]="{ transform: isVisible ? 'rotate(180deg)' : 'rotate(0deg)' }"
+      src="assets/icons/icon-arrow.svg"
+    ></svg-icon>
+  </div>
+  <ul class="list" [class.visible]="isVisible === true">
+    <li
+      class="list-item"
+      *ngFor="let option of availableOptions"
+      (click)="selectOption(option.id)"
+    >
+      {{ option.label }}
+    </li>
+  </ul>
+</div>
