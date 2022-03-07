@@ -11,7 +11,7 @@ export class HomePageComponent implements OnInit {
   invoices$: Observable<Invoice[]>;
 
   constructor(private invoiceService: InvoiceService) {
-    this.invoices$ = this.invoiceService.invoices$;
+    this.invoices$ = this.invoiceService.filteredInvoices$;
   }
 
   ngOnInit(): void {

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { InvoiceService } from '@shared/services/invoice/invoice.service';
 
 @Component({
   selector: 'app-dropdown',
@@ -9,9 +10,13 @@ export class DropdownComponent {
   statuses: string[] = ['draft', 'pending', 'paid'];
   isVisible: boolean = false;
 
+  constructor(private invoiceService: InvoiceService) {}
+
   toggleIsVisible(): void {
-    this.isVisible === true
-      ? (this.isVisible = false)
-      : (this.isVisible = true);
+    this.isVisible = this.isVisible ? false : true;
+  }
+
+  filterByStatus(status: string): void {
+    this.invoiceService.filterByStatus(status);
   }
 }
