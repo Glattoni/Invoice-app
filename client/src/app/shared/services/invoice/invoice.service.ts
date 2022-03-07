@@ -19,9 +19,11 @@ export class InvoiceService {
 
   private invoice = new ReplaySubject<Invoice>();
   private invoices = new BehaviorSubject<Invoice[]>([]);
+  private filteredInvoices = new BehaviorSubject<Invoice[]>([]);
 
   readonly invoice$ = this.invoice.asObservable();
   readonly invoices$ = this.invoices.asObservable();
+  readonly filteredInvoices$ = this.filteredInvoices.asObservable();
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -35,7 +37,10 @@ export class InvoiceService {
     this.http
       .get<Invoice[]>(this.invoicesUrl)
       .pipe(catchError(this.handleError<Invoice[]>()))
-      .subscribe((value) => this.invoices.next(value));
+      .subscribe((value) => {
+        this.invoices.next(value);
+        this.filteredInvoices.next(value);
+      });
   }
 
   getInvoice(id: string) {
@@ -69,6 +74,14 @@ export class InvoiceService {
       .patch<Invoice>(url, { status: 'paid' }, this.httpOptions)
       .pipe(catchError(this.handleError<Invoice>()))
       .subscribe((value) => this.invoice.next(value));
+  }
+
+  filterByStatus(status: string) {
+    let tempInvoices: Invoice[] = [];
+
+    this.invoices$.subscribe((value) => (tempInvoices = [...value]));
+    tempInvoices = tempInvoices.filter((invoice) => invoice.status === status);
+    this.filteredInvoices.next(tempInvoices);
   }
 
   private handleError<T>(result?: T) {
