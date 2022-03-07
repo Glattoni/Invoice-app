@@ -7,7 +7,7 @@
     ></svg-icon>
   </button>
   <ul class="container" [ngStyle]="{ display: isVisible ? 'flex' : 'none' }">
-    <li *ngFor="let status of statuses">
+    <li *ngFor="let status of statuses" (click)="filterByStatus(status)">
       <input type="radio" name="option" [id]="status" />
       <label [attr.for]="status">
         <span class="fake-radio">
