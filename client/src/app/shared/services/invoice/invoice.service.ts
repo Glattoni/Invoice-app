@@ -19,10 +19,12 @@ export class InvoiceService {
 
   private invoice = new ReplaySubject<Invoice>();
   private invoices = new BehaviorSubject<Invoice[]>([]);
+  private currentFilter = new BehaviorSubject<string>('');
   private filteredInvoices = new BehaviorSubject<Invoice[]>([]);
 
   readonly invoice$ = this.invoice.asObservable();
   readonly invoices$ = this.invoices.asObservable();
+  readonly currentFilter$ = this.currentFilter.asObservable();
   readonly filteredInvoices$ = this.filteredInvoices.asObservable();
 
   httpOptions = {
@@ -82,6 +84,7 @@ export class InvoiceService {
     this.invoices$.subscribe((value) => (tempInvoices = [...value]));
     tempInvoices = tempInvoices.filter((invoice) => invoice.status === status);
     this.filteredInvoices.next(tempInvoices);
+    this.currentFilter.next(status);
   }
 
   private handleError<T>(result?: T) {
