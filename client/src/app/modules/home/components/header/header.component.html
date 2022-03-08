@@ -3,11 +3,9 @@
     <div>
       <h1>Invoices</h1>
       <p class="full-info">
-        There are total {{ (invoices$ | async)?.length || 0 }} invoices
+        {{ description }}
       </p>
-      <p class="shortened-info">
-        {{ (invoices$ | async)?.length || 'No' }} invoices
-      </p>
+      <p class="shortened-info">{{ amount || 'No' }} invoices</p>
     </div>
     <div class="header-controls">
       <app-dropdown></app-dropdown>
