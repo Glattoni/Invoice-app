@@ -19,10 +19,12 @@ export class InvoiceService {
 
   private invoice = new ReplaySubject<Invoice>();
   private invoices = new BehaviorSubject<Invoice[]>([]);
+  private currentFilter = new BehaviorSubject<string>('');
   private filteredInvoices = new BehaviorSubject<Invoice[]>([]);
 
   readonly invoice$ = this.invoice.asObservable();
   readonly invoices$ = this.invoices.asObservable();
+  readonly currentFilter$ = this.currentFilter.asObservable();
   readonly filteredInvoices$ = this.filteredInvoices.asObservable();
 
   httpOptions = {
@@ -64,24 +66,29 @@ export class InvoiceService {
           (invoice) => invoice._id !== value._id
         );
         this.invoices.next(updatedValue);
+        this.filteredInvoices.next(updatedValue);
       });
   }
 
   markAsPaidInvoice(id: string) {
     const url = `${this.invoicesUrl}/${id}`;
+    const body = { status: 'paid' };
 
     this.http
-      .patch<Invoice>(url, { status: 'paid' }, this.httpOptions)
+      .patch<Invoice>(url, body, this.httpOptions)
       .pipe(catchError(this.handleError<Invoice>()))
       .subscribe((value) => this.invoice.next(value));
   }
 
   filterByStatus(status: string) {
-    let tempInvoices: Invoice[] = [];
-
-    this.invoices$.subscribe((value) => (tempInvoices = [...value]));
-    tempInvoices = tempInvoices.filter((invoice) => invoice.status === status);
-    this.filteredInvoices.next(tempInvoices);
+    this.currentFilter.next(status);
+    this.invoices$.subscribe((value) => {
+      let tempInvoices = [...value];
+      tempInvoices = tempInvoices.filter(
+        (invoice) => invoice.status === status
+      );
+      this.filteredInvoices.next(tempInvoices);
+    });
   }
 
   private handleError<T>(result?: T) {

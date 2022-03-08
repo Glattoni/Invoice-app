@@ -10,8 +10,10 @@ import { Observable } from 'rxjs';
 })
 export class HeaderComponent {
   invoices$: Observable<Invoice[]>;
+  filter$: Observable<string>;
 
   constructor(private invoiceService: InvoiceService) {
-    this.invoices$ = this.invoiceService.invoices$;
+    this.invoices$ = this.invoiceService.filteredInvoices$;
+    this.filter$ = this.invoiceService.currentFilter$;
   }
 }

@@ -3,7 +3,7 @@
     <div>
       <h1>Invoices</h1>
       <p class="full-info">
-        There are total {{ (invoices$ | async)?.length || 0 }} invoices
+        {{ (invoices$ | async)?.length | summary: (filter$ | async) }}
       </p>
       <p class="shortened-info">
         {{ (invoices$ | async)?.length || 'No' }} invoices
