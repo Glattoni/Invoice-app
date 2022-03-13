@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { Invoice } from '@shared/models/invoice.model';
-import { InvoiceService } from '@shared/services/invoice/invoice.service';
-import { ModalService } from '@shared/services/modal/modal.service';
 import { Observable } from 'rxjs';
+import { Invoice } from '@shared/models/invoice.model';
+
+import { ModalService } from '@core/services/modal/modal.service';
+import { InvoiceService } from '@core/services/invoice/invoice.service';
 
 @Component({
   templateUrl: './invoice-detail-page.component.html',
@@ -37,7 +38,7 @@ export class InvoiceDetailPageComponent implements OnInit {
     this.router.navigate(['']);
   }
 
-  closeModal(id: string) {
+  closeModal(id: string): void {
     this.modalService.close(id);
   }
 }

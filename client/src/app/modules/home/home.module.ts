@@ -9,6 +9,7 @@ import { SharedModule } from '@shared/shared.module';
 import { InvoiceComponent } from './components/invoice/invoice.component';
 import { PlaceholderComponent } from './components/placeholder/placeholder.component';
 import { HomePageComponent } from './pages/home-page.component';
+import { SummaryPipe } from './pipes/summary/summary.pipe';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { HomePageComponent } from './pages/home-page.component';
     InvoiceComponent,
     PlaceholderComponent,
     HomePageComponent,
+    SummaryPipe,
   ],
   imports: [
     CommonModule,

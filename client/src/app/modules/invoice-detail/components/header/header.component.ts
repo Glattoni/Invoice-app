@@ -1,9 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
+import { ModalService } from '@core/services/modal/modal.service';
+import { InvoiceService } from '@core/services/invoice/invoice.service';
+
 import { Invoice } from '@shared/models/invoice.model';
-import { InvoiceService } from '@shared/services/invoice/invoice.service';
-import { ModalService } from '@shared/services/modal/modal.service';
 
 @Component({
   selector: 'app-header',
@@ -12,7 +13,7 @@ import { ModalService } from '@shared/services/modal/modal.service';
 })
 export class HeaderComponent {
   @Input() invoice?: Invoice;
-  @Input() state?: String;
+  @Input() state?: string;
 
   constructor(
     private route: ActivatedRoute,

@@ -1,6 +1,6 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { SummaryPipe } from '@shared/pipes/summary/summary.pipe';
+import { SummaryPipe } from '../../pipes/summary/summary.pipe';
 import { HeaderComponent } from './header.component';
 
 describe('HeaderComponent', () => {
