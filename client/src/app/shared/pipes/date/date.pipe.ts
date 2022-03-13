@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Months } from './months';
+import { Months } from '@shared/constants/months';
 
 @Pipe({
   name: 'date',

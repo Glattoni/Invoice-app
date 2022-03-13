@@ -1,8 +1,9 @@
-<div *ngIf="invoice" class="app-container">
+<div *ngIf="invoice$ | async as invoice" class="app-container container">
   <app-go-back-button [offset]="'0 0 2rem'"></app-go-back-button>
-  <app-header [state]="invoice.status"></app-header>
+  <app-header [invoice]="invoice" [state]="invoice.status"></app-header>
   <section>
     <app-body
+      [slug]="invoice.slug"
       [createdAt]="invoice.createdAt"
       [paymentDue]="invoice.paymentDue"
       [description]="invoice.description"
@@ -14,4 +15,19 @@
     <app-table [items]="invoice.items" [total]="invoice.total"></app-table>
   </section>
 </div>
-<app-footer></app-footer>
+
+<app-modal *ngIf="invoice$ | async as invoice" id="delete-prompt">
+  <h2 class="modal-title">confirm deletion</h2>
+  <p class="modal-text">
+    Are you sure you want to delete invoice #{{ invoice.slug }}? This action
+    cannot be undone.
+  </p>
+  <div class="modal-controls">
+    <app-button [variant]="'edit'" (click)="closeModal('delete-prompt')"
+      >Cancel</app-button
+    >
+    <app-button [variant]="'delete'" (click)="deleteInvoice()"
+      >Delete</app-button
+    >
+  </div>
+</app-modal>

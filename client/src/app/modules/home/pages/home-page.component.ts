@@ -1,22 +1,24 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { InvoiceService } from '@core/services/invoice/invoice.service';
 import { Invoice } from '@shared/models/invoice.model';
-import { InvoiceService } from '@shared/services/invoice/invoice.service';
 
 @Component({
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss'],
 })
 export class HomePageComponent implements OnInit {
-  invoices: Invoice[] = [];
-  constructor(private invoiceService: InvoiceService) {}
+  invoices$: Observable<Invoice[]>;
 
-  ngOnInit(): void {
-    this.getInvoices();
+  constructor(private invoiceService: InvoiceService) {
+    this.invoices$ = this.invoiceService.filteredInvoices$;
   }
 
-  getInvoices(): void {
-    this.invoiceService
-      .getInvoices()
-      .subscribe((value) => (this.invoices = value));
+  ngOnInit(): void {
+    this.invoiceService.getInvoices();
+  }
+
+  trackByInvoiceId(index: number, invoice: Invoice) {
+    return invoice._id;
   }
 }

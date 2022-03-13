@@ -5,7 +5,9 @@
   </div>
   <div class="controls">
     <app-button [variant]="'edit'">Edit</app-button>
-    <app-button [variant]="'delete'">Delete</app-button>
-    <app-button>Mark as paid</app-button>
+    <app-button [variant]="'delete'" (click)="openModal('delete-prompt')"
+      >Delete</app-button
+    >
+    <app-button (click)="markAsPaid()">Mark as paid</app-button>
   </div>
 </div>

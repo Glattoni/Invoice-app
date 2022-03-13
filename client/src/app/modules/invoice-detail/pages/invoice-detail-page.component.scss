@@ -1,5 +1,9 @@
 @use 'breakpoints' as bp;
 
+.container {
+  margin-bottom: 9.125rem;
+}
+
 section {
   display: flex;
   flex-direction: column;
@@ -15,4 +19,26 @@ section {
     padding: 2rem;
     margin-top: 1.5rem;
   }
+}
+
+.modal-title {
+  margin-bottom: 0.5rem;
+  line-height: 2rem;
+  text-transform: capitalize;
+
+  @include bp.md {
+    font-size: 1.5rem;
+  }
+}
+
+.modal-text {
+  margin-bottom: 1.5rem;
+  line-height: 1.375rem;
+  color: var(--foreground-primary);
+}
+
+.modal-controls {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
 }
