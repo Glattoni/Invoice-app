@@ -7,7 +7,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 
-import { ModalService } from '@shared/services/modal/modal.service';
+import { ModalService } from '@core/services/modal/modal.service';
 
 @Component({
   selector: 'app-modal',

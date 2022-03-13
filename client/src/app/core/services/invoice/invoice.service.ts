@@ -8,8 +8,7 @@ import {
   ReplaySubject,
   BehaviorSubject,
 } from 'rxjs';
-
-import { Invoice } from '../../models/invoice.model';
+import { Invoice } from '@shared/models/invoice.model';
 
 @Injectable({
   providedIn: 'root',

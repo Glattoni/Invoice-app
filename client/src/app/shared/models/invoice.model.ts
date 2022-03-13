@@ -1,3 +1,19 @@
+interface Address {
+  street: string;
+  city: string;
+  postCode: string;
+  country: string;
+  _id: string;
+}
+
+interface Item {
+  name: string;
+  quantity: number;
+  price: number;
+  total: number;
+  _id: string;
+}
+
 export interface Invoice {
   _id: string;
   slug: string;
@@ -8,28 +24,8 @@ export interface Invoice {
   clientName: string;
   clientEmail: string;
   status: string;
-  senderAddress: {
-    street: string;
-    city: string;
-    postCode: string;
-    country: string;
-    _id: string;
-  };
-  clientAddress: {
-    street: string;
-    city: string;
-    postCode: string;
-    country: string;
-    _id: string;
-  };
-  items: [
-    {
-      name: string;
-      quantity: number;
-      price: number;
-      total: number;
-      _id: string;
-    }
-  ];
+  senderAddress: Address;
+  clientAddress: Address;
+  items: Item[];
   total: number;
 }

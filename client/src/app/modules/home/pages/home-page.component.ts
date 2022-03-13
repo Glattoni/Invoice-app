@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { InvoiceService } from '@core/services/invoice/invoice.service';
 import { Invoice } from '@shared/models/invoice.model';
-import { InvoiceService } from '@shared/services/invoice/invoice.service';
 
 @Component({
   templateUrl: './home-page.component.html',

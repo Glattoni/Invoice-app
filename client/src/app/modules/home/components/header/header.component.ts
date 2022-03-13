@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
+import { InvoiceService } from '@core/services/invoice/invoice.service';
 import { Invoice } from '@shared/models/invoice.model';
-import { InvoiceService } from '@shared/services/invoice/invoice.service';
 import { Observable } from 'rxjs';
 
 @Component({

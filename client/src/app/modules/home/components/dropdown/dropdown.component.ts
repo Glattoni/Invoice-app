@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { InvoiceService } from '@shared/services/invoice/invoice.service';
+import { InvoiceService } from '@core/services/invoice/invoice.service';
 
 @Component({
   selector: 'app-dropdown',
