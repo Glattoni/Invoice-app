@@ -11,7 +11,9 @@
     </div>
     <div class="header-controls">
       <app-dropdown></app-dropdown>
-      <app-button [hasIcon]="true">New <span>Invoice</span></app-button>
+      <a [routerLink]="['/invoice/create']">
+        <app-button [hasIcon]="true">New <span>Invoice</span></app-button>
+      </a>
     </div>
   </div>
 </header>

@@ -7,7 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class TextFieldComponent implements OnInit {
   @Input() id: string = 'text field';
-  @Input() value: string = 'text field';
+  @Input() value: string = '';
   constructor() {}
 
   ngOnInit(): void {}
