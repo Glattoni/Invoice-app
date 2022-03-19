@@ -8,8 +8,11 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
 import { SharedModule } from '@shared/shared.module';
 import { InvoiceComponent } from './components/invoice/invoice.component';
 import { PlaceholderComponent } from './components/placeholder/placeholder.component';
-import { HomePageComponent } from './pages/home-page.component';
+import { HomePageComponent } from './pages/home/home-page.component';
 import { SummaryPipe } from './pipes/summary/summary.pipe';
+import { NewInvoiceComponent } from './pages/new-invoice/new-invoice.component';
+import { BillingFormComponent } from './components/billing-form/billing-form.component';
+import { TextFieldComponent } from './components/form-elements/text-field/text-field.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +22,9 @@ import { SummaryPipe } from './pipes/summary/summary.pipe';
     PlaceholderComponent,
     HomePageComponent,
     SummaryPipe,
+    NewInvoiceComponent,
+    BillingFormComponent,
+    TextFieldComponent,
   ],
   imports: [
     CommonModule,

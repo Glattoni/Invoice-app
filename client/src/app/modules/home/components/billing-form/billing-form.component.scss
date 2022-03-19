@@ -1,0 +1,106 @@
+@use 'breakpoints' as bp;
+
+h1 {
+  margin-bottom: 1.5rem;
+
+  @include bp.md {
+    margin-bottom: 3rem;
+  }
+}
+
+fieldset {
+  padding: 0;
+  border: 0;
+
+  &:not(:last-child) {
+    margin-bottom: 2.5rem;
+
+    @include bp.md {
+      margin-bottom: 3rem;
+    }
+  }
+}
+
+legend {
+  margin-bottom: 1.5rem;
+  font-weight: bold;
+  color: var(--primary);
+  text-transform: capitalize;
+}
+
+label {
+  text-transform: capitalize;
+}
+
+.form {
+  &-group {
+    display: grid;
+    grid-gap: 1.5rem;
+  }
+
+  &-subgroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+  }
+}
+
+.sender {
+  display: grid;
+  grid-template-areas:
+    'street street'
+    'city postCode'
+    'country country';
+
+  .street-address {
+    grid-area: street;
+  }
+
+  .city {
+    grid-area: city;
+  }
+
+  .post-code {
+    grid-area: postCode;
+  }
+
+  .country {
+    grid-area: country;
+  }
+
+  @include bp.md {
+    grid-template-areas:
+      'street street street'
+      'city postCode country';
+  }
+}
+
+.client {
+  display: grid;
+
+  :not(.city, .post-code) {
+    grid-column: span 2;
+  }
+
+  @include bp.md {
+    grid-template-columns: 1fr 1fr 1fr;
+
+    :not(.city, .post-code, .country) {
+      grid-column: span 3;
+    }
+
+    .form-subgroup.country {
+      grid-column: span 1;
+    }
+  }
+}
+
+.other {
+  display: grid;
+
+  @include bp.md {
+    .project-description {
+      grid-column: span 2;
+    }
+  }
+}

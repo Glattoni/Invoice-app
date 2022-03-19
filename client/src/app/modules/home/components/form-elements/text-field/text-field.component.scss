@@ -1,0 +1,20 @@
+label {
+  color: var(--label-foreground);
+}
+
+input {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 1rem 1.25rem;
+  font-weight: bold;
+  color: var(--base);
+  background-color: var(--background-secondary);
+  border: 1px solid var(--input-inner-border);
+  border-radius: 0.25rem;
+  caret-color: var(--primary);
+  outline: none;
+
+  &:focus {
+    border-color: var(--primary);
+  }
+}
