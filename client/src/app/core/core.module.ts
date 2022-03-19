@@ -2,14 +2,11 @@ import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { AngularSvgIconModule } from 'angular-svg-icon';
-import { BillingFormComponent } from './components/billing-form/billing-form.component';
-import { TextFieldComponent } from './components/form-elements/text-field/text-field.component';
-import { DropdownComponent } from './components/form-elements/dropdown/dropdown.component';
 
 @NgModule({
-  declarations: [SidebarComponent, BillingFormComponent, TextFieldComponent, DropdownComponent],
+  declarations: [SidebarComponent],
   imports: [CommonModule, AngularSvgIconModule],
-  exports: [SidebarComponent, BillingFormComponent],
+  exports: [SidebarComponent],
 })
 export class CoreModule {
   constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
