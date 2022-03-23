@@ -9,6 +9,7 @@ export const light: Theme = {
     '--primary': 'hsl(252deg 94% 67%)',
     '--primary-light': 'hsl(252deg 100% 73%)',
     '--white': 'hsl(0deg 0% 100%)',
+    '--black': 'hsl(0deg 0% 0%)',
     '--base': 'hsl(228deg 29% 7%)',
     '--shamrock': 'hsl(160deg 67% 52%)',
     '--shamrock-light': 'hsla(160, 67%, 52%, 0.06)',

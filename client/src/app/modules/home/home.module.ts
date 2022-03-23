@@ -11,8 +11,7 @@ import { PlaceholderComponent } from './components/placeholder/placeholder.compo
 import { HomePageComponent } from './pages/home/home-page.component';
 import { SummaryPipe } from './pipes/summary/summary.pipe';
 import { NewInvoiceComponent } from './pages/new-invoice/new-invoice.component';
-import { BillingFormComponent } from './components/billing-form/billing-form.component';
-import { TextFieldComponent } from './components/form-elements/text-field/text-field.component';
+import { PortalModule } from '@angular/cdk/portal';
 
 @NgModule({
   declarations: [
@@ -23,14 +22,13 @@ import { TextFieldComponent } from './components/form-elements/text-field/text-f
     HomePageComponent,
     SummaryPipe,
     NewInvoiceComponent,
-    BillingFormComponent,
-    TextFieldComponent,
   ],
   imports: [
     CommonModule,
     HomeRoutingModule,
     AngularSvgIconModule,
     SharedModule,
+    PortalModule,
   ],
 })
 export class HomeModule {}

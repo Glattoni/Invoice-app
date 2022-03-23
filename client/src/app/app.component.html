@@ -1,4 +1,15 @@
 <app-sidebar></app-sidebar>
+
 <main>
   <router-outlet></router-outlet>
 </main>
+
+<aside [class.visible]="visible$ | async">
+  <app-billing-form></app-billing-form>
+</aside>
+
+<div
+  class="overlay"
+  [class.visible]="visible$ | async"
+  (click)="closeSidebar()"
+></div>
