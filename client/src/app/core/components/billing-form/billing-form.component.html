@@ -1,0 +1,79 @@
+<header>
+  <h1>New Invoice</h1>
+</header>
+
+<form>
+  <fieldset>
+    <legend>bill from</legend>
+    <div class="form-group sender">
+      <div class="form-subgroup street-address">
+        <label for="street-address">street address</label>
+        <app-text-field [id]="'street-address'"></app-text-field>
+      </div>
+      <div class="form-subgroup city">
+        <label for="city">city</label>
+        <app-text-field id="city"></app-text-field>
+      </div>
+      <div class="form-subgroup post-code">
+        <label for="post-code">post code</label>
+        <app-text-field [id]="'post-code'"></app-text-field>
+      </div>
+      <div class="form-subgroup country">
+        <label for="country">country</label>
+        <app-text-field [id]="'country'"></app-text-field>
+      </div>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>bill to</legend>
+    <div class="form-group client">
+      <div class="form-subgroup client-name">
+        <label for="client-name">client's name</label>
+        <app-text-field [id]="'client-name'"></app-text-field>
+      </div>
+      <div class="form-subgroup client-email">
+        <label for="client-name">client's email</label>
+        <app-text-field [id]="'client-email'"></app-text-field>
+      </div>
+      <div class="form-subgroup client-address">
+        <label for="client-address">street address</label>
+        <app-text-field [id]="'client-address'"></app-text-field>
+      </div>
+      <div class="form-subgroup city">
+        <label for="country">city</label>
+        <app-text-field [id]="'city'"></app-text-field>
+      </div>
+      <div class="form-subgroup post-code">
+        <label for="post-code">post code</label>
+        <app-text-field [id]="'post-code'"></app-text-field>
+      </div>
+      <div class="form-subgroup country">
+        <label for="country">country</label>
+        <app-text-field [id]="'country'"></app-text-field>
+      </div>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <div class="form-group other">
+      <div class="form-subgroup invoice-date">
+        <label for="invoice-date">invoice date</label>
+        <input type="date" id="invoice-date" />
+      </div>
+      <div class="form-subgroup payment-terms">
+        <label for="payment-terms">payment terms</label>
+        <select name="payment-terms" id="payment-terms">
+          <option value="next 1 day">Next 1 day</option>
+          <option value="next 7 day">Next 7 days</option>
+          <option value="next 14 day">Next 14 days</option>
+          <option value="next 30 day">Next 30 days</option>
+        </select>
+      </div>
+      <div class="form-subgroup project-description">
+        <label for="project-description">project description</label>
+        <app-text-field [id]="'project-description'"></app-text-field>
+      </div>
+    </div>
+  </fieldset>
+</form>
