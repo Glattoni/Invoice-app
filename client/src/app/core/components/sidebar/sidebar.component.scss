@@ -5,6 +5,7 @@ aside {
   top: 0;
   right: 0;
   left: 0;
+  z-index: var(--z-sidebar);
   display: flex;
   justify-content: space-between;
   min-height: 4.5rem;
