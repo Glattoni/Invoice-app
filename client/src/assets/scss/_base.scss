@@ -106,3 +106,28 @@ input {
   max-width: 45.625rem;
   margin: 0 auto;
 }
+
+@supports (scrollbar-color: rebeccapurple green) {
+  * {
+    scrollbar-color: var(--background-secondary) transparent;
+    scrollbar-gutter: auto;
+    scroll-margin: 50px 10px;
+  }
+}
+
+@supports not (scrollbar-color: rebeccapurple green) {
+  * {
+    ::-webkit-scrollbar {
+      width: 0.5rem;
+    }
+
+    ::-webkit-scrollbar-track {
+      background-color: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: var(--background-secondary);
+      border-radius: 0.25rem;
+    }
+  }
+}

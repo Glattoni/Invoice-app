@@ -11,13 +11,14 @@ main {
 }
 
 aside {
-  position: absolute;
+  position: fixed;
   top: 5rem;
+  bottom: 0;
   z-index: var(--z-billing-form);
   display: none;
   max-width: 38.5rem;
-  min-height: 100vh;
   padding: 4rem 4rem 2rem;
+  overflow-y: scroll;
   background-color: var(--background-primary);
   border-top-right-radius: 1.25rem;
   border-bottom-right-radius: 1.25rem;
