@@ -1,7 +1,7 @@
 @use 'breakpoints' as bp;
 
 aside {
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   left: 0;
@@ -16,9 +16,9 @@ aside {
   }
 
   @include bp.xxl {
+    bottom: 0;
     flex-direction: column;
     max-width: 6.4375rem;
-    min-height: 100vh;
     border-top-right-radius: 1.25rem;
     border-bottom-right-radius: 1.25rem;
   }
