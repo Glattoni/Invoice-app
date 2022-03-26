@@ -71,6 +71,11 @@ h5 {
   letter-spacing: -0.25px;
 }
 
+fieldset {
+  padding: 0;
+  border: 0;
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -110,8 +115,6 @@ input {
 @supports (scrollbar-color: rebeccapurple green) {
   * {
     scrollbar-color: var(--background-secondary) transparent;
-    scrollbar-gutter: auto;
-    scroll-margin: 50px 10px;
   }
 }
 
