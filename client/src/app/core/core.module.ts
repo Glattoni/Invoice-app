@@ -3,11 +3,10 @@ import { CommonModule } from '@angular/common';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { BillingFormComponent } from './components/billing-form/billing-form.component';
-import { TextFieldComponent } from './components/form-elements/text-field/text-field.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [SidebarComponent, BillingFormComponent, TextFieldComponent],
+  declarations: [SidebarComponent, BillingFormComponent],
   imports: [
     CommonModule,
     AngularSvgIconModule,
