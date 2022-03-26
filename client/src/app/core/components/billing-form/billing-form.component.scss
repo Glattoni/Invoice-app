@@ -8,17 +8,18 @@ h1 {
   }
 }
 
+form {
+  display: grid;
+  grid-gap: 2.5rem;
+
+  @include bp.md {
+    grid-gap: 3rem;
+  }
+}
+
 fieldset {
   padding: 0;
   border: 0;
-
-  &:not(:last-child) {
-    margin-bottom: 2.5rem;
-
-    @include bp.md {
-      margin-bottom: 3rem;
-    }
-  }
 }
 
 legend {
@@ -29,30 +30,51 @@ legend {
 }
 
 label {
+  color: var(--label-foreground);
   text-transform: capitalize;
 }
 
-.form {
-  &-group {
-    display: grid;
-    grid-gap: 1.5rem;
-  }
+input,
+select {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 1rem 1.25rem;
+  font-weight: bold;
+  color: var(--base);
+  background-color: var(--background-secondary);
+  border: 1px solid var(--input-inner-border);
+  border-radius: 0.25rem;
+  caret-color: var(--primary);
+  outline: none;
 
-  &-subgroup {
-    display: flex;
-    flex-direction: column;
-    gap: 0.625rem;
+  &:focus {
+    border-color: var(--primary);
   }
 }
 
-.sender {
+.form-group {
+  display: grid;
+  grid-gap: 1.5rem;
+}
+
+.form-subgroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.client-initials {
+  margin-bottom: 1.5rem;
+}
+
+.sender-address {
   display: grid;
   grid-template-areas:
     'street street'
     'city postCode'
     'country country';
 
-  .street-address {
+  .street {
     grid-area: street;
   }
 
@@ -75,9 +97,7 @@ label {
   }
 }
 
-.client {
-  display: grid;
-
+.client-address {
   :not(.city, .post-code) {
     grid-column: span 2;
   }
@@ -95,28 +115,12 @@ label {
   }
 }
 
-.other {
+.conditions {
   display: grid;
 
   @include bp.md {
     .project-description {
       grid-column: span 2;
     }
-  }
-}
-
-.overlay {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  display: none;
-  min-width: 100vw;
-  background-color: orange;
-  opacity: 0.25;
-
-  @include bp.md {
-    display: block;
   }
 }
