@@ -50,6 +50,7 @@ export const light: Theme = {
     '--input-inner-border': 'hsl(231deg 75% 93%)',
     '--label-foreground': 'hsl(231deg 36% 63%)',
     '--select-option-divider': 'hsl(231deg 75% 93%)',
+    '--items-list': 'hsl(225deg 14% 53%)',
     // box-shadows
     '--box-shadow-primary': 'hsl(232deg 38% 45% / 25%)',
     '--box-shadow-secondary': 'hsl(232deg 38% 45% / 10%)',
@@ -100,8 +101,9 @@ export const dark: Theme = {
     '--invoice-grand-total': 'hsl(231deg 28% 7%)',
     '--invoice-item-title': 'hsl(231deg 20% 61%)',
     '--input-inner-border': 'hsl(233deg 20% 21%)',
-    '--label-foreground': 'hsl(231deg 75% 93%)',
+    '--label-foreground': 'hsl(231deg 20% 61%)',
     '--select-option-divider': 'hsl(233deg 31% 17%)',
+    '--items-list': 'hsl(225deg 14% 53%)',
     // box-shadows
     '--box-shadow-primary': 'hsl(0deg 0% 0% / 25%)',
     '--box-shadow-secondary': 'hsl(232deg 38% 45% / 10%)',

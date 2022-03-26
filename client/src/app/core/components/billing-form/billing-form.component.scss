@@ -11,15 +11,11 @@ h1 {
 form {
   display: grid;
   grid-gap: 2.5rem;
+  overflow: scroll;
 
   @include bp.md {
     grid-gap: 3rem;
   }
-}
-
-fieldset {
-  padding: 0;
-  border: 0;
 }
 
 legend {
@@ -27,6 +23,17 @@ legend {
   font-weight: bold;
   color: var(--primary);
   text-transform: capitalize;
+
+  &.legend-title {
+    font-size: 1.125rem;
+    line-height: 2rem;
+    color: var(--items-list);
+    letter-spacing: -0.375px;
+
+    @include bp.md {
+      margin-bottom: 1rem;
+    }
+  }
 }
 
 label {
@@ -52,64 +59,61 @@ select {
   }
 }
 
-.form-group {
+.fields-container {
   display: grid;
   grid-gap: 1.5rem;
 }
 
-.form-subgroup {
+.form-field {
   display: flex;
   flex-direction: column;
   gap: 0.625rem;
+
+  .item-total {
+    padding: 1rem 0;
+  }
 }
 
 .client-initials {
   margin-bottom: 1.5rem;
 }
 
-.sender-address {
+.sender {
   display: grid;
-  grid-template-areas:
-    'street street'
-    'city postCode'
-    'country country';
+  grid-template-columns: 1fr 1fr;
 
-  .street {
-    grid-area: street;
-  }
-
-  .city {
-    grid-area: city;
-  }
-
-  .post-code {
-    grid-area: postCode;
-  }
-
-  .country {
-    grid-area: country;
-  }
-
-  @include bp.md {
-    grid-template-areas:
-      'street street street'
-      'city postCode country';
-  }
-}
-
-.client-address {
-  :not(.city, .post-code) {
+  &-street,
+  &-country {
     grid-column: span 2;
   }
 
   @include bp.md {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
 
-    :not(.city, .post-code, .country) {
+    &-street {
       grid-column: span 3;
     }
 
-    .form-subgroup.country {
+    &-country {
+      grid-column: span 1;
+    }
+  }
+}
+
+.client {
+  &-street,
+  &-country {
+    grid-column: span 2;
+  }
+
+  @include bp.md {
+    grid-template-columns: repeat(3, 1fr);
+
+    &-street {
+      grid-column: span 3;
+    }
+
+    &-country {
       grid-column: span 1;
     }
   }
@@ -123,4 +127,54 @@ select {
       grid-column: span 2;
     }
   }
+}
+
+.list {
+  display: grid;
+  grid-gap: 3rem;
+
+  @include bp.md {
+    grid-gap: 1.125rem;
+  }
+}
+
+.list-item {
+  display: grid;
+
+  .form-field:first-child {
+    grid-column: span 4;
+
+    @include bp.md {
+      grid-column: span 1;
+    }
+  }
+
+  button {
+    max-height: 2rem;
+    padding: 0.5rem 0.625rem;
+    margin-bottom: 0.5rem;
+  }
+
+  div:nth-child(2) {
+    max-width: 4rem;
+  }
+
+  @include bp.md {
+    grid-template-columns: auto 4.5rem 6.25rem auto auto;
+  }
+}
+
+.delete-button {
+  display: flex;
+  align-items: flex-end;
+}
+
+.add-button {
+  width: 100%;
+  padding: 1rem 1.25rem;
+  margin-top: 1.5rem;
+  font-weight: bold;
+  text-transform: capitalize;
+  border: 1px solid white;
+  border-radius: 1.5rem;
 }

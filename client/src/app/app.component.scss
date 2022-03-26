@@ -2,9 +2,11 @@
 
 main {
   padding-top: 6.5rem;
+
   @include bp.md {
     padding-top: 8.5rem;
   }
+
   @include bp.xxl {
     padding-top: 6rem;
   }
@@ -18,7 +20,7 @@ aside {
   display: none;
   max-width: 38.5rem;
   padding: 4rem 4rem 2rem;
-  overflow-y: scroll;
+  overflow: scroll;
   background-color: var(--background-primary);
   border-top-right-radius: 1.25rem;
   border-bottom-right-radius: 1.25rem;

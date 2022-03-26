@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-billing-form',
@@ -32,10 +32,30 @@ export class BillingFormComponent implements OnInit {
       invoiceDate: '',
       paymentTerms: '',
       projectDescription: '',
+      items: this.fb.array([]),
     });
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.billingForm.valueChanges.subscribe((value) => console.log(value));
+  }
+
+  get itemForms() {
+    return this.billingForm.get('items') as FormArray;
+  }
+
+  addItem(): void {
+    const item = this.fb.group({
+      name: '',
+      quantity: '',
+      price: '',
+      total: '',
+    });
+
+    this.itemForms.push(item);
+  }
+
+  deleteItem(idx: number): void {
+    this.itemForms.removeAt(idx);
   }
 }
