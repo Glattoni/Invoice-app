@@ -5,20 +5,20 @@
 <form [formGroup]="billingForm">
   <fieldset>
     <legend>bill from</legend>
-    <div formGroupName="senderAddress" class="form-group sender-address">
-      <div class="form-subgroup street">
+    <div formGroupName="senderAddress" class="fields-container sender">
+      <div class="form-field sender-street">
         <label for="sender-street">street address</label>
         <input id="sender-street" formControlName="street" />
       </div>
-      <div class="form-subgroup city">
+      <div class="form-field sender-city">
         <label for="sender-city">city</label>
         <input id="sender-city" formControlName="city" />
       </div>
-      <div class="form-subgroup post-code">
+      <div class="form-field sender-post-code">
         <label for="sender-post-code">post code</label>
         <input id="sender-post-code" formControlName="postCode" />
       </div>
-      <div class="form-subgroup country">
+      <div class="form-field sender-country">
         <label for="sender-country">country</label>
         <input id="sender-country" formControlName="country" />
       </div>
@@ -27,30 +27,30 @@
 
   <fieldset>
     <legend>bill to</legend>
-    <div class="form-group client-initials">
-      <div class="form-subgroup client-name">
+    <div class="fields-container client-initials">
+      <div class="form-field client-name">
         <label for="client-name">client's name</label>
         <input id="client-name" formControlName="clientName" />
       </div>
-      <div class="form-subgroup client-email">
+      <div class="form-field client-email">
         <label for="client-email">client's email</label>
         <input id="client-email" formControlName="clientEmail" />
       </div>
     </div>
-    <div formGroupName="clientAddress" class="form-group client-address">
-      <div class="form-subgroup street">
+    <div formGroupName="clientAddress" class="fields-container client">
+      <div class="form-field client-street">
         <label for="client-street">street address</label>
         <input id="client-street" formControlName="street" />
       </div>
-      <div class="form-subgroup city">
+      <div class="form-field client-city">
         <label for="client-city">city</label>
         <input id="client-city" formControlName="city" />
       </div>
-      <div class="form-subgroup post-code">
+      <div class="form-field client-post-code">
         <label for="client-post-code">post code</label>
         <input id="client-post-code" formControlName="postCode" />
       </div>
-      <div class="form-subgroup country">
+      <div class="form-field client-country">
         <label for="client-country">country</label>
         <input id="client-country" formControlName="country" />
       </div>
@@ -58,12 +58,13 @@
   </fieldset>
 
   <fieldset>
-    <div class="form-group conditions">
-      <div class="form-subgroup invoice-date">
+    <legend>item list</legend>
+    <div class="fields-container conditions">
+      <div class="form-field invoice-date">
         <label for="invoice-date">invoice date</label>
         <input type="date" id="invoice-date" formControlName="invoiceDate" />
       </div>
-      <div class="form-subgroup payment-terms">
+      <div class="form-field payment-terms">
         <label for="payment-terms">payment terms</label>
         <select
           id="payment-terms"
@@ -76,10 +77,44 @@
           <option value="30">Next 30 days</option>
         </select>
       </div>
-      <div class="form-subgroup project-description">
+      <div class="form-field project-description">
         <label for="project-description">project description</label>
         <input id="project-description" formControlName="projectDescription" />
       </div>
     </div>
+  </fieldset>
+
+  <fieldset>
+    <legend class="legend-title">items list</legend>
+    <div formArrayName="items" class="list">
+      <div
+        *ngFor="let item of itemForms.controls; let i = index"
+        [formGroupName]="i"
+        class="fields-container list-item"
+      >
+        <div class="form-field">
+          <label for="item-name">item name</label>
+          <input id="item-name" formControlName="name" />
+        </div>
+        <div class="form-field">
+          <label for="quantity">qty.</label>
+          <input id="quantity" formControlName="quantity" />
+        </div>
+        <div class="form-field">
+          <label for="price">price</label>
+          <input id="price" formControlName="price" />
+        </div>
+        <div class="form-field">
+          <label>total</label>
+          <div class="item-total">100</div>
+        </div>
+        <div class="delete-button">
+          <button (click)="deleteItem(i)">
+            <svg-icon src="assets/icons/icon-delete.svg"></svg-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+    <button class="add-button" (click)="addItem()">+ add new item</button>
   </fieldset>
 </form>
