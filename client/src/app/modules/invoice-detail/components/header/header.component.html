@@ -4,8 +4,8 @@
     <app-invoice-state [variant]="state || 'N/A'"></app-invoice-state>
   </div>
   <div class="controls">
-    <app-button [variant]="'edit'">Edit</app-button>
-    <app-button [variant]="'delete'" (click)="openModal('delete-prompt')"
+    <app-button [variant]="'neutral'">Edit</app-button>
+    <app-button [variant]="'danger'" (click)="openModal('delete-prompt')"
       >Delete</app-button
     >
     <app-button (click)="markAsPaid()">Mark as paid</app-button>

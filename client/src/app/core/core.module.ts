@@ -4,6 +4,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { BillingFormComponent } from './components/billing-form/billing-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ButtonsModule } from '../modules/buttons/buttons.module';
 
 @NgModule({
   declarations: [SidebarComponent, BillingFormComponent],
@@ -12,6 +13,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AngularSvgIconModule,
     FormsModule,
     ReactiveFormsModule,
+    ButtonsModule,
   ],
   exports: [SidebarComponent, BillingFormComponent],
 })
