@@ -23,10 +23,10 @@
     cannot be undone.
   </p>
   <div class="modal-controls">
-    <app-button [variant]="'edit'" (click)="closeModal('delete-prompt')"
+    <app-button [variant]="'neutral'" (click)="closeModal('delete-prompt')"
       >Cancel</app-button
     >
-    <app-button [variant]="'delete'" (click)="deleteInvoice()"
+    <app-button [variant]="'danger'" (click)="deleteInvoice()"
       >Delete</app-button
     >
   </div>

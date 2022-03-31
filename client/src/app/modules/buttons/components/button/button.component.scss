@@ -1,36 +1,19 @@
 @use 'breakpoints' as bp;
 
 button {
-  display: inline-flex;
-  align-items: center;
   padding: 1rem 1.5rem;
   font-weight: bold;
-  color: var(--white);
   letter-spacing: -0.25px;
-  background-color: var(--primary);
   border-radius: 1.5rem;
-
-  &.with-icon {
-    padding: 0.375rem 1rem 0.375rem 0.375rem;
-
-    @include bp.md {
-      padding: 0.5rem 1rem 0.5rem 0.5rem;
-    }
-  }
-
-  &:hover {
-    background-color: var(--primary-light);
-  }
 }
 
 :host ::ng-deep span {
   display: none;
+  padding-left: 0.25rem;
 
   @include bp.md {
     display: inline;
   }
-
-  padding-left: 0.25rem;
 }
 
 svg-icon {
@@ -48,7 +31,26 @@ svg-icon {
   }
 }
 
-.edit {
+.with-icon {
+  display: flex;
+  align-items: center;
+  padding: 0.375rem 1rem 0.375rem 0.375rem;
+
+  @include bp.md {
+    padding: 0.5rem 1rem 0.5rem 0.5rem;
+  }
+}
+
+.primary {
+  color: var(--white);
+  background-color: var(--primary);
+
+  &:hover {
+    background-color: var(--primary-light);
+  }
+}
+
+.neutral {
   color: var(--button-3-fg);
   background-color: var(--button-3-bg);
 
@@ -58,7 +60,7 @@ svg-icon {
   }
 }
 
-.save {
+.dark {
   color: var(--button-4-fg);
   background-color: var(--button-4-bg);
 
@@ -68,7 +70,8 @@ svg-icon {
   }
 }
 
-.delete {
+.danger {
+  color: var(--white);
   background-color: var(--danger);
 
   &:hover {
@@ -76,12 +79,12 @@ svg-icon {
   }
 }
 
-.add {
-  color: var(--button-4-fg);
-  background-color: var(--button-4-bg);
+.light {
+  color: var(--button-6-fg);
+  background-color: var(--button-6-bg);
 
   &:hover {
-    color: var(--button-4-fg-hover);
-    background-color: var(--button-4-bg-hover);
+    color: var(--button-6-fg-hover);
+    background-color: var(--button-6-bg-hover);
   }
 }

@@ -7,6 +7,7 @@ import { InvoiceDetailPageComponent } from './pages/invoice-detail-page.componen
 import { HeaderComponent } from './components/header/header.component';
 import { BodyComponent } from './components/body/body.component';
 import { TableComponent } from './components/table/table.component';
+import { ButtonsModule } from '../buttons/buttons.module';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { TableComponent } from './components/table/table.component';
     InvoiceDetailRoutingModule,
     SharedModule,
     AngularSvgIconModule,
+    ButtonsModule,
   ],
 })
 export class InvoiceDetail {}

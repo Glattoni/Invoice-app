@@ -12,6 +12,7 @@ import { HomePageComponent } from './pages/home/home-page.component';
 import { SummaryPipe } from './pipes/summary/summary.pipe';
 import { NewInvoiceComponent } from './pages/new-invoice/new-invoice.component';
 import { PortalModule } from '@angular/cdk/portal';
+import { ButtonsModule } from '../buttons/buttons.module';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { PortalModule } from '@angular/cdk/portal';
     AngularSvgIconModule,
     SharedModule,
     PortalModule,
+    ButtonsModule,
   ],
 })
 export class HomeModule {}

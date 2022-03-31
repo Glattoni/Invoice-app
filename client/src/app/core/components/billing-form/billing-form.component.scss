@@ -140,6 +140,7 @@ select {
 
 .list-item {
   display: grid;
+  grid-gap: 1.5rem 1rem;
 
   .form-field:first-child {
     grid-column: span 4;
@@ -160,7 +161,8 @@ select {
   }
 
   @include bp.md {
-    grid-template-columns: auto 4.5rem 6.25rem auto auto;
+    grid-template-columns: 13rem auto 6.25rem auto auto;
+    grid-gap: 1rem;
   }
 }
 
@@ -170,11 +172,11 @@ select {
 }
 
 .add-button {
-  width: 100%;
-  padding: 1rem 1.25rem;
+  display: block;
   margin-top: 1.5rem;
-  font-weight: bold;
-  text-transform: capitalize;
-  border: 1px solid white;
-  border-radius: 1.5rem;
+
+  ::ng-deep button {
+    width: 100%;
+    text-transform: capitalize;
+  }
 }
