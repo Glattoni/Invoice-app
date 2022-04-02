@@ -11,7 +11,6 @@ h1 {
 form {
   display: grid;
   grid-gap: 2.5rem;
-  overflow: scroll;
 
   @include bp.md {
     grid-gap: 3rem;
@@ -160,8 +159,18 @@ select {
     max-width: 4rem;
   }
 
+  div:nth-child(4) {
+    min-width: 5.25rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    @include bp.md {
+      min-width: unset;
+    }
+  }
+
   @include bp.md {
-    grid-template-columns: 13rem auto 6.25rem auto auto;
+    grid-template-columns: 12.5rem 2.875rem 6.25rem auto 2rem;
     grid-gap: 1rem;
   }
 }
