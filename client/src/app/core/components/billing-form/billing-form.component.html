@@ -106,7 +106,9 @@
         </div>
         <div class="form-field">
           <label>total</label>
-          <div class="item-total">100</div>
+          <div class="item-total">
+            {{ calculateItemTotal(i) | currency: '':'' }}
+          </div>
         </div>
         <div class="delete-button">
           <button (click)="deleteItem(i)">
