@@ -114,7 +114,7 @@ input {
 
 @supports (scrollbar-color: rebeccapurple green) {
   * {
-    scrollbar-color: var(--background-secondary) transparent;
+    scrollbar-color: var(--background-scrollbar) transparent;
   }
 }
 

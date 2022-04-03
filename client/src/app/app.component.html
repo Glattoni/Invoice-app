@@ -5,7 +5,9 @@
 </main>
 
 <aside [class.visible]="visible$ | async">
-  <app-billing-form></app-billing-form>
+  <div class="form-container" (scroll)="onScroll($event)">
+    <app-billing-form></app-billing-form>
+  </div>
 </aside>
 
 <div

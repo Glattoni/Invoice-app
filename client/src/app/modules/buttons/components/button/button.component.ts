@@ -9,4 +9,5 @@ import { Button } from '../../types/button';
 export class ButtonComponent {
   @Input() hasIcon: boolean = false;
   @Input() variant: Button = 'primary';
+  @Input() small: boolean = false;
 }

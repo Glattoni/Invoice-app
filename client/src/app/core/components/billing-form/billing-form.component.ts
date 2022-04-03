@@ -1,13 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { distinctUntilChanged, Subscription } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
+
+import { ScrollService } from '@core/services/scroll/scroll.service';
+import { SidebarFormService } from '@core/services/sidebar-form/sidebar-form.service';
 
 @Component({
   selector: 'app-billing-form',
   templateUrl: './billing-form.component.html',
   styleUrls: ['./billing-form.component.scss'],
 })
-export class BillingFormComponent implements OnInit {
+export class BillingFormComponent implements OnInit, OnDestroy {
   billingForm: FormGroup;
+  isBottom: boolean = false;
+  scrollSubscription: Subscription;
 
   readonly options: any = [
     { id: '1', label: 'Next 1 day' },
@@ -23,7 +29,12 @@ export class BillingFormComponent implements OnInit {
     country: [''],
   });
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private scrollService: ScrollService,
+    private sidebarFormService: SidebarFormService
+  ) {
+    this.scrollSubscription = this.scrollService.isBottom$.subscribe();
     this.billingForm = this.fb.group({
       senderAddress: this.address,
       clientName: [''],
@@ -44,6 +55,13 @@ export class BillingFormComponent implements OnInit {
     this.itemForms.valueChanges.subscribe((_) => {
       this.calculateTotal();
     });
+    this.scrollSubscription = this.scrollService.isBottom$
+      .pipe(distinctUntilChanged())
+      .subscribe((value) => (this.isBottom = value));
+  }
+
+  ngOnDestroy(): void {
+    this.scrollSubscription.unsubscribe();
   }
 
   get itemForms() {
@@ -75,13 +93,17 @@ export class BillingFormComponent implements OnInit {
     return totalPrice;
   }
 
-  calculateTotal() {
+  calculateTotal(): void {
     const grandTotal = this.billingForm.get('total');
     const amountDue = this.itemForms.controls
       .map((c) => parseInt(c.get('total')?.value))
       .reduce((a, b) => a + b);
 
     grandTotal?.setValue(amountDue);
-    return;
+  }
+
+  discardForm(): void {
+    this.billingForm.reset();
+    this.sidebarFormService.close();
   }
 }
