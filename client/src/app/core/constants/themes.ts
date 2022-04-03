@@ -52,6 +52,7 @@ export const light: Theme = {
     '--label-foreground': 'hsl(231deg 36% 63%)',
     '--select-option-divider': 'hsl(231deg 75% 93%)',
     '--items-list': 'hsl(225deg 14% 53%)',
+    '--background-scrollbar': 'hsl(231deg 75% 93%)',
     // box-shadows
     '--box-shadow-primary': 'hsl(232deg 38% 45% / 25%)',
     '--box-shadow-secondary': 'hsl(232deg 38% 45% / 10%)',
@@ -106,6 +107,7 @@ export const dark: Theme = {
     '--label-foreground': 'hsl(231deg 75% 93%)',
     '--select-option-divider': 'hsl(233deg 31% 17%)',
     '--items-list': 'hsl(225deg 14% 53%)',
+    '--background-scrollbar': 'hsl(233deg 30% 21%)',
     // box-shadows
     '--box-shadow-primary': 'hsl(0deg 0% 0% / 25%)',
     '--box-shadow-secondary': 'hsl(232deg 38% 45% / 10%)',

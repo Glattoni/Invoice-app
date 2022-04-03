@@ -5,7 +5,6 @@ import { PortalService } from '../../services/portal/portal.service';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-new-invoice',
   templateUrl: './new-invoice.component.html',
   styleUrls: ['./new-invoice.component.scss'],
 })

@@ -19,11 +19,9 @@ aside {
   z-index: var(--z-billing-form);
   display: none;
   max-width: 38.5rem;
-  padding: 4rem 4rem 2rem;
-  overflow: scroll;
+  padding: 4rem 2rem 4rem 4rem;
   background-color: var(--background-quaternary);
-  border-top-right-radius: 1.25rem;
-  border-bottom-right-radius: 1.25rem;
+  border-radius: 0 1.25rem 1.25rem 0;
   transform: translateX(-100%);
 
   @include bp.xxl {
@@ -31,6 +29,12 @@ aside {
     left: 5.1875rem;
     padding-left: 5.25rem;
   }
+}
+
+.form-container {
+  height: 100%;
+  padding-right: 1rem;
+  overflow-y: scroll;
 }
 
 .overlay {

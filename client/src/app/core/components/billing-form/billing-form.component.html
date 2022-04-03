@@ -79,14 +79,24 @@
       </div>
       <div class="form-field project-description">
         <label for="project-description">project description</label>
-        <input id="project-description" formControlName="projectDescription" />
+        <input
+          id="project-description"
+          placeholder="e.g Graphic Design Service"
+          formControlName="projectDescription"
+        />
       </div>
     </div>
   </fieldset>
 
-  <fieldset>
+  <fieldset class="items-list">
     <legend class="legend-title">items list</legend>
     <div formArrayName="items" class="list">
+      <div class="list-thead">
+        <div>item name</div>
+        <div>qty.</div>
+        <div>price</div>
+        <div>total</div>
+      </div>
       <div
         *ngFor="let item of itemForms.controls; let i = index"
         [formGroupName]="i"
@@ -117,8 +127,18 @@
         </div>
       </div>
     </div>
-    <app-button class="add-button" [variant]="'light'" (click)="addItem()"
-      >+ add new item</app-button
-    >
+    <app-button class="add-button" [variant]="'light'" (click)="addItem()">
+      + add new item
+    </app-button>
   </fieldset>
+
+  <div class="panel" [class.accent]="!isBottom">
+    <app-button [variant]="'light'" [small]="true" (click)="discardForm()">
+      Discard
+    </app-button>
+    <div class="panel-right">
+      <app-button [variant]="'dark'" [small]="true">Save as Draft</app-button>
+      <app-button [small]="true">Save & Send</app-button>
+    </div>
+  </div>
 </form>
