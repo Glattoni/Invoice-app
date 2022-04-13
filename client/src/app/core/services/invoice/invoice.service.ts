@@ -1,14 +1,16 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-
 import {
   of,
+  map,
   catchError,
+  withLatestFrom,
   Observable,
   ReplaySubject,
   BehaviorSubject,
 } from 'rxjs';
+
+import { Injectable } from '@angular/core';
 import { Invoice } from '@shared/models/invoice.model';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -18,12 +20,12 @@ export class InvoiceService {
 
   private invoice = new ReplaySubject<Invoice>();
   private invoices = new BehaviorSubject<Invoice[]>([]);
-  private currentFilter = new BehaviorSubject<string>('');
+  private selectedFilter = new ReplaySubject<string>();
   private filteredInvoices = new BehaviorSubject<Invoice[]>([]);
 
   readonly invoice$ = this.invoice.asObservable();
   readonly invoices$ = this.invoices.asObservable();
-  readonly currentFilter$ = this.currentFilter.asObservable();
+  readonly selectedFilter$ = this.selectedFilter.asObservable();
   readonly filteredInvoices$ = this.filteredInvoices.asObservable();
 
   httpOptions = {
@@ -33,6 +35,13 @@ export class InvoiceService {
   };
 
   constructor(private http: HttpClient) {}
+
+  private handleError<T>(result?: T) {
+    return (error: any): Observable<T> => {
+      console.log(error);
+      return of(result as T);
+    };
+  }
 
   getInvoices() {
     this.http
@@ -53,19 +62,35 @@ export class InvoiceService {
       .subscribe((value) => this.invoice.next(value));
   }
 
+  createInvoice(body: Invoice) {
+    this.http
+      .post<Invoice>(this.invoicesUrl, body, this.httpOptions)
+      .pipe(
+        withLatestFrom(this.invoices),
+        map(([created, current]) => [...current, created]),
+        catchError(this.handleError<Invoice[]>())
+      )
+      .subscribe((value) => {
+        this.invoices.next(value);
+        this.filteredInvoices.next(value);
+      });
+  }
+
   deleteInvoice(id: string) {
     const url = `${this.invoicesUrl}/${id}`;
-    const currentValue = this.invoices.getValue();
 
     this.http
       .delete<Invoice>(url, this.httpOptions)
-      .pipe(catchError(this.handleError<Invoice>()))
+      .pipe(
+        withLatestFrom(this.invoices),
+        map(([deleted, current]) =>
+          current.filter((invoice) => invoice._id !== deleted._id)
+        ),
+        catchError(this.handleError<Invoice[]>())
+      )
       .subscribe((value) => {
-        const updatedValue = currentValue.filter(
-          (invoice) => invoice._id !== value._id
-        );
-        this.invoices.next(updatedValue);
-        this.filteredInvoices.next(updatedValue);
+        this.invoices.next(value);
+        this.filteredInvoices.next(value);
       });
   }
 
@@ -80,20 +105,14 @@ export class InvoiceService {
   }
 
   filterByStatus(status: string) {
-    this.currentFilter.next(status);
-    this.invoices$.subscribe((value) => {
-      let tempInvoices = [...value];
-      tempInvoices = tempInvoices.filter(
-        (invoice) => invoice.status === status
-      );
-      this.filteredInvoices.next(tempInvoices);
-    });
-  }
-
-  private handleError<T>(result?: T) {
-    return (error: any): Observable<T> => {
-      console.log(error);
-      return of(result as T);
-    };
+    this.selectedFilter.next(status);
+    this.invoices$
+      .pipe(
+        map((invoices) =>
+          invoices.filter((invoice) => invoice.status === status)
+        ),
+        catchError(this.handleError<Invoice[]>())
+      )
+      .subscribe((value) => this.filteredInvoices.next(value));
   }
 }
