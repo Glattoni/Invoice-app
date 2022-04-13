@@ -17,6 +17,12 @@ form {
   }
 }
 
+.form-container {
+  height: 100%;
+  padding-right: 1rem;
+  overflow-y: scroll;
+}
+
 fieldset:last-child {
   padding-bottom: 5.5rem;
 }
@@ -219,7 +225,7 @@ select {
   padding-bottom: 11rem;
 
   @include bp.md {
-    padding-bottom: 4rem;
+    padding-bottom: 9.125rem;
   }
 }
 
