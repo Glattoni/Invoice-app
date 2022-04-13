@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
-import { ScrollService } from '@core/services/scroll/scroll.service';
-import { SidebarFormService } from '@core/services/sidebar-form/sidebar-form.service';
 import { Observable } from 'rxjs';
+import { Component } from '@angular/core';
+import { SidebarFormService } from '@core/services/sidebar-form/sidebar-form.service';
 
 @Component({
   selector: 'app-root',
@@ -11,18 +10,11 @@ import { Observable } from 'rxjs';
 export class AppComponent {
   visible$: Observable<boolean>;
 
-  constructor(
-    private sidebarFormService: SidebarFormService,
-    private scrollService: ScrollService
-  ) {
+  constructor(private sidebarFormService: SidebarFormService) {
     this.visible$ = this.sidebarFormService.visible$;
   }
 
   closeSidebar(): void {
     this.sidebarFormService.close();
-  }
-
-  onScroll(event: any) {
-    this.scrollService.onScroll(event);
   }
 }

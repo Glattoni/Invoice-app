@@ -18,7 +18,7 @@ export class HeaderComponent {
     private sidebarFormService: SidebarFormService
   ) {
     this.invoices$ = this.invoiceService.filteredInvoices$;
-    this.filter$ = this.invoiceService.currentFilter$;
+    this.filter$ = this.invoiceService.selectedFilter$;
   }
 
   openSidebar(): void {
