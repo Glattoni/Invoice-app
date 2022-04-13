@@ -9,6 +9,9 @@
   ],
   "rules": {
     "function-url-quotes": "single",
+    "property-no-vendor-prefix": [true, {
+      "ignoreProperties": ["appearance"]
+    }],
     "selector-pseudo-element-no-unknown": [true, {
       "ignorePseudoElements": ["ng-deep"]
     }]
