@@ -5,13 +5,11 @@
 </main>
 
 <aside [class.visible]="visible$ | async">
-  <div class="form-container" (scroll)="onScroll($event)">
-    <app-billing-form></app-billing-form>
-  </div>
+  <app-billing-form></app-billing-form>
 </aside>
 
 <div
   class="overlay"
-  [class.visible]="visible$ | async"
   (click)="closeSidebar()"
+  [class.visible]="visible$ | async"
 ></div>

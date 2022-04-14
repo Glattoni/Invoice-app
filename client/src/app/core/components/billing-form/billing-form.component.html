@@ -2,143 +2,168 @@
   <h1>New Invoice</h1>
 </header>
 
-<form [formGroup]="billingForm">
-  <fieldset>
-    <legend>bill from</legend>
-    <div formGroupName="senderAddress" class="fields-container sender">
-      <div class="form-field sender-street">
-        <label for="sender-street">street address</label>
-        <input id="sender-street" formControlName="street" />
+<div #formContainer class="form-container" (scroll)="($event)">
+  <form (ngSubmit)="onSubmit()" [formGroup]="billingForm">
+    <fieldset>
+      <legend>bill from</legend>
+      <div formGroupName="senderAddress" class="fields-container sender">
+        <div class="form-field sender-street">
+          <label for="sender-street">street address</label>
+          <input id="sender-street" formControlName="street" />
+        </div>
+        <div class="form-field sender-city">
+          <label for="sender-city">city</label>
+          <input id="sender-city" formControlName="city" />
+        </div>
+        <div class="form-field sender-post-code">
+          <label for="sender-post-code">post code</label>
+          <input id="sender-post-code" formControlName="postCode" />
+        </div>
+        <div class="form-field sender-country">
+          <label for="sender-country">country</label>
+          <input id="sender-country" formControlName="country" />
+        </div>
       </div>
-      <div class="form-field sender-city">
-        <label for="sender-city">city</label>
-        <input id="sender-city" formControlName="city" />
-      </div>
-      <div class="form-field sender-post-code">
-        <label for="sender-post-code">post code</label>
-        <input id="sender-post-code" formControlName="postCode" />
-      </div>
-      <div class="form-field sender-country">
-        <label for="sender-country">country</label>
-        <input id="sender-country" formControlName="country" />
-      </div>
-    </div>
-  </fieldset>
+    </fieldset>
 
-  <fieldset>
-    <legend>bill to</legend>
-    <div class="fields-container client-initials">
-      <div class="form-field client-name">
-        <label for="client-name">client's name</label>
-        <input id="client-name" formControlName="clientName" />
+    <fieldset>
+      <legend>bill to</legend>
+      <div class="fields-container client-initials">
+        <div class="form-field client-name">
+          <label for="client-name">client's name</label>
+          <input id="client-name" formControlName="clientName" />
+        </div>
+        <div class="form-field client-email">
+          <label for="client-email">client's email</label>
+          <input id="client-email" formControlName="clientEmail" />
+        </div>
       </div>
-      <div class="form-field client-email">
-        <label for="client-email">client's email</label>
-        <input id="client-email" formControlName="clientEmail" />
+      <div formGroupName="clientAddress" class="fields-container client">
+        <div class="form-field client-street">
+          <label for="client-street">street address</label>
+          <input id="client-street" formControlName="street" />
+        </div>
+        <div class="form-field client-city">
+          <label for="client-city">city</label>
+          <input id="client-city" formControlName="city" />
+        </div>
+        <div class="form-field client-post-code">
+          <label for="client-post-code">post code</label>
+          <input id="client-post-code" formControlName="postCode" />
+        </div>
+        <div class="form-field client-country">
+          <label for="client-country">country</label>
+          <input id="client-country" formControlName="country" />
+        </div>
       </div>
-    </div>
-    <div formGroupName="clientAddress" class="fields-container client">
-      <div class="form-field client-street">
-        <label for="client-street">street address</label>
-        <input id="client-street" formControlName="street" />
-      </div>
-      <div class="form-field client-city">
-        <label for="client-city">city</label>
-        <input id="client-city" formControlName="city" />
-      </div>
-      <div class="form-field client-post-code">
-        <label for="client-post-code">post code</label>
-        <input id="client-post-code" formControlName="postCode" />
-      </div>
-      <div class="form-field client-country">
-        <label for="client-country">country</label>
-        <input id="client-country" formControlName="country" />
-      </div>
-    </div>
-  </fieldset>
+    </fieldset>
 
-  <fieldset>
-    <legend>item list</legend>
-    <div class="fields-container conditions">
-      <div class="form-field invoice-date">
-        <label for="invoice-date">invoice date</label>
-        <input type="date" id="invoice-date" formControlName="invoiceDate" />
+    <fieldset>
+      <legend>item list</legend>
+      <div class="fields-container conditions">
+        <div class="form-field invoice-date">
+          <label for="invoice-date">invoice date</label>
+          <input type="date" id="invoice-date" formControlName="createdAt" />
+        </div>
+        <div class="form-field payment-terms">
+          <label for="payment-terms">payment terms</label>
+          <select
+            id="payment-terms"
+            name="payment-terms"
+            formControlName="paymentTerms"
+          >
+            <option value="1">Next 1 day</option>
+            <option value="7">Next 7 days</option>
+            <option value="14">Next 14 days</option>
+            <option value="30">Next 30 days</option>
+          </select>
+        </div>
+        <div class="form-field project-description">
+          <label for="project-description">project description</label>
+          <input
+            id="project-description"
+            placeholder="e.g Graphic Design Service"
+            formControlName="projectDescription"
+          />
+        </div>
       </div>
-      <div class="form-field payment-terms">
-        <label for="payment-terms">payment terms</label>
-        <select
-          id="payment-terms"
-          name="payment-terms"
-          formControlName="paymentTerms"
+    </fieldset>
+
+    <fieldset class="items-list">
+      <legend class="legend-title">items list</legend>
+      <div formArrayName="items" class="list">
+        <div class="list-thead">
+          <div>item name</div>
+          <div>qty.</div>
+          <div>price</div>
+          <div>total</div>
+        </div>
+        <div
+          *ngFor="let item of items.controls; let i = index"
+          [formGroupName]="i"
+          class="fields-container list-item"
         >
-          <option value="1">Next 1 day</option>
-          <option value="7">Next 7 days</option>
-          <option value="14">Next 14 days</option>
-          <option value="30">Next 30 days</option>
-        </select>
-      </div>
-      <div class="form-field project-description">
-        <label for="project-description">project description</label>
-        <input
-          id="project-description"
-          placeholder="e.g Graphic Design Service"
-          formControlName="projectDescription"
-        />
-      </div>
-    </div>
-  </fieldset>
-
-  <fieldset class="items-list">
-    <legend class="legend-title">items list</legend>
-    <div formArrayName="items" class="list">
-      <div class="list-thead">
-        <div>item name</div>
-        <div>qty.</div>
-        <div>price</div>
-        <div>total</div>
-      </div>
-      <div
-        *ngFor="let item of itemForms.controls; let i = index"
-        [formGroupName]="i"
-        class="fields-container list-item"
-      >
-        <div class="form-field">
-          <label for="item-name">item name</label>
-          <input id="item-name" formControlName="name" />
-        </div>
-        <div class="form-field">
-          <label for="quantity">qty.</label>
-          <input id="quantity" formControlName="quantity" />
-        </div>
-        <div class="form-field">
-          <label for="price">price</label>
-          <input id="price" formControlName="price" />
-        </div>
-        <div class="form-field">
-          <label>total</label>
-          <div class="item-total">
-            {{ calculateItemTotal(i) | currency: '':'' }}
+          <div class="form-field">
+            <label for="item-name">item name</label>
+            <input id="item-name" formControlName="name" />
+          </div>
+          <div class="form-field">
+            <label for="quantity">qty.</label>
+            <input
+              id="quantity"
+              type="number"
+              formControlName="quantity"
+              placeholder=""
+            />
+          </div>
+          <div class="form-field">
+            <label for="price">price</label>
+            <input
+              id="price"
+              type="number"
+              formControlName="price"
+              placeholder=""
+            />
+          </div>
+          <div class="form-field">
+            <label>total</label>
+            <div class="item-total">
+              {{ calculateItemTotal(i) | currency: '':'' }}
+            </div>
+          </div>
+          <div class="delete-button">
+            <button type="button" (click)="deleteItem(i)">
+              <svg-icon src="assets/icons/icon-delete.svg"></svg-icon>
+            </button>
           </div>
         </div>
-        <div class="delete-button">
-          <button (click)="deleteItem(i)">
-            <svg-icon src="assets/icons/icon-delete.svg"></svg-icon>
-          </button>
-        </div>
+      </div>
+      <app-button
+        class="add-button"
+        [type]="'button'"
+        [variant]="'light'"
+        (click)="addItem()"
+      >
+        + add new item
+      </app-button>
+    </fieldset>
+
+    <div class="panel" [class.accent]="!isBottom">
+      <app-button [variant]="'light'" [small]="true" (click)="discardForm()">
+        Discard
+      </app-button>
+      <div class="panel-right">
+        <app-button (click)="saveAsDraft()" [variant]="'dark'" [small]="true">
+          Save as Draft
+        </app-button>
+        <app-button
+          [small]="true"
+          (click)="onSubmit()"
+          [disabled]="!billingForm.valid"
+        >
+          Save & Send
+        </app-button>
       </div>
     </div>
-    <app-button class="add-button" [variant]="'light'" (click)="addItem()">
-      + add new item
-    </app-button>
-  </fieldset>
-
-  <div class="panel" [class.accent]="!isBottom">
-    <app-button [variant]="'light'" [small]="true" (click)="discardForm()">
-      Discard
-    </app-button>
-    <div class="panel-right">
-      <app-button [variant]="'dark'" [small]="true">Save as Draft</app-button>
-      <app-button [small]="true">Save & Send</app-button>
-    </div>
-  </div>
-</form>
+  </form>
+</div>
