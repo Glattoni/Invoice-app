@@ -39,8 +39,8 @@ $breakpoints: (
   }
 }
 
-@mixin between($bpMin: 0, $bpMax) {
-  @media (min-width: $bpMin) and (max-width: $bpMax) {
+@mixin between($min: 0, $max) {
+  @media (min-width: #{$min + 'px'}) and (max-width: #{$max + 'px'}) {
     @content;
   }
 }

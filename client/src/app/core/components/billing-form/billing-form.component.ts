@@ -18,7 +18,7 @@ import {
 } from 'rxjs';
 
 import { addDays, generateSlug } from 'src/utils';
-import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 
 import { InvoiceService } from '@core/services/invoice/invoice.service';
 import { SidebarFormService } from '@core/services/sidebar-form/sidebar-form.service';
@@ -30,42 +30,39 @@ import { SidebarFormService } from '@core/services/sidebar-form/sidebar-form.ser
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BillingFormComponent implements OnInit, OnDestroy, AfterViewInit {
-  billingForm: FormGroup;
-  isBottom: boolean = false;
-  submitted: boolean = false;
   private destroy$ = new Subject<void>();
 
-  readonly options: any = [
-    { id: '1', label: 'Next 1 day' },
-    { id: '2', label: 'Next 7 days' },
-    { id: '3', label: 'Next 14 days' },
-    { id: '4', label: 'Next 30 days' },
-  ];
+  form: FormGroup;
+  valid: boolean = true;
+  submitted: boolean = false;
+  scrolledToBottom: boolean = false;
 
-  private readonly address = this.fb.group({
-    street: [''],
-    city: [''],
-    postCode: [''],
-    country: [''],
-  });
+  private generateAddressGroup() {
+    return this.fb.group({
+      street: ['', Validators.required],
+      city: ['', Validators.required],
+      postCode: ['', Validators.required],
+      country: ['', Validators.required],
+    });
+  }
 
   constructor(
     private fb: FormBuilder,
     private sidebarFormService: SidebarFormService,
     private invoiceService: InvoiceService
   ) {
-    this.billingForm = this.fb.group({
-      slug: generateSlug(),
-      senderAddress: this.address,
-      clientName: [''],
-      clientEmail: [''],
+    this.form = this.fb.group({
       status: 'pending',
-      clientAddress: this.address,
-      createdAt: [''],
-      paymentTerms: ['30'],
-      paymentDue: [''],
-      projectDescription: [''],
-      items: this.fb.array([]),
+      slug: generateSlug(),
+      senderAddress: this.generateAddressGroup(),
+      clientAddress: this.generateAddressGroup(),
+      clientName: ['', Validators.required],
+      clientEmail: ['', [Validators.required, Validators.email]],
+      createdAt: ['', Validators.required],
+      paymentTerms: ['30', Validators.required],
+      paymentDue: ['', Validators.required],
+      items: this.fb.array([], Validators.required),
+      description: '',
       total: 0,
     });
   }
@@ -73,7 +70,7 @@ export class BillingFormComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('formContainer') formContainer: ElementRef | undefined;
 
   ngOnInit(): void {
-    this.billingForm.valueChanges
+    this.form.valueChanges
       .pipe(
         debounceTime(1000),
         distinctUntilChanged(),
@@ -108,15 +105,15 @@ export class BillingFormComponent implements OnInit, OnDestroy, AfterViewInit {
   ngAfterViewInit() {
     fromEvent(this.formContainer?.nativeElement, 'scroll', this.handleScroll)
       .pipe(throttleTime(25), takeUntil(this.destroy$))
-      .subscribe((value) => (this.isBottom = value));
+      .subscribe((value) => (this.scrolledToBottom = value));
   }
 
   addItem(): void {
     const item = this.fb.group({
-      name: [''],
-      quantity: [''],
-      price: [''],
-      total: [0],
+      name: ['', Validators.required],
+      quantity: ['', Validators.required],
+      price: ['', Validators.required],
+      total: [0, Validators.required],
     });
 
     this.items.push(item);
@@ -139,7 +136,7 @@ export class BillingFormComponent implements OnInit, OnDestroy, AfterViewInit {
   calculateTotal(): void {
     const grandTotal = this.items.controls
       .map((c) => parseInt(c.get('total')?.value))
-      .reduce((a, b) => a + b);
+      .reduce((a, b) => a + b, 0);
 
     this.total?.setValue(grandTotal);
   }
@@ -153,7 +150,8 @@ export class BillingFormComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   discardForm(): void {
-    this.billingForm.reset();
+    this.valid = true;
+    this.form.reset();
     this.sidebarFormService.close();
   }
 
@@ -162,38 +160,90 @@ export class BillingFormComponent implements OnInit, OnDestroy, AfterViewInit {
     this.onSubmit();
   }
 
+  validateForm(form: FormGroup): void {
+    if (form.invalid) {
+      form.markAllAsTouched();
+      this.valid = false;
+    } else {
+      this.valid = true;
+    }
+  }
+
   onSubmit(): void {
     this.submitted = true;
-    this.invoiceService.createInvoice(this.formData);
-    this.billingForm.reset();
-    this.sidebarFormService.close();
+    this.validateForm(this.form);
+    if (this.valid) {
+      this.invoiceService.createInvoice(this.formData);
+      this.form.reset();
+      this.sidebarFormService.close();
+    }
   }
 
   get formData() {
-    return this.billingForm.value;
+    return this.form.value;
   }
 
   get total() {
-    return this.billingForm.get('total');
+    return this.form.get('total');
   }
 
   get status() {
-    return this.billingForm.get('status');
+    return this.form.get('status');
   }
 
   get createdAt() {
-    return this.billingForm.get('createdAt');
+    return this.form.get('createdAt');
   }
 
   get paymentDue() {
-    return this.billingForm.get('paymentDue');
+    return this.form.get('paymentDue');
   }
 
   get paymentTerms() {
-    return this.billingForm.get('paymentTerms');
+    return this.form.get('paymentTerms');
+  }
+
+  get clientEmail() {
+    return this.form.get('clientEmail');
+  }
+
+  get senderStreet() {
+    return this.form.get('senderAddress.street');
+  }
+
+  get senderCity() {
+    return this.form.get('senderAddress.city');
+  }
+
+  get senderPostCode() {
+    return this.form.get('senderAddress.postCode');
+  }
+
+  get senderCountry() {
+    return this.form.get('senderAddress.country');
+  }
+
+  get clientName() {
+    return this.form.get('clientName');
+  }
+
+  get clientStreet() {
+    return this.form.get('clientAddress.street');
+  }
+
+  get clientCity() {
+    return this.form.get('clientAddress.city');
+  }
+
+  get clientPostCode() {
+    return this.form.get('clientAddress.postCode');
+  }
+
+  get clientCountry() {
+    return this.form.get('clientAddress.country');
   }
 
   get items() {
-    return this.billingForm.get('items') as FormArray;
+    return this.form.get('items') as FormArray;
   }
 }
