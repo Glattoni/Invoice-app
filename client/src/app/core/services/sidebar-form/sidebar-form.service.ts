@@ -5,14 +5,14 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class SidebarFormService {
-  private _visible = new BehaviorSubject<boolean>(false);
-  readonly visible$ = this._visible.asObservable();
+  private visible = new BehaviorSubject<boolean>(false);
+  readonly visible$ = this.visible.asObservable();
 
   open(): void {
-    this._visible.next(true);
+    this.visible.next(true);
   }
 
   close(): void {
-    this._visible.next(false);
+    this.visible.next(false);
   }
 }

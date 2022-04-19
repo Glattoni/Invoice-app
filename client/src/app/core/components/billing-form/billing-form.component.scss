@@ -10,17 +10,22 @@ h1 {
 
 form {
   display: grid;
-  grid-gap: 2.5rem;
+  gap: 2.5rem;
+  padding-bottom: 11rem;
 
   @include bp.md {
-    grid-gap: 3rem;
+    gap: 3rem;
+    padding-bottom: 9.125rem;
   }
 }
 
 .form-container {
   height: 100%;
-  padding-right: 1rem;
   overflow-y: scroll;
+
+  @include bp.md {
+    padding-right: 1rem;
+  }
 }
 
 fieldset:last-child {
@@ -45,6 +50,10 @@ legend {
   }
 }
 
+span {
+  display: none;
+}
+
 label {
   color: var(--label-foreground);
   text-transform: capitalize;
@@ -63,6 +72,10 @@ select {
   caret-color: var(--primary);
   outline: none;
 
+  &::placeholder {
+    color: initial;
+  }
+
   &:focus {
     border-color: var(--primary);
   }
@@ -70,13 +83,36 @@ select {
 
 .fields-container {
   display: grid;
-  grid-gap: 1.5rem;
+  gap: 1.5rem;
 }
 
 .form-field {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 0.625rem;
+
+  input,
+  select,
+  div {
+    grid-column: span 2;
+  }
+
+  &.invalid {
+    label,
+    span,
+    input {
+      color: var(--danger);
+    }
+
+    span {
+      display: block;
+      text-align: right;
+    }
+
+    input {
+      border-color: var(--danger);
+    }
+  }
 
   .item-total {
     padding: 1rem 0;
@@ -134,7 +170,7 @@ select {
   display: grid;
 
   @include bp.md {
-    .project-description {
+    .description {
       grid-column: span 2;
     }
   }
@@ -142,7 +178,7 @@ select {
 
 .list {
   display: grid;
-  grid-gap: 3rem;
+  gap: 3rem;
 
   &-thead {
     display: none;
@@ -152,24 +188,32 @@ select {
     @include bp.md {
       display: grid;
       grid-template-columns: 12.5rem 2.875rem 6.25rem auto;
-      grid-gap: 1rem;
+      gap: 1rem;
     }
   }
 
   @include bp.md {
-    grid-gap: 1.125rem;
+    gap: 1.125rem;
   }
 }
 
 .list-item {
   display: grid;
-  grid-gap: 1.5rem 1rem;
+  gap: 1.5rem 1rem;
+
+  &:last-child {
+    margin-bottom: 3rem;
+    @include bp.md {
+      margin: 0;
+    }
+  }
 
   .form-field:first-child {
     grid-column: span 4;
 
     @include bp.md {
       grid-column: span 1;
+      margin: 0;
     }
   }
 
@@ -195,7 +239,7 @@ select {
 
   @include bp.md {
     grid-template-columns: 12.5rem 2.875rem 6.25rem auto 2rem;
-    grid-gap: 1rem;
+    gap: 1rem;
 
     .form-field label {
       display: none;
@@ -222,11 +266,11 @@ select {
 }
 
 .items-list {
-  padding-bottom: 11rem;
+  /* // padding-bottom: 11rem;
 
   @include bp.md {
     padding-bottom: 9.125rem;
-  }
+  } */
 }
 
 .panel {
@@ -259,4 +303,9 @@ select {
       border-radius: 0 1.25rem 1.25rem 0;
     }
   }
+}
+
+.validation-errors {
+  font-size: 0.625rem;
+  color: var(--danger);
 }
