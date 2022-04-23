@@ -179,30 +179,6 @@ export class BillingFormComponent implements OnInit, OnDestroy, AfterViewInit {
     return this.form.get('paymentTerms');
   }
 
-  get clientEmail() {
-    return this.form.get('clientEmail');
-  }
-
-  get clientName() {
-    return this.form.get('clientName');
-  }
-
-  get clientStreet() {
-    return this.form.get('clientAddress.street');
-  }
-
-  get clientCity() {
-    return this.form.get('clientAddress.city');
-  }
-
-  get clientPostCode() {
-    return this.form.get('clientAddress.postCode');
-  }
-
-  get clientCountry() {
-    return this.form.get('clientAddress.country');
-  }
-
   get items() {
     return this.form.get('items') as FormArray;
   }

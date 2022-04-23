@@ -32,24 +32,6 @@ fieldset:last-child {
   padding-bottom: 5.5rem;
 }
 
-legend {
-  margin-bottom: 1.5rem;
-  font-weight: bold;
-  color: var(--primary);
-  text-transform: capitalize;
-
-  &.legend-title {
-    font-size: 1.125rem;
-    line-height: 2rem;
-    color: var(--items-list);
-    letter-spacing: -0.375px;
-
-    @include bp.md {
-      margin-bottom: 1rem;
-    }
-  }
-}
-
 span {
   display: none;
 }
@@ -121,51 +103,6 @@ select {
   }
 }
 
-.client-initials {
-  margin-bottom: 1.5rem;
-}
-
-.sender {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-
-  &-street,
-  &-country {
-    grid-column: span 2;
-  }
-
-  @include bp.md {
-    grid-template-columns: repeat(3, 1fr);
-
-    &-street {
-      grid-column: span 3;
-    }
-
-    &-country {
-      grid-column: span 1;
-    }
-  }
-}
-
-.client {
-  &-street,
-  &-country {
-    grid-column: span 2;
-  }
-
-  @include bp.md {
-    grid-template-columns: repeat(3, 1fr);
-
-    &-street {
-      grid-column: span 3;
-    }
-
-    &-country {
-      grid-column: span 1;
-    }
-  }
-}
-
 .conditions {
   display: grid;
 
@@ -173,95 +110,6 @@ select {
     .description {
       grid-column: span 2;
     }
-  }
-}
-
-.list {
-  display: grid;
-  gap: 3rem;
-
-  &-thead {
-    display: none;
-    color: var(--label-foreground);
-    text-transform: capitalize;
-
-    @include bp.md {
-      display: grid;
-      grid-template-columns: 12.5rem 2.875rem 6.25rem auto;
-      gap: 1rem;
-    }
-  }
-
-  @include bp.md {
-    gap: 1.125rem;
-  }
-}
-
-.list-item {
-  display: grid;
-  gap: 1.5rem 1rem;
-
-  &:last-child {
-    margin-bottom: 3rem;
-    @include bp.md {
-      margin: 0;
-    }
-  }
-
-  .form-field:first-child {
-    grid-column: span 4;
-
-    @include bp.md {
-      grid-column: span 1;
-      margin: 0;
-    }
-  }
-
-  button {
-    max-height: 2rem;
-    padding: 0.5rem 0.625rem;
-    margin-bottom: 0.5rem;
-  }
-
-  div:nth-child(2) {
-    max-width: 4rem;
-  }
-
-  div:nth-child(4) {
-    min-width: 5.25rem;
-    overflow: hidden;
-    text-overflow: ellipsis;
-
-    @include bp.md {
-      min-width: unset;
-    }
-  }
-
-  @include bp.md {
-    grid-template-columns: 12.5rem 2.875rem 6.25rem auto 2rem;
-    gap: 1rem;
-
-    .form-field label {
-      display: none;
-    }
-  }
-}
-
-.delete-button {
-  display: flex;
-  align-items: flex-end;
-}
-
-.add-button {
-  display: block;
-
-  ::ng-deep button {
-    width: 100%;
-    text-transform: capitalize;
-  }
-
-  @include bp.md {
-    margin-top: 1.5rem;
   }
 }
 

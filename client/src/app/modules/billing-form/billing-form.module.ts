@@ -7,9 +7,10 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ItemsListComponent } from './components/items-list/items-list.component';
 import { SenderAddressComponent } from './components/sender-address/sender-address.component';
+import { ClientInfoComponent } from './components/client-info/client-info.component';
 
 @NgModule({
-  declarations: [BillingFormComponent, ItemsListComponent, SenderAddressComponent],
+  declarations: [BillingFormComponent, ItemsListComponent, SenderAddressComponent, ClientInfoComponent],
   imports: [
     CommonModule,
     SharedModule,
