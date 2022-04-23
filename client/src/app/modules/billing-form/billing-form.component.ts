@@ -108,7 +108,7 @@ export class BillingFormComponent implements OnInit, OnDestroy, AfterViewInit {
       .subscribe((value) => (this.scrolledToBottom = value));
   }
 
-  addItem(): void {
+  /* addItem(): void {
     const item = this.fb.group({
       name: ['', Validators.required],
       quantity: ['', Validators.required],
@@ -131,7 +131,7 @@ export class BillingFormComponent implements OnInit, OnDestroy, AfterViewInit {
     item.get('total')?.setValue(itemTotal);
 
     return itemTotal;
-  }
+  } */
 
   calculateTotal(): void {
     const grandTotal = this.items.controls
@@ -149,7 +149,7 @@ export class BillingFormComponent implements OnInit, OnDestroy, AfterViewInit {
     this.paymentDue?.setValue(due, { onlySelf: true });
   }
 
-  discardForm(): void {
+  onDiscard(): void {
     this.valid = true;
     this.form.reset();
     this.sidebarFormService.close();
@@ -172,6 +172,7 @@ export class BillingFormComponent implements OnInit, OnDestroy, AfterViewInit {
   onSubmit(): void {
     this.submitted = true;
     this.validateForm(this.form);
+
     if (this.valid) {
       this.invoiceService.createInvoice(this.formData);
       this.form.reset();

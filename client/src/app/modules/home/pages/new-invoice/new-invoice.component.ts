@@ -1,8 +1,8 @@
-import { AfterViewInit, ChangeDetectorRef, Component } from '@angular/core';
-import { ComponentPortal } from '@angular/cdk/portal';
-import { BillingFormComponent } from '@core/components/billing-form/billing-form.component';
-import { PortalService } from '../../services/portal/portal.service';
 import { Observable } from 'rxjs';
+import { ComponentPortal } from '@angular/cdk/portal';
+import { AfterViewInit, ChangeDetectorRef, Component } from '@angular/core';
+import { PortalService } from '../../services/portal/portal.service';
+import { BillingFormComponent } from 'src/app/modules/billing-form/billing-form.component';
 
 @Component({
   templateUrl: './new-invoice.component.html',

@@ -7,6 +7,7 @@ import { PortalModule } from '@angular/cdk/portal';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
+import { BillingFormModule } from './modules/billing-form/billing-form.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,6 +18,7 @@ import { CoreModule } from './core/core.module';
     AngularSvgIconModule.forRoot(),
     CoreModule,
     PortalModule,
+    BillingFormModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

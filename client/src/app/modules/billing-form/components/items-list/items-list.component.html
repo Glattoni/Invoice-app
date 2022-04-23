@@ -1,0 +1,79 @@
+<fieldset *ngIf="form" [formGroup]="form">
+  <legend>items list</legend>
+
+  <header>
+    <p *ngFor="let header of headers">
+      {{ header }}
+    </p>
+  </header>
+
+  <ul formArrayName="items">
+    <li *ngFor="let item of items.controls; let i = index" [formGroupName]="i">
+      <!-- name -->
+      <div
+        class="form-field"
+        [class.invalid]="item.get('name')?.invalid && item.get('name')?.touched"
+      >
+        <label for="item-name">item name</label>
+        <input id="item-name" formControlName="name" />
+      </div>
+      <!-- name -->
+
+      <!-- quantity -->
+      <div
+        class="form-field"
+        [class.invalid]="
+          item.get('quantity')?.invalid && item.get('quantity')?.touched
+        "
+      >
+        <label for="quantity">qty.</label>
+        <input
+          id="quantity"
+          type="number"
+          placeholder="0"
+          formControlName="quantity"
+        />
+      </div>
+      <!-- quantity -->
+
+      <!-- price -->
+      <div
+        class="form-field"
+        [class.invalid]="
+          item.get('price')?.invalid && item.get('price')?.touched
+        "
+      >
+        <label for="price">price</label>
+        <input
+          id="price"
+          type="number"
+          placeholder="0.00"
+          formControlName="price"
+        />
+      </div>
+      <!-- price -->
+
+      <!-- total -->
+      <div class="form-field">
+        <label>total</label>
+        <div class="item-total">
+          {{ calculateItemTotal(i) | currency: '':'' }}
+        </div>
+      </div>
+      <!-- total -->
+
+      <button type="button" (click)="deleteItem(i)">
+        <svg-icon src="assets/icons/icon-delete.svg"></svg-icon>
+      </button>
+    </li>
+  </ul>
+
+  <app-button
+    class="add-button"
+    [type]="'button'"
+    [variant]="'light'"
+    (click)="addItem()"
+  >
+    + add new item
+  </app-button>
+</fieldset>

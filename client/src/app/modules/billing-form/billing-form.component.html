@@ -4,10 +4,10 @@
 
 <div #formContainer class="form-container" (scroll)="($event)">
   <form (ngSubmit)="onSubmit()" [formGroup]="form">
-    <fieldset>
+    <fieldset formGroupName="senderAddress">
       <legend>bill from</legend>
 
-      <div formGroupName="senderAddress" class="fields-container sender">
+      <div class="fields-container sender">
         <div
           class="form-field sender-street"
           [class.invalid]="senderStreet?.invalid && senderStreet?.touched"
@@ -135,9 +135,11 @@
       </div>
     </fieldset>
 
-    <fieldset class="items-list">
+    <app-items-list></app-items-list>
+
+    <!-- <fieldset formArrayName="items" class="items-list">
       <legend class="legend-title">items list</legend>
-      <div formArrayName="items" class="list">
+      <div class="list">
         <div class="list-thead">
           <div>item name</div>
           <div>qty.</div>
@@ -207,7 +209,7 @@
       >
         + add new item
       </app-button>
-    </fieldset>
+    </fieldset> -->
 
     <div *ngIf="!valid" class="validation-errors">
       <div>- All fields must be added</div>
@@ -215,7 +217,7 @@
     </div>
 
     <div class="panel" [class.accent]="!scrolledToBottom">
-      <app-button [variant]="'light'" [small]="true" (click)="discardForm()">
+      <app-button [variant]="'light'" [small]="true" (click)="onDiscard()">
         Discard
       </app-button>
       <div class="panel-right">
