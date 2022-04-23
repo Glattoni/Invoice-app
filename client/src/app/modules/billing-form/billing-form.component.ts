@@ -108,31 +108,6 @@ export class BillingFormComponent implements OnInit, OnDestroy, AfterViewInit {
       .subscribe((value) => (this.scrolledToBottom = value));
   }
 
-  /* addItem(): void {
-    const item = this.fb.group({
-      name: ['', Validators.required],
-      quantity: ['', Validators.required],
-      price: ['', Validators.required],
-      total: [0, Validators.required],
-    });
-
-    this.items.push(item);
-  }
-
-  deleteItem(idx: number): void {
-    this.items.removeAt(idx);
-  }
-
-  calculateItemTotal(idx: number) {
-    const item = this.items.controls[idx];
-    const quantity = parseInt(item.get('quantity')?.value);
-    const price = parseInt(item.get('price')?.value);
-    const itemTotal = quantity * price || 0;
-    item.get('total')?.setValue(itemTotal);
-
-    return itemTotal;
-  } */
-
   calculateTotal(): void {
     const grandTotal = this.items.controls
       .map((c) => parseInt(c.get('total')?.value))
@@ -206,22 +181,6 @@ export class BillingFormComponent implements OnInit, OnDestroy, AfterViewInit {
 
   get clientEmail() {
     return this.form.get('clientEmail');
-  }
-
-  get senderStreet() {
-    return this.form.get('senderAddress.street');
-  }
-
-  get senderCity() {
-    return this.form.get('senderAddress.city');
-  }
-
-  get senderPostCode() {
-    return this.form.get('senderAddress.postCode');
-  }
-
-  get senderCountry() {
-    return this.form.get('senderAddress.country');
   }
 
   get clientName() {

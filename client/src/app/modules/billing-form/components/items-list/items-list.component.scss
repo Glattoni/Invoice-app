@@ -1,12 +1,9 @@
 @use 'breakpoints' as bp;
 
 legend {
-  margin-bottom: 1.5rem;
   font-size: 1.125rem;
-  font-weight: bold;
   line-height: 2rem;
   color: var(--items-list);
-  text-transform: capitalize;
   letter-spacing: -0.375px;
 
   @include bp.md {
@@ -32,7 +29,6 @@ ul {
 
   @include bp.md {
     gap: 1.125rem;
-    margin-top: 1rem;
   }
 }
 
@@ -40,11 +36,17 @@ li {
   display: grid;
   gap: 1.5rem 1rem;
 
+  &:first-child {
+    @include bp.md {
+      margin-top: 1rem;
+    }
+  }
+
   &:last-child {
     margin-bottom: 3rem;
 
     @include bp.md {
-      margin: 0;
+      margin-bottom: 0;
     }
   }
 
@@ -76,38 +78,7 @@ li {
   }
 }
 
-label {
-  color: var(--label-foreground);
-  text-transform: capitalize;
-}
-
-input,
-select {
-  box-sizing: border-box;
-  width: 100%;
-  padding: 1rem 1.25rem;
-  font-weight: bold;
-  color: var(--base);
-  background-color: var(--background-secondary);
-  border: 1px solid var(--input-inner-border);
-  border-radius: 0.25rem;
-  caret-color: var(--primary);
-  outline: none;
-
-  &::placeholder {
-    color: initial;
-  }
-
-  &:focus {
-    border-color: var(--primary);
-  }
-}
-
-.form-field {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.625rem;
-
+.item-field {
   input,
   select,
   .item-total {
@@ -133,21 +104,6 @@ select {
     padding: 1rem 0;
     font-weight: bold;
     color: var(--foreground-primary);
-  }
-}
-
-.form-field.invalid {
-  & > * {
-    color: var(--danger);
-  }
-
-  span {
-    display: block;
-    text-align: right;
-  }
-
-  input {
-    border-color: var(--danger);
   }
 }
 

@@ -11,7 +11,7 @@
     <li *ngFor="let item of items.controls; let i = index" [formGroupName]="i">
       <!-- name -->
       <div
-        class="form-field"
+        class="form-field item-field"
         [class.invalid]="item.get('name')?.invalid && item.get('name')?.touched"
       >
         <label for="item-name">item name</label>
@@ -21,7 +21,7 @@
 
       <!-- quantity -->
       <div
-        class="form-field"
+        class="form-field item-field"
         [class.invalid]="
           item.get('quantity')?.invalid && item.get('quantity')?.touched
         "
@@ -38,7 +38,7 @@
 
       <!-- price -->
       <div
-        class="form-field"
+        class="form-field item-field"
         [class.invalid]="
           item.get('price')?.invalid && item.get('price')?.touched
         "
@@ -54,7 +54,7 @@
       <!-- price -->
 
       <!-- total -->
-      <div class="form-field">
+      <div class="form-field item-field">
         <label>total</label>
         <div class="item-total">
           {{ calculateItemTotal(i) | currency: '':'' }}

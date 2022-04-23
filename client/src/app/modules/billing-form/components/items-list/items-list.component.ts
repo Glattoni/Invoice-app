@@ -8,7 +8,7 @@ import {
 } from '@angular/forms';
 
 @Component({
-  selector: 'app-items-list',
+  selector: 'form-items-list',
   templateUrl: './items-list.component.html',
   styleUrls: ['./items-list.component.scss'],
 })
