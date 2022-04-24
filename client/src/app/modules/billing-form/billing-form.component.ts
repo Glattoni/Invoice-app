@@ -76,9 +76,7 @@ export class BillingFormComponent implements OnInit, OnDestroy, AfterViewInit {
         distinctUntilChanged(),
         takeUntil(this.destroy$)
       )
-      .subscribe((value) => {
-        this.getPaymentDueDate();
-      });
+      .subscribe((_) => this.getPaymentDueDate());
 
     this.items.valueChanges
       .pipe(
@@ -86,9 +84,7 @@ export class BillingFormComponent implements OnInit, OnDestroy, AfterViewInit {
         distinctUntilChanged(),
         takeUntil(this.destroy$)
       )
-      .subscribe((value) => {
-        this.calculateTotal();
-      });
+      .subscribe((_) => this.calculateTotal());
   }
 
   ngOnDestroy(): void {
@@ -108,31 +104,6 @@ export class BillingFormComponent implements OnInit, OnDestroy, AfterViewInit {
       .subscribe((value) => (this.scrolledToBottom = value));
   }
 
-  addItem(): void {
-    const item = this.fb.group({
-      name: ['', Validators.required],
-      quantity: ['', Validators.required],
-      price: ['', Validators.required],
-      total: [0, Validators.required],
-    });
-
-    this.items.push(item);
-  }
-
-  deleteItem(idx: number): void {
-    this.items.removeAt(idx);
-  }
-
-  calculateItemTotal(idx: number) {
-    const item = this.items.controls[idx];
-    const quantity = parseInt(item.get('quantity')?.value);
-    const price = parseInt(item.get('price')?.value);
-    const itemTotal = quantity * price || 0;
-    item.get('total')?.setValue(itemTotal);
-
-    return itemTotal;
-  }
-
   calculateTotal(): void {
     const grandTotal = this.items.controls
       .map((c) => parseInt(c.get('total')?.value))
@@ -149,7 +120,7 @@ export class BillingFormComponent implements OnInit, OnDestroy, AfterViewInit {
     this.paymentDue?.setValue(due, { onlySelf: true });
   }
 
-  discardForm(): void {
+  onDiscard(): void {
     this.valid = true;
     this.form.reset();
     this.sidebarFormService.close();
@@ -172,6 +143,7 @@ export class BillingFormComponent implements OnInit, OnDestroy, AfterViewInit {
   onSubmit(): void {
     this.submitted = true;
     this.validateForm(this.form);
+
     if (this.valid) {
       this.invoiceService.createInvoice(this.formData);
       this.form.reset();
@@ -201,46 +173,6 @@ export class BillingFormComponent implements OnInit, OnDestroy, AfterViewInit {
 
   get paymentTerms() {
     return this.form.get('paymentTerms');
-  }
-
-  get clientEmail() {
-    return this.form.get('clientEmail');
-  }
-
-  get senderStreet() {
-    return this.form.get('senderAddress.street');
-  }
-
-  get senderCity() {
-    return this.form.get('senderAddress.city');
-  }
-
-  get senderPostCode() {
-    return this.form.get('senderAddress.postCode');
-  }
-
-  get senderCountry() {
-    return this.form.get('senderAddress.country');
-  }
-
-  get clientName() {
-    return this.form.get('clientName');
-  }
-
-  get clientStreet() {
-    return this.form.get('clientAddress.street');
-  }
-
-  get clientCity() {
-    return this.form.get('clientAddress.city');
-  }
-
-  get clientPostCode() {
-    return this.form.get('clientAddress.postCode');
-  }
-
-  get clientCountry() {
-    return this.form.get('clientAddress.country');
   }
 
   get items() {

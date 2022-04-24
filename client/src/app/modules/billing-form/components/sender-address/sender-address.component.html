@@ -1,0 +1,46 @@
+<fieldset *ngIf="form" [formGroup]="form">
+  <legend>bill from</legend>
+
+  <div formGroupName="senderAddress" class="fields-container sender">
+    <!-- sender street -->
+    <div
+      class="form-field sender-street"
+      [class.invalid]="senderStreet?.invalid && senderStreet?.touched"
+    >
+      <label for="sender-street">street address</label>
+      <span *ngIf="senderStreet?.invalid"> can't be emtpy </span>
+      <input id="sender-street" formControlName="street" />
+    </div>
+    <!-- sender street -->
+
+    <!-- sender city -->
+    <div
+      class="form-field sender-city"
+      [class.invalid]="senderCity?.invalid && senderCity?.touched"
+    >
+      <label for="sender-city">city</label>
+      <input id="sender-city" formControlName="city" />
+    </div>
+    <!-- sender city -->
+
+    <!-- sender post code -->
+    <div
+      class="form-field sender-post-code"
+      [class.invalid]="senderPostCode?.invalid && senderPostCode?.touched"
+    >
+      <label for="sender-post-code">post code</label>
+      <input id="sender-post-code" formControlName="postCode" />
+    </div>
+    <!-- sender post code -->
+
+    <!-- sender country -->
+    <div
+      class="form-field sender-country"
+      [class.invalid]="senderCountry?.invalid && senderCountry?.touched"
+    >
+      <label for="sender-country">country</label>
+      <input id="sender-country" formControlName="country" />
+    </div>
+    <!-- sender country -->
+  </div>
+</fieldset>

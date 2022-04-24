@@ -1,0 +1,28 @@
+@use 'breakpoints' as bp;
+
+span {
+  display: none;
+}
+
+.client-initials {
+  margin-bottom: 1.5rem;
+}
+
+.client {
+  &-street,
+  &-country {
+    grid-column: span 2;
+  }
+
+  @include bp.md {
+    grid-template-columns: repeat(3, 1fr);
+
+    &-street {
+      grid-column: span 3;
+    }
+
+    &-country {
+      grid-column: span 1;
+    }
+  }
+}
