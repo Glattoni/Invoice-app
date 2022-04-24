@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormBuilder, FormGroupDirective } from '@angular/forms';
 
 import { ItemsListComponent } from './items-list.component';
 
@@ -8,9 +9,9 @@ describe('ItemsListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ItemsListComponent ]
-    })
-    .compileComponents();
+      declarations: [ItemsListComponent],
+      providers: [FormGroupDirective, FormBuilder],
+    }).compileComponents();
   });
 
   beforeEach(() => {

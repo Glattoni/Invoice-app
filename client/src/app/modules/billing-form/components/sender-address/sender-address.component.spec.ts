@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormGroupDirective } from '@angular/forms';
 
 import { SenderAddressComponent } from './sender-address.component';
 
@@ -8,9 +9,9 @@ describe('SenderAddressComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SenderAddressComponent ]
-    })
-    .compileComponents();
+      declarations: [SenderAddressComponent],
+      providers: [FormGroupDirective],
+    }).compileComponents();
   });
 
   beforeEach(() => {

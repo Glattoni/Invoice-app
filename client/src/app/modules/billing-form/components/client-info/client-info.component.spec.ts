@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormGroupDirective } from '@angular/forms';
 
 import { ClientInfoComponent } from './client-info.component';
 
@@ -8,9 +9,9 @@ describe('ClientInfoComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ClientInfoComponent ]
-    })
-    .compileComponents();
+      declarations: [ClientInfoComponent],
+      providers: [FormGroupDirective],
+    }).compileComponents();
   });
 
   beforeEach(() => {
