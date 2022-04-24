@@ -1,0 +1,11 @@
+@use 'breakpoints' as bp;
+
+.conditions {
+  display: grid;
+
+  .description {
+    @include bp.md {
+      grid-column: span 2;
+    }
+  }
+}

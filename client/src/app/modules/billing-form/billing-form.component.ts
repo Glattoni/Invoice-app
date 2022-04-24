@@ -76,9 +76,7 @@ export class BillingFormComponent implements OnInit, OnDestroy, AfterViewInit {
         distinctUntilChanged(),
         takeUntil(this.destroy$)
       )
-      .subscribe((value) => {
-        this.getPaymentDueDate();
-      });
+      .subscribe((_) => this.getPaymentDueDate());
 
     this.items.valueChanges
       .pipe(
@@ -86,9 +84,7 @@ export class BillingFormComponent implements OnInit, OnDestroy, AfterViewInit {
         distinctUntilChanged(),
         takeUntil(this.destroy$)
       )
-      .subscribe((value) => {
-        this.calculateTotal();
-      });
+      .subscribe((_) => this.calculateTotal());
   }
 
   ngOnDestroy(): void {

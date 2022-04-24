@@ -8,9 +8,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ItemsListComponent } from './components/items-list/items-list.component';
 import { SenderAddressComponent } from './components/sender-address/sender-address.component';
 import { ClientInfoComponent } from './components/client-info/client-info.component';
+import { InvoiceTermsComponent } from './components/invoice-terms/invoice-terms.component';
 
 @NgModule({
-  declarations: [BillingFormComponent, ItemsListComponent, SenderAddressComponent, ClientInfoComponent],
+  declarations: [BillingFormComponent, ItemsListComponent, SenderAddressComponent, ClientInfoComponent, InvoiceTermsComponent],
   imports: [
     CommonModule,
     SharedModule,

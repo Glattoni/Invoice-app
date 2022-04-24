@@ -15,6 +15,7 @@ form {
 
   @include bp.md {
     gap: 3rem;
+    min-width: 31.5rem;
     padding-bottom: 9.125rem;
   }
 }
@@ -32,107 +33,26 @@ fieldset:last-child {
   padding-bottom: 5.5rem;
 }
 
-span {
-  display: none;
-}
-
-label {
-  color: var(--label-foreground);
-  text-transform: capitalize;
-}
-
-input,
-select {
-  box-sizing: border-box;
-  width: 100%;
-  padding: 1rem 1.25rem;
-  font-weight: bold;
-  color: var(--base);
-  background-color: var(--background-secondary);
-  border: 1px solid var(--input-inner-border);
-  border-radius: 0.25rem;
-  caret-color: var(--primary);
-  outline: none;
-
-  &::placeholder {
-    color: initial;
-  }
-
-  &:focus {
-    border-color: var(--primary);
-  }
-}
-
-.fields-container {
-  display: grid;
-  gap: 1.5rem;
-}
-
-.form-field {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.625rem;
-
-  input,
-  select,
-  div {
-    grid-column: span 2;
-  }
-
-  &.invalid {
-    label,
-    span,
-    input {
-      color: var(--danger);
-    }
-
-    span {
-      display: block;
-      text-align: right;
-    }
-
-    input {
-      border-color: var(--danger);
-    }
-  }
-
-  .item-total {
-    padding: 1rem 0;
-    font-weight: bold;
-    color: var(--foreground-primary);
-  }
-}
-
-.conditions {
-  display: grid;
-
-  @include bp.md {
-    .description {
-      grid-column: span 2;
-    }
-  }
-}
-
 .panel {
   position: fixed;
   right: 0;
   bottom: 0;
   left: 0;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 0.5rem;
   padding: 1.25rem 1.5rem;
   background-color: var(--background-quaternary);
   box-shadow: 0 -2.5rem 4.25rem 0 var(--box-shadow-primary);
+
+  ::ng-deep button {
+    line-height: 1rem;
+  }
 
   @include bp.md {
     padding: 2rem 3.125rem 2rem 4rem;
     border-bottom-right-radius: 1.25rem;
     box-shadow: none;
-  }
-
-  &-right {
-    display: flex;
-    gap: 0.5rem;
   }
 
   &.accent {
