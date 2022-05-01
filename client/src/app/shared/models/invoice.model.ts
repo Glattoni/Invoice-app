@@ -1,4 +1,4 @@
-interface Address {
+export interface Address {
   street: string;
   city: string;
   postCode: string;
@@ -6,7 +6,7 @@ interface Address {
   _id: string;
 }
 
-interface Item {
+export interface Item {
   name: string;
   quantity: number;
   price: number;

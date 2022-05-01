@@ -7,10 +7,21 @@ import { InvoiceStateComponent } from './components/invoice-state/invoice-state.
 import { DatePipe } from './pipes/date/date.pipe';
 
 import { AngularSvgIconModule } from 'angular-svg-icon';
+import { ClickedOutsideDirective } from './directives/clicked-outside.directive';
 
 @NgModule({
-  declarations: [ModalComponent, InvoiceStateComponent, DatePipe],
+  declarations: [
+    DatePipe,
+    ModalComponent,
+    InvoiceStateComponent,
+    ClickedOutsideDirective,
+  ],
   imports: [CommonModule, AngularSvgIconModule],
-  exports: [ModalComponent, InvoiceStateComponent, DatePipe],
+  exports: [
+    DatePipe,
+    ModalComponent,
+    InvoiceStateComponent,
+    ClickedOutsideDirective,
+  ],
 })
 export class SharedModule {}
