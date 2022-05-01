@@ -4,9 +4,9 @@
     "baseUrl": "./",
     "paths": {
       "@core/*":["src/app/core/*"],
-      "@shared/*":["src/app/shared/*"],
-      "@features/*":["src/app/features/*"],
       "@assets/*":["src/assets/*"],
+      "@shared/*":["src/app/shared/*"],
+      "@modules/*":["src/app/modules/*"],
       "@environments/*":["src/app/environments/*"],
     },
     "outDir": "./dist/out-tsc",
