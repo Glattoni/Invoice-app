@@ -1,6 +1,7 @@
 import {
   of,
   map,
+  tap,
   catchError,
   withLatestFrom,
   Observable,
@@ -16,7 +17,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root',
 })
 export class InvoiceService {
-  private invoicesUrl = 'http://localhost:3000/api/v1/invoices';
+  private readonly invoicesUrl = 'http://localhost:3000/api/v1/invoices';
+  private readonly httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+    }),
+  };
 
   private invoice = new ReplaySubject<Invoice>();
   private invoices = new BehaviorSubject<Invoice[]>([]);
@@ -28,20 +34,7 @@ export class InvoiceService {
   readonly selectedFilter$ = this.selectedFilter.asObservable();
   readonly filteredInvoices$ = this.filteredInvoices.asObservable();
 
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-    }),
-  };
-
   constructor(private http: HttpClient) {}
-
-  private handleError<T>(result?: T) {
-    return (error: any): Observable<T> => {
-      console.log(error);
-      return of(result as T);
-    };
-  }
 
   getInvoices() {
     this.http
@@ -76,6 +69,29 @@ export class InvoiceService {
       });
   }
 
+  updateInvoice(id: string, body: Invoice) {
+    const url = `${this.invoicesUrl}/${id}`;
+
+    this.http
+      .patch<Invoice>(url, body, this.httpOptions)
+      .pipe(
+        tap((invoice) => this.invoice.next(invoice)),
+        withLatestFrom(this.invoices),
+        map(([patched, invoices]) => [...invoices, patched]),
+        map((invoices) =>
+          invoices.filter(
+            (invoice, index, self) =>
+              self.findIndex((item) => item._id === invoice._id) === index
+          )
+        ),
+        catchError(this.handleError<Invoice[]>())
+      )
+      .subscribe((value) => {
+        this.invoices.next(value);
+        this.filteredInvoices.next(value);
+      });
+  }
+
   deleteInvoice(id: string) {
     const url = `${this.invoicesUrl}/${id}`;
 
@@ -83,8 +99,8 @@ export class InvoiceService {
       .delete<Invoice>(url, this.httpOptions)
       .pipe(
         withLatestFrom(this.invoices),
-        map(([deleted, current]) =>
-          current.filter((invoice) => invoice._id !== deleted._id)
+        map(([deleted, invoices]) =>
+          invoices.filter((invoice) => invoice._id !== deleted._id)
         ),
         catchError(this.handleError<Invoice[]>())
       )
@@ -114,5 +130,12 @@ export class InvoiceService {
         catchError(this.handleError<Invoice[]>())
       )
       .subscribe((value) => this.filteredInvoices.next(value));
+  }
+
+  private handleError<T>(result?: T) {
+    return (error: any): Observable<T> => {
+      console.log(error);
+      return of(result as T);
+    };
   }
 }

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {
-  FormArray,
-  FormBuilder,
   FormGroup,
-  FormGroupDirective,
+  FormArray,
   Validators,
+  FormBuilder,
+  FormGroupDirective,
 } from '@angular/forms';
 
 @Component({
@@ -13,24 +13,24 @@ import {
   styleUrls: ['./items-list.component.scss'],
 })
 export class ItemsListComponent implements OnInit {
-  form: FormGroup | undefined = undefined;
+  form?: FormGroup;
   readonly headers = ['item name', 'qty.', 'price', 'total'];
 
   constructor(
-    private rootFormGroup: FormGroupDirective,
-    private fb: FormBuilder
+    private formBuilder: FormBuilder,
+    private rootFormGroup: FormGroupDirective
   ) {}
 
   ngOnInit(): void {
     this.form = this.rootFormGroup.control;
   }
 
-  deleteItem(idx: number): void {
-    this.items.removeAt(idx);
+  deleteItem(index: number): void {
+    this.items.removeAt(index);
   }
 
   addItem(): void {
-    const item = this.fb.group({
+    const item = this.formBuilder.group({
       name: ['', Validators.required],
       quantity: ['', Validators.required],
       price: ['', Validators.required],
@@ -40,8 +40,8 @@ export class ItemsListComponent implements OnInit {
     this.items.push(item);
   }
 
-  calculateItemTotal(idx: number) {
-    const item = this.items.controls[idx];
+  calculateItemTotal(index: number) {
+    const item = this.items.controls[index];
     const quantity = parseInt(item.get('quantity')?.value);
     const price = parseInt(item.get('price')?.value);
     const itemTotal = quantity * price || 0;

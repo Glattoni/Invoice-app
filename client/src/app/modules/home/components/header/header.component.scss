@@ -6,14 +6,6 @@
   justify-content: space-between;
 }
 
-app-button {
-  display: none;
-
-  @include bp.md {
-    display: block;
-  }
-}
-
 h1 {
   margin-bottom: 0.4rem;
 }
@@ -22,14 +14,7 @@ p {
   color: var(--foreground-primary);
 }
 
-a app-button {
-  display: block;
-  @include bp.md {
-    display: none;
-  }
-}
-
-.full-info {
+.summary {
   display: none;
 
   @include bp.md {
@@ -37,7 +22,7 @@ a app-button {
   }
 }
 
-.shortened-info {
+.brief-summary {
   display: static;
 
   @include bp.md {
@@ -45,7 +30,7 @@ a app-button {
   }
 }
 
-.header-controls {
+.controls {
   display: flex;
   align-items: center;
 

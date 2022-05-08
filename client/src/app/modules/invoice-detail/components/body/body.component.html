@@ -1,28 +1,31 @@
 <div class="container">
-  <div class="slug-container">
+  <header>
     <h3><span>#</span>{{ slug }}</h3>
     <p>{{ description }}</p>
-  </div>
+  </header>
+
   <div *ngIf="senderAddress" class="address-container">
     <p>{{ senderAddress.street }}</p>
     <p>{{ senderAddress.city }}</p>
     <p>{{ senderAddress.postCode }}</p>
     <p>{{ senderAddress.country }}</p>
   </div>
+
   <div class="terms-container">
     <div>
       <p class="label">invoice date</p>
-      <span *ngIf="createdAt" class="accent">{{
-        createdAt | date: 'shortened'
-      }}</span>
+      <span *ngIf="createdAt" class="accent">
+        {{ createdAt | date: 'dd MMM yyyy' }}
+      </span>
     </div>
     <div>
       <p class="label">payment due</p>
-      <span *ngIf="paymentDue" class="accent">{{
-        paymentDue | date: 'shortened'
-      }}</span>
+      <span *ngIf="paymentDue" class="accent">
+        {{ paymentDue | date: 'dd MMM yyyy' }}
+      </span>
     </div>
   </div>
+
   <div class="client-address-container">
     <p class="label">bill to</p>
     <p class="accent recepient">{{ clientName }}</p>
@@ -33,6 +36,7 @@
       <p>{{ clientAddress.country }}</p>
     </div>
   </div>
+
   <div class="email-container">
     <p class="label">sent to</p>
     <p class="accent">{{ clientEmail }}</p>

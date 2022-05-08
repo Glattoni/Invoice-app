@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SidebarFormService } from '@core/services/sidebar-form/sidebar-form.service';
 
 @Component({
@@ -7,10 +7,12 @@ import { SidebarFormService } from '@core/services/sidebar-form/sidebar-form.ser
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
-  visible$: Observable<boolean>;
+export class AppComponent implements OnInit {
+  visible$?: Observable<boolean>;
 
-  constructor(private sidebarFormService: SidebarFormService) {
+  constructor(private sidebarFormService: SidebarFormService) {}
+
+  ngOnInit(): void {
     this.visible$ = this.sidebarFormService.visible$;
   }
 

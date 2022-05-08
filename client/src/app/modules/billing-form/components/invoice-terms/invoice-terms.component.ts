@@ -1,5 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormGroupDirective } from '@angular/forms';
+
+import { Invoice } from '@shared/models/invoice.model';
+import { SidebarFormService } from '@core/services/sidebar-form/sidebar-form.service';
 
 @Component({
   selector: 'form-invoice-terms',
@@ -7,11 +12,15 @@ import { FormGroup, FormGroupDirective } from '@angular/forms';
   styleUrls: ['./invoice-terms.component.scss'],
 })
 export class InvoiceTermsComponent implements OnInit {
-  form: FormGroup | undefined = undefined;
+  form?: FormGroup;
 
   constructor(private rootFormGroup: FormGroupDirective) {}
 
   ngOnInit(): void {
     this.form = this.rootFormGroup.control;
+  }
+
+  get createdAt() {
+    return this.form?.get('createdAt');
   }
 }

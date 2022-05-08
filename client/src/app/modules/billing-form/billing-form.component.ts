@@ -8,8 +8,13 @@ import {
   ChangeDetectionStrategy,
 } from '@angular/core';
 
+import { formatDate } from '@angular/common';
+
 import {
   Subject,
+  Observable,
+  map,
+  filter,
   takeUntil,
   fromEvent,
   throttleTime,
@@ -18,10 +23,12 @@ import {
 } from 'rxjs';
 
 import { addDays, generateSlug } from 'src/utils';
-import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 
+import { Invoice, Item } from '@shared/models/invoice.model';
 import { InvoiceService } from '@core/services/invoice/invoice.service';
 import { SidebarFormService } from '@core/services/sidebar-form/sidebar-form.service';
+
+import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-billing-form',
@@ -30,61 +37,37 @@ import { SidebarFormService } from '@core/services/sidebar-form/sidebar-form.ser
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BillingFormComponent implements OnInit, OnDestroy, AfterViewInit {
-  private destroy$ = new Subject<void>();
+  @ViewChild('formContainer') formContainer?: ElementRef;
 
-  form: FormGroup;
+  form?: FormGroup;
   valid: boolean = true;
   submitted: boolean = false;
   scrolledToBottom: boolean = false;
 
-  private generateAddressGroup() {
-    return this.fb.group({
-      street: ['', Validators.required],
-      city: ['', Validators.required],
-      postCode: ['', Validators.required],
-      country: ['', Validators.required],
-    });
-  }
+  payload$?: Observable<Invoice>;
+
+  private destroy$ = new Subject<void>();
 
   constructor(
-    private fb: FormBuilder,
-    private sidebarFormService: SidebarFormService,
-    private invoiceService: InvoiceService
-  ) {
-    this.form = this.fb.group({
-      status: 'pending',
-      slug: generateSlug(),
-      senderAddress: this.generateAddressGroup(),
-      clientAddress: this.generateAddressGroup(),
-      clientName: ['', Validators.required],
-      clientEmail: ['', [Validators.required, Validators.email]],
-      createdAt: ['', Validators.required],
-      paymentTerms: ['30', Validators.required],
-      paymentDue: ['', Validators.required],
-      items: this.fb.array([], Validators.required),
-      description: '',
-      total: 0,
-    });
-  }
-
-  @ViewChild('formContainer') formContainer: ElementRef | undefined;
+    private formBuilder: FormBuilder,
+    private invoiceService: InvoiceService,
+    private sidebarFormService: SidebarFormService
+  ) {}
 
   ngOnInit(): void {
-    this.form.valueChanges
-      .pipe(
-        debounceTime(1000),
-        distinctUntilChanged(),
-        takeUntil(this.destroy$)
-      )
-      .subscribe((_) => this.getPaymentDueDate());
+    this.payload$ = this.sidebarFormService.payload$;
 
-    this.items.valueChanges
-      .pipe(
-        debounceTime(1000),
-        distinctUntilChanged(),
-        takeUntil(this.destroy$)
-      )
-      .subscribe((_) => this.calculateTotal());
+    this.trackPayloadValueChanges();
+    this.generateFormGroup();
+    this.patchFormValue();
+    this.trackFormValueChanges();
+    this.trackItemListValueChanges();
+  }
+
+  ngAfterViewInit(): void {
+    fromEvent(this.formContainer?.nativeElement, 'scroll', this.onScroll)
+      .pipe(throttleTime(25), takeUntil(this.destroy$))
+      .subscribe((value) => (this.scrolledToBottom = value));
   }
 
   ngOnDestroy(): void {
@@ -92,27 +75,169 @@ export class BillingFormComponent implements OnInit, OnDestroy, AfterViewInit {
     this.destroy$.complete();
   }
 
-  handleScroll(e: any) {
-    return (
-      e.target.offsetHeight + e.target.scrollTop >= e.target.scrollHeight - 100
-    );
+  onDiscard(): void {
+    this.valid = true;
+    this.form?.reset();
+    this.sidebarFormService.close();
   }
 
-  ngAfterViewInit() {
-    fromEvent(this.formContainer?.nativeElement, 'scroll', this.handleScroll)
-      .pipe(throttleTime(25), takeUntil(this.destroy$))
-      .subscribe((value) => (this.scrolledToBottom = value));
+  onCancel(): void {
+    this.valid = true;
+    this.sidebarFormService.finishEditing();
   }
 
-  calculateTotal(): void {
-    const grandTotal = this.items.controls
-      .map((c) => parseInt(c.get('total')?.value))
-      .reduce((a, b) => a + b, 0);
-
-    this.total?.setValue(grandTotal);
+  onSaveAsDraft(): void {
+    this.status?.setValue('draft');
+    this.onSubmit();
   }
 
-  getPaymentDueDate(): void {
+  onSubmit(): void {
+    if (!this.form) return;
+
+    this.submitted = true;
+    this.validateForm(this.form);
+
+    if (!this.valid) return;
+
+    this.invoiceService.createInvoice(this.formData);
+    this.form.reset();
+    this.sidebarFormService.close();
+  }
+
+  onSaveChanges(invoiceId: string): void {
+    if (!this.form) return;
+
+    this.submitted = true;
+    this.validateForm(this.form);
+
+    if (!this.valid) return;
+
+    this.invoiceService.updateInvoice(invoiceId, this.formData);
+    this.form.reset();
+    this.sidebarFormService.close();
+  }
+
+  private onScroll({ target }: any) {
+    return target.offsetHeight + target.scrollTop >= target.scrollHeight - 100;
+  }
+
+  private generateFormGroup() {
+    const slug = generateSlug();
+    const senderAddress = this.generateAddressGroup();
+    const clientAddress = this.generateAddressGroup();
+
+    this.form = this.formBuilder.group({
+      status: 'pending',
+      slug: slug,
+      senderAddress: senderAddress,
+      clientAddress: clientAddress,
+      clientName: ['', Validators.required],
+      clientEmail: ['', [Validators.required, Validators.email]],
+      createdAt: [
+        formatDate(new Date(), 'yyyy-MM-dd', 'en'),
+        Validators.required,
+      ],
+      paymentTerms: ['30', Validators.required],
+      paymentDue: ['', Validators.required],
+      items: this.formBuilder.array([], Validators.required),
+      description: '',
+      total: 0,
+    });
+  }
+
+  private generateAddressGroup() {
+    return this.formBuilder.group({
+      street: ['', Validators.required],
+      city: ['', Validators.required],
+      postCode: ['', Validators.required],
+      country: ['', Validators.required],
+    });
+  }
+
+  private patchFormValue(): void {
+    this.payload$
+      ?.pipe(
+        filter((payload) => payload !== null),
+        takeUntil(this.destroy$)
+      )
+      .subscribe((invoice) => {
+        this.form?.patchValue({
+          senderAddress: invoice.senderAddress,
+          clientAddress: invoice.clientAddress,
+          clientName: invoice.clientName,
+          clientEmail: invoice.clientEmail,
+          createdAt: invoice.createdAt,
+          paymentTerms: invoice.paymentTerms,
+          description: invoice.description,
+          items: this.patchItemList(invoice.items),
+          status: invoice.status,
+          total: invoice.total,
+          slug: invoice.slug,
+        });
+      });
+  }
+
+  private patchItemList(items: Item[]): void {
+    this.items.clear();
+
+    items.reduce((acc, item) => {
+      acc.push(
+        this.formBuilder.group({
+          name: [item.name, Validators.required],
+          quantity: [item.quantity, Validators.required],
+          price: [item.price, Validators.required],
+          total: [item.total, Validators.required],
+        })
+      );
+
+      return acc;
+    }, this.items);
+  }
+
+  private trackFormValueChanges(): void {
+    this.form?.valueChanges
+      .pipe(
+        debounceTime(1000),
+        distinctUntilChanged(),
+        takeUntil(this.destroy$)
+      )
+      .subscribe(() => {
+        this.calculatePaymentDueDate();
+      });
+  }
+
+  private trackItemListValueChanges(): void {
+    this.items.valueChanges
+      .pipe(
+        debounceTime(1000),
+        distinctUntilChanged(),
+        takeUntil(this.destroy$)
+      )
+      .subscribe(() => {
+        this.calculateAmountDue();
+      });
+  }
+
+  private trackPayloadValueChanges(): void {
+    this.payload$
+      ?.pipe(
+        map((payload) => !!payload),
+        takeUntil(this.destroy$)
+      )
+      .subscribe((payload) => {
+        !payload && this.form?.reset();
+      });
+  }
+
+  private calculateAmountDue(): void {
+    const amount = this.items.controls
+      .map((control) => parseInt(control.get('total')?.value))
+      .reduce((total, current) => total + current, 0);
+
+    this.total?.setValue(amount);
+  }
+
+  private calculatePaymentDueDate(): void {
     const date = this.createdAt?.value;
     const amount = this.paymentTerms?.value;
     const due = addDays(date, amount);
@@ -120,18 +245,7 @@ export class BillingFormComponent implements OnInit, OnDestroy, AfterViewInit {
     this.paymentDue?.setValue(due, { onlySelf: true });
   }
 
-  onDiscard(): void {
-    this.valid = true;
-    this.form.reset();
-    this.sidebarFormService.close();
-  }
-
-  saveAsDraft(): void {
-    this.status?.setValue('draft');
-    this.onSubmit();
-  }
-
-  validateForm(form: FormGroup): void {
+  private validateForm(form: FormGroup): void {
     if (form.invalid) {
       form.markAllAsTouched();
       this.valid = false;
@@ -140,42 +254,31 @@ export class BillingFormComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  onSubmit(): void {
-    this.submitted = true;
-    this.validateForm(this.form);
-
-    if (this.valid) {
-      this.invoiceService.createInvoice(this.formData);
-      this.form.reset();
-      this.sidebarFormService.close();
-    }
-  }
-
   get formData() {
-    return this.form.value;
+    return this.form?.value;
   }
 
   get total() {
-    return this.form.get('total');
+    return this.form?.get('total');
   }
 
   get status() {
-    return this.form.get('status');
+    return this.form?.get('status');
   }
 
   get createdAt() {
-    return this.form.get('createdAt');
+    return this.form?.get('createdAt');
   }
 
   get paymentDue() {
-    return this.form.get('paymentDue');
+    return this.form?.get('paymentDue');
   }
 
   get paymentTerms() {
-    return this.form.get('paymentTerms');
+    return this.form?.get('paymentTerms');
   }
 
   get items() {
-    return this.form.get('items') as FormArray;
+    return this.form?.get('items') as FormArray;
   }
 }

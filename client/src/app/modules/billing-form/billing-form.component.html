@@ -1,9 +1,17 @@
 <header>
-  <h1>New Invoice</h1>
+  <app-go-back-button [offset]="'0 0 1.5rem 0'"></app-go-back-button>
+
+  <ng-container *ngIf="payload$ | async as invoice; else new">
+    <h1>Edit <span>#</span>{{ invoice.slug }}</h1>
+  </ng-container>
+
+  <ng-template #new>
+    <h1>New Invoice</h1>
+  </ng-template>
 </header>
 
 <div #formContainer class="form-container" (scroll)="($event)">
-  <form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <form *ngIf="form" (ngSubmit)="onSubmit()" [formGroup]="form">
     <form-sender-address></form-sender-address>
     <form-client-info></form-client-info>
     <form-invoice-terms></form-invoice-terms>
@@ -16,12 +24,23 @@
   </form>
 
   <div class="panel" [class.accent]="!scrolledToBottom">
-    <app-button [variant]="'light'" [small]="true" (click)="onDiscard()">
-      Discard
-    </app-button>
-    <app-button [variant]="'dark'" [small]="true" (click)="saveAsDraft()">
-      Save as Draft
-    </app-button>
-    <app-button [small]="true" (click)="onSubmit()"> Save & Send </app-button>
+    <ng-container *ngIf="payload$ | async as invoice; else create">
+      <app-button [variant]="'light'" [small]="true" (click)="onCancel()">
+        Cancel
+      </app-button>
+      <app-button [small]="true" (click)="onSaveChanges(invoice._id)">
+        Save Changes
+      </app-button>
+    </ng-container>
+
+    <ng-template #create>
+      <app-button [variant]="'light'" [small]="true" (click)="onDiscard()">
+        Discard
+      </app-button>
+      <app-button [variant]="'dark'" [small]="true" (click)="onSaveAsDraft()">
+        Save as Draft
+      </app-button>
+      <app-button [small]="true" (click)="onSubmit()"> Save & Send </app-button>
+    </ng-template>
   </div>
 </div>

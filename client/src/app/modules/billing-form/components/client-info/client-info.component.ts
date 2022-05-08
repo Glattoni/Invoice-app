@@ -7,7 +7,7 @@ import { FormGroup, FormGroupDirective } from '@angular/forms';
   styleUrls: ['./client-info.component.scss'],
 })
 export class ClientInfoComponent implements OnInit {
-  form: FormGroup | undefined = undefined;
+  form?: FormGroup;
 
   constructor(private rootFormGroup: FormGroupDirective) {}
 
