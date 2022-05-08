@@ -1,12 +1,31 @@
-<a
-  [ngStyle]="{ margin: offset }"
-  (click)="goBack()"
-  (keypress)="goBack()"
-  tabindex="0"
->
-  <svg-icon
-    [svgStyle]="{ transform: 'rotate(90deg)' }"
-    src="assets/icons/icon-arrow.svg"
-  ></svg-icon>
-  <p>Go back</p>
-</a>
+<ng-container *ngIf="isLinkType">
+  <a
+    tabindex="0"
+    (click)="goBackOnePage()"
+    (keypress)="goBackOnePage()"
+    [ngStyle]="{ margin: offset }"
+  >
+    <svg-icon
+      src="assets/icons/icon-arrow.svg"
+      [svgStyle]="{ transform: 'rotate(90deg)' }"
+    >
+    </svg-icon>
+    <p>Go back</p>
+  </a>
+</ng-container>
+
+<ng-container *ngIf="!isLinkType">
+  <button
+    tabindex="0"
+    (click)="closeFormSidebar()"
+    (keypress)="closeFormSidebar()"
+    [ngStyle]="{ margin: offset }"
+  >
+    <svg-icon
+      src="assets/icons/icon-arrow.svg"
+      [svgStyle]="{ transform: 'rotate(90deg)' }"
+    >
+    </svg-icon>
+    <p>Go back</p>
+  </button>
+</ng-container>
