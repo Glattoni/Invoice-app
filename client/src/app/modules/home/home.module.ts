@@ -10,27 +10,27 @@ import { InvoiceComponent } from './components/invoice/invoice.component';
 import { PlaceholderComponent } from './components/placeholder/placeholder.component';
 import { HomePageComponent } from './pages/home/home-page.component';
 import { SummaryPipe } from './pipes/summary/summary.pipe';
-import { NewInvoiceComponent } from './pages/new-invoice/new-invoice.component';
 import { PortalModule } from '@angular/cdk/portal';
 import { ButtonsModule } from '../buttons/buttons.module';
+import { BillingFormModule } from '@modules/billing-form/billing-form.module';
 
 @NgModule({
   declarations: [
-    HeaderComponent,
-    DropdownComponent,
-    InvoiceComponent,
-    PlaceholderComponent,
-    HomePageComponent,
     SummaryPipe,
-    NewInvoiceComponent,
+    HeaderComponent,
+    InvoiceComponent,
+    DropdownComponent,
+    HomePageComponent,
+    PlaceholderComponent,
   ],
   imports: [
     CommonModule,
-    HomeRoutingModule,
-    AngularSvgIconModule,
     SharedModule,
     PortalModule,
     ButtonsModule,
+    HomeRoutingModule,
+    BillingFormModule,
+    AngularSvgIconModule,
   ],
 })
 export class HomeModule {}
