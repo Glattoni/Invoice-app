@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Item } from '@shared/models/invoice.model';
 
 @Component({
   selector: 'app-table',
@@ -6,11 +7,6 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./table.component.scss'],
 })
 export class TableComponent {
-  @Input() items?: Array<{
-    name: string;
-    quantity: number;
-    price: number;
-    total: number;
-  }>;
+  @Input() items?: Item[];
   @Input() total?: number;
 }
