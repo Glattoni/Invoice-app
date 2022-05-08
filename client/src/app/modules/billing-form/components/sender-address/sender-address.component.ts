@@ -7,7 +7,7 @@ import { FormGroup, FormGroupDirective } from '@angular/forms';
   styleUrls: ['./sender-address.component.scss'],
 })
 export class SenderAddressComponent implements OnInit {
-  form: FormGroup | undefined = undefined;
+  form?: FormGroup;
 
   constructor(private rootFormGroup: FormGroupDirective) {}
 
