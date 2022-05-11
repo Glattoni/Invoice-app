@@ -12,7 +12,7 @@ import { DOCUMENT } from '@angular/common';
 import { Subject, fromEvent, filter, takeUntil } from 'rxjs';
 
 @Directive({
-  selector: '[clickedOutside]',
+  selector: '[appClickedOutside]',
 })
 export class ClickedOutsideDirective implements AfterViewInit, OnDestroy {
   @Output() clickOutside = new EventEmitter<void>();
