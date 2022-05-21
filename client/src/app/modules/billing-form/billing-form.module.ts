@@ -11,6 +11,7 @@ import { ItemsListComponent } from './components/items-list/items-list.component
 import { ClientInfoComponent } from './components/client-info/client-info.component';
 import { InvoiceTermsComponent } from './components/invoice-terms/invoice-terms.component';
 import { SenderAddressComponent } from './components/sender-address/sender-address.component';
+import { CustomSelectComponent } from './components/custom-select/custom-select.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { SenderAddressComponent } from './components/sender-address/sender-addre
     BillingFormComponent,
     InvoiceTermsComponent,
     SenderAddressComponent,
+    CustomSelectComponent,
   ],
   imports: [
     FormsModule,

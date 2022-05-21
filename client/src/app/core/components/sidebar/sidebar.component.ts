@@ -11,7 +11,7 @@ export class SidebarComponent {
 
   getThemeIconPath(): string {
     const theme = this.themeService.getActiveTheme();
-    return `assets/icons/icon-${theme.name === 'light' ? 'moon' : 'sun'}.svg`;
+    return `assets/icons/${theme.name === 'light' ? 'moon' : 'sun'}.svg`;
   }
 
   toggleTheme(): void {
