@@ -8,8 +8,6 @@ import {
   ChangeDetectionStrategy,
 } from '@angular/core';
 
-import { formatDate } from '@angular/common';
-
 import {
   Subject,
   Observable,
@@ -22,6 +20,7 @@ import {
   distinctUntilChanged,
 } from 'rxjs';
 
+import { formatDate } from '@angular/common';
 import { addDays, generateSlug } from 'src/utils';
 
 import { Invoice, Item } from '@shared/models/invoice.model';
@@ -125,19 +124,17 @@ export class BillingFormComponent implements OnInit, OnDestroy, AfterViewInit {
     const slug = generateSlug();
     const senderAddress = this.generateAddressGroup();
     const clientAddress = this.generateAddressGroup();
+    const creationDate = formatDate(new Date(), 'yyyy-MM-dd', 'en');
 
     this.form = this.formBuilder.group({
-      status: 'pending',
       slug: slug,
+      status: 'pending',
       senderAddress: senderAddress,
       clientAddress: clientAddress,
       clientName: ['', Validators.required],
       clientEmail: ['', [Validators.required, Validators.email]],
-      createdAt: [
-        formatDate(new Date(), 'yyyy-MM-dd', 'en'),
-        Validators.required,
-      ],
-      paymentTerms: ['30', Validators.required],
+      createdAt: [creationDate, Validators.required],
+      paymentTerms: [30, Validators.required],
       paymentDue: ['', Validators.required],
       items: this.formBuilder.array([], Validators.required),
       description: '',
@@ -225,7 +222,7 @@ export class BillingFormComponent implements OnInit, OnDestroy, AfterViewInit {
         takeUntil(this.destroy$)
       )
       .subscribe((payload) => {
-        !payload && this.form?.reset();
+        !payload && this.form?.touched && this.form?.reset();
       });
   }
 
