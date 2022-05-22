@@ -8,7 +8,6 @@ import {
   AbstractControl,
   FormGroupDirective,
 } from '@angular/forms';
-import { Item } from '@shared/models/invoice.model';
 
 @Component({
   selector: 'form-items-list',
