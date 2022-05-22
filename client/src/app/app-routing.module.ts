@@ -8,7 +8,7 @@ const routes: Routes = [
       import('./modules/home/home.module').then((m) => m.HomeModule),
   },
   {
-    path: 'invoices/:slug',
+    path: 'invoices/:id',
     loadChildren: () =>
       import('./modules/invoice-detail/invoice-detail.module').then(
         (m) => m.InvoiceDetail

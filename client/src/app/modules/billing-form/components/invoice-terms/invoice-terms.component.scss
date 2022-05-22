@@ -1,0 +1,19 @@
+@use 'breakpoints' as bp;
+
+.conditions {
+  display: grid;
+
+  @include bp.md {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.description {
+  @include bp.md {
+    grid-column: span 2;
+  }
+}
+
+.payment-terms app-custom-select {
+  grid-column: span 2;
+}

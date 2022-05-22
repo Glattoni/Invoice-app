@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Address } from '@shared/models/invoice.model';
 
 @Component({
   selector: 'app-body',
@@ -12,16 +13,6 @@ export class BodyComponent {
   @Input() paymentDue?: string;
   @Input() clientName?: string;
   @Input() clientEmail?: string;
-  @Input() senderAddress?: {
-    street: string;
-    city: string;
-    postCode: string;
-    country: string;
-  };
-  @Input() clientAddress?: {
-    street: string;
-    city: string;
-    postCode: string;
-    country: string;
-  };
+  @Input() senderAddress?: Address;
+  @Input() clientAddress?: Address;
 }

@@ -14,7 +14,7 @@ p {
   color: var(--foreground-primary);
 }
 
-.full-info {
+.summary {
   display: none;
 
   @include bp.md {
@@ -22,7 +22,7 @@ p {
   }
 }
 
-.shortened-info {
+.brief-summary {
   display: static;
 
   @include bp.md {
@@ -30,7 +30,7 @@ p {
   }
 }
 
-.header-controls {
+.controls {
   display: flex;
   align-items: center;
 

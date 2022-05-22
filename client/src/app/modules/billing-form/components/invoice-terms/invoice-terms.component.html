@@ -1,0 +1,32 @@
+<fieldset *ngIf="form" [formGroup]="form">
+  <legend class="hidden">invoice terms and conditions</legend>
+
+  <div class="fields-container conditions">
+    <!-- created at -->
+    <div class="form-field invoice-date">
+      <label for="invoice-date">invoice date</label>
+      <input type="date" id="invoice-date" formControlName="createdAt" />
+    </div>
+    <!-- created at -->
+
+    <!-- payment terms -->
+    <app-custom-select
+      class="payment-terms"
+      formControlName="paymentTerms"
+      [options]="options"
+      [selected]="deadline"
+      [label]="'payment terms'"
+    ></app-custom-select>
+    <!-- payment terms -->
+
+    <!-- description -->
+    <app-custom-input
+      class="description"
+      formControlName="description"
+      [label]="'project description'"
+      [invalid]="invalidDescription"
+      [placeholder]="'e.g Graphic Design Service'"
+    ></app-custom-input>
+    <!-- description  -->
+  </div>
+</fieldset>

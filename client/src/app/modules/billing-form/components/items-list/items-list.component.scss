@@ -1,0 +1,121 @@
+@use 'breakpoints' as bp;
+
+legend {
+  font-size: 1.125rem;
+  line-height: 2rem;
+  color: var(--items-list);
+  letter-spacing: -0.375px;
+
+  @include bp.md {
+    margin-bottom: 1rem;
+  }
+}
+
+header {
+  display: none;
+  color: var(--label-foreground);
+  text-transform: capitalize;
+
+  @include bp.md {
+    display: grid;
+    grid-template-columns: 12.5rem 2.875rem 6.25rem auto;
+    gap: 1rem;
+  }
+}
+
+ul {
+  display: grid;
+  gap: 3rem;
+
+  @include bp.md {
+    gap: 1.125rem;
+  }
+}
+
+li {
+  display: grid;
+  gap: 1.5rem 1rem;
+
+  &:first-child {
+    @include bp.md {
+      margin-top: 1rem;
+    }
+  }
+
+  &:last-child {
+    margin-bottom: 3rem;
+
+    @include bp.md {
+      margin-bottom: 0;
+    }
+  }
+
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 0.5rem 0.625rem;
+  }
+
+  div:nth-child(2) {
+    max-width: 4rem;
+  }
+
+  div:nth-child(4) {
+    min-width: 5.25rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    @include bp.md {
+      min-width: unset;
+    }
+  }
+
+  @include bp.md {
+    grid-template-columns: 12.5rem 2.875rem 6.25rem auto 2rem;
+    gap: 1rem;
+  }
+}
+
+.item-field {
+  input,
+  select,
+  .item-total {
+    grid-column: span 2;
+  }
+
+  ::ng-deep label {
+    @include bp.md {
+      display: none;
+    }
+  }
+
+  &:first-child {
+    grid-column: span 4;
+
+    @include bp.md {
+      grid-column: span 1;
+      margin: 0;
+    }
+  }
+
+  .item-total {
+    padding: 1rem 0;
+    font-weight: bold;
+    color: var(--foreground-primary);
+  }
+}
+
+.add-button {
+  display: block;
+
+  ::ng-deep button {
+    width: 100%;
+    text-transform: capitalize;
+  }
+
+  @include bp.md {
+    margin-top: 1.5rem;
+  }
+}

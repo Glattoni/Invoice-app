@@ -1,0 +1,66 @@
+<fieldset *ngIf="form" [formGroup]="form">
+  <legend>items list</legend>
+
+  <header>
+    <p *ngFor="let header of headers">
+      {{ header }}
+    </p>
+  </header>
+
+  <ul formArrayName="items">
+    <li *ngFor="let item of items.controls; index as i" [formGroupName]="i">
+      <!-- item name -->
+      <app-custom-input
+        class="item-field"
+        formControlName="name"
+        [label]="'item name'"
+        [invalid]="invalidItemName(item)"
+      ></app-custom-input>
+      <!-- item name -->
+
+      <!-- item quantity -->
+      <app-custom-input
+        class="item-field"
+        formControlName="quantity"
+        [type]="'number'"
+        [label]="'qty.'"
+        [placeholder]="'0'"
+        [invalid]="invalidItemQuantity(item)"
+      ></app-custom-input>
+      <!-- item quantity -->
+
+      <!-- item price -->
+      <app-custom-input
+        class="item-field"
+        formControlName="price"
+        [type]="'number'"
+        [label]="'price'"
+        [placeholder]="'0.00'"
+        [invalid]="invalidItemPrice(item)"
+      ></app-custom-input>
+      <!-- item price -->
+
+      <!-- item total -->
+      <div class="form-field item-field">
+        <label>total</label>
+        <div class="item-total">
+          {{ calculateItemTotal(i) | currency: '':'' }}
+        </div>
+      </div>
+      <!-- item total -->
+
+      <button type="button" (click)="deleteItem(i)">
+        <svg-icon src="assets/icons/delete.svg"></svg-icon>
+      </button>
+    </li>
+  </ul>
+
+  <app-button
+    class="add-button"
+    [type]="'button'"
+    [variant]="'light'"
+    (click)="addItem()"
+  >
+    + add new item
+  </app-button>
+</fieldset>

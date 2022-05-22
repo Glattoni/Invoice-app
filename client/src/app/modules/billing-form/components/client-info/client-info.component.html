@@ -1,0 +1,61 @@
+<fieldset *ngIf="form" [formGroup]="form">
+  <legend>bill to</legend>
+
+  <div class="fields-container client-initials">
+    <!-- client's name -->
+    <app-custom-input
+      class="client-name"
+      formControlName="clientName"
+      [label]="'client\'s name'"
+      [invalid]="invalidName"
+    ></app-custom-input>
+    <!-- client's name -->
+
+    <!-- client's email -->
+    <app-custom-input
+      class="client-email"
+      formControlName="clientEmail"
+      [label]="'client\'s email'"
+      [invalid]="invalidEmail"
+    ></app-custom-input>
+    <!-- client's email -->
+  </div>
+
+  <div formGroupName="clientAddress" class="fields-container client">
+    <!-- client's street -->
+    <app-custom-input
+      class="client-street"
+      formControlName="street"
+      [label]="'street address'"
+      [invalid]="invalidStreet"
+    ></app-custom-input>
+    <!-- client's street -->
+
+    <!-- client's city -->
+    <app-custom-input
+      class="client-city"
+      formControlName="city"
+      [label]="'city'"
+      [invalid]="invalidCity"
+    ></app-custom-input>
+    <!-- client's city -->
+
+    <!-- client's postcode -->
+    <app-custom-input
+      class="client-post-code"
+      formControlName="postCode"
+      [label]="'post code'"
+      [invalid]="invalidPostCode"
+    ></app-custom-input>
+    <!-- client's postcode -->
+
+    <!-- client's country -->
+    <app-custom-input
+      class="client-contry"
+      formControlName="country"
+      [label]="'country'"
+      [invalid]="invalidCountry"
+    ></app-custom-input>
+    <!-- client's country -->
+  </div>
+</fieldset>

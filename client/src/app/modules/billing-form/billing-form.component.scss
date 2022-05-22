@@ -1,0 +1,93 @@
+@use 'breakpoints' as bp;
+
+app-go-back-button {
+  @include bp.md {
+    display: none;
+  }
+}
+
+// align to the right if has only one sibling
+app-button:first-child:nth-last-child(2) {
+  justify-self: right;
+
+  ~ app-button {
+    justify-self: right;
+  }
+}
+
+h1 {
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  letter-spacing: -0.5px;
+
+  @include bp.md {
+    margin-bottom: 3rem;
+  }
+
+  span {
+    color: var(--invoice-detail);
+  }
+}
+
+form {
+  display: grid;
+  gap: 2.5rem;
+  padding-bottom: 11rem;
+
+  @include bp.md {
+    gap: 3rem;
+    min-width: 31.5rem;
+    padding-bottom: 9.125rem;
+  }
+}
+
+.form-container {
+  height: 100%;
+  overflow-y: scroll;
+
+  @include bp.md {
+    padding-right: 1rem;
+  }
+}
+
+fieldset:last-child {
+  padding-bottom: 5.5rem;
+}
+
+.panel {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 0.5rem;
+  padding: 1.25rem 1.5rem;
+  background-color: var(--background-quaternary);
+  box-shadow: 0 -2.5rem 4.25rem 0 var(--box-shadow-primary);
+
+  ::ng-deep button {
+    line-height: 1rem;
+  }
+
+  @include bp.md {
+    padding: 2rem 3.125rem 2rem 4rem;
+    border-bottom-right-radius: 1.25rem;
+    box-shadow: none;
+  }
+
+  &.accent {
+    background-color: var(--background-quaternary);
+    box-shadow: 0 -2.5rem 4.25rem 0 var(--box-shadow-primary);
+
+    @include bp.md {
+      border-radius: 0 1.25rem 1.25rem 0;
+    }
+  }
+}
+
+.validation-errors {
+  font-size: 0.625rem;
+  color: var(--danger);
+}

@@ -65,6 +65,7 @@ const InvoiceSchema = new Schema({
   clientAddress: Address,
   items: [Item],
   total: Number,
+  slug: String,
 });
 
 module.exports = mongoose.model('Invoice', InvoiceSchema);

@@ -2,16 +2,22 @@
   <div class="app-container container">
     <div>
       <h1>Invoices</h1>
-      <p class="full-info">
-        {{ (invoices$ | async)?.length | summary: (filter$ | async) }}
-      </p>
-      <p class="shortened-info">
-        {{ (invoices$ | async)?.length || 'No' }} invoices
-      </p>
+      <ng-container *ngIf="(invoices$ | async)?.length as amount; else empty">
+        <p class="summary">
+          {{ amount | summary: (filter$ | async) }}
+        </p>
+        <p class="brief-summary">{{ amount }} invoices</p>
+      </ng-container>
+      <ng-template #empty>
+        <p>No invoices</p>
+      </ng-template>
     </div>
-    <div class="header-controls">
+
+    <div class="controls">
       <app-dropdown></app-dropdown>
-      <app-button [hasIcon]="true">New <span>Invoice</span></app-button>
+      <app-button [hasIcon]="true" (click)="openSidebar()">
+        New <span>Invoice</span>
+      </app-button>
     </div>
   </div>
 </header>

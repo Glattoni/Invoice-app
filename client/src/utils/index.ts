@@ -1,24 +1,39 @@
-const getRandomString = (length: number) => {
-  let result = '';
-  const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  for (let i = 0; i < length; i++) {
-    result += alphabet[Math.floor(Math.random() * alphabet.length)];
-  }
-  return result;
-};
+enum TimeUnits {
+  Hours = 24,
+  Minutes = 60,
+  Seconds = 60,
+  Milliseconds = 1000,
+}
 
-const getRandomNumber = (length: number) => {
-  let result = '';
-  for (let i = 0; i < length; i++) {
-    result += Math.floor(Math.random() * 10);
-  }
-  return result;
-};
+const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
-const generateSlug = () => {
-  const characters = getRandomString(2);
-  const number = getRandomNumber(4);
-  return `${characters}${number}`;
-};
+const numberToArray = (number: number) => Array.from(Array(number));
 
-export { generateSlug };
+const msInDays = (amount: number) =>
+  amount *
+  TimeUnits.Hours *
+  TimeUnits.Minutes *
+  TimeUnits.Seconds *
+  TimeUnits.Milliseconds;
+
+const getInteger = (length: number) => Math.floor(Math.random() * length);
+
+const getRandomNumber = (digits: number) =>
+  numberToArray(digits).reduce((acc) => acc + getInteger(10), '');
+
+const getRandomString = (length: number) =>
+  numberToArray(length).reduce(
+    (acc) => acc + ALPHABET[getInteger(ALPHABET.length)],
+    ''
+  );
+
+export const generateSlug = () => `${getRandomString(2)}${getRandomNumber(4)}`;
+
+export const addDays = (date: string, amount: string) => {
+  if (!date) return;
+
+  const time = new Date(date).getTime();
+  const milliseconds = time + msInDays(+amount);
+
+  return new Date(milliseconds).toISOString().slice(0, 10);
+};
