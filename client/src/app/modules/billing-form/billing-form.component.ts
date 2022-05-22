@@ -177,8 +177,8 @@ export class BillingFormComponent implements OnInit, OnDestroy, AfterViewInit {
   private patchItemList(items: Item[]): void {
     this.items.clear();
 
-    items.reduce((acc, item) => {
-      acc.push(
+    items.forEach((item) => {
+      this.items.push(
         this.formBuilder.group({
           name: [item.name, Validators.required],
           quantity: [item.quantity, Validators.required],
@@ -186,9 +186,7 @@ export class BillingFormComponent implements OnInit, OnDestroy, AfterViewInit {
           total: [item.total, Validators.required],
         })
       );
-
-      return acc;
-    }, this.items);
+    });
   }
 
   private trackFormValueChanges(): void {
