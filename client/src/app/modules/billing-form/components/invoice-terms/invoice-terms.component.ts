@@ -24,11 +24,27 @@ export class InvoiceTermsComponent implements OnInit {
     this.deadline = this.paymentTerms?.value;
   }
 
-  get createdAt() {
+  get invalidDate() {
+    return this.createdAt?.invalid && this.createdAt.touched;
+  }
+
+  get invalidTerms() {
+    return this.paymentTerms?.invalid && this.paymentTerms.touched;
+  }
+
+  get invalidDescription() {
+    return this.description?.invalid && this.description.touched;
+  }
+
+  private get createdAt() {
     return this.form?.get('createdAt');
   }
 
-  get paymentTerms() {
+  private get paymentTerms() {
     return this.form?.get('paymentTerms');
+  }
+
+  private get description() {
+    return this.form?.get('description');
   }
 }

@@ -85,7 +85,7 @@ li {
     grid-column: span 2;
   }
 
-  label {
+  ::ng-deep label {
     @include bp.md {
       display: none;
     }

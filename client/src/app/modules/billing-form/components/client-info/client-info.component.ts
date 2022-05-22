@@ -15,27 +15,51 @@ export class ClientInfoComponent implements OnInit {
     this.form = this.rootFormGroup.control;
   }
 
-  get clientEmail() {
+  get invalidEmail() {
+    return this.email?.invalid && this.email.touched;
+  }
+
+  get invalidName() {
+    return this.name?.invalid && this.name.touched;
+  }
+
+  get invalidStreet() {
+    return this.street?.invalid && this.street.touched;
+  }
+
+  get invalidCity() {
+    return this.city?.invalid && this.city.touched;
+  }
+
+  get invalidPostCode() {
+    return this.postCode?.invalid && this.postCode.touched;
+  }
+
+  get invalidCountry() {
+    return this.country?.invalid && this.country.touched;
+  }
+
+  private get email() {
     return this.form?.get('clientEmail');
   }
 
-  get clientName() {
+  private get name() {
     return this.form?.get('clientName');
   }
 
-  get clientStreet() {
+  private get street() {
     return this.form?.get('clientAddress.street');
   }
 
-  get clientCity() {
+  private get city() {
     return this.form?.get('clientAddress.city');
   }
 
-  get clientPostCode() {
+  private get postCode() {
     return this.form?.get('clientAddress.postCode');
   }
 
-  get clientCountry() {
+  private get country() {
     return this.form?.get('clientAddress.country');
   }
 }

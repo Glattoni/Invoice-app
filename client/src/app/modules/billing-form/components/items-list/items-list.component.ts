@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+
 import {
   FormGroup,
   FormArray,
   Validators,
   FormBuilder,
+  AbstractControl,
   FormGroupDirective,
 } from '@angular/forms';
+import { Item } from '@shared/models/invoice.model';
 
 @Component({
   selector: 'form-items-list',
@@ -14,6 +17,7 @@ import {
 })
 export class ItemsListComponent implements OnInit {
   form?: FormGroup;
+
   readonly headers = ['item name', 'qty.', 'price', 'total'];
 
   constructor(
@@ -45,9 +49,22 @@ export class ItemsListComponent implements OnInit {
     const quantity = parseInt(item.get('quantity')?.value);
     const price = parseInt(item.get('price')?.value);
     const itemTotal = quantity * price || 0;
+
     item.get('total')?.setValue(itemTotal);
 
     return itemTotal;
+  }
+
+  invalidItemName(item: AbstractControl) {
+    return item.get('name')?.invalid && item.get('name')?.touched;
+  }
+
+  invalidItemQuantity(item: AbstractControl) {
+    return item.get('quantity')?.invalid && item.get('quantity')?.touched;
+  }
+
+  invalidItemPrice(item: AbstractControl) {
+    return item.get('price')?.invalid && item.get('price')?.touched;
   }
 
   get items() {

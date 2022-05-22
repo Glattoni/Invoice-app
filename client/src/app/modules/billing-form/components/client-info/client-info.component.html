@@ -3,71 +3,59 @@
 
   <div class="fields-container client-initials">
     <!-- client's name -->
-    <div
-      class="form-field client-name"
-      [class.invalid]="clientName?.invalid && clientName?.touched"
-    >
-      <label for="client-name">client's name</label>
-      <span *ngIf="clientName?.invalid"> can't be emtpy </span>
-      <input id="client-name" formControlName="clientName" />
-    </div>
+    <app-custom-input
+      class="client-name"
+      formControlName="clientName"
+      [label]="'client\'s name'"
+      [invalid]="invalidName"
+    ></app-custom-input>
     <!-- client's name -->
 
     <!-- client's email -->
-    <div
-      class="form-field client-email"
-      [class.invalid]="clientEmail?.invalid && clientEmail?.touched"
-    >
-      <label for="client-email">client's email</label>
-      <span *ngIf="clientEmail?.hasError('required')">can't be empty</span>
-      <span *ngIf="clientEmail?.touched && clientEmail?.errors?.['email']">
-        invalid email format
-      </span>
-      <input id="client-email" type="email" formControlName="clientEmail" />
-    </div>
+    <app-custom-input
+      class="client-email"
+      formControlName="clientEmail"
+      [label]="'client\'s email'"
+      [invalid]="invalidEmail"
+    ></app-custom-input>
     <!-- client's email -->
   </div>
 
   <div formGroupName="clientAddress" class="fields-container client">
     <!-- client's street -->
-    <div
-      class="form-field client-street"
-      [class.invalid]="clientStreet?.invalid && clientStreet?.touched"
-    >
-      <label for="client-street">street address</label>
-      <span *ngIf="clientStreet?.invalid">can't be empty</span>
-      <input id="client-street" formControlName="street" />
-    </div>
+    <app-custom-input
+      class="client-street"
+      formControlName="street"
+      [label]="'street address'"
+      [invalid]="invalidStreet"
+    ></app-custom-input>
     <!-- client's street -->
 
     <!-- client's city -->
-    <div
-      class="form-field client-city"
-      [class.invalid]="clientCity?.invalid && clientCity?.touched"
-    >
-      <label for="client-city">city</label>
-      <input id="client-city" formControlName="city" />
-    </div>
+    <app-custom-input
+      class="client-city"
+      formControlName="city"
+      [label]="'city'"
+      [invalid]="invalidCity"
+    ></app-custom-input>
     <!-- client's city -->
 
     <!-- client's postcode -->
-    <div
-      class="form-field client-post-code"
-      [class.invalid]="clientPostCode?.invalid && clientPostCode?.touched"
-    >
-      <label for="client-post-code">post code</label>
-      <input id="client-post-code" formControlName="postCode" />
-    </div>
+    <app-custom-input
+      class="client-post-code"
+      formControlName="postCode"
+      [label]="'post code'"
+      [invalid]="invalidPostCode"
+    ></app-custom-input>
     <!-- client's postcode -->
 
     <!-- client's country -->
-    <div
-      class="form-field client-country"
-      [class.invalid]="clientCountry?.invalid && clientCountry?.touched"
-    >
-      <label for="client-country">country</label>
-      <input id="client-country" formControlName="country" />
-    </div>
+    <app-custom-input
+      class="client-contry"
+      formControlName="country"
+      [label]="'country'"
+      [invalid]="invalidCountry"
+    ></app-custom-input>
     <!-- client's country -->
   </div>
 </fieldset>

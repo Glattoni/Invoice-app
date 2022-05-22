@@ -15,19 +15,35 @@ export class SenderAddressComponent implements OnInit {
     this.form = this.rootFormGroup.control;
   }
 
-  get senderStreet() {
+  get invalidStreet() {
+    return this.street?.invalid && this.street.touched;
+  }
+
+  get invalidCity() {
+    return this.city?.invalid && this.city.touched;
+  }
+
+  get invalidPostCode() {
+    return this.postCode?.invalid && this.postCode.touched;
+  }
+
+  get invalidCountry() {
+    return this.country?.invalid && this.country.touched;
+  }
+
+  private get street() {
     return this.form?.get('senderAddress.street');
   }
 
-  get senderCity() {
+  private get city() {
     return this.form?.get('senderAddress.city');
   }
 
-  get senderPostCode() {
+  private get postCode() {
     return this.form?.get('senderAddress.postCode');
   }
 
-  get senderCountry() {
+  private get country() {
     return this.form?.get('senderAddress.country');
   }
 }
