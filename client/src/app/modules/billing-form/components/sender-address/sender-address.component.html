@@ -3,44 +3,39 @@
 
   <div formGroupName="senderAddress" class="fields-container sender">
     <!-- sender street -->
-    <div
-      class="form-field sender-street"
-      [class.invalid]="senderStreet?.invalid && senderStreet?.touched"
-    >
-      <label for="sender-street">street address</label>
-      <span *ngIf="senderStreet?.invalid"> can't be emtpy </span>
-      <input id="sender-street" formControlName="street" />
-    </div>
+    <app-custom-input
+      class="sender-street"
+      formControlName="street"
+      [label]="'street address'"
+      [invalid]="invalidStreet"
+    ></app-custom-input>
     <!-- sender street -->
 
     <!-- sender city -->
-    <div
-      class="form-field sender-city"
-      [class.invalid]="senderCity?.invalid && senderCity?.touched"
-    >
-      <label for="sender-city">city</label>
-      <input id="sender-city" formControlName="city" />
-    </div>
+    <app-custom-input
+      class="sender-city"
+      formControlName="city"
+      [label]="'city'"
+      [invalid]="invalidCity"
+    ></app-custom-input>
     <!-- sender city -->
 
     <!-- sender post code -->
-    <div
-      class="form-field sender-post-code"
-      [class.invalid]="senderPostCode?.invalid && senderPostCode?.touched"
-    >
-      <label for="sender-post-code">post code</label>
-      <input id="sender-post-code" formControlName="postCode" />
-    </div>
+    <app-custom-input
+      class="sender-post-code"
+      formControlName="postCode"
+      [label]="'post code'"
+      [invalid]="invalidPostCode"
+    ></app-custom-input>
     <!-- sender post code -->
 
     <!-- sender country -->
-    <div
-      class="form-field sender-country"
-      [class.invalid]="senderCountry?.invalid && senderCountry?.touched"
-    >
-      <label for="sender-country">country</label>
-      <input id="sender-country" formControlName="country" />
-    </div>
+    <app-custom-input
+      class="sender-country"
+      formControlName="country"
+      [label]="'country'"
+      [invalid]="invalidCountry"
+    ></app-custom-input>
     <!-- sender country -->
   </div>
 </fieldset>

@@ -1,7 +1,8 @@
 ul {
   position: absolute;
-  top: 3.5rem;
+  top: 5rem;
   width: 100%;
+  font-weight: bold;
   pointer-events: none;
   background-color: var(--background-secondary);
   border-radius: 0.5rem;
@@ -31,13 +32,13 @@ svg-icon {
 
 .container {
   position: relative;
-  font-weight: bold;
 }
 
 .selected-option {
   position: relative;
   min-height: 3rem;
   padding: 1rem 1.25rem;
+  font-weight: bold;
   cursor: pointer;
   background-color: var(--background-tetriary);
   border: 1px solid var(--input-inner-border);

@@ -16,6 +16,8 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 export class CustomSelectComponent implements OnInit, ControlValueAccessor {
   @Input() options: Option[] = [];
   @Input() selected?: number;
+  @Input() label: string = '';
+  @Input() invalid: boolean = false;
 
   value: number = 30;
   onChange?: (value: number) => void;
@@ -24,8 +26,8 @@ export class CustomSelectComponent implements OnInit, ControlValueAccessor {
   isVisible: boolean = false;
   selectedOption?: Option;
 
-  writeValue(obj: any): void {
-    this.value = obj;
+  writeValue(value: number): void {
+    this.value = value;
   }
 
   registerOnChange(fn: (value: number) => void): void {

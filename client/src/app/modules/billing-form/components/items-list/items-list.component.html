@@ -8,59 +8,46 @@
   </header>
 
   <ul formArrayName="items">
-    <li *ngFor="let item of items.controls; let i = index" [formGroupName]="i">
-      <!-- name -->
-      <div
-        class="form-field item-field"
-        [class.invalid]="item.get('name')?.invalid && item.get('name')?.touched"
-      >
-        <label for="item-name">item name</label>
-        <input id="item-name" formControlName="name" />
-      </div>
-      <!-- name -->
+    <li *ngFor="let item of items.controls; index as i" [formGroupName]="i">
+      <!-- item name -->
+      <app-custom-input
+        class="item-field"
+        formControlName="name"
+        [label]="'item name'"
+        [invalid]="invalidItemName(item)"
+      ></app-custom-input>
+      <!-- item name -->
 
-      <!-- quantity -->
-      <div
-        class="form-field item-field"
-        [class.invalid]="
-          item.get('quantity')?.invalid && item.get('quantity')?.touched
-        "
-      >
-        <label for="quantity">qty.</label>
-        <input
-          id="quantity"
-          type="number"
-          placeholder="0"
-          formControlName="quantity"
-        />
-      </div>
-      <!-- quantity -->
+      <!-- item quantity -->
+      <app-custom-input
+        class="item-field"
+        formControlName="quantity"
+        [type]="'number'"
+        [label]="'qty.'"
+        [placeholder]="'0'"
+        [invalid]="invalidItemQuantity(item)"
+      ></app-custom-input>
+      <!-- item quantity -->
 
-      <!-- price -->
-      <div
-        class="form-field item-field"
-        [class.invalid]="
-          item.get('price')?.invalid && item.get('price')?.touched
-        "
-      >
-        <label for="price">price</label>
-        <input
-          id="price"
-          type="number"
-          placeholder="0.00"
-          formControlName="price"
-        />
-      </div>
-      <!-- price -->
+      <!-- item price -->
+      <app-custom-input
+        class="item-field"
+        formControlName="price"
+        [type]="'number'"
+        [label]="'price'"
+        [placeholder]="'0.00'"
+        [invalid]="invalidItemPrice(item)"
+      ></app-custom-input>
+      <!-- item price -->
 
-      <!-- total -->
+      <!-- item total -->
       <div class="form-field item-field">
         <label>total</label>
         <div class="item-total">
           {{ calculateItemTotal(i) | currency: '':'' }}
         </div>
       </div>
-      <!-- total -->
+      <!-- item total -->
 
       <button type="button" (click)="deleteItem(i)">
         <svg-icon src="assets/icons/delete.svg"></svg-icon>
