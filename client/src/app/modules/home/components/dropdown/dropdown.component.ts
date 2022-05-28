@@ -7,16 +7,33 @@ import { InvoiceService } from '@core/services/invoice/invoice.service';
   styleUrls: ['./dropdown.component.scss'],
 })
 export class DropdownComponent {
-  statuses: string[] = ['draft', 'pending', 'paid'];
+  value: string = 'all';
+  index: number = -1;
   isVisible: boolean = false;
+  statuses: string[] = ['draft', 'pending', 'paid'];
 
   constructor(private invoiceService: InvoiceService) {}
 
-  toggleIsVisible(): void {
-    this.isVisible = this.isVisible ? false : true;
+  onClick(event: MouseEvent, index: number): void {
+    if (this.index === index) {
+      (event.target as HTMLInputElement).checked = false;
+      this.invoiceService.filterByStatus('all');
+      this.index = -1;
+    } else {
+      this.index = index;
+    }
   }
 
-  filterByStatus(status: string): void {
-    this.invoiceService.filterByStatus(status);
+  toggleVisibility(): void {
+    this.isVisible = !this.isVisible;
+  }
+
+  clickedOutside(): void {
+    this.isVisible = false;
+  }
+
+  onModelChange(value: string): void {
+    this.value = value;
+    this.invoiceService.filterByStatus(value);
   }
 }

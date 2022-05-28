@@ -1,20 +1,27 @@
-<div class="wrapper">
-  <button (click)="toggleIsVisible()">
+<div class="wrapper" clickedOutside (clickOutside)="clickedOutside()">
+  <button (click)="toggleVisibility()">
     Filter <span>by status</span>
     <svg-icon
-      [svgStyle]="{ transform: isVisible ? 'rotate(180deg)' : 'rotate(0deg)' }"
+      [class.rotated]="isVisible"
       src="assets/icons/chevron.svg"
     ></svg-icon>
   </button>
 
-  <ul class="container" [ngStyle]="{ display: isVisible ? 'flex' : 'none' }">
-    <li *ngFor="let status of statuses" (click)="filterByStatus(status)">
-      <input type="radio" name="option" [id]="status" />
-      <label [attr.for]="status">
+  <ul *ngIf="isVisible">
+    <li *ngFor="let status of statuses; index as i">
+      <input
+        type="radio"
+        [id]="status"
+        [value]="status"
+        [(ngModel)]="value"
+        (click)="onClick($event, i)"
+        (ngModelChange)="onModelChange($event)"
+      />
+      <label [for]="status">
         <span class="fake-radio">
           <svg-icon src="assets/icons/check.svg"></svg-icon>
         </span>
-        {{ status }}
+        <p class="status">{{ status }}</p>
       </label>
     </li>
   </ul>
