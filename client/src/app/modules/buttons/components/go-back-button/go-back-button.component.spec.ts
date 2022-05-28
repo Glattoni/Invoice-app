@@ -8,9 +8,8 @@ describe('GoBackButtonComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GoBackButtonComponent ]
-    })
-    .compileComponents();
+      declarations: [GoBackButtonComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
