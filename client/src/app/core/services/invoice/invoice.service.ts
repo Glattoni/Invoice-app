@@ -3,12 +3,12 @@ import {
   map,
   tap,
   iif,
+  mergeMap,
   catchError,
   withLatestFrom,
   Observable,
   ReplaySubject,
   BehaviorSubject,
-  mergeMap,
 } from 'rxjs';
 
 import { Injectable } from '@angular/core';
@@ -28,7 +28,7 @@ export class InvoiceService {
 
   private invoice = new ReplaySubject<Invoice>();
   private invoices = new BehaviorSubject<Invoice[]>([]);
-  private selectedFilter = new ReplaySubject<string>();
+  private selectedFilter = new ReplaySubject<string | null>();
   private filteredInvoices = new BehaviorSubject<Invoice[]>([]);
 
   readonly invoice$ = this.invoice.asObservable();
@@ -122,13 +122,13 @@ export class InvoiceService {
       .subscribe((value) => this.invoice.next(value));
   }
 
-  filterByStatus(status: string) {
+  filterByStatus(status: string | null) {
     this.selectedFilter.next(status);
     this.invoices$
       .pipe(
         mergeMap((invoices) =>
           iif(
-            () => status === 'all',
+            () => status === null,
             of(invoices),
             of(invoices.filter((invoice) => invoice.status === status))
           )

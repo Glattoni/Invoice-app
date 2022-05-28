@@ -9,7 +9,7 @@ import { ThemeService } from '@core/services/theme/theme.service';
 export class SidebarComponent {
   constructor(private themeService: ThemeService) {}
 
-  getThemeIconPath(): string {
+  get iconPath() {
     const theme = this.themeService.getActiveTheme();
     return `assets/icons/${theme.name === 'light' ? 'moon' : 'sun'}.svg`;
   }
