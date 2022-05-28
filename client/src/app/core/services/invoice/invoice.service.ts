@@ -2,11 +2,13 @@ import {
   of,
   map,
   tap,
+  iif,
   catchError,
   withLatestFrom,
   Observable,
   ReplaySubject,
   BehaviorSubject,
+  mergeMap,
 } from 'rxjs';
 
 import { Injectable } from '@angular/core';
@@ -124,8 +126,12 @@ export class InvoiceService {
     this.selectedFilter.next(status);
     this.invoices$
       .pipe(
-        map((invoices) =>
-          invoices.filter((invoice) => invoice.status === status)
+        mergeMap((invoices) =>
+          iif(
+            () => status === 'all',
+            of(invoices),
+            of(invoices.filter((invoice) => invoice.status === status))
+          )
         ),
         catchError(this.handleError<Invoice[]>())
       )

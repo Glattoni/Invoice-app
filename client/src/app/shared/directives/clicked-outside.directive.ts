@@ -12,7 +12,7 @@ import { DOCUMENT } from '@angular/common';
 import { Subject, fromEvent, filter, takeUntil } from 'rxjs';
 
 @Directive({
-  selector: '[appClickedOutside]',
+  selector: '[clickedOutside]',
 })
 export class ClickedOutsideDirective implements AfterViewInit, OnDestroy {
   @Output() clickOutside = new EventEmitter<void>();
@@ -27,7 +27,7 @@ export class ClickedOutsideDirective implements AfterViewInit, OnDestroy {
   ngAfterViewInit(): void {
     fromEvent(this.document, 'click')
       .pipe(
-        filter((e) => !this.insideElementement(e.target as HTMLElement)),
+        filter((event) => !this.insideElement(event.target as HTMLElement)),
         takeUntil(this.destroy$)
       )
       .subscribe(() => {
@@ -40,7 +40,7 @@ export class ClickedOutsideDirective implements AfterViewInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  private insideElementement(element: HTMLElement) {
+  private insideElement(element: HTMLElement) {
     return (
       element === this.element.nativeElement ||
       this.element.nativeElement.contains(element)

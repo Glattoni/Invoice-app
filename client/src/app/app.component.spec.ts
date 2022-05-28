@@ -1,12 +1,17 @@
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { SidebarComponent } from '@core/components/sidebar/sidebar.component';
+import { BillingFormComponent } from '@modules/billing-form/billing-form.component';
+import { HttpClient, HttpHandler } from '@angular/common/http';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
-      declarations: [AppComponent],
+      declarations: [AppComponent, SidebarComponent, BillingFormComponent],
+      imports: [RouterTestingModule, ReactiveFormsModule],
+      providers: [FormBuilder, HttpClient, HttpHandler],
     }).compileComponents();
   });
 

@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularSvgIconModule } from 'angular-svg-icon';
-import { PortalModule } from '@angular/cdk/portal';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,7 +16,6 @@ import { BillingFormModule } from './modules/billing-form/billing-form.module';
     HttpClientModule,
     AngularSvgIconModule.forRoot(),
     CoreModule,
-    PortalModule,
     BillingFormModule,
   ],
   providers: [],

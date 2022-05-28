@@ -10,7 +10,7 @@
   }
 }
 
-.container {
+ul {
   position: absolute;
   top: 2.5rem;
   left: 0;
@@ -51,7 +51,7 @@ button {
 .fake-radio {
   position: relative;
   display: flex;
-  align-items: ceter;
+  align-items: center;
   justify-content: center;
   width: 1rem;
   height: 1rem;
@@ -83,6 +83,11 @@ label {
   text-transform: capitalize;
   cursor: pointer;
 
+  .status {
+    margin-top: 1px;
+    line-height: 0.9375rem;
+  }
+
   &:hover .fake-radio {
     border: 2px solid var(--primary);
   }
@@ -90,4 +95,8 @@ label {
 
 input:checked + label:hover .fake-radio {
   border: none;
+}
+
+.rotated > svg {
+  transform: rotate(180deg);
 }
