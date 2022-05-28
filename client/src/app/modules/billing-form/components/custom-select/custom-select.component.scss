@@ -3,11 +3,9 @@ ul {
   top: 5rem;
   width: 100%;
   font-weight: bold;
-  pointer-events: none;
   background-color: var(--background-secondary);
   border-radius: 0.5rem;
   box-shadow: 0 0.625rem 1.25rem var(--box-shadow-primary);
-  opacity: 0;
 }
 
 li {
@@ -43,11 +41,6 @@ svg-icon {
   background-color: var(--background-tetriary);
   border: 1px solid var(--input-inner-border);
   border-radius: 0.25rem;
-}
-
-.visible {
-  pointer-events: initial;
-  opacity: 1;
 }
 
 .focused {

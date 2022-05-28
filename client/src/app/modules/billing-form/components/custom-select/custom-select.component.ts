@@ -38,16 +38,20 @@ export class CustomSelectComponent implements OnInit, ControlValueAccessor {
     this.onTouched = fn;
   }
 
-  toggleVisibility(): void {
-    this.isVisible = !this.isVisible;
-  }
-
   ngOnInit(): void {
     if (!this.selected) return;
 
     this.selectedOption = this.options.find(
       (option) => option.value === this.selected
     );
+  }
+
+  toggleVisibility(): void {
+    this.isVisible = !this.isVisible;
+  }
+
+  clickedOutside(): void {
+    this.isVisible = false;
   }
 
   selectOption(id: string): void {
