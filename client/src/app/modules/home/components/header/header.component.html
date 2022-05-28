@@ -1,16 +1,11 @@
 <header>
   <div class="app-container container">
-    <div>
+    <div *ngIf="invoices$ | async as invoices">
       <h1>Invoices</h1>
-      <ng-container *ngIf="(invoices$ | async)?.length as amount; else empty">
-        <p class="summary">
-          {{ amount | summary: (filter$ | async) }}
-        </p>
-        <p class="brief-summary">{{ amount }} invoices</p>
-      </ng-container>
-      <ng-template #empty>
-        <p>No invoices</p>
-      </ng-template>
+      <p class="summary">
+        {{ invoices.length | summary: (filter$ | async) }}
+      </p>
+      <p class="brief-summary">{{ invoices.length }} invoices</p>
     </div>
 
     <div class="controls">

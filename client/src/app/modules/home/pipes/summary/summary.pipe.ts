@@ -5,8 +5,11 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class SummaryPipe implements PipeTransform {
   transform(amount: number, filter: string | null) {
-    let result;
+    let result: string = 'No invoices';
 
+    if (!filter && !amount) {
+      return result;
+    }
     if (!filter) {
       result = `There are ${amount} total invoices`;
     }
