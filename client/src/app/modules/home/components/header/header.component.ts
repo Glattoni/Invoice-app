@@ -10,7 +10,7 @@ import { SidebarFormService } from '@core/services/sidebar-form/sidebar-form.ser
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  filter$?: Observable<string>;
+  filter$?: Observable<string | null>;
   invoices$?: Observable<Invoice[]>;
 
   constructor(

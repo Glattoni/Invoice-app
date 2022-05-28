@@ -9,7 +9,7 @@ export class ThemeService {
   private active: Theme;
 
   constructor(private localStorageService: LocalStorageService) {
-    this.active = this.checkLocalStorage() || light;
+    this.active = this.checkLocalStorage();
     this.setActiveTheme(this.active);
   }
 
@@ -18,9 +18,7 @@ export class ThemeService {
   }
 
   checkLocalStorage() {
-    const theme = this.localStorageService.getItem('theme');
-    if (!theme) return light;
-    return JSON.parse(theme);
+    return this.localStorageService.getItem('theme') || light;
   }
 
   setDarkTheme(): void {

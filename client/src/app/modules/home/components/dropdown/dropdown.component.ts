@@ -7,7 +7,7 @@ import { InvoiceService } from '@core/services/invoice/invoice.service';
   styleUrls: ['./dropdown.component.scss'],
 })
 export class DropdownComponent {
-  value: string = 'all';
+  value: string = '';
   index: number = -1;
   isVisible: boolean = false;
   statuses: string[] = ['draft', 'pending', 'paid'];
@@ -16,9 +16,9 @@ export class DropdownComponent {
 
   onClick(event: MouseEvent, index: number): void {
     if (this.index === index) {
-      (event.target as HTMLInputElement).checked = false;
-      this.invoiceService.filterByStatus('all');
       this.index = -1;
+      this.invoiceService.filterByStatus(null);
+      (event.target as HTMLInputElement).checked = false;
     } else {
       this.index = index;
     }
