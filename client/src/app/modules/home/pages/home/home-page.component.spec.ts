@@ -4,6 +4,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { HomePageComponent } from './home-page.component';
 import { PlaceholderComponent } from '@modules/home/components/placeholder/placeholder.component';
 import { HeaderComponent } from '@modules/home/components/header/header.component';
+import { SummaryPipe } from '@modules/home/pipes/summary/summary.pipe';
 
 describe('HomePageComponent', () => {
   let component: HomePageComponent;
@@ -11,7 +12,12 @@ describe('HomePageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [HomePageComponent, PlaceholderComponent, HeaderComponent],
+      declarations: [
+        SummaryPipe,
+        HeaderComponent,
+        HomePageComponent,
+        PlaceholderComponent,
+      ],
       imports: [HttpClientTestingModule],
     }).compileComponents();
   });
