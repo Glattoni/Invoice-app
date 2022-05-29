@@ -2,12 +2,6 @@ import { Location } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { SidebarFormService } from '@core/services/sidebar-form/sidebar-form.service';
 
-//TODO: move to separate file
-export enum GoBack {
-  Link = 'link',
-  Button = 'button',
-}
-
 @Component({
   selector: 'app-go-back-button',
   templateUrl: './go-back-button.component.html',
@@ -33,4 +27,9 @@ export class GoBackButtonComponent {
   get isLinkType() {
     return this.type === GoBack.Link;
   }
+}
+
+export enum GoBack {
+  Link = 'link',
+  Button = 'button',
 }

@@ -8,13 +8,15 @@
       <app-button [variant]="'neutral'" (click)="openEditingForm(invoice)">
         Edit
       </app-button>
-      <app-button
-        [variant]="'danger'"
-        (click)="openDeleteModal('delete-prompt')"
-      >
+      <app-button [variant]="'danger'" (click)="openDialog('delete-dialog')">
         Delete
       </app-button>
-      <app-button (click)="markAsPaid(invoice._id)">Mark as paid</app-button>
+      <app-button
+        *ngIf="!isPaidInvoice"
+        (click)="openDialog('mark-as-paid-dialog')"
+      >
+        Mark as paid
+      </app-button>
     </div>
   </div>
 </ng-container>
