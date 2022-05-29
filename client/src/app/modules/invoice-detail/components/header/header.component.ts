@@ -20,7 +20,11 @@ export class HeaderComponent {
     private formService: SidebarFormService
   ) {}
 
-  openDeleteModal(id: string): void {
+  get isPaidInvoice() {
+    return this.invoice?.status === 'paid';
+  }
+
+  openDialog(id: string): void {
     this.modalService.open(id);
   }
 

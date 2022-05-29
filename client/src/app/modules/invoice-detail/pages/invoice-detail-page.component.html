@@ -1,10 +1,12 @@
 <ng-container *ngIf="invoice$ | async as invoice">
   <div class="app-container container">
     <app-go-back-button
-      [type]="linkType"
+      [type]="link"
       [offset]="'0 0 2rem'"
     ></app-go-back-button>
+
     <app-header [invoice]="invoice"></app-header>
+
     <section>
       <app-body
         [slug]="invoice.slug"
@@ -20,20 +22,13 @@
     </section>
   </div>
 
-  <!--TODO: move to separate component -->
-  <app-modal id="delete-prompt">
-    <h2 class="modal-title">confirm deletion</h2>
-    <p class="modal-text">
-      Are you sure you want to delete invoice #{{ invoice.slug }}? This action
-      cannot be undone.
-    </p>
-    <div class="modal-controls">
-      <app-button [variant]="'neutral'" (click)="closeModal('delete-prompt')">
-        Cancel
-      </app-button>
-      <app-button [variant]="'danger'" (click)="deleteInvoice(invoice._id)">
-        Delete
-      </app-button>
-    </div>
-  </app-modal>
+  <app-delete-dialog
+    [id]="invoice._id"
+    [slug]="invoice.slug"
+  ></app-delete-dialog>
+
+  <app-mark-as-paid-dialog
+    [id]="invoice._id"
+    [slug]="invoice.slug"
+  ></app-mark-as-paid-dialog>
 </ng-container>
