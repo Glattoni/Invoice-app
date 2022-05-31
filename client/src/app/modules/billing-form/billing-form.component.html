@@ -10,7 +10,11 @@
   </ng-template>
 </header>
 
-<div #formContainer class="form-container" (scroll)="($event)">
+<div
+  class="form-container"
+  scrolledToBottom
+  (scrolledToBottom)="onScroll($event)"
+>
   <form *ngIf="form" (ngSubmit)="onSubmit()" [formGroup]="form">
     <form-sender-address></form-sender-address>
     <form-client-info></form-client-info>

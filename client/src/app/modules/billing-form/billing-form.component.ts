@@ -2,9 +2,6 @@ import {
   OnInit,
   OnDestroy,
   Component,
-  ViewChild,
-  ElementRef,
-  AfterViewInit,
   ChangeDetectionStrategy,
 } from '@angular/core';
 
@@ -14,8 +11,6 @@ import {
   map,
   filter,
   takeUntil,
-  fromEvent,
-  throttleTime,
   debounceTime,
   distinctUntilChanged,
 } from 'rxjs';
@@ -35,9 +30,7 @@ import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
   styleUrls: ['./billing-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BillingFormComponent implements OnInit, OnDestroy, AfterViewInit {
-  @ViewChild('formContainer') formContainer?: ElementRef;
-
+export class BillingFormComponent implements OnInit, OnDestroy {
   form?: FormGroup;
   valid: boolean = true;
   submitted: boolean = false;
@@ -61,12 +54,6 @@ export class BillingFormComponent implements OnInit, OnDestroy, AfterViewInit {
     this.patchFormValue();
     this.trackFormValueChanges();
     this.trackItemListValueChanges();
-  }
-
-  ngAfterViewInit(): void {
-    fromEvent(this.formContainer?.nativeElement, 'scroll', this.onScroll)
-      .pipe(throttleTime(25), takeUntil(this.destroy$))
-      .subscribe((value) => (this.scrolledToBottom = value));
   }
 
   ngOnDestroy(): void {
@@ -93,7 +80,6 @@ export class BillingFormComponent implements OnInit, OnDestroy, AfterViewInit {
   onSubmit(): void {
     if (!this.form) return;
 
-    this.submitted = true;
     this.validateForm(this.form);
 
     if (!this.valid) return;
@@ -106,7 +92,6 @@ export class BillingFormComponent implements OnInit, OnDestroy, AfterViewInit {
   onSaveChanges(invoiceId: string): void {
     if (!this.form) return;
 
-    this.submitted = true;
     this.validateForm(this.form);
 
     if (!this.valid) return;
@@ -116,8 +101,8 @@ export class BillingFormComponent implements OnInit, OnDestroy, AfterViewInit {
     this.sidebarFormService.close();
   }
 
-  private onScroll({ target }: any) {
-    return target.offsetHeight + target.scrollTop >= target.scrollHeight - 100;
+  onScroll(value: boolean): void {
+    this.scrolledToBottom = value;
   }
 
   private generateFormGroup() {
