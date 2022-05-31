@@ -13,6 +13,7 @@ import { InvoiceTermsComponent } from './components/invoice-terms/invoice-terms.
 import { SenderAddressComponent } from './components/sender-address/sender-address.component';
 import { CustomSelectComponent } from './components/custom-select/custom-select.component';
 import { CustomInputComponent } from './components/custom-input/custom-input.component';
+import { ScrolledToBottomDirective } from './directives/scrolled-to-bottom.directive';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { CustomInputComponent } from './components/custom-input/custom-input.com
     SenderAddressComponent,
     CustomSelectComponent,
     CustomInputComponent,
+    ScrolledToBottomDirective,
   ],
   imports: [
     FormsModule,
