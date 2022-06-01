@@ -62,8 +62,10 @@ export class BillingFormComponent implements OnInit, OnDestroy {
   }
 
   onDiscard(): void {
+    if (!this.form) return;
+
     this.valid = true;
-    this.form?.reset();
+    this.form.reset();
     this.sidebarFormService.close();
   }
 
