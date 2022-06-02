@@ -36,6 +36,10 @@ export class InvoiceTermsComponent implements OnInit {
     return this.description?.invalid && this.description.touched;
   }
 
+  get disabledCreatedAt() {
+    return this.createdAt?.disabled;
+  }
+
   private get createdAt() {
     return this.form?.get('createdAt');
   }

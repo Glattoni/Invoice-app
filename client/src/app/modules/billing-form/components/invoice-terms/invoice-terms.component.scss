@@ -17,3 +17,11 @@
 .payment-terms app-custom-select {
   grid-column: span 2;
 }
+
+.disabled {
+  opacity: 0.5;
+
+  input:focus {
+    border-color: var(--input-inner-border);
+  }
+}
