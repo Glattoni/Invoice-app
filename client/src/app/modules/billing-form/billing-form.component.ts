@@ -139,26 +139,30 @@ export class BillingFormComponent implements OnInit, OnDestroy {
   }
 
   private patchFormValue(): void {
-    this.payload$
-      ?.pipe(
-        filter((payload) => payload !== null),
-        takeUntil(this.destroy$)
-      )
-      .subscribe((invoice) => {
-        this.form?.patchValue({
-          senderAddress: invoice.senderAddress,
-          clientAddress: invoice.clientAddress,
-          clientName: invoice.clientName,
-          clientEmail: invoice.clientEmail,
-          createdAt: invoice.createdAt,
-          paymentTerms: invoice.paymentTerms,
-          description: invoice.description,
-          items: this.patchItemList(invoice.items),
-          status: invoice.status,
-          total: invoice.total,
-          slug: invoice.slug,
+    if (this.payload$) {
+      this.createdAt?.disable();
+
+      this.payload$
+        .pipe(
+          filter((payload) => payload !== null),
+          takeUntil(this.destroy$)
+        )
+        .subscribe((invoice) => {
+          this.form?.patchValue({
+            senderAddress: invoice.senderAddress,
+            clientAddress: invoice.clientAddress,
+            clientName: invoice.clientName,
+            clientEmail: invoice.clientEmail,
+            createdAt: invoice.createdAt,
+            paymentTerms: invoice.paymentTerms,
+            description: invoice.description,
+            items: this.patchItemList(invoice.items),
+            status: invoice.status,
+            total: invoice.total,
+            slug: invoice.slug,
+          });
         });
-      });
+    }
   }
 
   private patchItemList(items: Item[]): void {
@@ -237,7 +241,7 @@ export class BillingFormComponent implements OnInit, OnDestroy {
   }
 
   get formData() {
-    return this.form?.value;
+    return this.form?.getRawValue();
   }
 
   get total() {
