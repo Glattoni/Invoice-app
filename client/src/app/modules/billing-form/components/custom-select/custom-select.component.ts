@@ -19,7 +19,7 @@ export class CustomSelectComponent implements OnInit, ControlValueAccessor {
   @Input() label: string = '';
   @Input() invalid: boolean = false;
 
-  value: number = 30;
+  value?: number;
   onChange?: (value: number) => void;
   onTouched?: () => void;
 
@@ -27,6 +27,7 @@ export class CustomSelectComponent implements OnInit, ControlValueAccessor {
   selectedOption?: Option;
 
   writeValue(value: number): void {
+    console.log('WRITE_VALUE', value);
     this.value = value;
   }
 
@@ -34,7 +35,7 @@ export class CustomSelectComponent implements OnInit, ControlValueAccessor {
     this.onChange = fn;
   }
 
-  registerOnTouched(fn: any): void {
+  registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
   }
 
@@ -44,6 +45,9 @@ export class CustomSelectComponent implements OnInit, ControlValueAccessor {
     this.selectedOption = this.options.find(
       (option) => option.value === this.selected
     );
+
+    console.log('SELECTED', this.selected);
+    console.log('SELECTED_OPTION', this.selectedOption);
   }
 
   toggleVisibility(): void {

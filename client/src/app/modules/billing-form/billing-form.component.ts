@@ -13,6 +13,7 @@ import {
   takeUntil,
   debounceTime,
   distinctUntilChanged,
+  merge,
 } from 'rxjs';
 
 import { formatDate } from '@angular/common';
@@ -33,7 +34,6 @@ import { UntypedFormBuilder, UntypedFormGroup, UntypedFormArray, Validators } fr
 export class BillingFormComponent implements OnInit, OnDestroy {
   form?: UntypedFormGroup;
   valid: boolean = true;
-  submitted: boolean = false;
   scrolledToBottom: boolean = false;
 
   payload$?: Observable<Invoice>;
@@ -70,7 +70,10 @@ export class BillingFormComponent implements OnInit, OnDestroy {
   }
 
   onCancel(): void {
+    console.log('CANCEL');
     this.valid = true;
+    this.form?.reset();
+    this.createdAt?.enable();
     this.sidebarFormService.finishEditing();
   }
 
@@ -139,30 +142,29 @@ export class BillingFormComponent implements OnInit, OnDestroy {
   }
 
   private patchFormValue(): void {
-    if (this.payload$) {
-      this.createdAt?.disable();
+    this.payload$
+      ?.pipe(
+        filter((payload) => payload !== null),
+        takeUntil(this.destroy$)
+      )
+      .subscribe((invoice) => {
+        console.log('PATCH_VALUE');
 
-      this.payload$
-        .pipe(
-          filter((payload) => payload !== null),
-          takeUntil(this.destroy$)
-        )
-        .subscribe((invoice) => {
-          this.form?.patchValue({
-            senderAddress: invoice.senderAddress,
-            clientAddress: invoice.clientAddress,
-            clientName: invoice.clientName,
-            clientEmail: invoice.clientEmail,
-            createdAt: invoice.createdAt,
-            paymentTerms: invoice.paymentTerms,
-            description: invoice.description,
-            items: this.patchItemList(invoice.items),
-            status: invoice.status,
-            total: invoice.total,
-            slug: invoice.slug,
-          });
+        this.form?.patchValue({
+          senderAddress: invoice.senderAddress,
+          clientAddress: invoice.clientAddress,
+          clientName: invoice.clientName,
+          clientEmail: invoice.clientEmail,
+          createdAt: invoice.createdAt,
+          paymentTerms: invoice.paymentTerms,
+          description: invoice.description,
+          items: this.patchItemList(invoice.items),
+          status: invoice.status,
+          total: invoice.total,
+          slug: invoice.slug,
         });
-    }
+        this.createdAt?.disable();
+      });
   }
 
   private patchItemList(items: Item[]): void {
@@ -181,15 +183,29 @@ export class BillingFormComponent implements OnInit, OnDestroy {
   }
 
   private trackFormValueChanges(): void {
-    this.form?.valueChanges
-      .pipe(
+    this.form
+      ?.get('paymentDue')
+      ?.valueChanges.pipe(
         debounceTime(1000),
         distinctUntilChanged(),
         takeUntil(this.destroy$)
       )
-      .subscribe(() => {
-        this.calculatePaymentDueDate();
+      .subscribe((value) => {
+        console.log('DUE_VALUE', value);
       });
+
+    if (this.createdAt && this.paymentTerms) {
+      merge(this.createdAt.valueChanges, this.paymentTerms.valueChanges)
+        .pipe(
+          debounceTime(1000),
+          distinctUntilChanged(),
+          takeUntil(this.destroy$)
+        )
+        .subscribe((value) => {
+          this.calculatePaymentDueDate();
+          console.log('DATE_VALUE', value);
+        });
+    }
   }
 
   private trackItemListValueChanges(): void {
@@ -228,7 +244,7 @@ export class BillingFormComponent implements OnInit, OnDestroy {
     const amount = this.paymentTerms?.value;
     const due = addDays(date, amount);
 
-    this.paymentDue?.setValue(due, { onlySelf: true });
+    this.paymentDue?.setValue(due);
   }
 
   private validateForm(form: UntypedFormGroup): void {
