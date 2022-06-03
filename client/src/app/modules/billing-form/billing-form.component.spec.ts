@@ -1,4 +1,4 @@
-import { FormBuilder, FormGroupDirective } from '@angular/forms';
+import { UntypedFormBuilder, FormGroupDirective } from '@angular/forms';
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
@@ -31,7 +31,7 @@ describe('BillingFormComponent', () => {
         SenderAddressComponent,
       ],
       imports: [HttpClientTestingModule],
-      providers: [FormBuilder, FormGroupDirective],
+      providers: [UntypedFormBuilder, FormGroupDirective],
     }).compileComponents();
   });
 

@@ -1,4 +1,4 @@
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { UntypedFormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -11,7 +11,7 @@ describe('AppComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [AppComponent, SidebarComponent, BillingFormComponent],
       imports: [RouterTestingModule, ReactiveFormsModule],
-      providers: [FormBuilder, HttpClient, HttpHandler],
+      providers: [UntypedFormBuilder, HttpClient, HttpHandler],
     }).compileComponents();
   });
 

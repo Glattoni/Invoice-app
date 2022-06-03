@@ -22,7 +22,7 @@ import { Invoice, Item } from '@shared/models/invoice.model';
 import { InvoiceService } from '@core/services/invoice/invoice.service';
 import { SidebarFormService } from '@core/services/sidebar-form/sidebar-form.service';
 
-import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, UntypedFormArray, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-billing-form',
@@ -31,7 +31,7 @@ import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BillingFormComponent implements OnInit, OnDestroy {
-  form?: FormGroup;
+  form?: UntypedFormGroup;
   valid: boolean = true;
   submitted: boolean = false;
   scrolledToBottom: boolean = false;
@@ -41,7 +41,7 @@ export class BillingFormComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private invoiceService: InvoiceService,
     private sidebarFormService: SidebarFormService
   ) {}
@@ -231,7 +231,7 @@ export class BillingFormComponent implements OnInit, OnDestroy {
     this.paymentDue?.setValue(due, { onlySelf: true });
   }
 
-  private validateForm(form: FormGroup): void {
+  private validateForm(form: UntypedFormGroup): void {
     if (form.invalid) {
       form.markAllAsTouched();
       this.valid = false;
@@ -265,6 +265,6 @@ export class BillingFormComponent implements OnInit, OnDestroy {
   }
 
   get items() {
-    return this.form?.get('items') as FormArray;
+    return this.form?.get('items') as UntypedFormArray;
   }
 }

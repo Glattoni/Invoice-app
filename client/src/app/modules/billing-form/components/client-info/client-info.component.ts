@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormGroupDirective } from '@angular/forms';
+import { UntypedFormGroup, FormGroupDirective } from '@angular/forms';
 
 @Component({
   selector: 'form-client-info',
@@ -7,7 +7,7 @@ import { FormGroup, FormGroupDirective } from '@angular/forms';
   styleUrls: ['./client-info.component.scss'],
 })
 export class ClientInfoComponent implements OnInit {
-  form?: FormGroup;
+  form?: UntypedFormGroup;
 
   constructor(private rootFormGroup: FormGroupDirective) {}
 
