@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 import {
-  FormGroup,
-  FormArray,
+  UntypedFormGroup,
+  UntypedFormArray,
   Validators,
-  FormBuilder,
+  UntypedFormBuilder,
   AbstractControl,
   FormGroupDirective,
 } from '@angular/forms';
@@ -15,12 +15,12 @@ import {
   styleUrls: ['./items-list.component.scss'],
 })
 export class ItemsListComponent implements OnInit {
-  form?: FormGroup;
+  form?: UntypedFormGroup;
 
   readonly headers = ['item name', 'qty.', 'price', 'total'];
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private rootFormGroup: FormGroupDirective
   ) {}
 
@@ -67,6 +67,6 @@ export class ItemsListComponent implements OnInit {
   }
 
   get items() {
-    return this.form?.get('items') as FormArray;
+    return this.form?.get('items') as UntypedFormArray;
   }
 }
