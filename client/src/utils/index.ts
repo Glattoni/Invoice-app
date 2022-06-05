@@ -29,11 +29,9 @@ const getRandomString = (length: number) =>
 
 export const generateSlug = () => `${getRandomString(2)}${getRandomNumber(4)}`;
 
-export const addDays = (date: string, amount: string) => {
-  if (!date) return;
-
+export const addDays = (date: string, amount: number) => {
   const time = new Date(date).getTime();
-  const milliseconds = time + msInDays(+amount);
+  const milliseconds = time + msInDays(amount);
 
   return new Date(milliseconds).toISOString().slice(0, 10);
 };
