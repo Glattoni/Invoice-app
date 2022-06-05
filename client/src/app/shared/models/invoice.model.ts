@@ -1,17 +1,17 @@
 export interface Address {
+  _id: string;
   street: string;
   city: string;
   postCode: string;
   country: string;
-  _id: string;
 }
 
 export interface Item {
+  _id: string;
   name: string;
   quantity: number;
   price: number;
   total: number;
-  _id: string;
 }
 
 export interface Invoice {
