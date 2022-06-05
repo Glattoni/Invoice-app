@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormGroup, FormGroupDirective } from '@angular/forms';
+import { FormGroupDirective, FormGroup } from '@angular/forms';
+import { BillingForm } from '../../models/billing-form.model';
 
 @Component({
   selector: 'form-invoice-terms',
@@ -7,7 +8,7 @@ import { UntypedFormGroup, FormGroupDirective } from '@angular/forms';
   styleUrls: ['./invoice-terms.component.scss'],
 })
 export class InvoiceTermsComponent implements OnInit {
-  form?: UntypedFormGroup;
+  form?: FormGroup<BillingForm>;
   deadline?: number;
 
   readonly options = [

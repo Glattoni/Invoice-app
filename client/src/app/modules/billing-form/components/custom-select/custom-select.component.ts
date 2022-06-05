@@ -27,7 +27,6 @@ export class CustomSelectComponent implements OnInit, ControlValueAccessor {
   selectedOption?: Option;
 
   writeValue(value: number): void {
-    console.log('WRITE_VALUE', value);
     this.value = value;
   }
 
@@ -45,9 +44,6 @@ export class CustomSelectComponent implements OnInit, ControlValueAccessor {
     this.selectedOption = this.options.find(
       (option) => option.value === this.selected
     );
-
-    console.log('SELECTED', this.selected);
-    console.log('SELECTED_OPTION', this.selectedOption);
   }
 
   toggleVisibility(): void {
