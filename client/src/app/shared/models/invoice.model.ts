@@ -1,5 +1,4 @@
 export interface Address {
-  _id: string;
   street: string;
   city: string;
   postCode: string;
@@ -7,7 +6,6 @@ export interface Address {
 }
 
 export interface Item {
-  _id: string;
   name: string;
   quantity: number;
   price: number;
@@ -29,3 +27,5 @@ export interface Invoice {
   items: Item[];
   total: number;
 }
+
+export type NewInvoice = Omit<Invoice, '_id'>;
