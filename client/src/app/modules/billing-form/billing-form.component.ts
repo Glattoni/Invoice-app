@@ -8,7 +8,6 @@ import {
 import {
   Subject,
   Observable,
-  tap,
   merge,
   filter,
   takeUntil,
@@ -53,11 +52,11 @@ export class BillingFormComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.checkForPayload();
+    this.getPayload();
     this.generateFormGroup();
     this.patchFormValue();
-    this.trackFormValueChanges();
-    this.trackItemListValueChanges();
+    this.onFormValueChanges();
+    this.onItemListValueChanges();
   }
 
   ngOnDestroy(): void {
@@ -67,15 +66,13 @@ export class BillingFormComponent implements OnInit, OnDestroy {
 
   onDiscard(): void {
     this.valid = true;
-    this.form?.reset();
-    this.items.clear();
+    this.resetForm();
     this.sidebarFormService.close();
   }
 
   onCancel(): void {
     this.valid = true;
-    this.form?.reset();
-    this.items.clear();
+    this.resetForm();
     this.createdAt?.enable();
     this.sidebarFormService.finishEditing();
   }
@@ -88,12 +85,9 @@ export class BillingFormComponent implements OnInit, OnDestroy {
   onSubmit(): void {
     this.validateForm();
 
-    if (!this.valid) return;
-
-    if (this.formData) {
-      //TODO: infer proper formData type
-      this.invoiceService.createInvoice(this.formData as any);
-      this.form?.reset();
+    if (this.valid && this.formData) {
+      this.invoiceService.createInvoice(this.formData);
+      this.resetForm();
       this.sidebarFormService.close();
     }
   }
@@ -101,12 +95,9 @@ export class BillingFormComponent implements OnInit, OnDestroy {
   onSaveChanges(invoiceId: string): void {
     this.validateForm();
 
-    if (!this.valid) return;
-
-    if (this.formData) {
-      //TODO: infer proper formData type
-      this.invoiceService.updateInvoice(invoiceId, this.formData as any);
-      this.form?.reset();
+    if (this.valid && this.formData) {
+      this.invoiceService.updateInvoice(invoiceId, this.formData);
+      this.resetForm();
       this.sidebarFormService.close();
     }
   }
@@ -115,7 +106,7 @@ export class BillingFormComponent implements OnInit, OnDestroy {
     this.scrolledToBottom = value;
   }
 
-  private checkForPayload(): void {
+  private getPayload(): void {
     this.payload$ = this.sidebarFormService.payload$;
   }
 
@@ -127,8 +118,8 @@ export class BillingFormComponent implements OnInit, OnDestroy {
     const paymentDue = addDays(creationDate, 30);
 
     this.form = this.formBuilder.group({
-      slug: slug,
-      status: 'pending',
+      slug: [slug, Validators.required],
+      status: ['pending', Validators.required],
       senderAddress: senderAddress,
       clientAddress: clientAddress,
       clientName: ['', Validators.required],
@@ -140,8 +131,8 @@ export class BillingFormComponent implements OnInit, OnDestroy {
         [],
         Validators.required
       ),
-      description: '',
-      total: 0,
+      description: ['', Validators.required],
+      total: [0, Validators.required],
     });
   }
 
@@ -194,23 +185,24 @@ export class BillingFormComponent implements OnInit, OnDestroy {
     });
   }
 
-  private trackFormValueChanges(): void {
+  private onFormValueChanges(): void {
     if (this.createdAt && this.paymentTerms) {
-      merge(this.createdAt.valueChanges, this.paymentTerms.valueChanges).pipe(
-        debounceTime(500),
-        distinctUntilChanged(),
-        tap(() => {
+      merge(this.createdAt.valueChanges, this.paymentTerms.valueChanges)
+        .pipe(
+          debounceTime(500),
+          distinctUntilChanged(),
+          takeUntil(this.destroy$)
+        )
+        .subscribe(() => {
           this.calculatePaymentDueDate();
-        })
-      );
+        });
     }
   }
 
-  private trackItemListValueChanges(): void {
+  private onItemListValueChanges(): void {
     this.items.valueChanges
       .pipe(debounceTime(500), distinctUntilChanged(), takeUntil(this.destroy$))
       .subscribe(() => {
-        //TODO: try to calculate without subscribing
         this.calculateAmountDue();
       });
   }
@@ -237,6 +229,11 @@ export class BillingFormComponent implements OnInit, OnDestroy {
   private validateForm(): void {
     this.form?.markAllAsTouched();
     this.valid = this.form?.invalid ? false : true;
+  }
+
+  private resetForm(): void {
+    this.form?.reset();
+    this.items.clear();
   }
 
   get formData() {
