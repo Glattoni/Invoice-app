@@ -4,7 +4,7 @@
     <input
       [id]="label"
       [type]="type"
-      [ngModel]="value"
+      [(ngModel)]="value"
       [placeholder]="placeholder"
       (blur)="onTouched()"
       (ngModelChange)="onChange($event)"

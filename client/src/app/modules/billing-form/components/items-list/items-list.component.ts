@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-
 import {
-  UntypedFormGroup,
-  UntypedFormArray,
+  FormGroup,
+  FormArray,
   Validators,
-  UntypedFormBuilder,
   AbstractControl,
   FormGroupDirective,
+  NonNullableFormBuilder,
 } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { BillingForm } from '../../models/billing-form.model';
 
 @Component({
   selector: 'form-items-list',
@@ -15,12 +15,12 @@ import {
   styleUrls: ['./items-list.component.scss'],
 })
 export class ItemsListComponent implements OnInit {
-  form?: UntypedFormGroup;
+  form?: FormGroup<BillingForm>;
 
   readonly headers = ['item name', 'qty.', 'price', 'total'];
 
   constructor(
-    private formBuilder: UntypedFormBuilder,
+    private formBuilder: NonNullableFormBuilder,
     private rootFormGroup: FormGroupDirective
   ) {}
 
@@ -67,6 +67,7 @@ export class ItemsListComponent implements OnInit {
   }
 
   get items() {
-    return this.form?.get('items') as UntypedFormArray;
+    // TODO: infer proper type for FormArray
+    return this.form?.get('items') as FormArray;
   }
 }

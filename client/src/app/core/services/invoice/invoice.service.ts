@@ -12,7 +12,7 @@ import {
 } from 'rxjs';
 
 import { Injectable } from '@angular/core';
-import { Invoice } from '@shared/models/invoice.model';
+import { Invoice, NewInvoice } from '@shared/models/invoice.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
@@ -57,7 +57,7 @@ export class InvoiceService {
       .subscribe((value) => this.invoice.next(value));
   }
 
-  createInvoice(body: Invoice) {
+  createInvoice(body: NewInvoice) {
     this.http
       .post<Invoice>(this.invoicesUrl, body, this.httpOptions)
       .pipe(
@@ -71,7 +71,7 @@ export class InvoiceService {
       });
   }
 
-  updateInvoice(id: string, body: Invoice) {
+  updateInvoice(id: string, body: NewInvoice) {
     const url = `${this.invoicesUrl}/${id}`;
 
     this.http

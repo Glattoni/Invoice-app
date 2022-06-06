@@ -8,7 +8,7 @@ import {
 import {
   Subject,
   Observable,
-  map,
+  merge,
   filter,
   takeUntil,
   debounceTime,
@@ -19,10 +19,16 @@ import { formatDate } from '@angular/common';
 import { addDays, generateSlug } from 'src/utils';
 
 import { Invoice, Item } from '@shared/models/invoice.model';
+import { BillingForm, ListItem } from './models/billing-form.model';
 import { InvoiceService } from '@core/services/invoice/invoice.service';
 import { SidebarFormService } from '@core/services/sidebar-form/sidebar-form.service';
 
-import { UntypedFormBuilder, UntypedFormGroup, UntypedFormArray, Validators } from '@angular/forms';
+import {
+  FormArray,
+  FormGroup,
+  Validators,
+  NonNullableFormBuilder,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-billing-form',
@@ -31,29 +37,26 @@ import { UntypedFormBuilder, UntypedFormGroup, UntypedFormArray, Validators } fr
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BillingFormComponent implements OnInit, OnDestroy {
-  form?: UntypedFormGroup;
-  valid: boolean = true;
-  submitted: boolean = false;
-  scrolledToBottom: boolean = false;
-
+  form?: FormGroup<BillingForm>;
   payload$?: Observable<Invoice>;
+
+  valid: boolean = true;
+  scrolledToBottom: boolean = false;
 
   private destroy$ = new Subject<void>();
 
   constructor(
-    private formBuilder: UntypedFormBuilder,
+    private formBuilder: NonNullableFormBuilder,
     private invoiceService: InvoiceService,
     private sidebarFormService: SidebarFormService
   ) {}
 
   ngOnInit(): void {
-    this.payload$ = this.sidebarFormService.payload$;
-
-    this.trackPayloadValueChanges();
+    this.getPayload();
     this.generateFormGroup();
     this.patchFormValue();
-    this.trackFormValueChanges();
-    this.trackItemListValueChanges();
+    this.onFormValueChanges();
+    this.onItemListValueChanges();
   }
 
   ngOnDestroy(): void {
@@ -62,15 +65,15 @@ export class BillingFormComponent implements OnInit, OnDestroy {
   }
 
   onDiscard(): void {
-    if (!this.form) return;
-
     this.valid = true;
-    this.form.reset();
+    this.resetForm();
     this.sidebarFormService.close();
   }
 
   onCancel(): void {
     this.valid = true;
+    this.resetForm();
+    this.createdAt?.enable();
     this.sidebarFormService.finishEditing();
   }
 
@@ -80,52 +83,56 @@ export class BillingFormComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(): void {
-    if (!this.form) return;
+    this.validateForm();
 
-    this.validateForm(this.form);
-
-    if (!this.valid) return;
-
-    this.invoiceService.createInvoice(this.formData);
-    this.form.reset();
-    this.sidebarFormService.close();
+    if (this.valid && this.formData) {
+      this.invoiceService.createInvoice(this.formData);
+      this.resetForm();
+      this.sidebarFormService.close();
+    }
   }
 
   onSaveChanges(invoiceId: string): void {
-    if (!this.form) return;
+    this.validateForm();
 
-    this.validateForm(this.form);
-
-    if (!this.valid) return;
-
-    this.invoiceService.updateInvoice(invoiceId, this.formData);
-    this.form.reset();
-    this.sidebarFormService.close();
+    if (this.valid && this.formData) {
+      this.invoiceService.updateInvoice(invoiceId, this.formData);
+      this.resetForm();
+      this.sidebarFormService.close();
+    }
   }
 
   onScroll(value: boolean): void {
     this.scrolledToBottom = value;
   }
 
-  private generateFormGroup() {
+  private getPayload(): void {
+    this.payload$ = this.sidebarFormService.payload$;
+  }
+
+  private generateFormGroup(): void {
     const slug = generateSlug();
     const senderAddress = this.generateAddressGroup();
     const clientAddress = this.generateAddressGroup();
     const creationDate = formatDate(new Date(), 'yyyy-MM-dd', 'en');
+    const paymentDue = addDays(creationDate, 30);
 
     this.form = this.formBuilder.group({
-      slug: slug,
-      status: 'pending',
+      slug: [slug, Validators.required],
+      status: ['pending', Validators.required],
       senderAddress: senderAddress,
       clientAddress: clientAddress,
       clientName: ['', Validators.required],
       clientEmail: ['', [Validators.required, Validators.email]],
       createdAt: [creationDate, Validators.required],
       paymentTerms: [30, Validators.required],
-      paymentDue: ['', Validators.required],
-      items: this.formBuilder.array([], Validators.required),
-      description: '',
-      total: 0,
+      paymentDue: [paymentDue, Validators.required],
+      items: this.formBuilder.array<FormGroup<ListItem>>(
+        [],
+        Validators.required
+      ),
+      description: ['', Validators.required],
+      total: [0, Validators.required],
     });
   }
 
@@ -139,85 +146,71 @@ export class BillingFormComponent implements OnInit, OnDestroy {
   }
 
   private patchFormValue(): void {
-    if (this.payload$) {
-      this.createdAt?.disable();
-
-      this.payload$
-        .pipe(
-          filter((payload) => payload !== null),
-          takeUntil(this.destroy$)
-        )
-        .subscribe((invoice) => {
-          this.form?.patchValue({
-            senderAddress: invoice.senderAddress,
-            clientAddress: invoice.clientAddress,
-            clientName: invoice.clientName,
-            clientEmail: invoice.clientEmail,
-            createdAt: invoice.createdAt,
-            paymentTerms: invoice.paymentTerms,
-            description: invoice.description,
-            items: this.patchItemList(invoice.items),
-            status: invoice.status,
-            total: invoice.total,
-            slug: invoice.slug,
-          });
+    this.payload$
+      ?.pipe(
+        filter((payload) => payload !== null),
+        takeUntil(this.destroy$)
+      )
+      .subscribe((invoice) => {
+        this.form?.patchValue({
+          slug: invoice.slug,
+          status: invoice.status,
+          senderAddress: invoice.senderAddress,
+          clientAddress: invoice.clientAddress,
+          clientName: invoice.clientName,
+          clientEmail: invoice.clientEmail,
+          createdAt: invoice.createdAt,
+          paymentTerms: invoice.paymentTerms,
+          paymentDue: invoice.paymentDue,
+          description: invoice.description,
+          total: invoice.total,
         });
-    }
+        this.patchItemList(invoice.items);
+        this.createdAt?.disable();
+      });
   }
 
   private patchItemList(items: Item[]): void {
     this.items.clear();
 
     items.forEach((item) => {
-      this.items.push(
-        this.formBuilder.group({
-          name: [item.name, Validators.required],
-          quantity: [item.quantity, Validators.required],
-          price: [item.price, Validators.required],
-          total: [item.total, Validators.required],
-        })
-      );
+      const listItem = this.formBuilder.group({
+        name: [item.name, Validators.required],
+        quantity: [item.quantity, Validators.required],
+        price: [item.price, Validators.required],
+        total: [item.total, Validators.required],
+      });
+
+      this.items.push(listItem);
     });
   }
 
-  private trackFormValueChanges(): void {
-    this.form?.valueChanges
-      .pipe(
-        debounceTime(1000),
-        distinctUntilChanged(),
-        takeUntil(this.destroy$)
-      )
-      .subscribe(() => {
-        this.calculatePaymentDueDate();
-      });
+  private onFormValueChanges(): void {
+    if (this.createdAt && this.paymentTerms) {
+      merge(this.createdAt.valueChanges, this.paymentTerms.valueChanges)
+        .pipe(
+          debounceTime(500),
+          distinctUntilChanged(),
+          takeUntil(this.destroy$)
+        )
+        .subscribe(() => {
+          this.calculatePaymentDueDate();
+        });
+    }
   }
 
-  private trackItemListValueChanges(): void {
+  private onItemListValueChanges(): void {
     this.items.valueChanges
-      .pipe(
-        debounceTime(1000),
-        distinctUntilChanged(),
-        takeUntil(this.destroy$)
-      )
+      .pipe(debounceTime(500), distinctUntilChanged(), takeUntil(this.destroy$))
       .subscribe(() => {
         this.calculateAmountDue();
       });
   }
 
-  private trackPayloadValueChanges(): void {
-    this.payload$
-      ?.pipe(
-        map((payload) => !!payload),
-        takeUntil(this.destroy$)
-      )
-      .subscribe((payload) => {
-        !payload && this.form?.touched && this.form?.reset();
-      });
-  }
-
   private calculateAmountDue(): void {
     const amount = this.items.controls
-      .map((control) => parseInt(control.get('total')?.value))
+      .map((control) => control.get('total')?.value)
+      .filter((total): total is number => !!total)
       .reduce((total, current) => total + current, 0);
 
     this.total?.setValue(amount);
@@ -226,18 +219,21 @@ export class BillingFormComponent implements OnInit, OnDestroy {
   private calculatePaymentDueDate(): void {
     const date = this.createdAt?.value;
     const amount = this.paymentTerms?.value;
-    const due = addDays(date, amount);
 
-    this.paymentDue?.setValue(due, { onlySelf: true });
+    if (date && amount) {
+      const due = addDays(date, amount);
+      this.paymentDue?.setValue(due);
+    }
   }
 
-  private validateForm(form: UntypedFormGroup): void {
-    if (form.invalid) {
-      form.markAllAsTouched();
-      this.valid = false;
-    } else {
-      this.valid = true;
-    }
+  private validateForm(): void {
+    this.form?.markAllAsTouched();
+    this.valid = this.form?.invalid ? false : true;
+  }
+
+  private resetForm(): void {
+    this.form?.reset();
+    this.items.clear();
   }
 
   get formData() {
@@ -265,6 +261,6 @@ export class BillingFormComponent implements OnInit, OnDestroy {
   }
 
   get items() {
-    return this.form?.get('items') as UntypedFormArray;
+    return this.form?.get('items') as FormArray<FormGroup<ListItem>>;
   }
 }

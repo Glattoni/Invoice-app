@@ -19,7 +19,7 @@ export class CustomSelectComponent implements OnInit, ControlValueAccessor {
   @Input() label: string = '';
   @Input() invalid: boolean = false;
 
-  value: number = 30;
+  value?: number;
   onChange?: (value: number) => void;
   onTouched?: () => void;
 
@@ -34,7 +34,7 @@ export class CustomSelectComponent implements OnInit, ControlValueAccessor {
     this.onChange = fn;
   }
 
-  registerOnTouched(fn: any): void {
+  registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
   }
 
