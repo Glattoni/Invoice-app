@@ -119,3 +119,7 @@ li {
     margin-top: 1.5rem;
   }
 }
+
+svg-icon svg:hover path {
+  fill: var(--danger);
+}
