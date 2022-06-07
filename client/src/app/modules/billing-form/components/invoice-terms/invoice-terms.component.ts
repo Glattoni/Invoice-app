@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroupDirective, FormGroup } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { BillingForm } from '../../models/billing-form.model';
 
 @Component({
@@ -7,9 +8,10 @@ import { BillingForm } from '../../models/billing-form.model';
   templateUrl: './invoice-terms.component.html',
   styleUrls: ['./invoice-terms.component.scss'],
 })
-export class InvoiceTermsComponent implements OnInit {
+export class InvoiceTermsComponent implements OnInit, OnDestroy {
   form?: FormGroup<BillingForm>;
-  deadline?: number;
+  deadline: number = 30;
+  deadlineSub?: Subscription;
 
   readonly options = [
     { id: '1', value: 1, label: 'Next 1 day' },
@@ -22,7 +24,13 @@ export class InvoiceTermsComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.rootFormGroup.control;
-    this.deadline = this.paymentTerms?.value;
+    this.deadlineSub = this.paymentTerms?.valueChanges.subscribe((value) => {
+      this.deadline = value;
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.deadlineSub?.unsubscribe();
   }
 
   get invalidDate() {

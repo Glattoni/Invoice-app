@@ -1,5 +1,17 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Input,
+  OnInit,
+  Component,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+
+interface Option {
+  id: string;
+  value: number;
+  label: string;
+}
 
 @Component({
   selector: 'app-custom-select',
@@ -13,10 +25,12 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     },
   ],
 })
-export class CustomSelectComponent implements OnInit, ControlValueAccessor {
+export class CustomSelectComponent
+  implements OnInit, ControlValueAccessor, OnChanges
+{
+  @Input() label: string = '';
   @Input() options: Option[] = [];
   @Input() selected?: number;
-  @Input() label: string = '';
   @Input() invalid: boolean = false;
 
   value?: number;
@@ -25,6 +39,18 @@ export class CustomSelectComponent implements OnInit, ControlValueAccessor {
 
   isVisible: boolean = false;
   selectedOption?: Option;
+
+  ngOnInit(): void {
+    this.selectedOption = this.options.find(
+      (option) => option.value === this.selected
+    );
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.selectedOption = this.options.find(
+      (option) => option.value === changes['selected'].currentValue
+    );
+  }
 
   writeValue(value: number): void {
     this.value = value;
@@ -36,14 +62,6 @@ export class CustomSelectComponent implements OnInit, ControlValueAccessor {
 
   registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
-  }
-
-  ngOnInit(): void {
-    if (!this.selected) return;
-
-    this.selectedOption = this.options.find(
-      (option) => option.value === this.selected
-    );
   }
 
   toggleVisibility(): void {
@@ -63,10 +81,4 @@ export class CustomSelectComponent implements OnInit, ControlValueAccessor {
     this.selectedOption = selected;
     this.toggleVisibility();
   }
-}
-
-interface Option {
-  id: string;
-  value: number;
-  label: string;
 }
