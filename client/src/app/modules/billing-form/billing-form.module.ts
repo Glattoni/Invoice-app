@@ -11,9 +11,8 @@ import { ItemsListComponent } from './components/items-list/items-list.component
 import { ClientInfoComponent } from './components/client-info/client-info.component';
 import { InvoiceTermsComponent } from './components/invoice-terms/invoice-terms.component';
 import { SenderAddressComponent } from './components/sender-address/sender-address.component';
-import { CustomSelectComponent } from './components/custom-select/custom-select.component';
-import { CustomInputComponent } from './components/custom-input/custom-input.component';
 import { ScrolledToBottomDirective } from './directives/scrolled-to-bottom.directive';
+import { FormControlsModule } from '@modules/form-controls/form-controls.module';
 
 @NgModule({
   declarations: [
@@ -22,8 +21,6 @@ import { ScrolledToBottomDirective } from './directives/scrolled-to-bottom.direc
     BillingFormComponent,
     InvoiceTermsComponent,
     SenderAddressComponent,
-    CustomSelectComponent,
-    CustomInputComponent,
     ScrolledToBottomDirective,
   ],
   imports: [
@@ -31,6 +28,7 @@ import { ScrolledToBottomDirective } from './directives/scrolled-to-bottom.direc
     CommonModule,
     SharedModule,
     ButtonsModule,
+    FormControlsModule,
     ReactiveFormsModule,
     AngularSvgIconModule,
   ],
