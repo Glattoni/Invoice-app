@@ -68,7 +68,7 @@ export class CustomSelectComponent
     this.isVisible = !this.isVisible;
   }
 
-  clickedOutside(): void {
+  onClickOutside(): void {
     this.isVisible = false;
   }
 

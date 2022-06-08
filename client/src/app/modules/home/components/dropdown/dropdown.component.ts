@@ -28,7 +28,7 @@ export class DropdownComponent {
     this.isVisible = !this.isVisible;
   }
 
-  clickedOutside(): void {
+  onClickOutside(): void {
     this.isVisible = false;
   }
 
