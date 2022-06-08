@@ -9,15 +9,15 @@ import {
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 
-import { Subject, fromEvent, filter, takeUntil } from 'rxjs';
+import { fromEvent, filter, Subscription } from 'rxjs';
 
 @Directive({
-  selector: '[clickedOutside]',
+  selector: '[clickOutside]',
 })
 export class ClickedOutsideDirective implements AfterViewInit, OnDestroy {
   @Output() clickOutside = new EventEmitter<void>();
 
-  private destroy$ = new Subject<void>();
+  subscription?: Subscription;
 
   constructor(
     private element: ElementRef,
@@ -25,22 +25,18 @@ export class ClickedOutsideDirective implements AfterViewInit, OnDestroy {
   ) {}
 
   ngAfterViewInit(): void {
-    fromEvent(this.document, 'click')
-      .pipe(
-        filter((event) => !this.insideElement(event.target as HTMLElement)),
-        takeUntil(this.destroy$)
-      )
+    this.subscription = fromEvent(this.document, 'click')
+      .pipe(filter((event) => !this.insideElement(event.target as HTMLElement)))
       .subscribe(() => {
         this.clickOutside.emit();
       });
   }
 
   ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
+    this.subscription?.unsubscribe();
   }
 
-  private insideElement(element: HTMLElement) {
+  private insideElement(element: HTMLElement): boolean {
     return (
       element === this.element.nativeElement ||
       this.element.nativeElement.contains(element)
