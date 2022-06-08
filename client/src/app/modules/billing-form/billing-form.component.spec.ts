@@ -1,17 +1,16 @@
-import { FormGroupDirective, NonNullableFormBuilder } from '@angular/forms';
-
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+
+import { FormGroupDirective, NonNullableFormBuilder } from '@angular/forms';
 
 import { BillingFormComponent } from './billing-form.component';
 import { ItemsListComponent } from './components/items-list/items-list.component';
 import { ClientInfoComponent } from './components/client-info/client-info.component';
 import { InvoiceTermsComponent } from './components/invoice-terms/invoice-terms.component';
 import { SenderAddressComponent } from './components/sender-address/sender-address.component';
-import { CustomSelectComponent } from './components/custom-select/custom-select.component';
-import { CustomInputComponent } from './components/custom-input/custom-input.component';
-import { GoBackButtonComponent } from '@modules/buttons/components/go-back-button/go-back-button.component';
+
 import { ButtonComponent } from '@modules/buttons/components/button/button.component';
+import { GoBackButtonComponent } from '@modules/buttons/components/go-back-button/go-back-button.component';
 
 describe('BillingFormComponent', () => {
   let component: BillingFormComponent;
@@ -23,11 +22,9 @@ describe('BillingFormComponent', () => {
         ButtonComponent,
         ItemsListComponent,
         ClientInfoComponent,
-        CustomInputComponent,
         BillingFormComponent,
         GoBackButtonComponent,
         InvoiceTermsComponent,
-        CustomSelectComponent,
         SenderAddressComponent,
       ],
       imports: [HttpClientTestingModule],
