@@ -19,7 +19,7 @@ import { formatDate } from '@angular/common';
 import { addDays, generateSlug } from 'src/utils';
 
 import { Invoice, Item } from '@shared/models/invoice.model';
-import { BillingForm, ListItem } from './models/billing-form.model';
+import { BillingForm, ListItem } from '../../models/billing-form.model';
 import { InvoiceService } from '@core/services/invoice/invoice.service';
 import { SidebarFormService } from '@core/services/sidebar-form/sidebar-form.service';
 

@@ -1,10 +1,11 @@
-import { UntypedFormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { TestBed } from '@angular/core/testing';
-import { AppComponent } from './app.component';
 import { RouterTestingModule } from '@angular/router/testing';
-import { SidebarComponent } from '@core/components/sidebar/sidebar.component';
-import { BillingFormComponent } from '@modules/billing-form/billing-form.component';
 import { HttpClient, HttpHandler } from '@angular/common/http';
+import { UntypedFormBuilder, ReactiveFormsModule } from '@angular/forms';
+
+import { AppComponent } from './app.component';
+import { SidebarComponent } from '@core/components/sidebar/sidebar.component';
+import { BillingFormComponent } from '@modules/billing-form/components/billing-form/billing-form.component';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
