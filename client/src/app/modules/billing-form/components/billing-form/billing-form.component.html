@@ -1,4 +1,4 @@
-<aside [hidden]="!(visible$ | async)">
+<aside [hidden]="(visible$ | async) === false">
   <header>
     <app-go-back-button [offset]="'0 0 1.5rem 0'"></app-go-back-button>
 
