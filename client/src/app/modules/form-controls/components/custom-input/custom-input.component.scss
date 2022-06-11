@@ -32,7 +32,7 @@ form label {
     outline: none;
 
     &::placeholder {
-      color: initial;
+      color: inherit;
     }
 
     &:focus {
