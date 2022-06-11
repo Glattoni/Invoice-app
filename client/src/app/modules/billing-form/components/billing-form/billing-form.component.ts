@@ -39,6 +39,7 @@ import {
 export class BillingFormComponent implements OnInit, OnDestroy {
   form?: FormGroup<BillingForm>;
   payload$?: Observable<Invoice>;
+  visible$?: Observable<boolean>;
 
   valid: boolean = true;
   scrolledToBottom: boolean = false;
@@ -52,6 +53,7 @@ export class BillingFormComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.getVisibility();
     this.getPayload();
     this.generateFormGroup();
     this.patchFormValue();
@@ -75,6 +77,10 @@ export class BillingFormComponent implements OnInit, OnDestroy {
     this.resetForm();
     this.createdAt?.enable();
     this.sidebarFormService.finishEditing();
+  }
+
+  onOverlayClick(): void {
+    this.payload$ ? this.onCancel() : this.onDiscard();
   }
 
   onSaveAsDraft(): void {
@@ -104,6 +110,10 @@ export class BillingFormComponent implements OnInit, OnDestroy {
 
   onScroll(value: boolean): void {
     this.scrolledToBottom = value;
+  }
+
+  private getVisibility(): void {
+    this.visible$ = this.sidebarFormService.visible$;
   }
 
   private getPayload(): void {
