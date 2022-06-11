@@ -4,4 +4,12 @@
   <router-outlet></router-outlet>
 </main>
 
-<app-billing-form></app-billing-form>
+<aside [class.visible]="visible$ | async">
+  <app-billing-form></app-billing-form>
+</aside>
+
+<div
+  class="overlay"
+  (click)="closeSidebar()"
+  [class.visible]="visible$ | async"
+></div>

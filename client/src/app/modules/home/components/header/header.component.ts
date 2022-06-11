@@ -24,6 +24,6 @@ export class HeaderComponent implements OnInit {
   }
 
   openSidebar(): void {
-    this.sidebarFormService.open();
+    this.sidebarFormService.open(true);
   }
 }
