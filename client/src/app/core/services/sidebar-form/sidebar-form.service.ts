@@ -12,8 +12,7 @@ export class SidebarFormService {
   readonly visible$ = this.visible.asObservable();
   readonly payload$ = this.payload.asObservable();
 
-  open(clean?: boolean): void {
-    clean && this.payload.next(null as any);
+  open(): void {
     this.visible.next(true);
   }
 
