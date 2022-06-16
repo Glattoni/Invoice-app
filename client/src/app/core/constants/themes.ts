@@ -1,6 +1,6 @@
 export interface Theme {
   name: string;
-  properties: any;
+  properties: { [key: string]: string };
 }
 
 export const light: Theme = {
@@ -36,6 +36,10 @@ export const light: Theme = {
     '--button-6-fg': 'hsl(231deg 36% 63%)',
     '--button-6-bg-hover': 'hsl(231deg 73% 93%)',
     '--button-6-fg-hover': 'hsl(231deg 36% 63%)',
+    '--button-7-bg': 'hsl(231deg 67% 99%)',
+    '--button-7-fg': 'hsl(231deg 36% 63%)',
+    '--button-7-bg-hover': 'hsl(231deg 73% 93%)',
+    '--button-7-fg-hover': 'hsl(231deg 36% 63%)',
     '--header-foreground': 'hsl(231deg 28% 7%)',
     '--radio-background': 'hsl(231deg 73% 93%)',
     '--draft-background': 'hsl(231deg 20% 27% / 6%)',
@@ -53,6 +57,7 @@ export const light: Theme = {
     '--select-option-divider': 'hsl(231deg 75% 93%)',
     '--items-list': 'hsl(225deg 14% 53%)',
     '--background-scrollbar': 'hsl(231deg 75% 93%)',
+    '--go-back-hover': 'hsl(231deg 36% 63%)',
     // box-shadows
     '--box-shadow-primary': 'hsl(232deg 38% 45% / 25%)',
     '--box-shadow-secondary': 'hsl(232deg 38% 45% / 10%)',
@@ -91,6 +96,10 @@ export const dark: Theme = {
     '--button-6-fg': 'hsl(231deg 36% 63%)',
     '--button-6-bg-hover': 'hsl(231deg 73% 93%)',
     '--button-6-fg-hover': 'hsl(231deg 36% 63%)',
+    '--button-7-bg': 'hsl(233deg 30% 21%)',
+    '--button-7-fg': 'hsl(231deg 75% 93%)',
+    '--button-7-bg-hover': 'hsl(233deg 30% 16%)',
+    '--button-7-fg-hover': 'hsl(231deg 75% 93%)',
     '--header-foreground': 'hsl(0deg 0% 100%)',
     '--radio-background': 'hsl(233deg 31% 17%)',
     '--draft-background': 'hsl(231deg 75% 93% / 6%)',
@@ -108,6 +117,7 @@ export const dark: Theme = {
     '--select-option-divider': 'hsl(233deg 31% 17%)',
     '--items-list': 'hsl(225deg 14% 53%)',
     '--background-scrollbar': 'hsl(233deg 30% 21%)',
+    '--go-back-hover': 'hsl(231deg 20% 61%)',
     // box-shadows
     '--box-shadow-primary': 'hsl(0deg 0% 0% / 25%)',
     '--box-shadow-secondary': 'hsl(232deg 38% 45% / 10%)',
