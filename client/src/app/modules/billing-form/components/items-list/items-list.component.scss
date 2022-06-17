@@ -18,7 +18,7 @@ header {
 
   @include bp.md {
     display: grid;
-    grid-template-columns: 12.5rem 2.875rem 6.25rem auto;
+    grid-template-columns: 12.5rem 4rem 6.25rem auto;
     gap: 1rem;
   }
 }
@@ -73,7 +73,7 @@ li {
   }
 
   @include bp.md {
-    grid-template-columns: 12.5rem 2.875rem 6.25rem auto 2rem;
+    grid-template-columns: 12.5rem 4rem 6.25rem auto 2rem;
     gap: 1rem;
   }
 }
