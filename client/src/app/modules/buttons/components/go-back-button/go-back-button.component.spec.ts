@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { NonNullableFormBuilder } from '@angular/forms';
 
 import { GoBackButtonComponent } from './go-back-button.component';
 
@@ -9,6 +10,7 @@ describe('GoBackButtonComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [GoBackButtonComponent],
+      providers: [NonNullableFormBuilder],
     }).compileComponents();
   });
 

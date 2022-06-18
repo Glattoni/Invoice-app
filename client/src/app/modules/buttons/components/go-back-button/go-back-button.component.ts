@@ -1,6 +1,11 @@
 import { Location } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { SidebarFormService } from '@core/services/sidebar-form/sidebar-form.service';
+import { BillingFormService } from '@core/services/billing-form/billing-form.service';
+
+export enum GoBack {
+  Link = 'link',
+  Button = 'button',
+}
 
 @Component({
   selector: 'app-go-back-button',
@@ -13,7 +18,7 @@ export class GoBackButtonComponent {
 
   constructor(
     private location: Location,
-    private sidebarFormService: SidebarFormService
+    private formService: BillingFormService
   ) {}
 
   goBackOnePage(): void {
@@ -21,15 +26,10 @@ export class GoBackButtonComponent {
   }
 
   closeFormSidebar(): void {
-    this.sidebarFormService.close();
+    this.formService.close();
   }
 
   get isLinkType() {
     return this.type === GoBack.Link;
   }
-}
-
-export enum GoBack {
-  Link = 'link',
-  Button = 'button',
 }
