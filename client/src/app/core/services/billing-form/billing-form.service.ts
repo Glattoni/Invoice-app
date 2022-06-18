@@ -1,6 +1,5 @@
-import { DOCUMENT } from '@angular/common';
-import { formatDate } from '@angular/common';
 import { Inject, Injectable } from '@angular/core';
+import { DOCUMENT, formatDate } from '@angular/common';
 import { BehaviorSubject, ReplaySubject } from 'rxjs';
 import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 
@@ -52,8 +51,8 @@ export class BillingFormService {
   generateListItem(item?: Item) {
     return this.formBuilder.group({
       name: [item?.name || '', Validators.required],
-      quantity: [item?.quantity || 0, Validators.required],
-      price: [item?.price || 0, Validators.required],
+      quantity: [item?.quantity || 0, [Validators.required, Validators.min(1)]],
+      price: [item?.price || 0, [Validators.required, Validators.min(0)]],
       total: [item?.total || 0, Validators.required],
     });
   }
