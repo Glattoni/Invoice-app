@@ -31,6 +31,8 @@
 
 .slug {
   grid-area: slug;
+  font-size: 0.75rem;
+  line-height: 0.9375rem;
   letter-spacing: -0.25px;
 
   &::first-letter {
@@ -40,8 +42,6 @@
   @include bp.md {
     grid-area: unset;
     order: 1;
-    font-size: 0.75rem;
-    line-height: 0.9375rem;
   }
 }
 
