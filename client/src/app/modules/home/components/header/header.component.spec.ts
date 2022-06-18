@@ -1,5 +1,6 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { NonNullableFormBuilder } from '@angular/forms';
 import { ButtonComponent } from '@modules/buttons/components/button/button.component';
 import { SummaryPipe } from '../../pipes/summary/summary.pipe';
 import { DropdownComponent } from '../dropdown/dropdown.component';
@@ -18,6 +19,7 @@ describe('HeaderComponent', () => {
         DropdownComponent,
       ],
       imports: [HttpClientTestingModule],
+      providers: [NonNullableFormBuilder],
     }).compileComponents();
   });
 

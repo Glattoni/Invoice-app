@@ -2,7 +2,7 @@ import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { Invoice } from '@shared/models/invoice.model';
 import { InvoiceService } from '@core/services/invoice/invoice.service';
-import { SidebarFormService } from '@core/services/sidebar-form/sidebar-form.service';
+import { BillingFormService } from '@core/services/billing-form/billing-form.service';
 
 @Component({
   selector: 'app-header',
@@ -15,7 +15,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private invoiceService: InvoiceService,
-    private sidebarFormService: SidebarFormService
+    private formService: BillingFormService
   ) {}
 
   ngOnInit(): void {
@@ -24,6 +24,6 @@ export class HeaderComponent implements OnInit {
   }
 
   openSidebar(): void {
-    this.sidebarFormService.open();
+    this.formService.open();
   }
 }

@@ -15,20 +15,13 @@ import {
   distinctUntilChanged,
 } from 'rxjs';
 
-import { formatDate } from '@angular/common';
-import { addDays, generateSlug } from 'src/utils';
+import { addDays } from 'src/utils';
+import { FormArray, FormGroup } from '@angular/forms';
 
 import { Invoice, Item } from '@shared/models/invoice.model';
 import { BillingForm, ListItem } from '../../models/billing-form.model';
 import { InvoiceService } from '@core/services/invoice/invoice.service';
-import { SidebarFormService } from '@core/services/sidebar-form/sidebar-form.service';
-
-import {
-  FormArray,
-  FormGroup,
-  Validators,
-  NonNullableFormBuilder,
-} from '@angular/forms';
+import { BillingFormService } from '@core/services/billing-form/billing-form.service';
 
 @Component({
   selector: 'app-billing-form',
@@ -47,15 +40,14 @@ export class BillingFormComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
 
   constructor(
-    private formBuilder: NonNullableFormBuilder,
     private invoiceService: InvoiceService,
-    private sidebarFormService: SidebarFormService
+    private formService: BillingFormService
   ) {}
 
   ngOnInit(): void {
     this.getVisibility();
     this.getPayload();
-    this.generateFormGroup();
+    this.generateForm();
     this.patchFormValue();
     this.onFormValueChanges();
     this.onItemListValueChanges();
@@ -69,14 +61,14 @@ export class BillingFormComponent implements OnInit, OnDestroy {
   onDiscard(): void {
     this.valid = true;
     this.resetForm();
-    this.sidebarFormService.close();
+    this.formService.close();
   }
 
   onCancel(): void {
     this.valid = true;
     this.resetForm();
     this.createdAt?.enable();
-    this.sidebarFormService.finishEditing();
+    this.formService.finishEditing();
   }
 
   onOverlayClick(): void {
@@ -94,7 +86,7 @@ export class BillingFormComponent implements OnInit, OnDestroy {
     if (this.valid && this.formData) {
       this.invoiceService.createInvoice(this.formData);
       this.resetForm();
-      this.sidebarFormService.close();
+      this.formService.close();
     }
   }
 
@@ -104,7 +96,7 @@ export class BillingFormComponent implements OnInit, OnDestroy {
     if (this.valid && this.formData) {
       this.invoiceService.updateInvoice(invoiceId, this.formData);
       this.resetForm();
-      this.sidebarFormService.close();
+      this.formService.close();
     }
   }
 
@@ -113,46 +105,15 @@ export class BillingFormComponent implements OnInit, OnDestroy {
   }
 
   private getVisibility(): void {
-    this.visible$ = this.sidebarFormService.visible$;
+    this.visible$ = this.formService.visible$;
   }
 
   private getPayload(): void {
-    this.payload$ = this.sidebarFormService.payload$;
+    this.payload$ = this.formService.payload$;
   }
 
-  private generateFormGroup(): void {
-    const slug = generateSlug();
-    const senderAddress = this.generateAddressGroup();
-    const clientAddress = this.generateAddressGroup();
-    const creationDate = formatDate(new Date(), 'yyyy-MM-dd', 'en');
-    const paymentDue = addDays(creationDate, 30);
-
-    this.form = this.formBuilder.group({
-      slug: [slug, Validators.required],
-      status: ['pending', Validators.required],
-      senderAddress: senderAddress,
-      clientAddress: clientAddress,
-      clientName: ['', Validators.required],
-      clientEmail: ['', [Validators.required, Validators.email]],
-      createdAt: [creationDate, Validators.required],
-      paymentTerms: [30, Validators.required],
-      paymentDue: [paymentDue, Validators.required],
-      items: this.formBuilder.array<FormGroup<ListItem>>(
-        [],
-        Validators.required
-      ),
-      description: ['', Validators.required],
-      total: [0, Validators.required],
-    });
-  }
-
-  private generateAddressGroup() {
-    return this.formBuilder.group({
-      street: ['', Validators.required],
-      city: ['', Validators.required],
-      postCode: ['', Validators.required],
-      country: ['', Validators.required],
-    });
+  private generateForm() {
+    this.form = this.formService.generateFormGroup();
   }
 
   private patchFormValue(): void {
@@ -184,13 +145,7 @@ export class BillingFormComponent implements OnInit, OnDestroy {
     this.items.clear();
 
     items.forEach((item) => {
-      const listItem = this.formBuilder.group({
-        name: [item.name, Validators.required],
-        quantity: [item.quantity, Validators.required],
-        price: [item.price, Validators.required],
-        total: [item.total, Validators.required],
-      });
-
+      const listItem = this.formService.generateListItem(item);
       this.items.push(listItem);
     });
   }

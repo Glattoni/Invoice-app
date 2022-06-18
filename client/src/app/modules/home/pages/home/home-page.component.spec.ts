@@ -5,6 +5,7 @@ import { HomePageComponent } from './home-page.component';
 import { PlaceholderComponent } from '@modules/home/components/placeholder/placeholder.component';
 import { HeaderComponent } from '@modules/home/components/header/header.component';
 import { SummaryPipe } from '@modules/home/pipes/summary/summary.pipe';
+import { NonNullableFormBuilder } from '@angular/forms';
 
 describe('HomePageComponent', () => {
   let component: HomePageComponent;
@@ -19,6 +20,7 @@ describe('HomePageComponent', () => {
         PlaceholderComponent,
       ],
       imports: [HttpClientTestingModule],
+      providers: [NonNullableFormBuilder],
     }).compileComponents();
   });
 

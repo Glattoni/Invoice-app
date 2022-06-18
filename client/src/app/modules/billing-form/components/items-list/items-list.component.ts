@@ -1,13 +1,12 @@
 import {
   FormGroup,
   FormArray,
-  Validators,
   AbstractControl,
   FormGroupDirective,
-  NonNullableFormBuilder,
 } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { BillingForm } from '../../models/billing-form.model';
+import { BillingForm, ListItem } from '../../models/billing-form.model';
+import { BillingFormService } from '@core/services/billing-form/billing-form.service';
 
 @Component({
   selector: 'form-items-list',
@@ -20,8 +19,8 @@ export class ItemsListComponent implements OnInit {
   readonly headers = ['item name', 'qty.', 'price', 'total'];
 
   constructor(
-    private formBuilder: NonNullableFormBuilder,
-    private rootFormGroup: FormGroupDirective
+    private rootFormGroup: FormGroupDirective,
+    private formService: BillingFormService
   ) {}
 
   ngOnInit(): void {
@@ -33,21 +32,15 @@ export class ItemsListComponent implements OnInit {
   }
 
   addItem(): void {
-    const item = this.formBuilder.group({
-      name: ['', Validators.required],
-      quantity: ['', Validators.required],
-      price: ['', Validators.required],
-      total: [0, Validators.required],
-    });
-
+    const item = this.formService.generateListItem();
     this.items.push(item);
   }
 
   calculateItemTotal(index: number) {
     const item = this.items.controls[index];
-    const quantity = parseInt(item.get('quantity')?.value);
-    const price = parseInt(item.get('price')?.value);
-    const itemTotal = quantity * price || 0;
+    const quantity = item.get('quantity')?.value || 0;
+    const price = item.get('price')?.value || 0;
+    const itemTotal = quantity * price;
 
     item.get('total')?.setValue(itemTotal);
 
@@ -67,7 +60,6 @@ export class ItemsListComponent implements OnInit {
   }
 
   get items() {
-    // TODO: infer proper type for FormArray
-    return this.form?.get('items') as FormArray;
+    return this.form?.get('items') as FormArray<FormGroup<ListItem>>;
   }
 }
