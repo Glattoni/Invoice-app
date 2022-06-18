@@ -9,12 +9,17 @@
   padding: 1.5rem;
   cursor: pointer;
   background-color: var(--background-secondary);
+  border: 1px solid transparent;
   border-radius: 0.5rem;
   box-shadow: 0 0.625rem 0.625rem -0.625rem var(--box-shadow-secondary);
 
+  &:hover {
+    border-color: var(--primary);
+  }
+
   @include bp.md {
     grid-template-rows: none;
-    grid-template-columns: 1.4fr 1.95fr 1.8fr 2fr 2.3fr 0.4fr;
+    grid-template-columns: 1.25fr 1.95fr 1.8fr 2fr 2.3fr 0.4fr;
     align-items: center;
     padding: 1rem 1.5rem;
   }
@@ -26,6 +31,8 @@
 
 .slug {
   grid-area: slug;
+  font-size: 0.75rem;
+  line-height: 0.9375rem;
   letter-spacing: -0.25px;
 
   &::first-letter {
@@ -45,8 +52,9 @@
 
   @include bp.md {
     grid-area: unset;
-    justify-self: center;
+    justify-self: left;
     order: 3;
+    padding-left: 1.25rem;
   }
 }
 

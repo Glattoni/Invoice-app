@@ -41,26 +41,23 @@
       <!-- item price -->
 
       <!-- item total -->
-      <div class="form-field item-field">
+      <div class="total-amount">
         <label>total</label>
-        <div class="item-total">
+        <p>
           {{ calculateItemTotal(i) | currency: '':'' }}
-        </div>
+        </p>
       </div>
       <!-- item total -->
 
-      <button type="button" (click)="deleteItem(i)">
-        <svg-icon src="assets/icons/delete.svg"></svg-icon>
-      </button>
+      <div class="delete-item">
+        <button type="button" (click)="deleteItem(i)">
+          <svg-icon src="assets/icons/delete.svg"></svg-icon>
+        </button>
+      </div>
     </li>
   </ul>
 
-  <app-button
-    class="add-button"
-    [type]="'button'"
-    [variant]="'light'"
-    (click)="addItem()"
-  >
+  <app-button class="add-button" [variant]="'mixed'" (click)="addItem()">
     + add new item
   </app-button>
 </fieldset>

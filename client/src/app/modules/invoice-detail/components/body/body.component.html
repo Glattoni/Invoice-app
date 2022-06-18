@@ -14,15 +14,15 @@
   <div class="terms-container">
     <div>
       <p class="label">invoice date</p>
-      <span *ngIf="createdAt" class="accent">
+      <p *ngIf="createdAt" class="accent">
         {{ createdAt | date: 'dd MMM yyyy' }}
-      </span>
+      </p>
     </div>
     <div>
       <p class="label">payment due</p>
-      <span *ngIf="paymentDue" class="accent">
+      <p *ngIf="paymentDue" class="accent">
         {{ paymentDue | date: 'dd MMM yyyy' }}
-      </span>
+      </p>
     </div>
   </div>
 

@@ -89,6 +89,16 @@ svg-icon {
   }
 }
 
+.mixed {
+  color: var(--button-7-fg);
+  background-color: var(--button-7-bg);
+
+  &:hover {
+    color: var(--button-7-fg-hover);
+    background-color: var(--button-7-bg-hover);
+  }
+}
+
 .small {
   padding: 1rem;
 }

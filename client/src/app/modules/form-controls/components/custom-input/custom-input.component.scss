@@ -31,10 +31,6 @@ form label {
     caret-color: var(--primary);
     outline: none;
 
-    &::placeholder {
-      color: inherit;
-    }
-
     &:focus {
       border-color: var(--primary);
     }
