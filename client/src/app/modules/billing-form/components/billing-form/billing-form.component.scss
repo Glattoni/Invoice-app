@@ -21,12 +21,14 @@ aside {
   bottom: 0;
   z-index: var(--z-billing-form);
   padding: 2rem 1.5rem 0;
+  overflow-y: scroll;
   background-color: var(--background-quaternary);
 
   @include bp.md {
     top: 5rem;
     max-width: 38.5rem;
     padding: 3.5rem 2rem 3.5rem 3.5rem;
+    overflow-y: hidden;
     border-radius: 0 1.25rem 1.25rem 0;
   }
 
@@ -66,10 +68,10 @@ form {
 
 .form-container {
   height: 100%;
-  overflow-y: scroll;
 
   @include bp.md {
     padding-right: 1rem;
+    overflow-y: scroll;
 
     @supports (scrollbar-color: rebeccapurple green) {
       padding-right: 1.5rem;
