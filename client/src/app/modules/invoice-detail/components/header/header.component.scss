@@ -33,10 +33,12 @@
   justify-content: center;
   padding: 1.25rem 1.5rem;
   background-color: var(--background-tetriary);
+  box-shadow: 0 -2.5rem 4.25rem 0 var(--box-shadow-primary);
 
   @include bp.md {
     position: initial;
     padding: 0;
+    box-shadow: none;
 
     a {
       display: none;
