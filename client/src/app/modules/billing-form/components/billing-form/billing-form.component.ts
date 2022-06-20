@@ -174,21 +174,17 @@ export class BillingFormComponent implements OnInit, OnDestroy {
 
   private calculateAmountDue(): void {
     const amount = this.items.controls
-      .map((control) => control.get('total')?.value)
-      .filter((total): total is number => !!total)
+      .map((control) => control.get('total')?.value || 0)
       .reduce((total, current) => total + current, 0);
 
     this.total?.setValue(amount);
   }
 
   private calculatePaymentDueDate(): void {
-    const date = this.createdAt?.value;
-    const amount = this.paymentTerms?.value;
+    const date = this.createdAt?.value || '';
+    const amount = this.paymentTerms?.value || 0;
 
-    if (date && amount) {
-      const due = addDays(date, amount);
-      this.paymentDue?.setValue(due);
-    }
+    this.paymentDue?.setValue(addDays(date, amount));
   }
 
   private validateForm(): void {
