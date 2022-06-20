@@ -13,6 +13,7 @@ import { InvoiceTermsComponent } from './components/invoice-terms/invoice-terms.
 import { SenderAddressComponent } from './components/sender-address/sender-address.component';
 import { ScrolledToBottomDirective } from './directives/scrolled-to-bottom.directive';
 import { FormControlsModule } from '@modules/form-controls/form-controls.module';
+import { FormHeaderComponent } from './components/form-header/form-header.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { FormControlsModule } from '@modules/form-controls/form-controls.module'
     InvoiceTermsComponent,
     SenderAddressComponent,
     ScrolledToBottomDirective,
+    FormHeaderComponent,
   ],
   imports: [
     FormsModule,
