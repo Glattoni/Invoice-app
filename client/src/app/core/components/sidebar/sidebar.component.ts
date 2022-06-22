@@ -9,15 +9,12 @@ import { ThemeService } from '@core/services/theme/theme.service';
 export class SidebarComponent {
   constructor(private themeService: ThemeService) {}
 
-  get iconPath() {
-    const theme = this.themeService.getActiveTheme();
-    return `assets/icons/${theme.name === 'light' ? 'moon' : 'sun'}.svg`;
+  toggleTheme(): void {
+    this.themeService.toggleTheme();
   }
 
-  toggleTheme(): void {
-    const theme = this.themeService.getActiveTheme();
-    theme.name === 'light'
-      ? this.themeService.setDarkTheme()
-      : this.themeService.setLightTheme();
+  get themeIcon() {
+    const theme = this.themeService.activeTheme;
+    return `assets/icons/${theme === 'light' ? 'moon' : 'sun'}.svg`;
   }
 }
