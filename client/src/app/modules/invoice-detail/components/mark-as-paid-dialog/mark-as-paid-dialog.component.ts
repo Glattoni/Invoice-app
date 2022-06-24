@@ -8,20 +8,21 @@ import { ModalService } from '@core/services/modal/modal.service';
   styleUrls: ['./mark-as-paid-dialog.component.scss'],
 })
 export class MarkAsPaidDialogComponent {
-  @Input() id?: string;
-  @Input() slug?: string;
+  @Input() slug: string = '';
+  @Input() modalId: string = '';
+  @Input() invoiceId: string = '';
 
   constructor(
     private modalService: ModalService,
     private invoiceService: InvoiceService
   ) {}
 
-  closeModal(id: string): void {
-    this.modalService.close(id);
+  closeModal(): void {
+    this.modalService.close(this.modalId);
   }
 
-  markAsPaid(id: string, dialogId: string): void {
-    this.invoiceService.markAsPaidInvoice(id);
-    this.modalService.close(dialogId);
+  markAsPaid(): void {
+    this.invoiceService.markAsPaidInvoice(this.invoiceId);
+    this.modalService.close(this.modalId);
   }
 }

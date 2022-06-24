@@ -1,18 +1,13 @@
-<app-modal id="mark-as-paid-dialog" *ngIf="id">
+<app-dialog [id]="modalId">
   <h2>confirm action</h2>
   <p>
     Are you sure you want to mark the invoice #{{ slug }} as paid? This action
     cannot be undone.
   </p>
   <div class="controls">
-    <app-button
-      [variant]="'neutral'"
-      (click)="closeModal('mark-as-paid-dialog')"
-    >
+    <app-button [variant]="'neutral'" (click)="closeModal()">
       Cancel
     </app-button>
-    <app-button (click)="markAsPaid(id, 'mark-as-paid-dialog')">
-      Mark as paid
-    </app-button>
+    <app-button (click)="markAsPaid()"> Mark as paid </app-button>
   </div>
-</app-modal>
+</app-dialog>
