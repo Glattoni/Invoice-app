@@ -1,26 +1,27 @@
 import { Injectable } from '@angular/core';
+import { DialogComponent } from '@shared/components/dialog/dialog.component';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ModalService {
-  private modals: any[] = [];
+  private modals: DialogComponent[] = [];
 
-  add(modal: any) {
+  add(modal: any): void {
     this.modals.push(modal);
   }
 
-  remove(id: string) {
-    this.modals = this.modals.filter((m) => m.id !== id);
+  remove(id: string): void {
+    this.modals = this.modals.filter((modal) => modal.id !== id);
   }
 
-  open(id: string) {
-    const modal = this.modals.find((m) => m.id === id);
-    modal.open();
+  open(id: string): void {
+    const modal = this.modals.find((modal) => modal.id === id);
+    modal?.dialog.showModal();
   }
 
-  close(id: string) {
-    const modal = this.modals.find((m) => m.id === id);
-    modal.close();
+  close(id: string): void {
+    const modal = this.modals.find((modal) => modal.id === id);
+    modal?.dialog.close();
   }
 }
