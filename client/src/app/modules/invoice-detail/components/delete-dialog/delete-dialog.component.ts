@@ -10,8 +10,9 @@ import { InvoiceService } from '@core/services/invoice/invoice.service';
   styleUrls: ['./delete-dialog.component.scss'],
 })
 export class DeleteDialogComponent {
-  @Input() id?: string;
-  @Input() slug?: string;
+  @Input() slug: string = '';
+  @Input() modalId: string = '';
+  @Input() invoiceId: string = '';
 
   constructor(
     private router: Router,
@@ -19,12 +20,12 @@ export class DeleteDialogComponent {
     private invoiceService: InvoiceService
   ) {}
 
-  deleteInvoice(id: string): void {
-    this.invoiceService.deleteInvoice(id);
+  deleteInvoice(): void {
+    this.invoiceService.deleteInvoice(this.invoiceId);
     this.router.navigate(['']);
   }
 
-  closeModal(id: string): void {
-    this.modalService.close(id);
+  closeModal(): void {
+    this.modalService.close(this.modalId);
   }
 }

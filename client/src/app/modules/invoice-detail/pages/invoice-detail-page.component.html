@@ -20,15 +20,17 @@
       ></app-body>
       <app-table [items]="invoice.items" [total]="invoice.total"></app-table>
     </section>
+
+    <app-delete-dialog
+      [slug]="invoice.slug"
+      [modalId]="'delete-dialog'"
+      [invoiceId]="invoice._id"
+    ></app-delete-dialog>
+
+    <app-mark-as-paid-dialog
+      [slug]="invoice.slug"
+      [invoiceId]="invoice._id"
+      [modalId]="'mark-as-paid-dialog'"
+    ></app-mark-as-paid-dialog>
   </div>
-
-  <app-delete-dialog
-    [id]="invoice._id"
-    [slug]="invoice.slug"
-  ></app-delete-dialog>
-
-  <app-mark-as-paid-dialog
-    [id]="invoice._id"
-    [slug]="invoice.slug"
-  ></app-mark-as-paid-dialog>
 </ng-container>

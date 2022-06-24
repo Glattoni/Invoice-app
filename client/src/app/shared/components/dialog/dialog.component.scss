@@ -1,0 +1,22 @@
+@use 'breakpoints' as bp;
+
+dialog {
+  top: 50%;
+  left: 50%;
+  width: 87.5vw;
+  max-width: 30rem;
+  padding: 2rem;
+  background-color: var(--background-tetriary);
+  border: none;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.625rem 0.625rem -0.625rem var(--box-shadow-secondary);
+  transform: translate(-50%, -50%);
+
+  &::backdrop {
+    background-color: hsl(0deg 0% 0% / 50%);
+  }
+
+  @include bp.md {
+    padding: 3rem;
+  }
+}
