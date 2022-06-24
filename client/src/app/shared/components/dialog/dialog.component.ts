@@ -37,6 +37,10 @@ export class DialogComponent implements OnInit, OnDestroy {
     !insideDialog && this.dialog.close();
   }
 
+  enableScrolling(): void {
+    this.modalService.toggleScrolling();
+  }
+
   get dialog() {
     return this.element.nativeElement.children[0] as HTMLDialogElement;
   }
