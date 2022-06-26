@@ -1,4 +1,4 @@
-<app-dialog [id]="modalId">
+<app-dialog [id]="modalId" (animationEnd)="onAnimationEnd()">
   <h2>confirm deletion</h2>
   <p>
     Are you sure you want to delete invoice #{{ slug }}? This action cannot be

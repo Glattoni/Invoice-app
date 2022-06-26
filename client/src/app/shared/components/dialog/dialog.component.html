@@ -1,3 +1,5 @@
 <dialog [id]="id" (click)="onClick($event)" (close)="enableScrolling()">
-  <ng-content></ng-content>
+  <div class="dialog-body">
+    <ng-content></ng-content>
+  </div>
 </dialog>

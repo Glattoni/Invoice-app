@@ -1,4 +1,13 @@
-import { Component, ElementRef, Input, OnDestroy, OnInit } from '@angular/core';
+import {
+  Input,
+  OnInit,
+  Output,
+  OnDestroy,
+  Component,
+  ElementRef,
+  EventEmitter,
+} from '@angular/core';
+import { fromEvent } from 'rxjs';
 import { ModalService } from '@core/services/modal/modal.service';
 
 @Component({
@@ -8,6 +17,7 @@ import { ModalService } from '@core/services/modal/modal.service';
 })
 export class DialogComponent implements OnInit, OnDestroy {
   @Input() id: string = 'dialog';
+  @Output() animationEnd = new EventEmitter<void>();
 
   constructor(
     private modalService: ModalService,
@@ -19,22 +29,23 @@ export class DialogComponent implements OnInit, OnDestroy {
       throw new Error('Modal must have an id');
     }
 
-    this.modalService.add(this);
+    this.modalService.addModal(this);
   }
 
   ngOnDestroy(): void {
-    this.modalService.remove(this.id);
+    this.modalService.removeModal(this.id);
   }
 
   onClick(event: MouseEvent): void {
-    const rect = this.dialog.getBoundingClientRect();
-    const insideDialog =
-      rect.top <= event.clientY &&
-      event.clientY <= rect.top + rect.height &&
-      rect.left <= event.clientX &&
-      event.clientX <= rect.left + rect.width;
+    const { nodeName } = event.target as HTMLElement;
 
-    !insideDialog && this.dialog.close();
+    this.dialog.setAttribute('closing', '');
+
+    fromEvent(this.dialog, 'animationend', { once: true }).subscribe(() => {
+      this.dialog.removeAttribute('closing');
+      this.animationEnd.emit();
+      nodeName === 'DIALOG' && this.dialog.close();
+    });
   }
 
   enableScrolling(): void {
