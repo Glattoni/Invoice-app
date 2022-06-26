@@ -18,11 +18,11 @@ export class MarkAsPaidDialogComponent {
   ) {}
 
   closeModal(): void {
-    this.modalService.close(this.modalId);
+    this.modalService.closeModal(this.modalId);
   }
 
   markAsPaid(): void {
     this.invoiceService.markAsPaidInvoice(this.invoiceId);
-    this.modalService.close(this.modalId);
+    this.modalService.closeModal(this.modalId);
   }
 }
