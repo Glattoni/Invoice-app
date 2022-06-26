@@ -10,23 +10,24 @@ export class ModalService {
 
   constructor(@Inject(DOCUMENT) private document: Document) {}
 
-  add(modal: any): void {
+  addModal(modal: any): void {
     this.modals.push(modal);
   }
 
-  remove(id: string): void {
+  removeModal(id: string): void {
     this.modals = this.modals.filter((modal) => modal.id !== id);
   }
 
-  open(id: string): void {
-    const modal = this.modals.find((modal) => modal.id === id);
+  getModal(id: string) {
+    return this.modals.find((modal) => modal.id === id);
+  }
+
+  openModal(id: string): void {
+    const modal = this.getModal(id);
     modal?.dialog.showModal();
     this.toggleScrolling();
   }
 
-  close(id: string): void {
-    const modal = this.modals.find((modal) => modal.id === id);
-    modal?.dialog.close();
   }
 
   toggleScrolling(): void {

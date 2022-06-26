@@ -21,7 +21,7 @@ export class HeaderComponent {
   ) {}
 
   openDialog(id: string): void {
-    this.modalService.open(id);
+    this.modalService.openModal(id);
   }
 
   openEditingForm(invoice: Invoice): void {
