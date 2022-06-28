@@ -15,18 +15,26 @@ import {
   distinctUntilChanged,
 } from 'rxjs';
 
-import { addDays } from 'src/utils';
 import { FormArray, FormGroup } from '@angular/forms';
 
-import { Invoice, Item } from '@shared/models/invoice.model';
+import { addDays } from 'src/utils';
 import { BillingForm, ListItem } from '../../models/billing-form.model';
+
 import { InvoiceService } from '@core/services/invoice/invoice.service';
 import { BillingFormService } from '@core/services/billing-form/billing-form.service';
+
+import { Invoice, Item } from '@shared/models/invoice.model';
+import {
+  fadeIn,
+  fadeOut,
+  slideInOut,
+} from '@shared/animations/form-animations';
 
 @Component({
   selector: 'app-billing-form',
   templateUrl: './billing-form.component.html',
   styleUrls: ['./billing-form.component.scss'],
+  animations: [slideInOut, fadeIn, fadeOut],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BillingFormComponent implements OnInit, OnDestroy {
@@ -35,7 +43,7 @@ export class BillingFormComponent implements OnInit, OnDestroy {
   visible$?: Observable<boolean>;
 
   valid: boolean = true;
-  scrolledToBottom: boolean = false;
+  reachedBottom: boolean = false;
 
   private destroy$ = new Subject<void>();
 
@@ -45,8 +53,7 @@ export class BillingFormComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.getVisibility();
-    this.getPayload();
+    this.initProperties();
     this.generateForm();
     this.patchFormValue();
     this.onFormValueChanges();
@@ -101,14 +108,11 @@ export class BillingFormComponent implements OnInit, OnDestroy {
   }
 
   onScroll(value: boolean): void {
-    this.scrolledToBottom = value;
+    this.reachedBottom = value;
   }
 
-  private getVisibility(): void {
+  private initProperties(): void {
     this.visible$ = this.formService.visible$;
-  }
-
-  private getPayload(): void {
     this.payload$ = this.formService.payload$;
   }
 

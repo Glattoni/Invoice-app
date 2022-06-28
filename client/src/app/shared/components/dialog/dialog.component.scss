@@ -7,10 +7,10 @@ dialog {
   background-color: var(--background-tetriary);
   border: none;
   border-radius: 0.5rem;
-  box-shadow: 0 0 0 100vw hsl(0deg 0% 0% / 50%);
+  box-shadow: 0 0 0 100vw var(--background-overlay);
 
   &::backdrop {
-    background-color: hsl(0deg 0% 0% / 50%);
+    background-color: var(--background-overlay);
     opacity: 0;
   }
 
