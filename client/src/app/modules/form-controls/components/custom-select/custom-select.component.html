@@ -7,17 +7,17 @@
 
   <div
     class="selected-option"
-    [class.focused]="isVisible"
+    [class.focused]="visible"
     (click)="toggleVisibility()"
   >
-    {{ selectedOption?.label }}
+    {{ value | paymentTerms }}
     <svg-icon
-      [class.rotated]="isVisible"
+      [class.rotated]="visible"
       src="assets/icons/chevron.svg"
     ></svg-icon>
   </div>
 
-  <ul *ngIf="isVisible">
+  <ul *ngIf="visible">
     <li *ngFor="let option of options" (click)="selectOption(option.id)">
       {{ option.label }}
     </li>
