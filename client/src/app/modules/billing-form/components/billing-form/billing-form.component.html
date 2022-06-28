@@ -1,4 +1,4 @@
-<aside [hidden]="(visible$ | async) === false">
+<aside [@slideInOut]="(visible$ | async) ? 'open' : 'close'">
   <app-form-header [payload$]="payload$"></app-form-header>
 
   <div
@@ -17,7 +17,7 @@
         <div *ngIf="!items.length">- An item should be added</div>
       </div>
 
-      <div class="panel" [class.accent]="!scrolledToBottom">
+      <div class="panel" [class.accent]="!reachedBottom">
         <ng-container *ngIf="payload$ | async as invoice; else create">
           <app-button [variant]="'light'" [small]="true" (click)="onCancel()">
             Cancel
@@ -46,7 +46,9 @@
 </aside>
 
 <div
-  id="form-overlay"
+  id="overlay"
+  [@fadeIn]
+  [@fadeOut]
   *ngIf="visible$ | async"
   (click)="onOverlayClick()"
 ></div>

@@ -1,10 +1,4 @@
-import {
-  Input,
-  OnInit,
-  Component,
-  OnChanges,
-  SimpleChanges,
-} from '@angular/core';
+import { Input, Component } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 interface Option {
@@ -25,32 +19,16 @@ interface Option {
     },
   ],
 })
-export class CustomSelectComponent
-  implements OnInit, ControlValueAccessor, OnChanges
-{
+export class CustomSelectComponent implements ControlValueAccessor {
   @Input() label: string = '';
   @Input() options: Option[] = [];
-  @Input() selected?: number;
   @Input() invalid: boolean = false;
 
-  value?: number;
-  onChange?: (value: number) => void;
-  onTouched?: () => void;
+  value: number = 30;
+  onChange!: (value: number) => void;
+  onTouched!: () => void;
 
-  isVisible: boolean = false;
-  selectedOption?: Option;
-
-  ngOnInit(): void {
-    this.selectedOption = this.options.find(
-      (option) => option.value === this.selected
-    );
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    this.selectedOption = this.options.find(
-      (option) => option.value === changes['selected'].currentValue
-    );
-  }
+  visible: boolean = false;
 
   writeValue(value: number): void {
     this.value = value;
@@ -65,20 +43,20 @@ export class CustomSelectComponent
   }
 
   toggleVisibility(): void {
-    this.isVisible = !this.isVisible;
+    this.visible = !this.visible;
   }
 
   onClickOutside(): void {
-    this.isVisible = false;
+    this.visible = false;
   }
 
   selectOption(id: string): void {
     const selected = this.options.find((option) => option.id === id);
 
-    if (!selected || !this.onChange) return;
-
-    this.onChange(selected.value);
-    this.selectedOption = selected;
-    this.toggleVisibility();
+    if (selected) {
+      this.onChange(selected.value);
+      this.writeValue(selected.value);
+      this.toggleVisibility();
+    }
   }
 }

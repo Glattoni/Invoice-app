@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { PaymentTermsPipe } from '@modules/form-controls/pipes/payment-terms.pipe';
 
 import { CustomSelectComponent } from './custom-select.component';
 
@@ -8,9 +9,8 @@ describe('CustomSelectComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CustomSelectComponent ]
-    })
-    .compileComponents();
+      declarations: [CustomSelectComponent, PaymentTermsPipe],
+    }).compileComponents();
   });
 
   beforeEach(() => {
