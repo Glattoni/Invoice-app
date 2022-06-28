@@ -11,7 +11,7 @@ export const slideInOut = trigger('slideInOut', [
     'open',
     style({
       opacity: 1,
-      transform: 'translateX(0)',
+      transform: 'none',
     })
   ),
   state(
