@@ -1,6 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroupDirective, FormGroup } from '@angular/forms';
-import { Subscription } from 'rxjs';
+
 import { BillingForm } from '../../models/billing-form.model';
 
 @Component({
@@ -8,10 +8,8 @@ import { BillingForm } from '../../models/billing-form.model';
   templateUrl: './invoice-terms.component.html',
   styleUrls: ['./invoice-terms.component.scss'],
 })
-export class InvoiceTermsComponent implements OnInit, OnDestroy {
+export class InvoiceTermsComponent implements OnInit {
   form?: FormGroup<BillingForm>;
-  deadline: number = 30;
-  deadlineSub?: Subscription;
 
   readonly options = [
     { id: '1', value: 1, label: 'Next 1 day' },
@@ -24,13 +22,18 @@ export class InvoiceTermsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.form = this.rootFormGroup.control;
-    this.deadlineSub = this.paymentTerms?.valueChanges.subscribe((value) => {
-      this.deadline = value;
-    });
   }
 
-  ngOnDestroy(): void {
-    this.deadlineSub?.unsubscribe();
+  get createdAt() {
+    return this.form?.get('createdAt');
+  }
+
+  get paymentTerms() {
+    return this.form?.get('paymentTerms');
+  }
+
+  get description() {
+    return this.form?.get('description');
   }
 
   get invalidDate() {
@@ -47,17 +50,5 @@ export class InvoiceTermsComponent implements OnInit, OnDestroy {
 
   get disabledCreatedAt() {
     return this.createdAt?.disabled;
-  }
-
-  private get createdAt() {
-    return this.form?.get('createdAt');
-  }
-
-  private get paymentTerms() {
-    return this.form?.get('paymentTerms');
-  }
-
-  private get description() {
-    return this.form?.get('description');
   }
 }
