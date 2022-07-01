@@ -106,10 +106,8 @@ fieldset:last-child {
 }
 
 #overlay {
-  position: fixed;
+  position: absolute;
   inset: 0;
-  z-index: var(--z-overlay);
-  width: 100%;
-  height: 100%;
+  z-index: -1;
   background-color: hsl(0deg 0% 0% / 50%);
 }
