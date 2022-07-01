@@ -5,12 +5,15 @@ ul {
   font-weight: bold;
   background-color: var(--background-secondary);
   border-radius: 0.5rem;
-  box-shadow: 0 0.625rem 1.25rem var(--box-shadow-primary);
+  box-shadow: none;
+  transition: box-shadow 0.2s ease-in-out;
+  transform-origin: top center;
 }
 
 li {
   padding: 1rem 1.25rem;
   cursor: pointer;
+  transition: color 0.1s ease-in-out;
 
   &:not(:last-child) {
     border-bottom: 1px solid var(--select-option-divider);
@@ -26,6 +29,14 @@ svg-icon {
   top: 50%;
   right: 1rem;
   transform: translateY(-50%);
+
+  & > svg {
+    transition: transform 0.2s ease-in-out;
+  }
+
+  &.rotated > svg {
+    transform: rotate(180deg);
+  }
 }
 
 .container {
@@ -41,12 +52,13 @@ svg-icon {
   background-color: var(--background-tetriary);
   border: 1px solid var(--input-inner-border);
   border-radius: 0.25rem;
-}
+  transition: border-color 0.2s ease-in-out;
 
-.focused {
-  border: 1px solid var(--primary);
-}
+  &.focused {
+    border-color: var(--primary);
 
-.rotated > svg {
-  transform: rotate(180deg);
+    & + ul {
+      box-shadow: 0 0.625rem 1.25rem var(--box-shadow-primary);
+    }
+  }
 }
