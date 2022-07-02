@@ -2,8 +2,6 @@ import {
   of,
   map,
   tap,
-  iif,
-  mergeMap,
   catchError,
   withLatestFrom,
   Observable,
@@ -122,19 +120,22 @@ export class InvoiceService {
       .subscribe((value) => this.invoice.next(value));
   }
 
-  filterByStatus(status: string | null) {
+  filterByStatus(status: string) {
     this.selectedFilter.next(status);
     this.invoices$
       .pipe(
-        mergeMap((invoices) =>
-          iif(
-            () => status === null,
-            of(invoices),
-            of(invoices.filter((invoice) => invoice.status === status))
-          )
+        map((invoices) =>
+          invoices.filter((invoice) => invoice.status === status)
         ),
         catchError(this.handleError<Invoice[]>())
       )
+      .subscribe((value) => this.filteredInvoices.next(value));
+  }
+
+  resetFilter() {
+    this.selectedFilter.next(null);
+    this.invoices$
+      .pipe(catchError(this.handleError<Invoice[]>()))
       .subscribe((value) => this.filteredInvoices.next(value));
   }
 

@@ -17,7 +17,7 @@ export class DropdownComponent {
   onClick(event: MouseEvent, index: number): void {
     if (this.index === index) {
       this.index = -1;
-      this.invoiceService.filterByStatus(null);
+      this.invoiceService.resetFilter();
       (event.target as HTMLInputElement).checked = false;
     } else {
       this.index = index;
