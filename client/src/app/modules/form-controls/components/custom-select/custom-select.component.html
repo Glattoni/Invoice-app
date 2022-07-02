@@ -17,7 +17,7 @@
     ></svg-icon>
   </div>
 
-  <ul *ngIf="visible">
+  <ul [@scaleDown]="visible ? 'open' : 'close'">
     <li *ngFor="let option of options" (click)="selectOption(option.id)">
       {{ option.label }}
     </li>

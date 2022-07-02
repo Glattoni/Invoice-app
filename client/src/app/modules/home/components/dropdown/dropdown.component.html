@@ -2,12 +2,12 @@
   <button (click)="toggleVisibility()">
     Filter <span>by status</span>
     <svg-icon
-      [class.rotated]="isVisible"
+      [class.rotated]="visible"
       src="assets/icons/chevron.svg"
     ></svg-icon>
   </button>
 
-  <ul *ngIf="isVisible">
+  <ul [@scaleDown]="visible ? 'open' : 'close'">
     <li *ngFor="let status of statuses; index as i">
       <input
         type="radio"

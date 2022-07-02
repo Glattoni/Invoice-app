@@ -1,3 +1,10 @@
+import {
+  state,
+  style,
+  trigger,
+  animate,
+  transition,
+} from '@angular/animations';
 import { Input, Component } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -17,6 +24,26 @@ interface Option {
       useExisting: CustomSelectComponent,
       multi: true,
     },
+  ],
+  animations: [
+    trigger('scaleDown', [
+      state(
+        'open',
+        style({
+          opacity: 1,
+          transform: 'scaleY(1)',
+        })
+      ),
+      state(
+        'close',
+        style({
+          opacity: 0,
+          transform: 'scaleY(0)',
+        })
+      ),
+      transition('open => *', [animate('200ms ease-in')]),
+      transition('* => open', [animate('200ms ease-out')]),
+    ]),
   ],
 })
 export class CustomSelectComponent implements ControlValueAccessor {

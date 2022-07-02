@@ -15,26 +15,66 @@ import {
   distinctUntilChanged,
 } from 'rxjs';
 
+import {
+  state,
+  style,
+  trigger,
+  animate,
+  transition,
+} from '@angular/animations';
+
 import { FormArray, FormGroup } from '@angular/forms';
 
 import { addDays } from 'src/utils';
 import { BillingForm, ListItem } from '../../models/billing-form.model';
 
+import { Invoice, Item } from '@shared/models/invoice.model';
+
 import { InvoiceService } from '@core/services/invoice/invoice.service';
 import { BillingFormService } from '@core/services/billing-form/billing-form.service';
-
-import { Invoice, Item } from '@shared/models/invoice.model';
-import {
-  fadeIn,
-  fadeOut,
-  slideInOut,
-} from '@shared/animations/form-animations';
 
 @Component({
   selector: 'app-billing-form',
   templateUrl: './billing-form.component.html',
   styleUrls: ['./billing-form.component.scss'],
-  animations: [slideInOut, fadeIn, fadeOut],
+  animations: [
+    trigger('slideInOut', [
+      state(
+        'open',
+        style({
+          opacity: 1,
+          transform: 'none',
+        })
+      ),
+      state(
+        'close',
+        style({
+          opacity: 0,
+          transform: 'translateX(-100%)',
+        })
+      ),
+      transition('open => *', [animate('300ms ease-in')]),
+      transition('* => open', [animate('300ms ease-out')]),
+    ]),
+    trigger('fadeInOut', [
+      state(
+        'open',
+        style({
+          zIndex: 'var(--z-overlay)',
+          opacity: 1,
+        })
+      ),
+      state(
+        'close',
+        style({
+          zIndex: -1,
+          opacity: 0,
+        })
+      ),
+      transition('open => *', [animate('300ms ease-in')]),
+      transition('* => open', [animate('300ms ease-out')]),
+    ]),
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BillingFormComponent implements OnInit, OnDestroy {
