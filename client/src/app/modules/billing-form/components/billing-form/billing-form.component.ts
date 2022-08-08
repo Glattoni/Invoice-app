@@ -142,6 +142,7 @@ export class BillingFormComponent implements OnInit, OnDestroy {
     if (this.valid && this.formData) {
       this.invoiceService.updateInvoice(invoiceId, this.formData);
       this.resetForm();
+      this.createdAt?.enable();
       this.formService.close();
     }
   }
