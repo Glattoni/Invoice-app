@@ -105,11 +105,11 @@ export class CustomDatepickerComponent
   }
 
   ngAfterContentInit(): void {
-    const control = this.ngControl.control;
+    const control = this.ngControl?.control;
 
     if (control === null) return;
 
-    merge(of(control.value), control.valueChanges)
+    merge(of(control?.value), control?.valueChanges)
       .pipe(
         distinctUntilChanged(),
         map(this.parseISODate),
