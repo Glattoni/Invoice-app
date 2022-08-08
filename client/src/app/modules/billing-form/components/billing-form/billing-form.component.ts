@@ -1,11 +1,4 @@
 import {
-  OnInit,
-  OnDestroy,
-  Component,
-  ChangeDetectionStrategy,
-} from '@angular/core';
-
-import {
   Subject,
   Observable,
   merge,
@@ -14,6 +7,13 @@ import {
   debounceTime,
   distinctUntilChanged,
 } from 'rxjs';
+
+import {
+  OnInit,
+  OnDestroy,
+  Component,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 
 import {
   state,
@@ -25,7 +25,6 @@ import {
 
 import { FormArray, FormGroup } from '@angular/forms';
 
-import { addDays } from 'src/utils';
 import { BillingForm, ListItem } from '../../models/billing-form.model';
 
 import { Invoice, Item } from '@shared/models/invoice.model';
@@ -37,6 +36,7 @@ import { BillingFormService } from '@core/services/billing-form/billing-form.ser
   selector: 'app-billing-form',
   templateUrl: './billing-form.component.html',
   styleUrls: ['./billing-form.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('slideInOut', [
       state(
@@ -75,17 +75,16 @@ import { BillingFormService } from '@core/services/billing-form/billing-form.ser
       transition('* => open', [animate('300ms ease-out')]),
     ]),
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BillingFormComponent implements OnInit, OnDestroy {
   form?: FormGroup<BillingForm>;
   payload$?: Observable<Invoice>;
   visible$?: Observable<boolean>;
 
-  valid: boolean = true;
-  reachedBottom: boolean = false;
+  valid = true;
+  reachedBottom = false;
 
-  private destroy$ = new Subject<void>();
+  private destroyed$ = new Subject<void>();
 
   constructor(
     private invoiceService: InvoiceService,
@@ -101,8 +100,8 @@ export class BillingFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
+    this.destroyed$.next();
+    this.destroyed$.complete();
   }
 
   onDiscard(): void {
@@ -143,6 +142,7 @@ export class BillingFormComponent implements OnInit, OnDestroy {
     if (this.valid && this.formData) {
       this.invoiceService.updateInvoice(invoiceId, this.formData);
       this.resetForm();
+      this.createdAt?.enable();
       this.formService.close();
     }
   }
@@ -164,7 +164,7 @@ export class BillingFormComponent implements OnInit, OnDestroy {
     this.payload$
       ?.pipe(
         filter((payload) => payload !== null),
-        takeUntil(this.destroy$)
+        takeUntil(this.destroyed$)
       )
       .subscribe((invoice) => {
         this.form?.patchValue({
@@ -188,10 +188,10 @@ export class BillingFormComponent implements OnInit, OnDestroy {
   private patchItemList(items: Item[]): void {
     this.items.clear();
 
-    items.forEach((item) => {
+    for (const item of items) {
       const listItem = this.formService.generateListItem(item);
       this.items.push(listItem);
-    });
+    }
   }
 
   private onFormValueChanges(): void {
@@ -200,7 +200,7 @@ export class BillingFormComponent implements OnInit, OnDestroy {
         .pipe(
           debounceTime(500),
           distinctUntilChanged(),
-          takeUntil(this.destroy$)
+          takeUntil(this.destroyed$)
         )
         .subscribe(() => {
           this.calculatePaymentDueDate();
@@ -210,7 +210,11 @@ export class BillingFormComponent implements OnInit, OnDestroy {
 
   private onItemListValueChanges(): void {
     this.items.valueChanges
-      .pipe(debounceTime(500), distinctUntilChanged(), takeUntil(this.destroy$))
+      .pipe(
+        debounceTime(500),
+        distinctUntilChanged(),
+        takeUntil(this.destroyed$)
+      )
       .subscribe(() => {
         this.calculateAmountDue();
       });
@@ -227,8 +231,9 @@ export class BillingFormComponent implements OnInit, OnDestroy {
   private calculatePaymentDueDate(): void {
     const date = this.createdAt?.value || '';
     const amount = this.paymentTerms?.value || 0;
+    const due = this.formService.getPaymentDue(date, { days: amount });
 
-    this.paymentDue?.setValue(addDays(date, amount));
+    this.paymentDue?.setValue(due);
   }
 
   private validateForm(): void {

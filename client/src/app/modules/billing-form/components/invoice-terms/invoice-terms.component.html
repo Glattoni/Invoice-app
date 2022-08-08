@@ -3,10 +3,12 @@
 
   <div class="fields-container conditions">
     <!-- created at -->
-    <div class="form-field invoice-date" [class.disabled]="disabledCreatedAt">
-      <label for="invoice-date">invoice date</label>
-      <input type="date" id="invoice-date" formControlName="createdAt" />
-    </div>
+    <app-custom-datepicker
+      class="created-at"
+      formControlName="createdAt"
+      [label]="'invoice date'"
+      [classes]="'form-field'"
+    ></app-custom-datepicker>
     <!-- created at -->
 
     <!-- payment terms -->

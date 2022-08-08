@@ -1,11 +1,17 @@
-import { Inject, Injectable } from '@angular/core';
-import { DOCUMENT, formatDate } from '@angular/common';
+import { DateTime } from 'luxon';
+import { generateSlug } from 'src/utils';
+
 import { BehaviorSubject, ReplaySubject } from 'rxjs';
+
+import { DOCUMENT } from '@angular/common';
+import { Inject, Injectable } from '@angular/core';
 import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 
-import { addDays, generateSlug } from 'src/utils';
 import { Invoice, Item } from '@shared/models/invoice.model';
 import { ListItem } from '@modules/billing-form/models/billing-form.model';
+
+const DEFAULT_PAYMENT_DUE = 30;
+const DEFAULT_DATE_FORMAT = 'yyyy-MM-dd';
 
 @Injectable({
   providedIn: 'root',
@@ -22,22 +28,26 @@ export class BillingFormService {
     private formBuilder: NonNullableFormBuilder
   ) {}
 
+  getPaymentDue(date: string, duration: Object) {
+    return DateTime.fromISO(date).plus(duration).toFormat(DEFAULT_DATE_FORMAT);
+  }
+
   generateFormGroup() {
-    const slug = generateSlug();
-    const senderAddress = this.generateAddressGroup();
-    const clientAddress = this.generateAddressGroup();
-    const creationDate = formatDate(new Date(), 'yyyy-MM-dd', 'en');
-    const paymentDue = addDays(creationDate, 30);
+    const date = DateTime.now();
+    const creationDate = date.toFormat(DEFAULT_DATE_FORMAT);
+    const paymentDue = this.getPaymentDue(date.toISO(), {
+      days: DEFAULT_PAYMENT_DUE,
+    });
 
     return this.formBuilder.group({
-      slug: [slug, Validators.required],
+      slug: [generateSlug(), Validators.required],
       status: ['pending', Validators.required],
-      senderAddress: senderAddress,
-      clientAddress: clientAddress,
+      senderAddress: this.generateAddressGroup(),
+      clientAddress: this.generateAddressGroup(),
       clientName: ['', Validators.required],
       clientEmail: ['', [Validators.required, Validators.email]],
       createdAt: [creationDate, Validators.required],
-      paymentTerms: [30, Validators.required],
+      paymentTerms: [DEFAULT_PAYMENT_DUE, Validators.required],
       paymentDue: [paymentDue, Validators.required],
       items: this.formBuilder.array<FormGroup<ListItem>>(
         [],
