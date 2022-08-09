@@ -7,7 +7,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
   template: `
     <div clickedOutside (clickOutside)="clickedOutside()">
       <button (click)="toggleVisibility()">menu title</button>
-
       <ul *ngIf="isVisible">
         <li>item one</li>
         <li>item two</li>
