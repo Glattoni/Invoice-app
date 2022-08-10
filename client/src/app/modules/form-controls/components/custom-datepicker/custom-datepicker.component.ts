@@ -88,11 +88,9 @@ export class CustomDatepickerComponent
   onTouched!: () => void;
   onChange!: (value: string) => void;
 
-  // TODO: return to using observables
   displayedDay = 0;
   month = 0;
   year = 0;
-  // ISODate = '';
   daysInMonth: Day[] = [];
 
   private readonly monthValueChanges$ = new Subject<number>();
