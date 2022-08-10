@@ -1,0 +1,52 @@
+<aside [@slideInOut]="(visible$ | async) ? 'open' : 'close'">
+  <app-form-header [payload$]="payload$"></app-form-header>
+
+  <div
+    class="form-container"
+    scrolledToBottom
+    (scrolledToBottom)="onScroll($event)"
+  >
+    <form *ngIf="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+      <form-sender-address></form-sender-address>
+      <form-client-info></form-client-info>
+      <form-invoice-terms></form-invoice-terms>
+      <form-items-list></form-items-list>
+
+      <div *ngIf="!valid" class="validation-errors">
+        <div>- All fields must be added</div>
+        <div *ngIf="!items.length">- An item should be added</div>
+      </div>
+
+      <div class="panel" [class.accent]="!reachedBottom">
+        <ng-container *ngIf="payload$ | async as invoice; else create">
+          <app-button [variant]="'light'" [small]="true" (click)="onCancel()">
+            Cancel
+          </app-button>
+          <app-button [small]="true" (click)="onSaveChanges(invoice._id)">
+            Save Changes
+          </app-button>
+        </ng-container>
+
+        <ng-template #create>
+          <app-button [variant]="'light'" [small]="true" (click)="onDiscard()">
+            Discard
+          </app-button>
+          <app-button
+            [variant]="'dark'"
+            [small]="true"
+            (click)="onSaveAsDraft()"
+          >
+            Save as Draft
+          </app-button>
+          <app-button type="'submit'" [small]="true"> Save & Send </app-button>
+        </ng-template>
+      </div>
+    </form>
+  </div>
+</aside>
+
+<div
+  id="overlay"
+  [@fadeInOut]="(visible$ | async) ? 'open' : 'close'"
+  (click)="onOverlayClick()"
+></div>

@@ -10,7 +10,7 @@ import {
 } from 'rxjs';
 
 import { Injectable } from '@angular/core';
-import { Invoice } from '@shared/models/invoice.model';
+import { Invoice, NewInvoice } from '@shared/models/invoice.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
@@ -26,7 +26,7 @@ export class InvoiceService {
 
   private invoice = new ReplaySubject<Invoice>();
   private invoices = new BehaviorSubject<Invoice[]>([]);
-  private selectedFilter = new ReplaySubject<string>();
+  private selectedFilter = new ReplaySubject<string | null>();
   private filteredInvoices = new BehaviorSubject<Invoice[]>([]);
 
   readonly invoice$ = this.invoice.asObservable();
@@ -55,7 +55,7 @@ export class InvoiceService {
       .subscribe((value) => this.invoice.next(value));
   }
 
-  createInvoice(body: Invoice) {
+  createInvoice(body: NewInvoice) {
     this.http
       .post<Invoice>(this.invoicesUrl, body, this.httpOptions)
       .pipe(
@@ -69,7 +69,7 @@ export class InvoiceService {
       });
   }
 
-  updateInvoice(id: string, body: Invoice) {
+  updateInvoice(id: string, body: NewInvoice) {
     const url = `${this.invoicesUrl}/${id}`;
 
     this.http
@@ -129,6 +129,13 @@ export class InvoiceService {
         ),
         catchError(this.handleError<Invoice[]>())
       )
+      .subscribe((value) => this.filteredInvoices.next(value));
+  }
+
+  resetFilter() {
+    this.selectedFilter.next(null);
+    this.invoices$
+      .pipe(catchError(this.handleError<Invoice[]>()))
       .subscribe((value) => this.filteredInvoices.next(value));
   }
 

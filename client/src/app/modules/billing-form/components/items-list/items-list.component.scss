@@ -18,7 +18,7 @@ header {
 
   @include bp.md {
     display: grid;
-    grid-template-columns: 12.5rem 2.875rem 6.25rem auto;
+    grid-template-columns: 12.5rem 4rem 6.25rem auto;
     gap: 1rem;
   }
 }
@@ -73,7 +73,7 @@ li {
   }
 
   @include bp.md {
-    grid-template-columns: 12.5rem 2.875rem 6.25rem auto 2rem;
+    grid-template-columns: 12.5rem 4rem 6.25rem auto 2rem;
     gap: 1rem;
   }
 }
@@ -117,5 +117,40 @@ li {
 
   @include bp.md {
     margin-top: 1.5rem;
+  }
+}
+
+svg-icon svg:hover path {
+  fill: var(--danger);
+}
+
+.delete-item {
+  padding-top: 1.5625rem;
+
+  @include bp.md {
+    padding-top: 0;
+  }
+}
+
+.total-amount {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  color: var(--foreground-primary);
+
+  p {
+    width: 100%;
+    max-height: 3rem;
+    padding: 1rem 0;
+    font-weight: bold;
+    border: 1px solid transparent;
+  }
+
+  @include bp.md {
+    flex-direction: row;
+
+    label {
+      display: none;
+    }
   }
 }

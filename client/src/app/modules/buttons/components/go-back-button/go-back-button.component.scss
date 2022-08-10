@@ -9,4 +9,8 @@ button {
 p {
   font-weight: bold;
   line-height: 0.9375rem;
+
+  &:hover {
+    color: var(--go-back-hover);
+  }
 }

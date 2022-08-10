@@ -3,6 +3,8 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { InvoiceDetailPageComponent } from './invoice-detail-page.component';
+import { ButtonComponent } from '@modules/buttons/components/button/button.component';
+import { GoBackButtonComponent } from '@modules/buttons/components/go-back-button/go-back-button.component';
 
 describe('InvoiceDetailPageComponent', () => {
   let component: InvoiceDetailPageComponent;
@@ -10,7 +12,11 @@ describe('InvoiceDetailPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [InvoiceDetailPageComponent],
+      declarations: [
+        ButtonComponent,
+        GoBackButtonComponent,
+        InvoiceDetailPageComponent,
+      ],
       imports: [HttpClientTestingModule, RouterTestingModule],
     }).compileComponents();
   });

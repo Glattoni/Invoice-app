@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
-import { SidebarFormService } from '@core/services/sidebar-form/sidebar-form.service';
+import { ThemeService } from '@core/services/theme/theme.service';
 
 @Component({
   selector: 'app-root',
@@ -8,15 +8,11 @@ import { SidebarFormService } from '@core/services/sidebar-form/sidebar-form.ser
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  visible$?: Observable<boolean>;
+  theme$?: Observable<'light' | 'dark'>;
 
-  constructor(private sidebarFormService: SidebarFormService) {}
+  constructor(private themeService: ThemeService) {}
 
   ngOnInit(): void {
-    this.visible$ = this.sidebarFormService.visible$;
-  }
-
-  closeSidebar(): void {
-    this.sidebarFormService.close();
+    this.theme$ = this.themeService.theme$;
   }
 }

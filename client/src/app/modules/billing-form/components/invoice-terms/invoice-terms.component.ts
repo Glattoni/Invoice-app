@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormGroupDirective } from '@angular/forms';
+import { FormGroupDirective, FormGroup } from '@angular/forms';
+
+import { BillingForm } from '../../models/billing-form.model';
 
 @Component({
   selector: 'form-invoice-terms',
@@ -7,8 +9,7 @@ import { FormGroup, FormGroupDirective } from '@angular/forms';
   styleUrls: ['./invoice-terms.component.scss'],
 })
 export class InvoiceTermsComponent implements OnInit {
-  form?: FormGroup;
-  deadline?: number;
+  form?: FormGroup<BillingForm>;
 
   readonly options = [
     { id: '1', value: 1, label: 'Next 1 day' },
@@ -21,7 +22,18 @@ export class InvoiceTermsComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.rootFormGroup.control;
-    this.deadline = this.paymentTerms?.value;
+  }
+
+  get createdAt() {
+    return this.form?.get('createdAt');
+  }
+
+  get paymentTerms() {
+    return this.form?.get('paymentTerms');
+  }
+
+  get description() {
+    return this.form?.get('description');
   }
 
   get invalidDate() {
@@ -36,15 +48,7 @@ export class InvoiceTermsComponent implements OnInit {
     return this.description?.invalid && this.description.touched;
   }
 
-  private get createdAt() {
-    return this.form?.get('createdAt');
-  }
-
-  private get paymentTerms() {
-    return this.form?.get('paymentTerms');
-  }
-
-  private get description() {
-    return this.form?.get('description');
+  get disabledCreatedAt() {
+    return this.createdAt?.disabled;
   }
 }

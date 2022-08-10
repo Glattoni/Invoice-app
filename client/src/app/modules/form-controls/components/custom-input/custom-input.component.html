@@ -1,0 +1,11 @@
+<div class="form-field" [class.invalid]="invalid">
+  <label [for]="label">{{ label }}</label>
+  <input
+    [id]="label"
+    [type]="type"
+    [(ngModel)]="value"
+    [placeholder]="placeholder"
+    (blur)="onTouched()"
+    (ngModelChange)="onChange($event)"
+  />
+</div>

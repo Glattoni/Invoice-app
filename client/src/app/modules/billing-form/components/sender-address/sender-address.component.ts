@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormGroupDirective } from '@angular/forms';
+import { FormGroupDirective, FormGroup } from '@angular/forms';
+import { BillingForm } from '../../models/billing-form.model';
 
 @Component({
   selector: 'form-sender-address',
@@ -7,7 +8,7 @@ import { FormGroup, FormGroupDirective } from '@angular/forms';
   styleUrls: ['./sender-address.component.scss'],
 })
 export class SenderAddressComponent implements OnInit {
-  form?: FormGroup;
+  form?: FormGroup<BillingForm>;
 
   constructor(private rootFormGroup: FormGroupDirective) {}
 

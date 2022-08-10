@@ -1,0 +1,39 @@
+<div
+  class="container"
+  [class]="classes"
+  [class.disabled]="disabled"
+  clickOutside
+  (clickOutside)="onClickOutside()"
+>
+  <label *ngIf="label">{{ label }}</label>
+
+  <div class="selected-date" [class.focused]="visible" (click)="toggle()">
+    <div>{{ value | date: DATE_FULL_FORMAT }}</div>
+    <svg-icon src="assets/icons/calendar.svg"></svg-icon>
+  </div>
+
+  <div class="date-picker" [@scaleDown]="visible ? 'open' : 'close'">
+    <div class="date-picker-header">
+      <svg-icon
+        src="assets/icons/chevron.svg"
+        (click)="decrementMonth()"
+      ></svg-icon>
+      <span>{{ ISODate | date: DATE_MEDIUM_FORMAT }}</span>
+      <svg-icon
+        src="assets/icons/chevron.svg"
+        (click)="incrementMonth()"
+      ></svg-icon>
+    </div>
+    <div class="days-container">
+      <div
+        class="day"
+        *ngFor="let day of daysInMonth"
+        (click)="setDate(day)"
+        [class.ahead]="day.next"
+        [class.selected]="displayedDay === day.value && month === selectedMonth"
+      >
+        {{ day.value }}
+      </div>
+    </div>
+  </div>
+</div>

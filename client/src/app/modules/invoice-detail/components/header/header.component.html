@@ -1,20 +1,21 @@
-<ng-container *ngIf="invoice">
-  <div class="wrapper">
-    <div class="status">
-      <p>Status</p>
-      <app-invoice-state [variant]="invoice.status"></app-invoice-state>
-    </div>
-    <div class="controls">
-      <app-button [variant]="'neutral'" (click)="openEditingForm(invoice)">
-        Edit
-      </app-button>
-      <app-button
-        [variant]="'danger'"
-        (click)="openDeleteModal('delete-prompt')"
-      >
-        Delete
-      </app-button>
-      <app-button (click)="markAsPaid(invoice._id)">Mark as paid</app-button>
-    </div>
+<div *ngIf="invoice" class="wrapper">
+  <div class="status">
+    <p>Status</p>
+    <app-invoice-state [variant]="invoice.status"></app-invoice-state>
   </div>
-</ng-container>
+
+  <div class="controls">
+    <app-button [variant]="'neutral'" (click)="openEditingForm(invoice)">
+      Edit
+    </app-button>
+    <app-button [variant]="'danger'" (click)="openDialog('delete-dialog')">
+      Delete
+    </app-button>
+    <app-button
+      *ngIf="!isPaidInvoice"
+      (click)="openDialog('mark-as-paid-dialog')"
+    >
+      Mark as paid
+    </app-button>
+  </div>
+</div>

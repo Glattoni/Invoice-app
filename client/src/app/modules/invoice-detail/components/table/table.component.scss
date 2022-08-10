@@ -17,6 +17,7 @@
   display: none;
   grid-template-columns: 3.5fr 1fr 1.25fr 1.25fr;
   margin-bottom: 2rem;
+  color: var(--label-foreground);
   text-align: right;
 
   &-name {

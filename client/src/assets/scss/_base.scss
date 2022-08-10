@@ -12,6 +12,14 @@
 }
 
 body {
+  &.modal-open,
+  &.form-open {
+    overflow-y: hidden;
+  }
+}
+
+#invoice-app {
+  overflow: scroll;
   font-family: Spartan, Roboto, Ubuntu, sans-serif;
   font-size: var(--font-sm);
   font-weight: 500;
@@ -139,7 +147,7 @@ input::-webkit-inner-spin-button {
     }
 
     ::-webkit-scrollbar-thumb {
-      background-color: var(--background-secondary);
+      background-color: var(--background-scrollbar);
       border-radius: 0.25rem;
     }
   }

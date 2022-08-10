@@ -6,13 +6,14 @@ import { SharedModule } from '@shared/shared.module';
 import { ButtonsModule } from '../buttons/buttons.module';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 
-import { BillingFormComponent } from './billing-form.component';
+import { BillingFormComponent } from './components/billing-form/billing-form.component';
 import { ItemsListComponent } from './components/items-list/items-list.component';
 import { ClientInfoComponent } from './components/client-info/client-info.component';
 import { InvoiceTermsComponent } from './components/invoice-terms/invoice-terms.component';
 import { SenderAddressComponent } from './components/sender-address/sender-address.component';
-import { CustomSelectComponent } from './components/custom-select/custom-select.component';
-import { CustomInputComponent } from './components/custom-input/custom-input.component';
+import { ScrolledToBottomDirective } from './directives/scrolled-to-bottom.directive';
+import { FormControlsModule } from '@modules/form-controls/form-controls.module';
+import { FormHeaderComponent } from './components/form-header/form-header.component';
 
 @NgModule({
   declarations: [
@@ -21,14 +22,15 @@ import { CustomInputComponent } from './components/custom-input/custom-input.com
     BillingFormComponent,
     InvoiceTermsComponent,
     SenderAddressComponent,
-    CustomSelectComponent,
-    CustomInputComponent,
+    ScrolledToBottomDirective,
+    FormHeaderComponent,
   ],
   imports: [
     FormsModule,
     CommonModule,
     SharedModule,
     ButtonsModule,
+    FormControlsModule,
     ReactiveFormsModule,
     AngularSvgIconModule,
   ],

@@ -1,44 +1,41 @@
 import { Injectable } from '@angular/core';
-import { Theme, light, dark } from '@core/constants/themes';
+import { BehaviorSubject } from 'rxjs';
 import { LocalStorageService } from '../local-storage/local-storage.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ThemeService {
-  private active: Theme;
+  private theme = new BehaviorSubject<'light' | 'dark'>('light');
+  readonly theme$ = this.theme.asObservable();
 
   constructor(private localStorageService: LocalStorageService) {
-    this.active = this.checkLocalStorage() || light;
-    this.setActiveTheme(this.active);
+    this.theme.next(this.preservedTheme);
   }
 
-  getActiveTheme(): Theme {
-    return this.active;
+  toggleTheme(): void {
+    this.isDarkTheme ? this.setLightTheme() : this.setDarkTheme();
   }
 
-  checkLocalStorage() {
-    const theme = this.localStorageService.getItem('theme');
-    if (!theme) return light;
-    return JSON.parse(theme);
+  private setDarkTheme(): void {
+    this.theme.next('dark');
+    this.localStorageService.setItem('theme', 'dark');
   }
 
-  setDarkTheme(): void {
-    this.setActiveTheme(dark);
-    this.localStorageService.setItem('theme', dark);
+  private setLightTheme(): void {
+    this.theme.next('light');
+    this.localStorageService.setItem('theme', 'light');
   }
 
-  setLightTheme(): void {
-    this.setActiveTheme(light);
-    this.localStorageService.setItem('theme', light);
+  get activeTheme() {
+    return this.theme.value;
   }
 
-  setActiveTheme(theme: Theme): void {
-    this.active = theme;
-    const documentStyle = document.documentElement.style;
+  get isDarkTheme() {
+    return this.theme.value === 'dark';
+  }
 
-    Object.keys(this.active.properties).forEach((prop) => {
-      documentStyle.setProperty(prop, this.active.properties[prop]);
-    });
+  get preservedTheme() {
+    return this.localStorageService.getItem('theme') || 'light';
   }
 }

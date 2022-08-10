@@ -1,15 +1,9 @@
-<app-sidebar></app-sidebar>
+<div id="invoice-app" [attr.data-theme]="theme$ | async">
+  <app-sidebar></app-sidebar>
 
-<main>
-  <router-outlet></router-outlet>
-</main>
+  <main>
+    <router-outlet></router-outlet>
+  </main>
 
-<aside [class.visible]="visible$ | async">
   <app-billing-form></app-billing-form>
-</aside>
-
-<div
-  class="overlay"
-  (click)="closeSidebar()"
-  [class.visible]="visible$ | async"
-></div>
+</div>

@@ -17,6 +17,7 @@
       formControlName="clientEmail"
       [label]="'client\'s email'"
       [invalid]="invalidEmail"
+      [placeholder]="'e.g. email@example.com'"
     ></app-custom-input>
     <!-- client's email -->
   </div>
@@ -51,7 +52,7 @@
 
     <!-- client's country -->
     <app-custom-input
-      class="client-contry"
+      class="client-country"
       formControlName="country"
       [label]="'country'"
       [invalid]="invalidCountry"

@@ -1,10 +1,12 @@
 <ng-container *ngIf="invoice$ | async as invoice">
   <div class="app-container container">
     <app-go-back-button
-      [type]="linkType"
+      [type]="link"
       [offset]="'0 0 2rem'"
     ></app-go-back-button>
+
     <app-header [invoice]="invoice"></app-header>
+
     <section>
       <app-body
         [slug]="invoice.slug"
@@ -18,22 +20,17 @@
       ></app-body>
       <app-table [items]="invoice.items" [total]="invoice.total"></app-table>
     </section>
-  </div>
 
-  <!--TODO: move to separate component -->
-  <app-modal id="delete-prompt">
-    <h2 class="modal-title">confirm deletion</h2>
-    <p class="modal-text">
-      Are you sure you want to delete invoice #{{ invoice.slug }}? This action
-      cannot be undone.
-    </p>
-    <div class="modal-controls">
-      <app-button [variant]="'neutral'" (click)="closeModal('delete-prompt')">
-        Cancel
-      </app-button>
-      <app-button [variant]="'danger'" (click)="deleteInvoice(invoice._id)">
-        Delete
-      </app-button>
-    </div>
-  </app-modal>
+    <app-delete-dialog
+      [slug]="invoice.slug"
+      [modalId]="'delete-dialog'"
+      [invoiceId]="invoice._id"
+    ></app-delete-dialog>
+
+    <app-mark-as-paid-dialog
+      [slug]="invoice.slug"
+      [invoiceId]="invoice._id"
+      [modalId]="'mark-as-paid-dialog'"
+    ></app-mark-as-paid-dialog>
+  </div>
 </ng-container>
