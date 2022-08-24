@@ -1,0 +1,11 @@
+<div class="container">
+  <svg-icon
+    src="assets/icons/chevron.svg"
+    (click)="cyclePrev.emit()"
+  ></svg-icon>
+  <span>{{ value | date: DATE_MEDIUM_FORMAT }}</span>
+  <svg-icon
+    src="assets/icons/chevron.svg"
+    (click)="cycleNext.emit()"
+  ></svg-icon>
+</div>
