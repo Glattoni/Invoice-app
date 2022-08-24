@@ -1,3 +1,5 @@
+import { fromEvent } from 'rxjs';
+
 import {
   Input,
   OnInit,
@@ -7,7 +9,7 @@ import {
   ElementRef,
   EventEmitter,
 } from '@angular/core';
-import { fromEvent } from 'rxjs';
+
 import { ModalService } from '@core/services/modal/modal.service';
 
 @Component({
