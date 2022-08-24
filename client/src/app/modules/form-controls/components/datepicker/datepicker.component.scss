@@ -28,10 +28,6 @@
   }
 }
 
-.selected {
-  color: var(--primary);
-}
-
 svg-icon {
   max-height: 1rem;
 }
@@ -46,47 +42,4 @@ svg-icon {
   border-radius: 0.5rem;
   box-shadow: 0 0.625rem 1.25rem var(--box-shadow-primary);
   transform-origin: top center;
-}
-
-.date-picker-header {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 1.5rem;
-  font-weight: bold;
-  text-align: center;
-
-  svg-icon {
-    cursor: pointer;
-
-    &:first-child {
-      transform: rotate(90deg);
-    }
-
-    &:last-child {
-      transform: rotate(-90deg);
-    }
-  }
-}
-
-.days-container {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 0.75rem;
-  row-gap: 1rem;
-}
-
-.day {
-  grid-column: span 1;
-  max-width: 1rem;
-  min-height: 1rem;
-  max-height: 1rem;
-  font-weight: bold;
-  line-height: 1rem;
-  text-align: center;
-  cursor: pointer;
-  border-radius: 0.125rem;
-}
-
-.ahead {
-  color: var(--next-month-foreground);
 }
