@@ -1,0 +1,26 @@
+.container {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.75rem;
+  row-gap: 1rem;
+}
+
+.day {
+  grid-column: span 1;
+  max-width: 1rem;
+  min-height: 1rem;
+  max-height: 1rem;
+  font-weight: bold;
+  line-height: 1rem;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 0.125rem;
+}
+
+.selected {
+  color: var(--primary);
+}
+
+.upcoming {
+  color: var(--next-month-foreground);
+}
