@@ -1,22 +1,25 @@
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { CustomDatepickerComponent } from './custom-datepicker.component';
+import { DatepickerComponent } from './datepicker.component';
 
 describe('CustomDatepickerComponent', () => {
-  let component: CustomDatepickerComponent;
-  let fixture: ComponentFixture<CustomDatepickerComponent>;
+  let component: DatepickerComponent;
+  let fixture: ComponentFixture<DatepickerComponent>;
+  let debugElement: DebugElement;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CustomDatepickerComponent],
+      declarations: [DatepickerComponent],
       imports: [BrowserAnimationsModule],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(CustomDatepickerComponent);
+    fixture = TestBed.createComponent(DatepickerComponent);
     component = fixture.componentInstance;
+    debugElement = fixture.debugElement;
+
     fixture.detectChanges();
   });
 

@@ -15,13 +15,13 @@ dialog {
   }
 
   &[open] {
-    animation: slide-up 500ms forwards, fade-in 500ms forwards;
+    animation: slide-down 250ms forwards, fade-in 250ms forwards;
   }
 
   &[closing] {
     display: block;
     pointer-events: none;
-    animation: fade-out 500ms forwards;
+    animation: fade-out 250ms forwards;
   }
 }
 
@@ -53,9 +53,9 @@ dialog {
   }
 }
 
-@keyframes slide-up {
+@keyframes slide-down {
   0% {
-    transform: translateY(100%);
+    transform: translateY(-25%);
   }
 
   100% {
