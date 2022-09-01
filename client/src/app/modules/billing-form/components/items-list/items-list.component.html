@@ -2,50 +2,46 @@
   <legend>items list</legend>
 
   <header>
-    <p *ngFor="let header of headers">
-      {{ header }}
-    </p>
+    <p *ngFor="let header of headers">{{ header }}</p>
   </header>
 
   <ul formArrayName="items">
     <li *ngFor="let item of items.controls; index as i" [formGroupName]="i">
       <!-- item name -->
-      <app-custom-input
+      <app-text-input
         class="item-field"
         formControlName="name"
         [label]="'item name'"
         [invalid]="invalidItemName(item)"
-      ></app-custom-input>
+      ></app-text-input>
       <!-- item name -->
 
       <!-- item quantity -->
-      <app-custom-input
+      <app-text-input
         class="item-field"
         formControlName="quantity"
         [type]="'number'"
         [label]="'qty.'"
         [placeholder]="'0'"
         [invalid]="invalidItemQuantity(item)"
-      ></app-custom-input>
+      ></app-text-input>
       <!-- item quantity -->
 
       <!-- item price -->
-      <app-custom-input
+      <app-text-input
         class="item-field"
         formControlName="price"
         [type]="'number'"
         [label]="'price'"
         [placeholder]="'0.00'"
         [invalid]="invalidItemPrice(item)"
-      ></app-custom-input>
+      ></app-text-input>
       <!-- item price -->
 
       <!-- item total -->
       <div class="total-amount">
         <label>total</label>
-        <p>
-          {{ calculateItemTotal(i) | currency: '':'' }}
-        </p>
+        <p>{{ calculateItemTotal(i) | currency: '':'' }}</p>
       </div>
       <!-- item total -->
 

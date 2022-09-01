@@ -3,39 +3,39 @@
 
   <div formGroupName="senderAddress" class="fields-container sender">
     <!-- sender street -->
-    <app-custom-input
+    <app-text-input
       class="sender-street"
       formControlName="street"
-      [label]="'street address'"
+      label="street address"
       [invalid]="invalidStreet"
-    ></app-custom-input>
+    ></app-text-input>
     <!-- sender street -->
 
     <!-- sender city -->
-    <app-custom-input
+    <app-text-input
       class="sender-city"
       formControlName="city"
-      [label]="'city'"
+      label="city"
       [invalid]="invalidCity"
-    ></app-custom-input>
+    ></app-text-input>
     <!-- sender city -->
 
     <!-- sender post code -->
-    <app-custom-input
+    <app-text-input
       class="sender-post-code"
       formControlName="postCode"
-      [label]="'post code'"
+      label="post code"
       [invalid]="invalidPostCode"
-    ></app-custom-input>
+    ></app-text-input>
     <!-- sender post code -->
 
     <!-- sender country -->
-    <app-custom-input
+    <app-text-input
       class="sender-country"
       formControlName="country"
-      [label]="'country'"
+      label="country"
       [invalid]="invalidCountry"
-    ></app-custom-input>
+    ></app-text-input>
     <!-- sender country -->
   </div>
 </fieldset>
