@@ -5,7 +5,7 @@ import {
   animate,
   transition,
 } from '@angular/animations';
-import { Input, Component } from '@angular/core';
+import { Input, Component, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 interface Option {
@@ -14,17 +14,17 @@ interface Option {
   label: string;
 }
 
+const SELECT_INPUT_VALUE_ACCESSOR = {
+  provide: NG_VALUE_ACCESSOR,
+  useExisting: forwardRef(() => SelectInputComponent),
+  multi: true,
+};
+
 @Component({
-  selector: 'app-custom-select',
-  templateUrl: './custom-select.component.html',
-  styleUrls: ['./custom-select.component.scss'],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: CustomSelectComponent,
-      multi: true,
-    },
-  ],
+  selector: 'app-select-input',
+  templateUrl: './select-input.component.html',
+  styleUrls: ['./select-input.component.scss'],
+  providers: [SELECT_INPUT_VALUE_ACCESSOR],
   animations: [
     trigger('scaleDown', [
       state(
@@ -46,7 +46,7 @@ interface Option {
     ]),
   ],
 })
-export class CustomSelectComponent implements ControlValueAccessor {
+export class SelectInputComponent implements ControlValueAccessor {
   @Input() label: string = '';
   @Input() options: Option[] = [];
   @Input() invalid: boolean = false;

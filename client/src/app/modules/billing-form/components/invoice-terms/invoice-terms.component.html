@@ -6,28 +6,28 @@
     <app-datepicker
       class="created-at"
       formControlName="createdAt"
-      [label]="'invoice date'"
+      label="invoice date"
       [classes]="'form-field'"
     ></app-datepicker>
     <!-- created at -->
 
     <!-- payment terms -->
-    <app-custom-select
+    <app-select-input
       class="payment-terms"
       formControlName="paymentTerms"
       [options]="options"
-      [label]="'payment terms'"
-    ></app-custom-select>
+      label="payment terms"
+    ></app-select-input>
     <!-- payment terms -->
 
     <!-- description -->
-    <app-custom-input
+    <app-text-input
       class="description"
       formControlName="description"
-      [label]="'project description'"
+      label="project description"
       [invalid]="invalidDescription"
-      [placeholder]="'e.g Graphic Design Service'"
-    ></app-custom-input>
+      placeholder="e.g Graphic Design Service"
+    ></app-text-input>
     <!-- description  -->
   </div>
 </fieldset>

@@ -1,19 +1,19 @@
 import { Component, Input, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-const INPUT_VALUE_ACCESSOR = {
+const TEXT_INPUT_VALUE_ACCESSOR = {
   provide: NG_VALUE_ACCESSOR,
-  useExisting: forwardRef(() => CustomInputComponent),
+  useExisting: forwardRef(() => TextInputComponent),
   multi: true,
 };
 
 @Component({
-  selector: 'app-custom-input',
-  templateUrl: './custom-input.component.html',
-  styleUrls: ['./custom-input.component.scss'],
-  providers: [INPUT_VALUE_ACCESSOR],
+  selector: 'app-text-input',
+  templateUrl: './text-input.component.html',
+  styleUrls: ['./text-input.component.scss'],
+  providers: [TEXT_INPUT_VALUE_ACCESSOR],
 })
-export class CustomInputComponent implements ControlValueAccessor {
+export class TextInputComponent implements ControlValueAccessor {
   @Input() label = '';
   @Input() type = 'text';
   @Input() invalid? = false;

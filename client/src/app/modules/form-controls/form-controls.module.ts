@@ -6,16 +6,16 @@ import { SharedModule } from '@shared/shared.module';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 
 import { PaymentTermsPipe } from './pipes/payment-terms.pipe';
-import { CustomInputComponent } from './components/custom-input/custom-input.component';
-import { CustomSelectComponent } from './components/custom-select/custom-select.component';
 import { DatepickerComponent } from './components/datepicker/datepicker.component';
-import { DatepickerHeaderComponent } from './components/datepicker-header/datepicker-header.component';
-import { DatepickerGridComponent } from './components/datepicker-grid/datepicker-grid.component';
+import { DatepickerHeaderComponent } from './components/datepicker/datepicker-header/datepicker-header.component';
+import { DatepickerGridComponent } from './components/datepicker/datepicker-grid/datepicker-grid.component';
+import { SelectInputComponent } from './components/select-input/select-input.component';
+import { TextInputComponent } from './components/text-input/text-input.component';
 
 @NgModule({
   declarations: [
-    CustomInputComponent,
-    CustomSelectComponent,
+    TextInputComponent,
+    SelectInputComponent,
     PaymentTermsPipe,
     DatepickerComponent,
     DatepickerHeaderComponent,
@@ -28,6 +28,6 @@ import { DatepickerGridComponent } from './components/datepicker-grid/datepicker
     ReactiveFormsModule,
     AngularSvgIconModule,
   ],
-  exports: [CustomInputComponent, CustomSelectComponent, DatepickerComponent],
+  exports: [TextInputComponent, SelectInputComponent, DatepickerComponent],
 })
 export class FormControlsModule {}
