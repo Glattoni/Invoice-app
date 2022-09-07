@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { InvoiceService } from '@core/services/invoice/invoice.service';
-import { ModalService } from '@core/services/modal/modal.service';
+import { DialogService } from '@core/services/dialog/dialog.service';
 
 @Component({
   selector: 'app-mark-as-paid-dialog',
@@ -13,16 +13,16 @@ export class MarkAsPaidDialogComponent {
   @Input() invoiceId: string = '';
 
   constructor(
-    private modalService: ModalService,
+    private dialogService: DialogService,
     private invoiceService: InvoiceService
   ) {}
 
-  closeModal(): void {
-    this.modalService.closeModal(this.modalId);
+  closeDialog(): void {
+    this.dialogService.closeDialog(this.modalId);
   }
 
   markAsPaid(): void {
     this.invoiceService.markAsPaidInvoice(this.invoiceId);
-    this.modalService.closeModal(this.modalId);
+    this.dialogService.closeDialog(this.modalId);
   }
 }

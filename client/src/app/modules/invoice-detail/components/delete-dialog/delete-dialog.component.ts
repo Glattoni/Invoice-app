@@ -3,8 +3,8 @@ import { Component, Input, OnDestroy } from '@angular/core';
 
 import { Subject, Subscription } from 'rxjs';
 
-import { ModalService } from '@core/services/modal/modal.service';
 import { InvoiceService } from '@core/services/invoice/invoice.service';
+import { DialogService } from '@core/services/dialog/dialog.service';
 
 @Component({
   selector: 'app-delete-dialog',
@@ -21,7 +21,7 @@ export class DeleteDialogComponent implements OnDestroy {
 
   constructor(
     private router: Router,
-    private modalService: ModalService,
+    private dialogService: DialogService,
     private invoiceService: InvoiceService
   ) {}
 
@@ -30,7 +30,7 @@ export class DeleteDialogComponent implements OnDestroy {
   }
 
   deleteInvoice(): void {
-    this.modalService.closeModal(this.modalId);
+    this.dialogService.closeDialog(this.modalId);
 
     this.subscription = this.animationEnded.subscribe(() => {
       this.invoiceService.deleteInvoice(this.invoiceId);
@@ -39,7 +39,7 @@ export class DeleteDialogComponent implements OnDestroy {
   }
 
   closeModal(): void {
-    this.modalService.closeModal(this.modalId);
+    this.dialogService.closeDialog(this.modalId);
   }
 
   onAnimationEnd(): void {

@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 
 import { Invoice } from '@shared/models/invoice.model';
 
-import { ModalService } from '@core/services/modal/modal.service';
+import { DialogService } from '@core/services/dialog/dialog.service';
 import { InvoiceService } from '@core/services/invoice/invoice.service';
 import { BillingFormService } from '@core/services/billing-form/billing-form.service';
 
@@ -15,13 +15,13 @@ export class HeaderComponent {
   @Input() invoice?: Invoice;
 
   constructor(
-    private modalService: ModalService,
+    private dialogService: DialogService,
     private invoiceService: InvoiceService,
     private formService: BillingFormService
   ) {}
 
   openDialog(id: string): void {
-    this.modalService.openModal(id);
+    this.dialogService.openDialog(id);
   }
 
   openEditingForm(invoice: Invoice): void {
