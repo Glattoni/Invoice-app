@@ -10,7 +10,7 @@ import {
   EventEmitter,
 } from '@angular/core';
 
-import { ModalService } from '@core/services/modal/modal.service';
+import { DialogService } from '@core/services/dialog/dialog.service';
 
 @Component({
   selector: 'app-dialog',
@@ -22,7 +22,7 @@ export class DialogComponent implements OnInit, OnDestroy {
   @Output() animationEnd = new EventEmitter<void>();
 
   constructor(
-    private modalService: ModalService,
+    private dialogService: DialogService,
     private element: ElementRef<HTMLDialogElement>
   ) {}
 
@@ -31,11 +31,11 @@ export class DialogComponent implements OnInit, OnDestroy {
       throw new Error('Modal must have an id');
     }
 
-    this.modalService.addModal(this);
+    this.dialogService.addDialog(this);
   }
 
   ngOnDestroy(): void {
-    this.modalService.removeModal(this.id);
+    this.dialogService.removeDialog(this.id);
   }
 
   onClick(event: MouseEvent): void {
@@ -51,7 +51,7 @@ export class DialogComponent implements OnInit, OnDestroy {
   }
 
   enableScrolling(): void {
-    this.modalService.toggleScrolling();
+    this.dialogService.toggleScrolling();
   }
 
   get dialog() {

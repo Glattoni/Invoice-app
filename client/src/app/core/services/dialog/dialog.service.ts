@@ -7,31 +7,31 @@ import { DialogComponent } from '@shared/components/dialog/dialog.component';
 @Injectable({
   providedIn: 'root',
 })
-export class ModalService {
-  private modals: DialogComponent[] = [];
+export class DialogService {
+  private dialogs: DialogComponent[] = [];
 
   constructor(@Inject(DOCUMENT) private document: Document) {}
 
-  addModal(modal: any): void {
-    this.modals.push(modal);
+  addDialog(dialog: any): void {
+    this.dialogs.push(dialog);
   }
 
-  removeModal(id: string): void {
-    this.modals = this.modals.filter((modal) => modal.id !== id);
+  removeDialog(id: string): void {
+    this.dialogs = this.dialogs.filter((dialog) => dialog.id !== id);
   }
 
-  getModal(id: string) {
-    return this.modals.find((modal) => modal.id === id);
+  getDialog(id: string) {
+    return this.dialogs.find((dialog) => dialog.id === id);
   }
 
-  openModal(id: string): void {
-    const modal = this.getModal(id);
-    modal?.dialog.showModal();
+  openDialog(id: string): void {
+    const dialog = this.getDialog(id);
+    dialog?.dialog.showModal();
     this.toggleScrolling();
   }
 
-  closeModal(id: string): void {
-    const dialog = this.getModal(id)?.dialog;
+  closeDialog(id: string): void {
+    const dialog = this.getDialog(id)?.dialog;
 
     if (dialog) {
       dialog.setAttribute('closing', '');
