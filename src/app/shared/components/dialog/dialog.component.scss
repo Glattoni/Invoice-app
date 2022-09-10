@@ -1,0 +1,64 @@
+@use 'breakpoints' as bp;
+
+dialog {
+  width: 87.5vw;
+  max-width: 30rem;
+  margin: auto;
+  background-color: var(--background-tetriary);
+  border: none;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 0 100vw var(--background-overlay);
+
+  &::backdrop {
+    background-color: var(--background-overlay);
+    opacity: 0;
+  }
+
+  &[open] {
+    animation: slide-down 250ms forwards, fade-in 250ms forwards;
+  }
+
+  &[closing] {
+    display: block;
+    pointer-events: none;
+    animation: fade-out 250ms forwards;
+  }
+}
+
+.dialog-body {
+  padding: 2rem;
+
+  @include bp.md {
+    padding: 3rem;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes slide-down {
+  0% {
+    transform: translateY(-25%);
+  }
+
+  100% {
+    transform: translateY(0%);
+  }
+}

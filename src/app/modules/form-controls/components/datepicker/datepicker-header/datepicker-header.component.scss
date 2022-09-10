@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+
+  svg-icon {
+    cursor: pointer;
+
+    &:first-child {
+      transform: rotate(90deg);
+    }
+
+    &:last-child {
+      transform: rotate(-90deg);
+    }
+  }
+}
