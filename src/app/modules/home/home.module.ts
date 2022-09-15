@@ -8,8 +8,7 @@ import { ButtonsModule } from '../buttons/buttons.module';
 import { HomeRoutingModule } from './home-routing.module';
 import { BillingFormModule } from '@modules/billing-form/billing-form.module';
 
-import { SummaryPipe } from './pipes/summary/summary.pipe';
-import { HomePageComponent } from './pages/home/home-page.component';
+import { HomePageComponent } from './pages/home-page/home-page.component';
 
 import { HeaderComponent } from './components/header/header.component';
 import { InvoiceComponent } from './components/invoice/invoice.component';
@@ -18,7 +17,6 @@ import { PlaceholderComponent } from './components/placeholder/placeholder.compo
 
 @NgModule({
   declarations: [
-    SummaryPipe,
     HeaderComponent,
     InvoiceComponent,
     DropdownComponent,
