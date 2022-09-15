@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 import { InvoiceService } from '@core/services/invoice/invoice.service';
 import { Invoice } from '@shared/models/invoice.model';
 
@@ -8,17 +8,17 @@ import { Invoice } from '@shared/models/invoice.model';
   styleUrls: ['./home-page.component.scss'],
 })
 export class HomePageComponent implements OnInit {
-  invoices$: Observable<Invoice[]>;
+  public invoices$: Observable<Invoice[]>;
 
   constructor(private invoiceService: InvoiceService) {
     this.invoices$ = this.invoiceService.filteredInvoices$;
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.invoiceService.getInvoices();
   }
 
-  trackByInvoiceId(_index: number, invoice: Invoice) {
+  public trackByInvoiceId(_index: number, invoice: Invoice) {
     return invoice._id;
   }
 }
