@@ -34,7 +34,7 @@ export class InvoiceSummaryService implements OnDestroy {
     const article = amount > 1 ? 'are' : 'is';
     const suffix = amount > 1 ? 's' : '';
 
-    return amount > 1
+    return amount
       ? `There ${article} ${amount} ${filter} invoice${suffix}`
       : 'No invoices';
   }
