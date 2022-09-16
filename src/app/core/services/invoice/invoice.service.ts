@@ -1,3 +1,5 @@
+import { DateTime } from 'luxon';
+
 import {
   of,
   map,
@@ -40,8 +42,12 @@ export class InvoiceService {
   public getInvoices(): void {
     this.http
       .get<Invoices>(baseUrl)
-      .pipe(catchError(this.handleError<Invoices>()))
-      .subscribe(({ invoices }) => {
+      .pipe(
+        map(({ invoices }) => invoices),
+        map(this.sortByNewest),
+        catchError(this.handleError<Invoice[]>())
+      )
+      .subscribe((invoices) => {
         this.invoices.next(invoices);
         this.filteredInvoices.next(invoices);
       });
@@ -62,6 +68,7 @@ export class InvoiceService {
       .pipe(
         withLatestFrom(this.invoices),
         map(([created, current]) => [...current, created]),
+        map(this.sortByNewest),
         catchError(this.handleError<Invoice[]>())
       )
       .subscribe((value) => {
@@ -138,6 +145,14 @@ export class InvoiceService {
     this.invoices$
       .pipe(catchError(this.handleError<Invoice[]>()))
       .subscribe((value) => this.filteredInvoices.next(value));
+  }
+
+  private sortByNewest(invoices: Invoice[]): Invoice[] {
+    return invoices.sort(
+      (a, b) =>
+        DateTime.fromISO(b.createdAt).toUnixInteger() -
+        DateTime.fromISO(a.createdAt).toUnixInteger()
+    );
   }
 
   private handleError<T>(result?: T): (error: unknown) => Observable<T> {
