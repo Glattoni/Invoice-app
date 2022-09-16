@@ -1,7 +1,6 @@
+import { fromEvent } from 'rxjs';
 import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable } from '@angular/core';
-
-import { fromEvent } from 'rxjs';
 import { DialogComponent } from '@shared/components/dialog/dialog.component';
 
 @Injectable({
@@ -12,38 +11,40 @@ export class DialogService {
 
   constructor(@Inject(DOCUMENT) private document: Document) {}
 
-  addDialog(dialog: any): void {
+  public addDialog(dialog: any): void {
     this.dialogs.push(dialog);
   }
 
-  removeDialog(id: string): void {
+  public removeDialog(id: string): void {
     this.dialogs = this.dialogs.filter((dialog) => dialog.id !== id);
   }
 
-  getDialog(id: string) {
+  public getDialog(id: string) {
     return this.dialogs.find((dialog) => dialog.id === id);
   }
 
-  openDialog(id: string): void {
+  public openDialog(id: string): void {
     const dialog = this.getDialog(id);
     dialog?.dialog.showModal();
     this.toggleScrolling();
   }
 
-  closeDialog(id: string): void {
+  public closeDialog(id: string): void {
     const dialog = this.getDialog(id)?.dialog;
 
     if (dialog) {
       dialog.setAttribute('closing', '');
 
-      fromEvent(dialog, 'animationend', { once: true }).subscribe(() => {
+      fromEvent(dialog, 'animationend').subscribe(() => {
         dialog.removeAttribute('closing');
         dialog.close();
       });
     }
+
+    this.toggleScrolling();
   }
 
-  toggleScrolling(): void {
+  public toggleScrolling(): void {
     this.document.body.classList.toggle('modal-open');
   }
 }
