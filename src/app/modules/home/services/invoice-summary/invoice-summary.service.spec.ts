@@ -16,7 +16,7 @@ describe('InvoiceSummaryService', () => {
   });
 
   it('should transform when amount is 0 and filter is undefined', () => {
-    expect(service['transform'](0, undefined)).toBe('No invoices');
+    expect(service['transform'](0)).toBe('No invoices');
   });
 
   it('should transform when amount is 0 and filter is set to draft', () => {
@@ -24,7 +24,7 @@ describe('InvoiceSummaryService', () => {
   });
 
   it('should transform when amount is 1 and filter is undefined', () => {
-    expect(service['transform'](1, undefined)).toBe('There is 1 total invoice');
+    expect(service['transform'](1)).toBe('There is 1 total invoice');
   });
 
   it('should transform when amount is 1 and filter is present', () => {
@@ -32,9 +32,7 @@ describe('InvoiceSummaryService', () => {
   });
 
   it('should transform when filter is undefined', () => {
-    expect(service['transform'](10, undefined)).toBe(
-      'There are 10 total invoices'
-    );
+    expect(service['transform'](10)).toBe('There are 10 total invoices');
   });
 
   it('should transform when filter is present', () => {
