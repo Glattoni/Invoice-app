@@ -1,35 +1,46 @@
+import { of } from 'rxjs';
+import { DebugElement } from '@angular/core';
+import { By } from '@angular/platform-browser';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { Theme } from '@core/services/theme/theme.service.constants';
 import { SidebarComponent } from './sidebar.component';
 
-import {
-  SvgLoader,
-  SvgIconRegistryService,
-  SVG_ICON_REGISTRY_PROVIDER,
-} from 'angular-svg-icon';
+const sun = '.panel__theme-icon--sun';
+const moon = '.panel__theme-icon--moon';
 
 describe('SidebarComponent', () => {
   let component: SidebarComponent;
   let fixture: ComponentFixture<SidebarComponent>;
+  let debugElement: DebugElement;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [SidebarComponent],
-      providers: [
-        SvgLoader,
-        SvgIconRegistryService,
-        SVG_ICON_REGISTRY_PROVIDER,
-      ],
     }).compileComponents();
   });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(SidebarComponent);
     component = fixture.componentInstance;
+    debugElement = fixture.debugElement;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should display moon icon if ative theme is light', () => {
+    Reflect.defineProperty(component, 'activeTheme$', {
+      value: of(Theme.Light),
+    });
+    fixture.detectChanges();
+    const themeIcon = debugElement.query(By.css(moon));
+    expect(themeIcon).toBeTruthy();
+  });
+
+  it('should display sun icon if ative theme is dark', () => {
+    Reflect.defineProperty(component, 'activeTheme$', {
+      value: of(Theme.Dark),
+    });
+    fixture.detectChanges();
+    const themeIcon = debugElement.query(By.css(sun));
+    expect(themeIcon).toBeTruthy();
   });
 });

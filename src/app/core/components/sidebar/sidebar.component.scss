@@ -1,128 +1,85 @@
 @use 'breakpoints' as bp;
 
-aside {
+$border-radius: 1.25rem;
+
+.panel {
   position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
+  inset: 0 0 auto 0;
   z-index: var(--z-sidebar);
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-areas: 'logo spacer theme avatar';
+  grid-template-columns: 4.5rem 1fr 5rem 5rem;
   min-height: 4.5rem;
   background-color: var(--sidebar-background);
 
   @include bp.md {
+    grid-template-columns: 5rem 1fr 6rem 6rem;
     min-height: 5rem;
   }
 
   @include bp.xxl {
-    bottom: 0;
+    inset: auto;
+    display: flex;
     flex-direction: column;
-    max-width: 6.4375rem;
-    border-top-right-radius: 1.25rem;
-    border-bottom-right-radius: 1.25rem;
-  }
-}
-
-.container {
-  display: flex;
-  align-items: center;
-
-  @include bp.xxl {
-    flex-direction: column;
-  }
-}
-
-.logo-wrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 4.5rem;
-  overflow: hidden;
-  background-color: var(--primary);
-  border-radius: 0 1.25rem 1.25rem 0;
-
-  &::after {
-    position: absolute;
-    top: 50%;
-    right: 0;
-    left: 0;
-    display: block;
-    width: 100%;
-    height: 100%;
-    content: '';
-    background-color: var(--primary-light);
-    border-radius: 1.25rem 0 0 1.25rem;
+    max-width: 100px;
+    min-height: 100vh;
+    border-radius: 0 $border-radius $border-radius 0;
   }
 
-  @include bp.md {
-    min-width: 5rem;
+  &__theme {
+    grid-area: theme;
+    padding: 1.25rem 1.5rem;
+
+    svg-icon {
+      display: grid;
+      place-items: center;
+      min-width: 2rem;
+      min-height: 2rem;
+
+      @include bp.xxl {
+        min-width: 2.25rem;
+        min-height: 2.25rem;
+      }
+    }
+
+    @include bp.md {
+      padding: 1.5rem 2rem;
+    }
+
+    @include bp.xxl {
+      padding: 2rem;
+      margin-top: auto;
+    }
   }
 
-  @include bp.xxl {
-    width: 100%;
-    min-height: 6.4375rem;
-  }
-}
-
-.logo {
-  z-index: var(--z-logo);
-  display: inline-block;
-  width: 1.8125rem;
-  height: 1.6875rem;
-
-  svg {
-    width: 100%;
-    height: 100%;
+  &__theme-icon {
+    cursor: pointer;
   }
 
-  @include bp.md {
-    width: 1.9375rem;
-    height: 1.8125rem;
-  }
+  &__user-avatar {
+    grid-area: avatar;
+    padding: 1.25rem 1.5rem;
+    border-left: 1px solid var(--sidebar-border);
 
-  @include bp.lg {
-    width: 2.5rem;
-    height: 2.375rem;
-  }
-}
+    img {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
 
-.theme-icon {
-  margin-right: 1.5rem;
-  cursor: pointer;
+      @include bp.xxl {
+        width: 2.5rem;
+        height: 2.5rem;
+      }
+    }
 
-  @include bp.md {
-    margin-right: 2rem;
-  }
+    @include bp.md {
+      padding: 1.5rem 2rem;
+    }
 
-  @include bp.xxl {
-    margin-right: 0;
-    margin-bottom: 2rem;
-  }
-}
-
-.user-icon {
-  padding: 1.25rem 1.5rem;
-  border-left: 1px solid var(--sidebar-border);
-
-  @include bp.md {
-    padding: 1.5rem 2rem;
-  }
-
-  @include bp.xxl {
-    border-top: 1px solid var(--sidebar-border);
-    border-left: none;
-  }
-}
-
-.user-icon img {
-  width: 2rem;
-  height: 2rem;
-  border-radius: 50%;
-
-  @include bp.xxl {
-    width: 2.5rem;
-    height: 2.5rem;
+    @include bp.xxl {
+      padding: 1.875rem;
+      border-top: 1px solid var(--sidebar-border);
+      border-left: none;
+    }
   }
 }

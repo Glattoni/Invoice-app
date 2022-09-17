@@ -28,4 +28,9 @@ export interface Invoice {
   total: number;
 }
 
+export interface Invoices {
+  invoices: Invoice[];
+  length: number;
+}
+
 export type NewInvoice = Omit<Invoice, '_id'>;

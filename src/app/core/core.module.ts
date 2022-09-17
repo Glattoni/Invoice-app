@@ -3,9 +3,10 @@ import { CommonModule } from '@angular/common';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { ButtonsModule } from '../modules/buttons/buttons.module';
+import { LogoComponent } from './components/logo/logo.component';
 
 @NgModule({
-  declarations: [SidebarComponent],
+  declarations: [SidebarComponent, LogoComponent],
   imports: [CommonModule, AngularSvgIconModule, ButtonsModule],
   exports: [SidebarComponent],
 })
