@@ -1,0 +1,36 @@
+@use 'breakpoints' as bp;
+
+main {
+  padding-top: 6.5rem;
+
+  @include bp.md {
+    padding-top: 8.5rem;
+  }
+
+  @include bp.xxl {
+    padding-top: 6rem;
+  }
+}
+
+ul {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+aside {
+  position: absolute;
+  top: 5rem;
+  z-index: var(--z-sidebar);
+  display: none;
+  max-width: 38.5rem;
+  padding: 4rem 4rem 2rem;
+  background-color: var(--background-primary);
+  border-top-right-radius: 1.25rem;
+  border-bottom-right-radius: 1.25rem;
+
+  @include bp.md {
+    display: block;
+  }
+}
