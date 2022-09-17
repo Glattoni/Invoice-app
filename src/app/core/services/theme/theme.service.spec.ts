@@ -1,6 +1,7 @@
+import { BehaviorSubject } from 'rxjs';
 import { TestBed } from '@angular/core/testing';
-
 import { ThemeService } from './theme.service';
+import { Theme } from './theme.service.constants';
 
 describe('ThemeExperimentalService', () => {
   let service: ThemeService;
@@ -10,15 +11,14 @@ describe('ThemeExperimentalService', () => {
     service = TestBed.inject(ThemeService);
   });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
-
-  it('should toggle theme', () => {
+  it('should toggle active theme', (done) => {
+    Reflect.defineProperty(service, 'activeTheme', {
+      value: new BehaviorSubject(Theme.Light),
+    });
     service.toggleTheme();
-    expect(service.isDarkTheme).toBeTruthy();
-
-    service.toggleTheme();
-    expect(service.isDarkTheme).toBeFalsy();
+    service['activeTheme'].subscribe((theme) => {
+      expect(theme).toBe(Theme.Dark);
+      done();
+    });
   });
 });
