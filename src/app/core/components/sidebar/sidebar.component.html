@@ -1,15 +1,24 @@
-<aside>
-  <div class="logo-wrapper">
-    <svg-icon class="logo" src="assets/icons/logo.svg"></svg-icon>
-  </div>
-  <div class="container">
+<aside class="panel">
+  <app-logo></app-logo>
+
+  <div class="panel__theme">
     <svg-icon
-      class="theme-icon"
-      [src]="themeIcon"
+      *ngIf="isDarkTheme$ | async; else moon"
+      class="panel__theme-icon panel__theme-icon--sun"
+      src="assets/icons/sun.svg"
       (click)="toggleTheme()"
     ></svg-icon>
-    <div class="user-icon">
-      <img src="assets/images/avatar.png" alt="user icon" />
-    </div>
+  </div>
+
+  <div class="panel__user-avatar">
+    <img src="assets/images/avatar.png" alt="avatar" />
   </div>
 </aside>
+
+<ng-template #moon>
+  <svg-icon
+    class="panel__theme-icon panel__theme-icon--moon"
+    src="assets/icons/moon.svg"
+    (click)="toggleTheme()"
+  ></svg-icon>
+</ng-template>
