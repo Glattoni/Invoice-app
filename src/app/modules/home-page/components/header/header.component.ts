@@ -7,7 +7,6 @@ import { InvoiceSummaryService } from '@modules/home-page/services/invoice-summa
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
-  providers: [InvoiceSummaryService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
