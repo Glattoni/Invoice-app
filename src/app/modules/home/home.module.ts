@@ -14,6 +14,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { InvoiceComponent } from './components/invoice/invoice.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { PlaceholderComponent } from './components/placeholder/placeholder.component';
+import { CheckboxComponent } from './components/checkbox/checkbox.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { PlaceholderComponent } from './components/placeholder/placeholder.compo
     DropdownComponent,
     HomePageComponent,
     PlaceholderComponent,
+    CheckboxComponent,
   ],
   imports: [
     FormsModule,

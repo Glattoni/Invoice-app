@@ -1,0 +1,17 @@
+<input
+  #input
+  type="radio"
+  [id]="value"
+  [name]="name"
+  [value]="value"
+  (change)="onChange($event)"
+/>
+<label class="checkbox" [for]="value" (click)="onClick($event)">
+  <span
+    class="checkbox__input"
+    [class.checkbox__input--checked]="input.checked"
+  >
+    <svg-icon *ngIf="input.checked" src="assets/icons/check.svg"></svg-icon>
+  </span>
+  <span *ngIf="label" class="checkbox__label">{{ label }}</span>
+</label>
