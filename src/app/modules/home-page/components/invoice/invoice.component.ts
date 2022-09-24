@@ -1,15 +1,16 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-invoice',
   templateUrl: './invoice.component.html',
   styleUrls: ['./invoice.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InvoiceComponent {
-  @Input() id: string = '';
-  @Input() slug: string = '';
-  @Input() clientName: string = '';
-  @Input() paymentDue: string = '';
-  @Input() total: number = 0;
-  @Input() status: string = '';
+  @Input() id = '';
+  @Input() slug = '';
+  @Input() clientName = '';
+  @Input() paymentDue = '';
+  @Input() total = 0;
+  @Input() status = '';
 }
