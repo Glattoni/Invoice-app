@@ -1,0 +1,67 @@
+@use 'breakpoints' as bp;
+
+.wrapper {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 8rem;
+
+  @include bp.md {
+    width: 12rem;
+  }
+}
+
+.trigger-button {
+  display: flex;
+  padding: 0.25rem;
+  font-weight: bold;
+  letter-spacing: -0.25px;
+
+  &__text {
+    span {
+      display: none;
+
+      @include bp.md {
+        display: inline;
+      }
+    }
+  }
+
+  &__icon {
+    margin-left: 0.5rem;
+
+    & > svg {
+      transition: transform 0.2s ease-in-out;
+    }
+
+    &--rotated > svg {
+      transform: rotate(180deg);
+    }
+
+    @include bp.md {
+      margin-left: 1rem;
+    }
+  }
+}
+
+.dropdown {
+  position: absolute;
+  top: 2.5rem;
+  left: 0;
+  z-index: var(--z-dropdown);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 8rem;
+  padding: 1rem;
+  font-weight: bold;
+  background-color: var(--background-secondary);
+  border-radius: 0.5rem;
+  box-shadow: 0 0.625rem 1.25rem var(--box-shadow-primary);
+  transition: box-shadow 0.2s ease-in-out;
+  transform-origin: top center;
+
+  @include bp.md {
+    width: 12rem;
+  }
+}
