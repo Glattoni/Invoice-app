@@ -1,67 +1,62 @@
-import {
-  state,
-  style,
-  trigger,
-  animate,
-  transition,
-} from '@angular/animations';
+import { filter, ReplaySubject, Subject, takeUntil } from 'rxjs';
 
-import { Component } from '@angular/core';
+import {
+  OnInit,
+  Component,
+  OnDestroy,
+  ChangeDetectionStrategy,
+} from '@angular/core';
+
+import {
+  INVOICE_STATUS,
+  INVOICE_STATUSES,
+} from '@shared/constants/invoice.constants';
+import { scaleDown } from './dropdown.component.animations';
 import { InvoiceService } from '@core/services/invoice/invoice.service';
 
 @Component({
   selector: 'app-dropdown',
   templateUrl: './dropdown.component.html',
   styleUrls: ['./dropdown.component.scss'],
-  animations: [
-    trigger('scaleDown', [
-      state(
-        'open',
-        style({
-          opacity: 1,
-          transform: 'translateY(0) scaleY(1)',
-        })
-      ),
-      state(
-        'close',
-        style({
-          opacity: 0,
-          transform: 'translateY(-10%) scaleY(0)',
-        })
-      ),
-      transition('open => *', [animate('200ms ease-in')]),
-      transition('* => open', [animate('200ms ease-out')]),
-    ]),
-  ],
+  animations: [scaleDown],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DropdownComponent {
-  value: string = '';
-  index: number = -1;
-  visible: boolean = false;
-  statuses: string[] = ['draft', 'pending', 'paid'];
+export class DropdownComponent implements OnInit, OnDestroy {
+  public visible = false;
+  public readonly statuses = INVOICE_STATUSES;
 
-  constructor(private invoiceService: InvoiceService) {}
+  private value$ = new ReplaySubject<INVOICE_STATUS>();
+  private readonly destroyed$ = new Subject<void>();
 
-  onClick(event: MouseEvent, index: number): void {
-    if (this.index === index) {
-      this.index = -1;
-      this.invoiceService.resetFilter();
-      (event.target as HTMLInputElement).checked = false;
-    } else {
-      this.index = index;
-    }
+  constructor(private readonly invoiceService: InvoiceService) {}
+
+  public ngOnInit(): void {
+    this.value$
+      .pipe(
+        takeUntil(this.destroyed$),
+        filter((value) => !!value)
+      )
+      .subscribe((value) => this.invoiceService.filterByStatus(value));
   }
 
-  toggleVisibility(): void {
+  public ngOnDestroy(): void {
+    this.destroyed$.next();
+    this.destroyed$.complete();
+  }
+
+  public onCheck(value: string): void {
+    this.value$.next(value as INVOICE_STATUS);
+  }
+
+  public onUnCheck(): void {
+    this.invoiceService.resetFilter();
+  }
+
+  public toggle(): void {
     this.visible = !this.visible;
   }
 
-  onClickOutside(): void {
+  public onClickOutside(): void {
     this.visible = false;
-  }
-
-  onModelChange(value: string): void {
-    this.value = value;
-    this.invoiceService.filterByStatus(value);
   }
 }

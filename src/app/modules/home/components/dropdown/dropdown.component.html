@@ -1,28 +1,23 @@
 <div class="wrapper" clickOutside (clickOutside)="onClickOutside()">
-  <button (click)="toggleVisibility()">
-    Filter <span>by status</span>
+  <button class="trigger-button" (click)="toggle()">
+    <p class="trigger-button__text">Filter <span>by status</span></p>
     <svg-icon
-      [class.rotated]="visible"
+      class="trigger-button__icon"
+      [class.trigger-button__icon--rotated]="visible"
       src="assets/icons/chevron.svg"
     ></svg-icon>
   </button>
 
-  <ul [@scaleDown]="visible ? 'open' : 'close'">
-    <li *ngFor="let status of statuses; index as i">
-      <input
-        type="radio"
-        [id]="status"
+  <ul class="dropdown" [@scaleDown]="visible ? 'open' : 'close'">
+    <li class="dropdown__item" *ngFor="let status of statuses; index as i">
+      <app-checkbox
+        #checkbox
+        [name]="'status'"
         [value]="status"
-        [(ngModel)]="value"
-        (click)="onClick($event, i)"
-        (ngModelChange)="onModelChange($event)"
-      />
-      <label [for]="status">
-        <span class="fake-radio">
-          <svg-icon src="assets/icons/check.svg"></svg-icon>
-        </span>
-        <p class="status">{{ status }}</p>
-      </label>
+        [label]="status"
+        (check)="onCheck($event)"
+        (unCheck)="onUnCheck()"
+      ></app-checkbox>
     </li>
   </ul>
 </div>
