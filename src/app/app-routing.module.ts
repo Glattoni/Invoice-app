@@ -5,13 +5,15 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
-      import('./modules/home/home.module').then((m) => m.HomeModule),
+      import('./modules/home-page/home-page.module').then(
+        (m) => m.HomePageModule
+      ),
   },
   {
     path: 'invoices/:id',
     loadChildren: () =>
       import('./modules/invoice-detail/invoice-detail.module').then(
-        (m) => m.InvoiceDetail
+        (m) => m.InvoiceDetailModule
       ),
   },
 ];

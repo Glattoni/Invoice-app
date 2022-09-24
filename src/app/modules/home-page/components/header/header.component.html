@@ -1,0 +1,16 @@
+<header class="header">
+  <div *ngIf="viewModel$ | async as vm">
+    <h1 class="header__title">Invoices</h1>
+    <p class="header__summary">{{ vm.summary }}</p>
+    <p class="header__summary header__summary--brief">
+      {{ vm.amount }}
+    </p>
+  </div>
+
+  <div class="header__controls">
+    <app-dropdown></app-dropdown>
+    <app-button [hasIcon]="true" (click)="openSidebar()">
+      New <span>Invoice</span>
+    </app-button>
+  </div>
+</header>

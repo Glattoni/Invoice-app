@@ -6,5 +6,5 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./invoice-state.component.scss'],
 })
 export class InvoiceStateComponent {
-  @Input() variant: String = 'pending';
+  @Input() variant = 'pending';
 }

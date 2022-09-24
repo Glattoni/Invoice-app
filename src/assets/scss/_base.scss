@@ -124,6 +124,11 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
+svg,
+svg-icon {
+  pointer-events: none;
+}
+
 .app-container {
   width: 87.5vw;
   max-width: 45.625rem;

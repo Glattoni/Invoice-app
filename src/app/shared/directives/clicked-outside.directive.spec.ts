@@ -3,14 +3,13 @@ import { ClickedOutsideDirective } from './clicked-outside.directive';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 @Component({
-  selector: 'app-test-click-outside-directive',
   template: `
     <div clickedOutside (clickOutside)="clickedOutside()">
       <button (click)="toggleVisibility()">menu title</button>
       <ul *ngIf="isVisible">
-        <li>item one</li>
-        <li>item two</li>
-        <li>item three</li>
+        <li>item 1</li>
+        <li>item 2</li>
+        <li>item 3</li>
       </ul>
     </div>
   `,
@@ -51,8 +50,8 @@ describe('Directive: ClickOutside', () => {
   });
 
   it('should handle document click', () => {
-    component.isVisible = true;
+    Reflect.defineProperty(component, 'isVisible', { value: true });
     document.dispatchEvent(new MouseEvent('click'));
-    expect(component.isVisible).toBe(false);
+    expect(component.isVisible).toBeFalse();
   });
 });
