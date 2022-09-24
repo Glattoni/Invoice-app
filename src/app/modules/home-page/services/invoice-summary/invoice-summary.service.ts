@@ -2,7 +2,9 @@ import { combineLatest, map, Observable, Subject, takeUntil } from 'rxjs';
 import { Injectable, OnDestroy } from '@angular/core';
 import { InvoiceService } from '@core/services/invoice/invoice.service';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class InvoiceSummaryService implements OnDestroy {
   private readonly destroyed$ = new Subject<void>();
 
