@@ -30,4 +30,4 @@ import { MarkAsPaidDialogComponent } from './components/mark-as-paid-dialog/mark
     InvoiceDetailRoutingModule,
   ],
 })
-export class InvoiceDetail {}
+export class InvoiceDetailModule {}

@@ -1,13 +1,13 @@
-<header class="page-header">
-  <div>
-    <h1 class="page-header__title">Invoices</h1>
-    <p class="page-header__summary">{{ invoiceSummary$ | async }}</p>
-    <p class="page-header__summary page-header__summary--brief">
-      {{ invoiceAmount$ | async }}
+<header class="header">
+  <div *ngIf="viewModel$ | async as vm">
+    <h1 class="header__title">Invoices</h1>
+    <p class="header__summary">{{ vm.summary }}</p>
+    <p class="header__summary header__summary--brief">
+      {{ vm.amount }}
     </p>
   </div>
 
-  <div class="page-header__controls">
+  <div class="header__controls">
     <app-dropdown></app-dropdown>
     <app-button [hasIcon]="true" (click)="openSidebar()">
       New <span>Invoice</span>

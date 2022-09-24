@@ -1,10 +1,16 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NonNullableFormBuilder } from '@angular/forms';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ButtonComponent } from '@modules/buttons/components/button/button.component';
-import { DropdownComponent } from '../dropdown/dropdown.component';
+
 import { HeaderComponent } from './header.component';
+import { DropdownComponent } from '../dropdown/dropdown.component';
+import { ButtonComponent } from '@modules/buttons/components/button/button.component';
+import { BillingFormService } from '@core/services/billing-form/billing-form.service';
+
+class BillingFormServiceStub {
+  public open = jasmine.createSpy();
+}
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -14,7 +20,10 @@ describe('HeaderComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [HeaderComponent, ButtonComponent, DropdownComponent],
       imports: [HttpClientTestingModule, BrowserAnimationsModule],
-      providers: [NonNullableFormBuilder],
+      providers: [
+        NonNullableFormBuilder,
+        { provide: BillingFormService, useClass: BillingFormServiceStub },
+      ],
     }).compileComponents();
   });
 
@@ -24,7 +33,9 @@ describe('HeaderComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should open sidebar on "New" button click', () => {
+    component.openSidebar();
+    fixture.detectChanges();
+    expect(component['billingFormService'].open).toHaveBeenCalled();
   });
 });
