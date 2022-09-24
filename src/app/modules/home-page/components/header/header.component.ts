@@ -1,7 +1,7 @@
 import { combineLatest, map } from 'rxjs';
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { BillingFormService } from '@core/services/billing-form/billing-form.service';
-import { InvoiceSummaryService } from '@modules/home/services/invoice-summary/invoice-summary.service';
+import { InvoiceSummaryService } from '@modules/home-page/services/invoice-summary/invoice-summary.service';
 
 @Component({
   selector: 'app-header',

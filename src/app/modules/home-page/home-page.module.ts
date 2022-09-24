@@ -5,10 +5,10 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '@shared/shared.module';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { ButtonsModule } from '../buttons/buttons.module';
-import { HomeRoutingModule } from './home-routing.module';
+import { HomeRoutingModule } from './home-page-routing.module';
 import { BillingFormModule } from '@modules/billing-form/billing-form.module';
 
-import { HomePageComponent } from './pages/home-page/home-page.component';
+import { HomePageComponent } from './home-page.component';
 
 import { HeaderComponent } from './components/header/header.component';
 import { InvoiceComponent } from './components/invoice/invoice.component';
@@ -35,4 +35,4 @@ import { CheckboxComponent } from './components/checkbox/checkbox.component';
     AngularSvgIconModule,
   ],
 })
-export class HomeModule {}
+export class HomePageModule {}
