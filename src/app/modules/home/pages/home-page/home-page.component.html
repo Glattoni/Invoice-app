@@ -1,0 +1,20 @@
+<div class="app-container">
+  <app-header></app-header>
+
+  <ul *ngIf="(invoices$ | async)?.length; else placeholder">
+    <li *ngFor="let invoice of invoices$ | async; trackBy: trackByInvoiceId">
+      <app-invoice
+        [id]="invoice._id"
+        [slug]="invoice.slug"
+        [paymentDue]="invoice.paymentDue"
+        [clientName]="invoice.clientName"
+        [total]="invoice.total"
+        [status]="invoice.status"
+      ></app-invoice>
+    </li>
+  </ul>
+</div>
+
+<ng-template #placeholder>
+  <app-placeholder></app-placeholder>
+</ng-template>
