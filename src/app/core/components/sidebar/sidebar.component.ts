@@ -11,7 +11,7 @@ import { Theme } from '@core/services/theme/theme.service.constants';
 export class SidebarComponent {
   public activeTheme$: Observable<string>;
 
-  constructor(private themeService: ThemeService) {
+  constructor(private readonly themeService: ThemeService) {
     this.activeTheme$ = this.themeService.activeTheme$;
   }
 
