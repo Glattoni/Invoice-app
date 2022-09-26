@@ -12,7 +12,7 @@ import { GoBack } from '@modules/buttons/components/go-back-button/go-back-butto
 })
 export class InvoiceDetailPageComponent implements OnInit {
   invoice$?: Observable<Invoice>;
-  link: GoBack = GoBack.Link;
+  link = GoBack.Link;
 
   constructor(
     private route: ActivatedRoute,

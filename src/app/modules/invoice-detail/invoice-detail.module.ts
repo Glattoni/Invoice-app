@@ -9,7 +9,7 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
 import { BodyComponent } from './components/body/body.component';
 import { TableComponent } from './components/table/table.component';
 import { HeaderComponent } from './components/header/header.component';
-import { InvoiceDetailPageComponent } from './pages/invoice-detail-page.component';
+import { InvoiceDetailPageComponent } from './invoice-detail-page.component';
 import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.component';
 import { MarkAsPaidDialogComponent } from './components/mark-as-paid-dialog/mark-as-paid-dialog.component';
 
