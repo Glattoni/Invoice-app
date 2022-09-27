@@ -8,10 +8,10 @@ import { Inject, Injectable } from '@angular/core';
 import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 
 import { Invoice, Item } from '@shared/models/invoice.model';
+import { DATE_FORMAT } from '@shared/constants/date-formats.constants';
 import { ListItem } from '@modules/billing-form/models/billing-form.model';
 
 const DEFAULT_PAYMENT_DUE = 30;
-const DEFAULT_DATE_FORMAT = 'yyyy-MM-dd';
 
 @Injectable({
   providedIn: 'root',
@@ -29,12 +29,12 @@ export class BillingFormService {
   ) {}
 
   getPaymentDue(date: string, duration: Object) {
-    return DateTime.fromISO(date).plus(duration).toFormat(DEFAULT_DATE_FORMAT);
+    return DateTime.fromISO(date).plus(duration).toFormat(DATE_FORMAT.DEFAULT);
   }
 
   generateFormGroup() {
     const date = DateTime.now();
-    const creationDate = date.toFormat(DEFAULT_DATE_FORMAT);
+    const creationDate = date.toFormat(DATE_FORMAT.DEFAULT);
     const paymentDue = this.getPaymentDue(date.toISO(), {
       days: DEFAULT_PAYMENT_DUE,
     });
