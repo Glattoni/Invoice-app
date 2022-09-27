@@ -12,8 +12,8 @@ const routes: Routes = [
   {
     path: 'invoices/:id',
     loadChildren: () =>
-      import('./modules/invoice-detail/invoice-detail.module').then(
-        (m) => m.InvoiceDetailModule
+      import('./modules/invoice-detail-page/invoice-detail-page.module').then(
+        (m) => m.InvoiceDetailPageModule
       ),
   },
 ];
