@@ -5,6 +5,7 @@ import { Invoice } from '@shared/models/invoice.model';
 import { DialogService } from '@core/services/dialog/dialog.service';
 import { InvoiceService } from '@core/services/invoice/invoice.service';
 import { BillingFormService } from '@core/services/billing-form/billing-form.service';
+import { InvoiceStatus } from '@shared/constants/invoice.constants';
 
 @Component({
   selector: 'app-header',
@@ -13,6 +14,7 @@ import { BillingFormService } from '@core/services/billing-form/billing-form.ser
 })
 export class HeaderComponent {
   @Input() invoice?: Invoice;
+  @Input() public status: InvoiceStatus = 'pending';
 
   constructor(
     private dialogService: DialogService,

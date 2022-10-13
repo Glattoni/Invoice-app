@@ -16,6 +16,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { Invoice, Invoices, NewInvoice } from '@shared/models/invoice.model';
 import { httpOptions, baseUrl } from './invoice.service.constants';
+import { InvoiceStatus } from '@shared/constants/invoice.constants';
 
 @Injectable({
   providedIn: 'root',
@@ -120,7 +121,7 @@ export class InvoiceService {
 
   public markAsPaidInvoice(id: string): void {
     const url = `${baseUrl}/${id}`;
-    const body = { status: 'paid' };
+    const body = { status: 'paid' as InvoiceStatus };
 
     this.http
       .patch<Invoice>(url, body, httpOptions)

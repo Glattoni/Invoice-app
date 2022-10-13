@@ -9,7 +9,12 @@ import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 
 import { Invoice, Item } from '@shared/models/invoice.model';
 import { DATE_FORMAT } from '@shared/constants/date-formats.constants';
-import { ListItem } from '@modules/billing-form/models/billing-form.model';
+import {
+  Address,
+  BillingForm,
+  ListItem,
+} from '@modules/billing-form/models/billing-form.model';
+import { InvoiceStatus } from '@shared/constants/invoice.constants';
 
 const DEFAULT_PAYMENT_DUE = 30;
 
@@ -32,7 +37,7 @@ export class BillingFormService {
     return DateTime.fromISO(date).plus(duration).toFormat(DATE_FORMAT.DEFAULT);
   }
 
-  generateFormGroup() {
+  public generateFormGroup(): FormGroup<BillingForm> {
     const date = DateTime.now();
     const creationDate = date.toFormat(DATE_FORMAT.DEFAULT);
     const paymentDue = this.getPaymentDue(date.toISO(), {
@@ -41,9 +46,9 @@ export class BillingFormService {
 
     return this.formBuilder.group({
       slug: [generateSlug(), Validators.required],
-      status: ['pending', Validators.required],
-      senderAddress: this.generateAddressGroup(),
-      clientAddress: this.generateAddressGroup(),
+      status: ['pending' as InvoiceStatus, Validators.required],
+      senderAddress: this.addressGroup,
+      clientAddress: this.addressGroup,
       clientName: ['', Validators.required],
       clientEmail: ['', [Validators.required, Validators.email]],
       createdAt: [creationDate, Validators.required],
@@ -87,7 +92,7 @@ export class BillingFormService {
     this.close();
   }
 
-  private generateAddressGroup() {
+  private get addressGroup(): FormGroup<Address> {
     return this.formBuilder.group({
       street: ['', Validators.required],
       city: ['', Validators.required],

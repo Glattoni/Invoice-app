@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { InvoiceStatus } from '@shared/constants/invoice.constants';
 
 @Component({
   selector: 'app-invoice',
@@ -12,5 +13,5 @@ export class InvoiceComponent {
   @Input() clientName = '';
   @Input() paymentDue = '';
   @Input() total = 0;
-  @Input() status = '';
+  @Input() status: InvoiceStatus = 'pending';
 }
