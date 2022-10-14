@@ -3,9 +3,9 @@
   <p class="invoice__client-name">{{ clientName }}</p>
   <p class="invoice__payment-due">{{ paymentDue | date }}</p>
   <p class="invoice__total">{{ total | currency: 'GBP' }}</p>
-  <app-invoice-state
+  <app-invoice-status
     class="invoice__status"
     [variant]="status"
-  ></app-invoice-state>
+  ></app-invoice-status>
   <svg-icon class="invoice__icon" src="assets/icons/chevron.svg"></svg-icon>
 </article>
