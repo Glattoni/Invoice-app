@@ -1,11 +1,13 @@
 <ng-container *ngIf="invoice$ | async as invoice">
   <div class="app-container container">
-    <app-go-back-button
-      [type]="link"
-      [offset]="'0 0 2rem'"
-    ></app-go-back-button>
+    <app-go-back [bottom]="2" (click)="toPreviousPage()"></app-go-back>
 
-    <app-header [invoice]="invoice"></app-header>
+    <app-header
+      [status]="invoice.status"
+      (edit)="onEdit(invoice)"
+      (delete)="onDelete()"
+      (markAsPaid)="onMarkAsPaid()"
+    ></app-header>
 
     <section>
       <app-body
