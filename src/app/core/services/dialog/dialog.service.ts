@@ -1,15 +1,15 @@
 import { fromEvent } from 'rxjs';
 import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable } from '@angular/core';
-import { DialogComponent } from '@shared/components/dialog/dialog.component';
+import { DialogBaseComponent } from '@shared/components/dialog-base/dialog-base.component';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DialogService {
-  private dialogs: DialogComponent[] = [];
+  private dialogs: DialogBaseComponent[] = [];
 
-  constructor(@Inject(DOCUMENT) private document: Document) {}
+  constructor(@Inject(DOCUMENT) private readonly document: Document) {}
 
   public addDialog(dialog: any): void {
     this.dialogs.push(dialog);
