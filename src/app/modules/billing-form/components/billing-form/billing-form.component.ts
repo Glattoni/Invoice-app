@@ -86,6 +86,10 @@ export class BillingFormComponent implements OnInit, OnDestroy {
     this.onSubmit();
   }
 
+  public onGoBack(): void {
+    this.billingFormService.close();
+  }
+
   public onSubmit(): void {
     this.validateForm();
 
