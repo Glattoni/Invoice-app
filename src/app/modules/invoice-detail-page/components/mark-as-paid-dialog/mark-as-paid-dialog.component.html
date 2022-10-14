@@ -1,4 +1,4 @@
-<app-dialog [id]="modalId">
+<app-dialog-base [id]="modalId">
   <h2>confirm action</h2>
   <p>
     Are you sure you want to mark the invoice #{{ slug }} as paid? This action
@@ -10,4 +10,4 @@
     </app-button>
     <app-button (click)="markAsPaid()"> Mark as paid </app-button>
   </div>
-</app-dialog>
+</app-dialog-base>
