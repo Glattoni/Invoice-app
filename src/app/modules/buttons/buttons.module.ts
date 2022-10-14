@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AngularSvgIconModule } from 'angular-svg-icon';
-import { GoBackButtonComponent } from './components/go-back-button/go-back-button.component';
+import { GoBackComponent } from './components/go-back/go-back.component';
 import { ButtonComponent } from './components/button/button.component';
 
 @NgModule({
-  declarations: [GoBackButtonComponent, ButtonComponent],
+  declarations: [GoBackComponent, ButtonComponent],
   imports: [CommonModule, AngularSvgIconModule],
-  exports: [GoBackButtonComponent, ButtonComponent],
+  exports: [GoBackComponent, ButtonComponent],
 })
 export class ButtonsModule {}
