@@ -1,6 +1,6 @@
 @use 'breakpoints' as bp;
 
-.wrapper {
+:host {
   background-color: var(--invoice-table-body);
   border-radius: 0.5rem;
 }
@@ -20,11 +20,11 @@
   color: var(--label-foreground);
   text-align: right;
 
-  &-name {
+  &__name {
     text-align: left;
   }
 
-  &-quantity {
+  &__quantity {
     text-align: center;
   }
 
@@ -41,7 +41,7 @@
   grid-gap: 0.5rem;
   font-weight: bold;
 
-  &-name {
+  &__name {
     grid-area: name;
 
     @include bp.md {
@@ -50,7 +50,7 @@
     }
   }
 
-  &-quantity {
+  &__quantity {
     display: none;
 
     @include bp.md {
@@ -59,7 +59,7 @@
     }
   }
 
-  &-total {
+  &__total {
     grid-area: total;
     align-self: center;
     text-align: right;
@@ -73,22 +73,26 @@
     }
   }
 
-  &-price {
+  &__price {
     grid-area: price;
     color: var(--invoice-item-title);
 
-    p {
+    &-value {
       display: inline-block;
-    }
 
-    &-value::first-letter {
-      margin: 0 0.15rem;
+      &::first-letter {
+        margin: 0 0.15rem;
+      }
     }
 
     @include bp.md {
       grid-area: unset;
       color: var(--base);
       text-align: right;
+
+      span:first-child {
+        display: none;
+      }
 
       &::first-letter {
         margin-right: 0.15rem;
@@ -104,14 +108,10 @@
     grid-template-areas: none;
     grid-template-columns: 3.5fr 1fr 1.25fr 1.25fr;
     grid-gap: 0;
-
-    &-price span:first-child {
-      display: none;
-    }
   }
 }
 
-.amount-due {
+.grand-total {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -120,7 +120,11 @@
   background-color: var(--invoice-grand-total);
   border-radius: 0 0 0.5rem 0.5rem;
 
-  .grand-total {
+  @include bp.md {
+    padding: 1.5rem 2rem;
+  }
+
+  &__value {
     font-size: 1.25rem;
     font-weight: bold;
     line-height: 2rem;
@@ -129,9 +133,5 @@
     &::first-letter {
       margin-right: 0.25rem;
     }
-  }
-
-  @include bp.md {
-    padding: 1.5rem 2rem;
   }
 }

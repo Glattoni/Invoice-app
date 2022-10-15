@@ -1,25 +1,23 @@
-<div class="wrapper">
-  <div class="container">
-    <div class="header">
-      <p class="header-name">Item name</p>
-      <p class="header-quantity">QTY.</p>
-      <p class="header-price">Price</p>
-      <p class="header-total">Total</p>
-    </div>
-    <div class="item" *ngFor="let item of items">
-      <h5 class="item-name">{{ item.name }}</h5>
-      <p class="item-quantity">{{ item.quantity }}</p>
-      <div class="item-price">
-        <span>{{ item.quantity }} x</span>
-        <p class="item-price-value">
-          {{ item.price | currency: 'GBP' }}
-        </p>
-      </div>
-      <p class="item-total">{{ item.total | currency: 'GBP' }}</p>
-    </div>
+<div class="container">
+  <div class="header">
+    <span class="header__name">Item name</span>
+    <span class="header__quantity">QTY.</span>
+    <span class="header__price">Price</span>
+    <span class="header__total">Total</span>
   </div>
-  <div class="amount-due">
-    <p>Amount Due</p>
-    <p class="grand-total">{{ total | currency: 'GBP' }}</p>
+
+  <div class="item" *ngFor="let item of items">
+    <h5 class="item__name">{{ item.name }}</h5>
+    <span class="item__quantity">{{ item.quantity }}</span>
+    <div class="item__price">
+      <span>{{ item.quantity }} x</span>
+      <p class="item__price-value">{{ item.price | currency: 'GBP' }}</p>
+    </div>
+    <span class="item__total">{{ item.total | currency: 'GBP' }}</span>
   </div>
+</div>
+
+<div class="grand-total">
+  <span class="grand-total__label">Amount Due</span>
+  <span class="grand-total__value">{{ total | currency: 'GBP' }}</span>
 </div>
