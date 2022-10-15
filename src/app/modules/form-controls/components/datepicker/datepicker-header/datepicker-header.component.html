@@ -2,7 +2,7 @@
   <div class="header__icon" (click)="cyclePrev.emit()">
     <svg-icon src="assets/icons/chevron.svg"></svg-icon>
   </div>
-  <span>{{ value | date: DATE_MEDIUM_FORMAT }}</span>
+  <span>{{ value | date: format }}</span>
   <div class="header__icon" (click)="cycleNext.emit()">
     <svg-icon src="assets/icons/chevron.svg"></svg-icon>
   </div>

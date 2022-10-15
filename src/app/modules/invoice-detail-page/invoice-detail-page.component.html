@@ -1,0 +1,38 @@
+<ng-container *ngIf="invoice$ | async as invoice">
+  <div class="app-container container">
+    <app-go-back [bottom]="2" (click)="toPreviousPage()"></app-go-back>
+
+    <app-header
+      [status]="invoice.status"
+      (edit)="onEdit(invoice)"
+      (delete)="onDelete()"
+      (markAsPaid)="onMarkAsPaid()"
+    ></app-header>
+
+    <section>
+      <app-body
+        [slug]="invoice.slug"
+        [createdAt]="invoice.createdAt"
+        [paymentDue]="invoice.paymentDue"
+        [clientName]="invoice.clientName"
+        [clientEmail]="invoice.clientEmail"
+        [description]="invoice.description"
+        [senderAddress]="invoice.senderAddress"
+        [clientAddress]="invoice.clientAddress"
+      ></app-body>
+      <app-table [items]="invoice.items" [total]="invoice.total"></app-table>
+    </section>
+
+    <app-delete-dialog
+      [slug]="invoice.slug"
+      [modalId]="'delete-dialog'"
+      [invoiceId]="invoice._id"
+    ></app-delete-dialog>
+
+    <app-mark-as-paid-dialog
+      [slug]="invoice.slug"
+      [invoiceId]="invoice._id"
+      [modalId]="'mark-as-paid-dialog'"
+    ></app-mark-as-paid-dialog>
+  </div>
+</ng-container>

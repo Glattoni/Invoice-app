@@ -37,6 +37,7 @@ import {
   animate,
   transition,
 } from '@angular/animations';
+import { DATE_FORMAT } from '@shared/constants/date-formats.constants';
 
 interface Day {
   value: number;
@@ -85,7 +86,7 @@ export class DatepickerComponent
   public onTouched!: () => void;
   public onChange!: (value: string) => void;
 
-  public DATE_FULL_FORMAT = 'dd MMM yyyy';
+  public readonly DATE_FORMAT = DATE_FORMAT;
 
   /**
    * Represents visibility state of picker

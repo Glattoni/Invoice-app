@@ -1,0 +1,16 @@
+<header class="header">
+  <div class="header__invoice-status">
+    <span>Status</span>
+    <app-invoice-status [variant]="status"></app-invoice-status>
+  </div>
+
+  <div class="header__controls">
+    <app-button [variant]="'neutral'" (click)="edit.emit()">Edit</app-button>
+    <app-button [variant]="'danger'" (click)="delete.emit()">
+      Delete
+    </app-button>
+    <app-button *ngIf="!isPaid" (click)="markAsPaid.emit()">
+      Mark as paid
+    </app-button>
+  </div>
+</header>

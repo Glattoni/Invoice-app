@@ -8,8 +8,8 @@ import {
 } from '@angular/core';
 
 import {
-  INVOICE_STATUS,
-  INVOICE_STATUSES,
+  InvoiceStatus,
+  InvoiceStatues,
 } from '@shared/constants/invoice.constants';
 import { scaleDown } from './dropdown.component.animations';
 import { InvoiceService } from '@core/services/invoice/invoice.service';
@@ -23,29 +23,29 @@ import { InvoiceService } from '@core/services/invoice/invoice.service';
 })
 export class DropdownComponent implements OnInit, OnDestroy {
   public visible = false;
-  public readonly statuses = INVOICE_STATUSES;
+  public readonly statuses = InvoiceStatues;
 
-  private value$ = new ReplaySubject<INVOICE_STATUS>();
-  private readonly destroyed$ = new Subject<void>();
+  private value$ = new ReplaySubject<InvoiceStatus>();
+  private readonly destroy$ = new Subject<void>();
 
   constructor(private readonly invoiceService: InvoiceService) {}
 
   public ngOnInit(): void {
     this.value$
       .pipe(
-        takeUntil(this.destroyed$),
-        filter((value) => !!value)
+        filter((value) => !!value),
+        takeUntil(this.destroy$)
       )
       .subscribe((value) => this.invoiceService.filterByStatus(value));
   }
 
   public ngOnDestroy(): void {
-    this.destroyed$.next();
-    this.destroyed$.complete();
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   public onCheck(value: string): void {
-    this.value$.next(value as INVOICE_STATUS);
+    this.value$.next(value as InvoiceStatus);
   }
 
   public onUnCheck(): void {

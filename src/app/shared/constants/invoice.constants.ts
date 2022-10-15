@@ -1,11 +1,3 @@
-export const enum INVOICE_STATUS {
-  PAID = 'paid',
-  PENDING = 'pending',
-  DRAFT = 'draft',
-}
+export type InvoiceStatus = 'paid' | 'pending' | 'draft';
 
-export const INVOICE_STATUSES = [
-  INVOICE_STATUS.PAID,
-  INVOICE_STATUS.PENDING,
-  INVOICE_STATUS.DRAFT,
-] as const;
+export const InvoiceStatues: InvoiceStatus[] = ['pending', 'paid', 'draft'];

@@ -1,0 +1,22 @@
+@use 'breakpoints' as bp;
+
+.container {
+  margin-bottom: 9.125rem;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  padding: 1.5rem;
+  margin-top: 1rem;
+  background-color: var(--background-tetriary);
+  border-radius: 0.5rem;
+  box-shadow: 0 0.625rem 0.625rem -0.625rem var(--box-shadow-secondary);
+
+  @include bp.md {
+    gap: 3rem;
+    padding: 2rem;
+    margin-top: 1.5rem;
+  }
+}

@@ -1,4 +1,5 @@
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { InvoiceStatus } from '@shared/constants/invoice.constants';
 
 export interface Address {
   street: FormControl<string>;
@@ -16,7 +17,7 @@ export interface ListItem {
 
 export interface BillingForm {
   slug: FormControl<string>;
-  status: FormControl<string>;
+  status: FormControl<InvoiceStatus>;
   senderAddress: FormGroup<Address>;
   clientAddress: FormGroup<Address>;
   clientName: FormControl<string>;
