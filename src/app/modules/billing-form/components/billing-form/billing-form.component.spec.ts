@@ -10,7 +10,7 @@ import { InvoiceTermsComponent } from '../invoice-terms/invoice-terms.component'
 import { SenderAddressComponent } from '../sender-address/sender-address.component';
 
 import { ButtonComponent } from '@modules/buttons/components/button/button.component';
-import { GoBackButtonComponent } from '@modules/buttons/components/go-back-button/go-back-button.component';
+import { GoBackComponent } from '@modules/buttons/components/go-back/go-back.component';
 
 describe('BillingFormComponent', () => {
   let component: BillingFormComponent;
@@ -23,7 +23,7 @@ describe('BillingFormComponent', () => {
         ItemsListComponent,
         ClientInfoComponent,
         BillingFormComponent,
-        GoBackButtonComponent,
+        GoBackComponent,
         InvoiceTermsComponent,
         SenderAddressComponent,
       ],

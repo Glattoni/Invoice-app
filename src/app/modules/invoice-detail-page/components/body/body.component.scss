@@ -1,0 +1,140 @@
+@use 'breakpoints' as bp;
+
+@mixin label {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  line-height: 0.9375rem;
+  text-transform: capitalize;
+}
+
+@mixin key-info {
+  font-size: 0.9375rem;
+  font-weight: bold;
+  line-height: 1.25rem;
+  color: var(--base);
+  letter-spacing: -0.3125px;
+}
+
+.container {
+  display: grid;
+  grid-template-areas:
+    'slug .'
+    'senderAddress .'
+    'terms clientAddress'
+    'email email';
+  gap: 2rem;
+  color: var(--invoice-detail);
+
+  @include bp.md {
+    grid-template-areas:
+      'slug . . senderAddress'
+      'terms clientAddress email email';
+    gap: 1.25rem;
+  }
+}
+
+.invoice {
+  grid-area: slug;
+
+  &__slug {
+    margin-bottom: 0.25rem;
+    font-size: inherit;
+    line-height: inherit;
+
+    span {
+      color: var(--invoice-detail);
+    }
+
+    @include bp.md {
+      margin-bottom: 0.5rem;
+      font-size: initial;
+      line-height: initial;
+    }
+  }
+}
+
+.sender-address {
+  display: flex;
+  flex-direction: column;
+  grid-area: senderAddress;
+  font-size: var(--font-xs);
+  line-height: 1.125rem;
+
+  @include bp.md {
+    text-align: right;
+  }
+}
+
+.invoice-terms {
+  display: grid;
+  grid-area: terms;
+  gap: 2.25rem;
+
+  &__label {
+    @include label;
+  }
+
+  &__creation-date,
+  &__payment-due {
+    @include key-info;
+  }
+
+  @include bp.md {
+    padding-right: 3.25rem;
+  }
+
+  @include bp.lg {
+    padding-right: 4rem;
+  }
+}
+
+.client-address {
+  grid-area: clientAddress;
+  font-size: var(--font-xs);
+  line-height: 1.125rem;
+
+  &__label {
+    @include label;
+  }
+
+  &__recepient {
+    margin-bottom: 0.5rem;
+    @include key-info;
+  }
+
+  @include bp.md {
+    padding-right: 3.5rem;
+  }
+
+  @include bp.lg {
+    padding-right: 4.25rem;
+  }
+}
+
+.client-email {
+  grid-area: email;
+
+  &__label {
+    @include label;
+  }
+
+  &__link {
+    display: block;
+    @include key-info;
+  }
+}
+
+.accent {
+  font-size: 0.9375rem;
+  font-weight: bold;
+  line-height: 1.25rem;
+  color: var(--base);
+  letter-spacing: -0.3125px;
+}
+
+.label {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  line-height: 0.9375rem;
+  text-transform: capitalize;
+}

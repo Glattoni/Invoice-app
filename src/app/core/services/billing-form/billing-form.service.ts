@@ -5,13 +5,28 @@ import { BehaviorSubject, ReplaySubject } from 'rxjs';
 
 import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable } from '@angular/core';
-import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
+import {
+  FormArray,
+  FormGroup,
+  Validators,
+  NonNullableFormBuilder,
+} from '@angular/forms';
 
 import { Invoice, Item } from '@shared/models/invoice.model';
-import { ListItem } from '@modules/billing-form/models/billing-form.model';
+import { DATE_FORMAT } from '@shared/constants/date-formats.constants';
+import {
+  Address,
+  BillingForm,
+  ListItem,
+} from '@modules/billing-form/models/billing-form.model';
+import { InvoiceStatus } from '@shared/constants/invoice.constants';
 
-const DEFAULT_PAYMENT_DUE = 30;
-const DEFAULT_DATE_FORMAT = 'yyyy-MM-dd';
+const newItem: Item = {
+  name: '',
+  quantity: 0,
+  price: 0,
+  total: 0,
+};
 
 @Injectable({
   providedIn: 'root',
@@ -20,79 +35,82 @@ export class BillingFormService {
   private visible = new BehaviorSubject<boolean>(false);
   private payload = new ReplaySubject<Invoice>();
 
-  readonly visible$ = this.visible.asObservable();
-  readonly payload$ = this.payload.asObservable();
+  public readonly visible$ = this.visible.asObservable();
+  public readonly payload$ = this.payload.asObservable();
 
   constructor(
-    @Inject(DOCUMENT) private document: Document,
-    private formBuilder: NonNullableFormBuilder
+    @Inject(DOCUMENT) private readonly document: Document,
+    private readonly formBuilder: NonNullableFormBuilder
   ) {}
 
-  getPaymentDue(date: string, duration: Object) {
-    return DateTime.fromISO(date).plus(duration).toFormat(DEFAULT_DATE_FORMAT);
+  public getPaymentDue(date: string, duration: object): string {
+    return DateTime.fromISO(date).plus(duration).toFormat(DATE_FORMAT.DEFAULT);
   }
 
-  generateFormGroup() {
-    const date = DateTime.now();
-    const creationDate = date.toFormat(DEFAULT_DATE_FORMAT);
-    const paymentDue = this.getPaymentDue(date.toISO(), {
-      days: DEFAULT_PAYMENT_DUE,
-    });
-
+  public get formControls(): FormGroup<BillingForm> {
     return this.formBuilder.group({
       slug: [generateSlug(), Validators.required],
-      status: ['pending', Validators.required],
-      senderAddress: this.generateAddressGroup(),
-      clientAddress: this.generateAddressGroup(),
+      status: ['pending' as InvoiceStatus, Validators.required],
+      senderAddress: this.addressGroup,
+      clientAddress: this.addressGroup,
       clientName: ['', Validators.required],
       clientEmail: ['', [Validators.required, Validators.email]],
-      createdAt: [creationDate, Validators.required],
-      paymentTerms: [DEFAULT_PAYMENT_DUE, Validators.required],
-      paymentDue: [paymentDue, Validators.required],
-      items: this.formBuilder.array<FormGroup<ListItem>>(
-        [],
-        Validators.required
-      ),
+      createdAt: [this.creationDate, Validators.required],
+      paymentTerms: [30, Validators.required],
+      paymentDue: [this.paymentDue, Validators.required],
+      items: this.itemsGroup,
       description: ['', Validators.required],
       total: [0, Validators.required],
     });
   }
 
-  generateListItem(item?: Item) {
+  public generateListItem(item = newItem) {
     return this.formBuilder.group({
-      name: [item?.name || '', Validators.required],
-      quantity: [item?.quantity || 0, [Validators.required, Validators.min(1)]],
-      price: [item?.price || 0, [Validators.required, Validators.min(0)]],
-      total: [item?.total || 0, Validators.required],
+      name: [item.name, Validators.required],
+      quantity: [item.quantity, [Validators.required, Validators.min(1)]],
+      price: [item.price, [Validators.required, Validators.min(0)]],
+      total: [item.total, Validators.required],
     });
   }
 
-  open(): void {
+  public open(): void {
     this.visible.next(true);
     this.document.body.classList.add('form-open');
   }
 
-  close(): void {
+  public close(): void {
     this.visible.next(false);
     this.document.body.classList.remove('form-open');
   }
 
-  startEditing(invoice: Invoice): void {
+  public startEditing(invoice: Invoice): void {
     this.payload.next(invoice);
     this.open();
   }
 
-  finishEditing(): void {
+  public finishEditing(): void {
     this.payload.next(null as any);
     this.close();
   }
 
-  private generateAddressGroup() {
+  private get addressGroup(): FormGroup<Address> {
     return this.formBuilder.group({
       street: ['', Validators.required],
       city: ['', Validators.required],
       postCode: ['', Validators.required],
       country: ['', Validators.required],
     });
+  }
+
+  private get itemsGroup(): FormArray<FormGroup<ListItem>> {
+    return this.formBuilder.array<FormGroup<ListItem>>([], Validators.required);
+  }
+
+  private get paymentDue(): string {
+    return this.getPaymentDue(DateTime.now().toISO(), { days: 30 });
+  }
+
+  private get creationDate(): string {
+    return DateTime.now().toFormat(DATE_FORMAT.DEFAULT);
   }
 }

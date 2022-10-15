@@ -1,5 +1,8 @@
 <aside [@slideInOut]="(visible$ | async) ? 'open' : 'close'">
-  <app-form-header [payload$]="payload$"></app-form-header>
+  <app-form-header
+    [payload$]="payload$"
+    (goBack)="onGoBack()"
+  ></app-form-header>
 
   <div
     class="form-container"

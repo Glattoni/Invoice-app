@@ -30,6 +30,10 @@ $border-radius: 1.25rem;
     grid-area: theme;
     padding: 1.25rem 1.5rem;
 
+    & > div {
+      cursor: pointer;
+    }
+
     svg-icon {
       display: grid;
       place-items: center;
@@ -50,10 +54,6 @@ $border-radius: 1.25rem;
       padding: 2rem;
       margin-top: auto;
     }
-  }
-
-  &__theme-icon {
-    cursor: pointer;
   }
 
   &__user-avatar {

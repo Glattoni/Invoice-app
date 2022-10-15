@@ -2,12 +2,12 @@
   <app-logo></app-logo>
 
   <div class="panel__theme">
-    <svg-icon
-      *ngIf="isDarkTheme$ | async; else moon"
-      class="panel__theme-icon panel__theme-icon--sun"
-      src="assets/icons/sun.svg"
-      (click)="toggleTheme()"
-    ></svg-icon>
+    <div *ngIf="isDarkTheme$ | async; else moon" (click)="toggleTheme()">
+      <svg-icon
+        class="panel__theme-icon panel__theme-icon--sun"
+        src="assets/icons/sun.svg"
+      ></svg-icon>
+    </div>
   </div>
 
   <div class="panel__user-avatar">
@@ -16,9 +16,10 @@
 </aside>
 
 <ng-template #moon>
-  <svg-icon
-    class="panel__theme-icon panel__theme-icon--moon"
-    src="assets/icons/moon.svg"
-    (click)="toggleTheme()"
-  ></svg-icon>
+  <div (click)="toggleTheme()">
+    <svg-icon
+      class="panel__theme-icon panel__theme-icon--moon"
+      src="assets/icons/moon.svg"
+    ></svg-icon>
+  </div>
 </ng-template>

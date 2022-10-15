@@ -14,8 +14,7 @@ import {
 })
 export class DatepickerHeaderComponent {
   @Input() public value = '';
+  @Input() public format?: string;
   @Output() public cycleNext = new EventEmitter<void>();
   @Output() public cyclePrev = new EventEmitter<void>();
-
-  public readonly DATE_MEDIUM_FORMAT = 'MMM yyyy';
 }

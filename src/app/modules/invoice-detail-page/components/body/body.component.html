@@ -1,0 +1,44 @@
+<div class="container">
+  <header class="invoice">
+    <h3 class="invoice__slug"><span>#</span>{{ slug }}</h3>
+    <p class="invoice__description">{{ description }}</p>
+  </header>
+
+  <address class="sender-address">
+    <p>{{ senderAddress.street }}</p>
+    <p>{{ senderAddress.city }}</p>
+    <p>{{ senderAddress.postCode }}</p>
+    <p>{{ senderAddress.country }}</p>
+  </address>
+
+  <div class="invoice-terms">
+    <div>
+      <span class="invoice-terms__label">invoice date</span>
+      <p class="invoice-terms__creation-date">
+        {{ createdAt | date: DATE_FORMAT.FULL }}
+      </p>
+    </div>
+    <div>
+      <span class="invoice-terms__label">payment due</span>
+      <p class="invoice-terms__payment-due">
+        {{ paymentDue | date: DATE_FORMAT.FULL }}
+      </p>
+    </div>
+  </div>
+
+  <address class="client-address">
+    <span class="client-address__label">bill to</span>
+    <p class="client-address__recepient">{{ clientName }}</p>
+    <div>
+      <p>{{ clientAddress.street }}</p>
+      <p>{{ clientAddress.city }}</p>
+      <p>{{ clientAddress.postCode }}</p>
+      <p>{{ clientAddress.country }}</p>
+    </div>
+  </address>
+
+  <address class="client-email">
+    <span class="client-email__label">sent to</span>
+    <a [href]="mailTo" class="client-email__link">{{ clientEmail }}</a>
+  </address>
+</div>

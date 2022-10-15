@@ -1,20 +1,24 @@
+import { AngularSvgIconModule } from 'angular-svg-icon';
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { InvoiceStateComponent } from './components/invoice-state/invoice-state.component';
-
-import { AngularSvgIconModule } from 'angular-svg-icon';
-import { ClickedOutsideDirective } from './directives/clicked-outside.directive';
-import { DialogComponent } from './components/dialog/dialog.component';
 import { ButtonsModule } from '@modules/buttons/buttons.module';
+import { DialogBaseComponent } from './components/dialog-base/dialog-base.component';
+import { InvoiceStatusComponent } from './components/invoice-status/invoice-status.component';
+import { ClickedOutsideDirective } from './directives/clicked-outside.directive';
 
 @NgModule({
   declarations: [
-    DialogComponent,
-    InvoiceStateComponent,
+    DialogBaseComponent,
+    InvoiceStatusComponent,
     ClickedOutsideDirective,
   ],
   imports: [CommonModule, AngularSvgIconModule, ButtonsModule],
-  exports: [DialogComponent, InvoiceStateComponent, ClickedOutsideDirective],
+  exports: [
+    DialogBaseComponent,
+    InvoiceStatusComponent,
+    ClickedOutsideDirective,
+  ],
 })
 export class SharedModule {}

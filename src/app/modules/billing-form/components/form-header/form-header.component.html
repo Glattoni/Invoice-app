@@ -1,11 +1,15 @@
-<header>
-  <app-go-back-button [offset]="'0 0 1.5rem 0'"></app-go-back-button>
+<header class="header">
+  <app-go-back
+    class="header__button"
+    [bottom]="1.5"
+    (click)="goBack.emit()"
+  ></app-go-back>
 
   <ng-container *ngIf="payload$ | async as invoice; else new">
-    <h1>Edit <span>#</span>{{ invoice.slug }}</h1>
+    <h1 class="header__title">Edit <span>#</span>{{ invoice.slug }}</h1>
   </ng-container>
 
   <ng-template #new>
-    <h1>New Invoice</h1>
+    <h1 class="header__title">New Invoice</h1>
   </ng-template>
 </header>
