@@ -1,10 +1,13 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NonNullableFormBuilder } from '@angular/forms';
+
+import { RouterTestingModule } from '@angular/router/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { RouterTestingModule } from '@angular/router/testing';
 
 import { InvoiceDetailPageComponent } from './invoice-detail-page.component';
 import { ButtonComponent } from '@modules/buttons/components/button/button.component';
-import { GoBackButtonComponent } from '@modules/buttons/components/go-back-button/go-back-button.component';
+import { GoBackComponent } from '@modules/buttons/components/go-back/go-back.component';
 
 describe('InvoiceDetailPageComponent', () => {
   let component: InvoiceDetailPageComponent;
@@ -14,10 +17,12 @@ describe('InvoiceDetailPageComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [
         ButtonComponent,
-        GoBackButtonComponent,
+        GoBackComponent,
         InvoiceDetailPageComponent,
       ],
       imports: [HttpClientTestingModule, RouterTestingModule],
+      providers: [NonNullableFormBuilder],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   });
 
