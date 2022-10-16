@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon';
-import { BehaviorSubject, filter, map, Observable, ReplaySubject } from 'rxjs';
+import { BehaviorSubject, map, Observable, ReplaySubject } from 'rxjs';
 
 import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable } from '@angular/core';
