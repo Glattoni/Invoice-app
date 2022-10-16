@@ -1,5 +1,6 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormGroupDirective } from '@angular/forms';
+import { FormGroupDirective, NonNullableFormBuilder } from '@angular/forms';
 
 import { InvoiceTermsComponent } from './invoice-terms.component';
 
@@ -10,7 +11,8 @@ describe('InvoiceTermsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [InvoiceTermsComponent],
-      providers: [FormGroupDirective],
+      providers: [FormGroupDirective, NonNullableFormBuilder],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   });
 
