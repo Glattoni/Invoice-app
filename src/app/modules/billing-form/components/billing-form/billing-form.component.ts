@@ -27,13 +27,13 @@ import { fadeInOut, slideInOut } from './billing-form.animations';
   selector: 'app-billing-form',
   templateUrl: './billing-form.component.html',
   styleUrls: ['./billing-form.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [slideInOut, fadeInOut],
 })
 export class BillingFormComponent implements OnInit, OnDestroy {
   public form: FormGroup<BillingForm>;
   public payload$: Observable<Invoice>;
   public visible$: Observable<boolean>;
+  public invoice$: Observable<Invoice>;
 
   public valid = true;
   public reachedBottom = false;
@@ -47,6 +47,7 @@ export class BillingFormComponent implements OnInit, OnDestroy {
     this.form = billingFormService.formControls;
     this.visible$ = billingFormService.visible$;
     this.payload$ = billingFormService.payload$;
+    this.invoice$ = this.invoiceService.invoice$;
   }
 
   public get items() {
@@ -73,7 +74,6 @@ export class BillingFormComponent implements OnInit, OnDestroy {
   public onCancel(): void {
     this.valid = true;
     this.resetForm();
-    this.createdAt?.enable();
     this.billingFormService.finishEditing();
   }
 
@@ -106,7 +106,6 @@ export class BillingFormComponent implements OnInit, OnDestroy {
     if (this.valid && this.formData) {
       this.invoiceService.updateInvoice(invoiceId, this.formData);
       this.resetForm();
-      this.createdAt?.enable();
       this.billingFormService.close();
     }
   }
@@ -136,7 +135,6 @@ export class BillingFormComponent implements OnInit, OnDestroy {
           total: invoice.total,
         });
         this.patchItemList(invoice.items);
-        this.createdAt?.disable();
       });
   }
 

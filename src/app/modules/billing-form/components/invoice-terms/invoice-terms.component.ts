@@ -1,5 +1,8 @@
+import { Observable } from 'rxjs';
+
 import { Component, OnInit } from '@angular/core';
 import { FormGroupDirective, FormGroup } from '@angular/forms';
+import { BillingFormService } from '@core/services/billing-form/billing-form.service';
 
 import { BillingForm } from '../../models/billing-form.model';
 
@@ -9,7 +12,7 @@ import { BillingForm } from '../../models/billing-form.model';
   styleUrls: ['./invoice-terms.component.scss'],
 })
 export class InvoiceTermsComponent implements OnInit {
-  form?: FormGroup<BillingForm>;
+  public form?: FormGroup<BillingForm>;
 
   readonly options = [
     { id: '1', value: 1, label: 'Next 1 day' },
@@ -18,37 +21,44 @@ export class InvoiceTermsComponent implements OnInit {
     { id: '30', value: 30, label: 'Next 30 days' },
   ];
 
-  constructor(private rootFormGroup: FormGroupDirective) {}
+  constructor(
+    private readonly rootFormGroup: FormGroupDirective,
+    private readonly billingFormService: BillingFormService
+  ) {}
 
-  ngOnInit(): void {
-    this.form = this.rootFormGroup.control;
+  public ngOnInit(): void {
+    this.form = this.rootFormGroup.form;
   }
 
-  get createdAt() {
+  public get editMode$(): Observable<boolean> {
+    return this.billingFormService.editMode$;
+  }
+
+  public get createdAt() {
     return this.form?.get('createdAt');
   }
 
-  get paymentTerms() {
+  public get paymentTerms() {
     return this.form?.get('paymentTerms');
   }
 
-  get description() {
+  public get description() {
     return this.form?.get('description');
   }
 
-  get invalidDate() {
+  public get invalidDate() {
     return this.createdAt?.invalid && this.createdAt.touched;
   }
 
-  get invalidTerms() {
+  public get invalidTerms() {
     return this.paymentTerms?.invalid && this.paymentTerms.touched;
   }
 
-  get invalidDescription() {
+  public get invalidDescription() {
     return this.description?.invalid && this.description.touched;
   }
 
-  get disabledCreatedAt() {
+  public get disabledCreatedAt() {
     return this.createdAt?.disabled;
   }
 }
