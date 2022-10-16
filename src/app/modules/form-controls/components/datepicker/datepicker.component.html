@@ -14,7 +14,7 @@
   <div class="date-picker" [@scaleDown]="visible ? 'open' : 'close'">
     <app-datepicker-header
       [value]="ISODate"
-      [format]="DATE_FORMAT.DEFAULT"
+      [format]="DATE_FORMAT.MEDIUM"
       (cycleNext)="operateMonth('INCREMENT')"
       (cyclePrev)="operateMonth('DECREMENT')"
     ></app-datepicker-header>
