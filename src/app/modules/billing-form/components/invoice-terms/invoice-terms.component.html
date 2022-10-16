@@ -6,8 +6,9 @@
     <app-datepicker
       class="created-at"
       formControlName="createdAt"
-      label="invoice date"
+      [label]="'invoice date'"
       [classes]="'form-field'"
+      [disabledControl]="(editMode$ | async) ?? false"
     ></app-datepicker>
     <!-- created at -->
 
@@ -16,7 +17,7 @@
       class="payment-terms"
       formControlName="paymentTerms"
       [options]="options"
-      label="payment terms"
+      [label]="'payment terms'"
     ></app-select-input>
     <!-- payment terms -->
 
@@ -24,9 +25,9 @@
     <app-text-input
       class="description"
       formControlName="description"
-      label="project description"
+      [label]="'project description'"
       [invalid]="invalidDescription"
-      placeholder="e.g Graphic Design Service"
+      [placeholder]="'e.g Graphic Design Service'"
     ></app-text-input>
     <!-- description  -->
   </div>

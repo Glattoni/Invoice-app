@@ -1,7 +1,5 @@
 import { DateTime } from 'luxon';
-import { generateSlug } from 'src/utils';
-
-import { BehaviorSubject, ReplaySubject } from 'rxjs';
+import { BehaviorSubject, filter, map, Observable, ReplaySubject } from 'rxjs';
 
 import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable } from '@angular/core';
@@ -20,6 +18,7 @@ import {
   ListItem,
 } from '@modules/billing-form/models/billing-form.model';
 import { InvoiceStatus } from '@shared/constants/invoice.constants';
+import { generateSlug } from 'src/utils';
 
 const newItem: Item = {
   name: '',
@@ -28,10 +27,13 @@ const newItem: Item = {
   total: 0,
 };
 
+type Mode = 'CREATE' | 'EDIT';
+
 @Injectable({
   providedIn: 'root',
 })
 export class BillingFormService {
+  private mode = new BehaviorSubject<Mode>('CREATE');
   private visible = new BehaviorSubject<boolean>(false);
   private payload = new ReplaySubject<Invoice>();
 
@@ -42,10 +44,6 @@ export class BillingFormService {
     @Inject(DOCUMENT) private readonly document: Document,
     private readonly formBuilder: NonNullableFormBuilder
   ) {}
-
-  public getPaymentDue(date: string, duration: object): string {
-    return DateTime.fromISO(date).plus(duration).toFormat(DATE_FORMAT.DEFAULT);
-  }
 
   public get formControls(): FormGroup<BillingForm> {
     return this.formBuilder.group({
@@ -64,11 +62,19 @@ export class BillingFormService {
     });
   }
 
+  public get editMode$(): Observable<boolean> {
+    return this.mode.pipe(map((mode) => mode === 'EDIT'));
+  }
+
+  public getPaymentDue(date: string, duration: object): string {
+    return DateTime.fromISO(date).plus(duration).toFormat(DATE_FORMAT.DEFAULT);
+  }
+
   public generateListItem(item = newItem) {
     return this.formBuilder.group({
       name: [item.name, Validators.required],
       quantity: [item.quantity, [Validators.required, Validators.min(1)]],
-      price: [item.price, [Validators.required, Validators.min(0)]],
+      price: [item.price, [Validators.required, Validators.min(0.01)]],
       total: [item.total, Validators.required],
     });
   }
@@ -85,11 +91,13 @@ export class BillingFormService {
 
   public startEditing(invoice: Invoice): void {
     this.payload.next(invoice);
+    this.mode.next('EDIT');
     this.open();
   }
 
   public finishEditing(): void {
     this.payload.next(null as any);
+    this.mode.next('CREATE');
     this.close();
   }
 
