@@ -36,8 +36,8 @@ export class InvoiceDetailPageComponent implements OnInit {
     this.location.back();
   }
 
-  public onEdit(invoice: Invoice): void {
-    this.billingFormService.startEditing(invoice);
+  public onEdit(): void {
+    this.billingFormService.startEditing();
   }
 
   public onDelete(): void {
