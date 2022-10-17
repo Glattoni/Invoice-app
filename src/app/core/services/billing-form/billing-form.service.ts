@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon';
-import { BehaviorSubject, map, Observable, ReplaySubject } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 
 import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable } from '@angular/core';
@@ -10,7 +10,7 @@ import {
   NonNullableFormBuilder,
 } from '@angular/forms';
 
-import { Invoice, Item } from '@shared/models/invoice.model';
+import { Item } from '@shared/models/invoice.model';
 import { DATE_FORMAT } from '@shared/constants/date-formats.constants';
 import {
   Address,
@@ -35,10 +35,8 @@ type Mode = 'CREATE' | 'EDIT';
 export class BillingFormService {
   private mode = new BehaviorSubject<Mode>('CREATE');
   private visible = new BehaviorSubject<boolean>(false);
-  private payload = new ReplaySubject<Invoice>();
 
   public readonly visible$ = this.visible.asObservable();
-  public readonly payload$ = this.payload.asObservable();
 
   constructor(
     @Inject(DOCUMENT) private readonly document: Document,
@@ -89,14 +87,12 @@ export class BillingFormService {
     this.document.body.classList.remove('form-open');
   }
 
-  public startEditing(invoice: Invoice): void {
-    this.payload.next(invoice);
+  public startEditing(): void {
     this.mode.next('EDIT');
     this.open();
   }
 
   public finishEditing(): void {
-    this.payload.next(null as any);
     this.mode.next('CREATE');
     this.close();
   }
