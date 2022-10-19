@@ -50,6 +50,8 @@ type Action = 'INCREMENT' | 'DECREMENT' | 'DATE_SELECTION';
 const LAST_MONTH = 12;
 const MAX_GRID_ITEMS = 35;
 
+const noop = () => undefined;
+
 @Component({
   selector: 'app-datepicker',
   templateUrl: './datepicker.component.html',
@@ -82,9 +84,9 @@ export class DatepickerComponent
   @Input() public label?: string;
   @Input() public classes?: string | string[];
 
-  public value!: string;
-  public onTouched!: () => void;
-  public onChange!: (value: string) => void;
+  public value = '';
+  public onTouched: () => void = noop;
+  public onChange: (value: string) => void = noop;
 
   public readonly DATE_FORMAT = DATE_FORMAT;
 

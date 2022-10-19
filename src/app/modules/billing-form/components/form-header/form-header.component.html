@@ -5,8 +5,8 @@
     (click)="goBack.emit()"
   ></app-go-back>
 
-  <ng-container *ngIf="payload$ | async as invoice; else new">
-    <h1 class="header__title">Edit <span>#</span>{{ invoice.slug }}</h1>
+  <ng-container *ngIf="editMode; else new">
+    <h1 class="header__title">Edit <span>#</span>{{ slug }}</h1>
   </ng-container>
 
   <ng-template #new>

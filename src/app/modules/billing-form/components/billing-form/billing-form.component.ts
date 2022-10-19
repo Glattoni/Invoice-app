@@ -6,6 +6,11 @@ import {
   takeUntil,
   debounceTime,
   distinctUntilChanged,
+  switchMap,
+  combineLatest,
+  map,
+  startWith,
+  take,
 } from 'rxjs';
 
 import {
@@ -28,15 +33,24 @@ import { fadeInOut, slideInOut } from './billing-form.animations';
   templateUrl: './billing-form.component.html',
   styleUrls: ['./billing-form.component.scss'],
   animations: [slideInOut, fadeInOut],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BillingFormComponent implements OnInit, OnDestroy {
   public form: FormGroup<BillingForm>;
-  public payload$: Observable<Invoice>;
+  public editMode$: Observable<boolean>;
   public visible$: Observable<boolean>;
   public invoice$: Observable<Invoice>;
 
   public valid = true;
   public reachedBottom = false;
+
+  public readonly viewModel$ = combineLatest([
+    this.billingFormService.editMode$,
+    this.billingFormService.visible$,
+    this.invoiceService.invoice$.pipe(startWith({} as Invoice)),
+  ]).pipe(
+    map(([editMode, visible, invoice]) => ({ editMode, visible, invoice }))
+  );
 
   private readonly destroy$ = new Subject<void>();
 
@@ -45,9 +59,9 @@ export class BillingFormComponent implements OnInit, OnDestroy {
     private readonly billingFormService: BillingFormService
   ) {
     this.form = billingFormService.formControls;
+    this.editMode$ = billingFormService.editMode$;
     this.visible$ = billingFormService.visible$;
-    this.payload$ = billingFormService.payload$;
-    this.invoice$ = this.invoiceService.invoice$;
+    this.invoice$ = invoiceService.invoice$;
   }
 
   public get items() {
@@ -78,7 +92,15 @@ export class BillingFormComponent implements OnInit, OnDestroy {
   }
 
   public onOverlayClick(): void {
-    this.payload$ ? this.onCancel() : this.onDiscard();
+    this.editMode$
+      .pipe(
+        take(1),
+        map((value) => !!value),
+        takeUntil(this.destroy$)
+      )
+      .subscribe((editMode) => {
+        editMode ? this.onCancel() : this.onDiscard();
+      });
   }
 
   public onSaveAsDraft(): void {
@@ -93,7 +115,7 @@ export class BillingFormComponent implements OnInit, OnDestroy {
   public onSubmit(): void {
     this.validateForm();
 
-    if (this.valid && this.formData) {
+    if (this.valid) {
       this.invoiceService.createInvoice(this.formData);
       this.resetForm();
       this.billingFormService.close();
@@ -103,7 +125,7 @@ export class BillingFormComponent implements OnInit, OnDestroy {
   public onSaveChanges(invoiceId: string): void {
     this.validateForm();
 
-    if (this.valid && this.formData) {
+    if (this.valid) {
       this.invoiceService.updateInvoice(invoiceId, this.formData);
       this.resetForm();
       this.billingFormService.close();
@@ -115,13 +137,13 @@ export class BillingFormComponent implements OnInit, OnDestroy {
   }
 
   private patchFormValue(): void {
-    this.payload$
-      ?.pipe(
-        filter((payload) => payload !== null),
-        takeUntil(this.destroy$)
+    this.editMode$
+      .pipe(
+        filter((value) => !!value),
+        switchMap(() => this.invoice$)
       )
       .subscribe((invoice) => {
-        this.form?.patchValue({
+        this.form.patchValue({
           slug: invoice.slug,
           status: invoice.status,
           senderAddress: invoice.senderAddress,
@@ -187,7 +209,7 @@ export class BillingFormComponent implements OnInit, OnDestroy {
 
   private validateForm(): void {
     this.form.markAllAsTouched();
-    this.valid = this.form.invalid ? false : true;
+    this.valid = this.form.valid;
   }
 
   private resetForm(): void {

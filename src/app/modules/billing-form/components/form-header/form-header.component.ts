@@ -1,4 +1,3 @@
-import { Observable } from 'rxjs';
 import {
   Input,
   Output,
@@ -6,7 +5,6 @@ import {
   EventEmitter,
   ChangeDetectionStrategy,
 } from '@angular/core';
-import { Invoice } from '@shared/models/invoice.model';
 
 @Component({
   selector: 'app-form-header',
@@ -15,6 +13,7 @@ import { Invoice } from '@shared/models/invoice.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormHeaderComponent {
-  @Input() public payload$?: Observable<Invoice>;
+  @Input() public slug = '';
+  @Input() public editMode = false;
   @Output() public goBack = new EventEmitter<void>();
 }
