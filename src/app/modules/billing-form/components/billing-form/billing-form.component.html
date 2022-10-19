@@ -11,7 +11,7 @@
       scrolledToBottom
       (scrolledToBottom)="onScroll($event)"
     >
-      <form *ngIf="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <form-sender-address></form-sender-address>
         <form-client-info></form-client-info>
         <form-invoice-terms></form-invoice-terms>

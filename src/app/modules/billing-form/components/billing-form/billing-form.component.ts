@@ -10,6 +10,7 @@ import {
   combineLatest,
   map,
   startWith,
+  take,
 } from 'rxjs';
 
 import {
@@ -91,7 +92,15 @@ export class BillingFormComponent implements OnInit, OnDestroy {
   }
 
   public onOverlayClick(): void {
-    this.editMode$ ? this.onCancel() : this.onDiscard();
+    this.editMode$
+      .pipe(
+        take(1),
+        map((value) => !!value),
+        takeUntil(this.destroy$)
+      )
+      .subscribe((editMode) => {
+        editMode ? this.onCancel() : this.onDiscard();
+      });
   }
 
   public onSaveAsDraft(): void {
@@ -200,7 +209,7 @@ export class BillingFormComponent implements OnInit, OnDestroy {
 
   private validateForm(): void {
     this.form.markAllAsTouched();
-    this.valid = this.form.invalid ? false : true;
+    this.valid = this.form.valid;
   }
 
   private resetForm(): void {
