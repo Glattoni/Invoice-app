@@ -6,7 +6,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { InvoiceDetailPageComponent } from './invoice-detail-page.component';
-import { GoBackComponent } from '@modules/buttons/components/go-back/go-back.component';
+import { GoBackComponent } from '@shared/components/go-back/go-back.component';
 
 describe('InvoiceDetailPageComponent', () => {
   let component: InvoiceDetailPageComponent;
