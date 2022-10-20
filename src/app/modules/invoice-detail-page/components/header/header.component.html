@@ -5,12 +5,14 @@
   </div>
 
   <div class="header__controls">
-    <app-button [variant]="'neutral'" (click)="edit.emit()">Edit</app-button>
-    <app-button [variant]="'danger'" (click)="delete.emit()">
-      Delete
-    </app-button>
-    <app-button *ngIf="!isPaid" (click)="markAsPaid.emit()">
+    <button class="app-button neutral" (click)="edit.emit()">Edit</button>
+    <button class="app-button danger" (click)="delete.emit()">Delete</button>
+    <button
+      *ngIf="!isPaid"
+      class="app-button primary"
+      (click)="markAsPaid.emit()"
+    >
       Mark as paid
-    </app-button>
+    </button>
   </div>
 </header>

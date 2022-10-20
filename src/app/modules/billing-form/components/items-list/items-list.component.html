@@ -2,7 +2,7 @@
   <legend>items list</legend>
 
   <header>
-    <p *ngFor="let header of headers">{{ header }}</p>
+    <span *ngFor="let header of headers">{{ header }}</span>
   </header>
 
   <ul formArrayName="items">
@@ -53,7 +53,7 @@
     </li>
   </ul>
 
-  <app-button class="add-button" [variant]="'mixed'" (click)="addItem()">
+  <button class="app-button mixed add-button" (click)="addItem()">
     + add new item
-  </app-button>
+  </button>
 </fieldset>

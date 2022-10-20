@@ -5,9 +5,9 @@
     cannot be undone.
   </p>
   <div class="controls">
-    <app-button [variant]="'neutral'" (click)="closeDialog()">
-      Cancel
-    </app-button>
-    <app-button (click)="markAsPaid()"> Mark as paid </app-button>
+    <button class="app-button neutral" (click)="closeDialog()">Cancel</button>
+    <button class="app-button primary" (click)="markAsPaid()">
+      Mark as paid
+    </button>
   </div>
 </app-dialog-base>

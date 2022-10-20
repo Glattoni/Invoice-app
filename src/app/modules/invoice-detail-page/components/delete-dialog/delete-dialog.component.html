@@ -5,11 +5,7 @@
     undone.
   </p>
   <div class="controls">
-    <app-button [variant]="'neutral'" (click)="closeModal()">
-      Cancel
-    </app-button>
-    <app-button [variant]="'danger'" (click)="deleteInvoice()">
-      Delete
-    </app-button>
+    <button class="app-button neutral" (click)="closeModal()">Cancel</button>
+    <button class="app-button danger" (click)="deleteInvoice()">Delete</button>
   </div>
 </app-dialog-base>

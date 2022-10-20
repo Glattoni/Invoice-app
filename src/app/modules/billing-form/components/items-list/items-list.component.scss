@@ -109,11 +109,8 @@ li {
 
 .add-button {
   display: block;
-
-  ::ng-deep button {
-    width: 100%;
-    text-transform: capitalize;
-  }
+  width: 100%;
+  text-transform: capitalize;
 
   @include bp.md {
     margin-top: 1.5rem;
