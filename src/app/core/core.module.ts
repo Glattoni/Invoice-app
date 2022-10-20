@@ -1,13 +1,14 @@
-import { NgModule, Optional, SkipSelf } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { AngularSvgIconModule } from 'angular-svg-icon';
-import { ButtonsModule } from '../modules/buttons/buttons.module';
+
+import { CommonModule } from '@angular/common';
+import { NgModule, Optional, SkipSelf } from '@angular/core';
+
 import { LogoComponent } from './components/logo/logo.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [SidebarComponent, LogoComponent],
-  imports: [CommonModule, AngularSvgIconModule, ButtonsModule],
+  imports: [CommonModule, AngularSvgIconModule],
   exports: [SidebarComponent],
 })
 export class CoreModule {

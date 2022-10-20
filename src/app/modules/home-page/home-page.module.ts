@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 
 import { SharedModule } from '@shared/shared.module';
 import { AngularSvgIconModule } from 'angular-svg-icon';
-import { ButtonsModule } from '../buttons/buttons.module';
 import { HomeRoutingModule } from './home-page-routing.module';
 import { BillingFormModule } from '@modules/billing-form/billing-form.module';
 
@@ -29,7 +28,6 @@ import { CheckboxComponent } from './components/checkbox/checkbox.component';
     FormsModule,
     CommonModule,
     SharedModule,
-    ButtonsModule,
     HomeRoutingModule,
     BillingFormModule,
     AngularSvgIconModule,

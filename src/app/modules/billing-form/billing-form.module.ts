@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { SharedModule } from '@shared/shared.module';
-import { ButtonsModule } from '../buttons/buttons.module';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 
 import { BillingFormComponent } from './components/billing-form/billing-form.component';
@@ -29,7 +28,6 @@ import { FormHeaderComponent } from './components/form-header/form-header.compon
     FormsModule,
     CommonModule,
     SharedModule,
-    ButtonsModule,
     FormControlsModule,
     ReactiveFormsModule,
     AngularSvgIconModule,
