@@ -9,7 +9,6 @@ import { ClientInfoComponent } from '../client-info/client-info.component';
 import { InvoiceTermsComponent } from '../invoice-terms/invoice-terms.component';
 import { SenderAddressComponent } from '../sender-address/sender-address.component';
 
-import { ButtonComponent } from '@modules/buttons/components/button/button.component';
 import { GoBackComponent } from '@modules/buttons/components/go-back/go-back.component';
 
 describe('BillingFormComponent', () => {
@@ -19,7 +18,6 @@ describe('BillingFormComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
-        ButtonComponent,
         ItemsListComponent,
         ClientInfoComponent,
         BillingFormComponent,
