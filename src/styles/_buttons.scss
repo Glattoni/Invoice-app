@@ -1,0 +1,68 @@
+.app-button {
+  padding: 1rem 1.5rem;
+  font-weight: bold;
+  letter-spacing: -0.25px;
+  border-radius: 1.5rem;
+
+  &.primary {
+    color: var(--white);
+    background-color: var(--primary);
+
+    &:hover {
+      background-color: var(--primary-light);
+    }
+  }
+
+  &.neutral {
+    color: var(--button-3-fg);
+    background-color: var(--button-3-bg);
+
+    &:hover {
+      color: var(--button-3-fg-hover);
+      background-color: var(--button-3-bg-hover);
+    }
+  }
+
+  &.dark {
+    color: var(--button-4-fg);
+    background-color: var(--button-4-bg);
+
+    &:hover {
+      color: var(--button-4-fg-hover);
+      background-color: var(--button-4-bg-hover);
+    }
+  }
+
+  &.danger {
+    color: var(--white);
+    background-color: var(--danger);
+
+    &:hover {
+      background-color: var(--danger-light);
+    }
+  }
+
+  &.light {
+    color: var(--button-6-fg);
+    background-color: var(--button-6-bg);
+
+    &:hover {
+      color: var(--button-6-fg-hover);
+      background-color: var(--button-6-bg-hover);
+    }
+  }
+
+  &.mixed {
+    color: var(--button-7-fg);
+    background-color: var(--button-7-bg);
+
+    &:hover {
+      color: var(--button-7-fg-hover);
+      background-color: var(--button-7-bg-hover);
+    }
+  }
+
+  &.small {
+    padding: 1rem;
+  }
+}
