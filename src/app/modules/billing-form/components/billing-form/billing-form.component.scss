@@ -1,11 +1,17 @@
 @use 'breakpoints' as bp;
 
-// align to the right if has only one sibling
-app-button:first-child:nth-last-child(2) {
-  justify-self: right;
-
-  ~ app-button {
+.app-button:first-child {
+  // align to the right if has only one sibling
+  &:nth-last-child(2) {
     justify-self: right;
+
+    ~ .app-button {
+      justify-self: right;
+    }
+  }
+
+  @include bp.md {
+    max-width: fit-content;
   }
 }
 

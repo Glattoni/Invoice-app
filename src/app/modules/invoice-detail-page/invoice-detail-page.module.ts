@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '@shared/shared.module';
-import { ButtonsModule } from '../buttons/buttons.module';
 import { InvoiceDetailRoutingModule } from './invoice-detail-page-routing.module';
 
 import { AngularSvgIconModule } from 'angular-svg-icon';
@@ -25,7 +24,6 @@ import { MarkAsPaidDialogComponent } from './components/mark-as-paid-dialog/mark
   imports: [
     CommonModule,
     SharedModule,
-    ButtonsModule,
     AngularSvgIconModule,
     InvoiceDetailRoutingModule,
   ],

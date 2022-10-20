@@ -9,8 +9,12 @@
 
   <div class="header__controls">
     <app-dropdown></app-dropdown>
-    <app-button [hasIcon]="true" (click)="openSidebar()">
-      New <span>Invoice</span>
-    </app-button>
+    <button
+      class="app-button primary header__controls-button"
+      (click)="openSidebar()"
+    >
+      <svg-icon src="assets/icons/plus.svg"></svg-icon>
+      <span>New</span><span class="last-word">Invoice</span>
+    </button>
   </div>
 </header>

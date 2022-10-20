@@ -24,32 +24,35 @@
 
         <div class="panel" [class.accent]="!reachedBottom">
           <ng-container *ngIf="vm.editMode; else create">
-            <app-button [variant]="'light'" [small]="true" (click)="onCancel()">
+            <button class="app-button light small" (click)="onCancel()">
               Cancel
-            </app-button>
-            <app-button [small]="true" (click)="onSaveChanges(vm.invoice._id)">
+            </button>
+            <button
+              class="app-button primary small"
+              (click)="onSaveChanges(vm.invoice._id)"
+            >
               Save Changes
-            </app-button>
+            </button>
           </ng-container>
 
           <ng-template #create>
-            <app-button
-              [variant]="'light'"
-              [small]="true"
+            <button
+              class="app-button light small"
+              type="button"
               (click)="onDiscard()"
             >
               Discard
-            </app-button>
-            <app-button
-              [variant]="'dark'"
-              [small]="true"
+            </button>
+            <button
+              class="app-button dark small"
+              type="button"
               (click)="onSaveAsDraft()"
             >
               Save as Draft
-            </app-button>
-            <app-button type="'submit'" [small]="true">
+            </button>
+            <button class="app-button primary small" type="submit">
               Save & Send
-            </app-button>
+            </button>
           </ng-template>
         </div>
       </form>

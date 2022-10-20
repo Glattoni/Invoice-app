@@ -1,6 +1,7 @@
 @use 'fonts';
 @use 'variables';
 @use 'themes';
+@use 'buttons';
 @use 'breakpoints' as bp;
 
 *,
@@ -129,7 +130,7 @@ svg-icon {
   pointer-events: none;
 }
 
-address{
+address {
   font-style: normal;
 }
 

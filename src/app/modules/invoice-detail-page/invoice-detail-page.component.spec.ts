@@ -6,8 +6,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { InvoiceDetailPageComponent } from './invoice-detail-page.component';
-import { ButtonComponent } from '@modules/buttons/components/button/button.component';
-import { GoBackComponent } from '@modules/buttons/components/go-back/go-back.component';
+import { GoBackComponent } from '@shared/components/go-back/go-back.component';
 
 describe('InvoiceDetailPageComponent', () => {
   let component: InvoiceDetailPageComponent;
@@ -15,11 +14,7 @@ describe('InvoiceDetailPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        ButtonComponent,
-        GoBackComponent,
-        InvoiceDetailPageComponent,
-      ],
+      declarations: [GoBackComponent, InvoiceDetailPageComponent],
       imports: [HttpClientTestingModule, RouterTestingModule],
       providers: [NonNullableFormBuilder],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],

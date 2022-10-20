@@ -1,7 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormGroupDirective, NonNullableFormBuilder } from '@angular/forms';
-import { ButtonComponent } from '@modules/buttons/components/button/button.component';
-
 import { ItemsListComponent } from './items-list.component';
 
 describe('ItemsListComponent', () => {
@@ -10,7 +8,7 @@ describe('ItemsListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ItemsListComponent, ButtonComponent],
+      declarations: [ItemsListComponent],
       providers: [FormGroupDirective, NonNullableFormBuilder],
     }).compileComponents();
   });
