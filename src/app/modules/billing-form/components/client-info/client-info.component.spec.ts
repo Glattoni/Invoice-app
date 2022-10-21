@@ -1,3 +1,4 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormGroupDirective } from '@angular/forms';
 
@@ -11,6 +12,7 @@ describe('ClientInfoComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ClientInfoComponent],
       providers: [FormGroupDirective],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   });
 

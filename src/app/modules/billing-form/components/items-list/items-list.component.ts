@@ -9,7 +9,7 @@ import { BillingForm, ListItem } from '../../models/billing-form.model';
 import { BillingFormService } from '@core/services/billing-form/billing-form.service';
 
 @Component({
-  selector: 'form-items-list',
+  selector: 'app-items-list',
   templateUrl: './items-list.component.html',
   styleUrls: ['./items-list.component.scss'],
 })

@@ -3,7 +3,7 @@ import { FormGroupDirective, FormGroup } from '@angular/forms';
 import { BillingForm } from '../../models/billing-form.model';
 
 @Component({
-  selector: 'form-sender-address',
+  selector: 'app-sender-address',
   templateUrl: './sender-address.component.html',
   styleUrls: ['./sender-address.component.scss'],
 })

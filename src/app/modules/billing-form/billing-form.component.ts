@@ -25,7 +25,7 @@ import { Invoice, Item } from '@shared/models/invoice.model';
 import { InvoiceService } from '@core/services/invoice/invoice.service';
 import { BillingFormService } from '@core/services/billing-form/billing-form.service';
 
-import { BillingForm, ListItem } from '../../models/billing-form.model';
+import { BillingForm, ListItem } from './models/billing-form.model';
 import { fadeInOut, slideInOut } from './billing-form.animations';
 
 @Component({
@@ -44,15 +44,16 @@ export class BillingFormComponent implements OnInit, OnDestroy {
   public valid = true;
   public reachedBottom = false;
 
+  private readonly destroy$ = new Subject<void>();
+
   public readonly viewModel$ = combineLatest([
     this.billingFormService.editMode$,
     this.billingFormService.visible$,
     this.invoiceService.invoice$.pipe(startWith({} as Invoice)),
   ]).pipe(
-    map(([editMode, visible, invoice]) => ({ editMode, visible, invoice }))
+    map(([editMode, visible, invoice]) => ({ editMode, visible, invoice })),
+    takeUntil(this.destroy$)
   );
-
-  private readonly destroy$ = new Subject<void>();
 
   constructor(
     private readonly invoiceService: InvoiceService,
@@ -66,6 +67,13 @@ export class BillingFormComponent implements OnInit, OnDestroy {
 
   public get items() {
     return this.form.get('items') as FormArray<FormGroup<ListItem>>;
+  }
+
+  public get animationState$(): Observable<string> {
+    return this.visible$.pipe(
+      map((visible) => (visible ? 'open' : 'close')),
+      takeUntil(this.destroy$)
+    );
   }
 
   public ngOnInit(): void {
@@ -156,16 +164,14 @@ export class BillingFormComponent implements OnInit, OnDestroy {
           description: invoice.description,
           total: invoice.total,
         });
-        this.patchItemList(invoice.items);
+        this.patchItemsList(invoice.items);
       });
   }
 
-  private patchItemList(items: Item[]): void {
+  private patchItemsList(items: Item[]): void {
     this.items.clear();
-
     for (const item of items) {
-      const listItem = this.billingFormService.generateListItem(item);
-      this.items.push(listItem);
+      this.items.push(this.billingFormService.generateListItem(item));
     }
   }
 

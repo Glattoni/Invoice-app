@@ -1,0 +1,42 @@
+<ng-container *ngIf="viewModel$ | async as vm">
+  <aside [@slideInOut]="animationState$ | async">
+    <app-form-header
+      [slug]="vm.invoice.slug"
+      [editMode]="vm.editMode"
+      (goBack)="onGoBack()"
+    ></app-form-header>
+
+    <div
+      class="form-container"
+      scrolledToBottom
+      (scrolledToBottom)="onScroll($event)"
+    >
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <app-sender-address></app-sender-address>
+        <app-client-info></app-client-info>
+        <app-invoice-terms></app-invoice-terms>
+        <app-items-list></app-items-list>
+
+        <ul *ngIf="!valid" class="validation-errors">
+          <li>- All fields must be added</li>
+          <li *ngIf="!items.length">- An item should be added</li>
+        </ul>
+
+        <app-action-buttons
+          [editMode]="vm.editMode"
+          [reachedBottom]="reachedBottom"
+          (cancel)="onCancel()"
+          (discard)="onDiscard()"
+          (saveAsDraft)="onSaveAsDraft()"
+          (saveChanges)="onSaveChanges(vm.invoice._id)"
+        ></app-action-buttons>
+      </form>
+    </div>
+  </aside>
+
+  <div
+    id="overlay"
+    (click)="onOverlayClick()"
+    [@fadeInOut]="animationState$ | async"
+  ></div>
+</ng-container>
