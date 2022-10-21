@@ -1,14 +1,16 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { FormGroupDirective, NonNullableFormBuilder } from '@angular/forms';
 
-import { BillingFormComponent } from './billing-form.component';
-import { ItemsListComponent } from '../items-list/items-list.component';
-import { ClientInfoComponent } from '../client-info/client-info.component';
-import { InvoiceTermsComponent } from '../invoice-terms/invoice-terms.component';
-import { SenderAddressComponent } from '../sender-address/sender-address.component';
 import { GoBackComponent } from '@shared/components/go-back/go-back.component';
+
+import { BillingFormComponent } from './billing-form.component';
+import { ItemsListComponent } from './components/items-list/items-list.component';
+import { ClientInfoComponent } from './components/client-info/client-info.component';
+import { InvoiceTermsComponent } from './components/invoice-terms/invoice-terms.component';
+import { SenderAddressComponent } from './components/sender-address/sender-address.component';
 
 describe('BillingFormComponent', () => {
   let component: BillingFormComponent;
@@ -26,6 +28,7 @@ describe('BillingFormComponent', () => {
       ],
       imports: [HttpClientTestingModule],
       providers: [FormGroupDirective, NonNullableFormBuilder],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   });
 
