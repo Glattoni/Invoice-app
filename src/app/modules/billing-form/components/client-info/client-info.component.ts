@@ -3,7 +3,7 @@ import { FormGroupDirective, FormGroup } from '@angular/forms';
 import { BillingForm } from '../../models/billing-form.model';
 
 @Component({
-  selector: 'form-client-info',
+  selector: 'app-client-info',
   templateUrl: './client-info.component.html',
   styleUrls: ['./client-info.component.scss'],
 })

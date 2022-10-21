@@ -7,7 +7,7 @@ import { BillingFormService } from '@core/services/billing-form/billing-form.ser
 import { BillingForm } from '../../models/billing-form.model';
 
 @Component({
-  selector: 'form-invoice-terms',
+  selector: 'app-invoice-terms',
   templateUrl: './invoice-terms.component.html',
   styleUrls: ['./invoice-terms.component.scss'],
 })

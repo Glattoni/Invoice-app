@@ -1,3 +1,4 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormGroupDirective, NonNullableFormBuilder } from '@angular/forms';
 import { ItemsListComponent } from './items-list.component';
@@ -10,6 +11,7 @@ describe('ItemsListComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ItemsListComponent],
       providers: [FormGroupDirective, NonNullableFormBuilder],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   });
 
