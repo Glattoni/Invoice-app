@@ -1,7 +1,9 @@
 import { of } from 'rxjs';
-import { DebugElement } from '@angular/core';
+
 import { By } from '@angular/platform-browser';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { CUSTOM_ELEMENTS_SCHEMA, DebugElement } from '@angular/core';
+
 import { Theme } from '@core/services/theme/theme.service.constants';
 import { SidebarComponent } from './sidebar.component';
 
@@ -16,6 +18,7 @@ describe('SidebarComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [SidebarComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   });
 

@@ -1,8 +1,9 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { PaymentTermsPipe } from '@modules/form-controls/pipes/payment-terms.pipe';
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { SelectInputComponent } from './select-input.component';
+import { PaymentTermsPipe } from '@modules/form-controls/pipes/payment-terms.pipe';
 
 describe('CustomSelectComponent', () => {
   let component: SelectInputComponent;
@@ -12,6 +13,7 @@ describe('CustomSelectComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [SelectInputComponent, PaymentTermsPipe],
       imports: [BrowserAnimationsModule],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   });
 
