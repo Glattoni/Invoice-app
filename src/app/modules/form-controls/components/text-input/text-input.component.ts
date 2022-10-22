@@ -7,6 +7,8 @@ const TEXT_INPUT_VALUE_ACCESSOR = {
   multi: true,
 };
 
+const noop = (): any => undefined;
+
 @Component({
   selector: 'app-text-input',
   templateUrl: './text-input.component.html',
@@ -14,24 +16,24 @@ const TEXT_INPUT_VALUE_ACCESSOR = {
   providers: [TEXT_INPUT_VALUE_ACCESSOR],
 })
 export class TextInputComponent implements ControlValueAccessor {
-  @Input() label = '';
-  @Input() type = 'text';
-  @Input() invalid? = false;
-  @Input() placeholder = '';
+  @Input() public label = '';
+  @Input() public type = 'text';
+  @Input() public invalid?: boolean;
+  @Input() public placeholder = '';
 
-  value = '';
-  onTouched!: () => void;
-  onChange!: (value: string) => void;
+  public value = '';
+  public onTouched: () => void = noop;
+  public onChange: (value: string) => void = noop;
 
-  writeValue(value: string): void {
+  public writeValue(value: string): void {
     this.value = value;
   }
 
-  registerOnChange(fn: (value: string) => void): void {
+  public registerOnChange(fn: (value: string) => void): void {
     this.onChange = fn;
   }
 
-  registerOnTouched(fn: any): void {
+  public registerOnTouched(fn: any): void {
     this.onTouched = fn;
   }
 }

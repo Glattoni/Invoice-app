@@ -9,9 +9,9 @@ import { Theme } from '@core/services/theme/theme.service.constants';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  activeTheme$: Observable<Theme>;
+  public readonly activeTheme$: Observable<Theme>;
 
-  constructor(private themeService: ThemeService) {
+  constructor(private readonly themeService: ThemeService) {
     this.activeTheme$ = this.themeService.activeTheme$;
   }
 }

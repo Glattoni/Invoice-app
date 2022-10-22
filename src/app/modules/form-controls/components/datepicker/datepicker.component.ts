@@ -50,7 +50,7 @@ type Action = 'INCREMENT' | 'DECREMENT' | 'DATE_SELECTION';
 const LAST_MONTH = 12;
 const MAX_GRID_ITEMS = 35;
 
-const noop = () => undefined;
+const noop = (): any => undefined;
 
 @Component({
   selector: 'app-datepicker',
@@ -193,7 +193,7 @@ export class DatepickerComponent
     this.disabled = isDisabled;
   }
 
-  public selectDay(day: Day) {
+  public selectDay(day: Day): void {
     this.day$.next(day.value);
 
     if (day.next) {
@@ -264,11 +264,11 @@ export class DatepickerComponent
    * Tracks form control value changes and updates date values
    */
   private onControlValueChanges(): void {
-    const control = this.ngControl?.control;
+    const control = this.ngControl.control;
 
     if (control === null) return;
 
-    merge(of(control?.value), control?.valueChanges)
+    merge(of(control.value), control.valueChanges)
       .pipe(map(this.parseISODate), takeUntil(this.destroyed$))
       .subscribe((value) => {
         this.getControlValue(value);

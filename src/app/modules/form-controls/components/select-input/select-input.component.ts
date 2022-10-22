@@ -20,6 +20,8 @@ const SELECT_INPUT_VALUE_ACCESSOR = {
   multi: true,
 };
 
+const noop = (): any => undefined;
+
 @Component({
   selector: 'app-select-input',
   templateUrl: './select-input.component.html',
@@ -47,37 +49,37 @@ const SELECT_INPUT_VALUE_ACCESSOR = {
   ],
 })
 export class SelectInputComponent implements ControlValueAccessor {
-  @Input() label: string = '';
-  @Input() options: Option[] = [];
-  @Input() invalid: boolean = false;
+  @Input() public label = '';
+  @Input() public options: Option[] = [];
+  @Input() public invalid = false;
 
-  value: number = 30;
-  onChange!: (value: number) => void;
-  onTouched!: () => void;
+  public value = 30;
+  public onChange: (value: number) => void = noop;
+  public onTouched: () => void = noop;
 
-  visible: boolean = false;
+  public visible = false;
 
-  writeValue(value: number): void {
+  public writeValue(value: number): void {
     this.value = value;
   }
 
-  registerOnChange(fn: (value: number) => void): void {
+  public registerOnChange(fn: (value: number) => void): void {
     this.onChange = fn;
   }
 
-  registerOnTouched(fn: () => void): void {
+  public registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
   }
 
-  toggleVisibility(): void {
+  public toggleVisibility(): void {
     this.visible = !this.visible;
   }
 
-  onClickOutside(): void {
+  public onClickOutside(): void {
     this.visible = false;
   }
 
-  selectOption(id: string): void {
+  public selectOption(id: string): void {
     const selected = this.options.find((option) => option.id === id);
 
     if (selected) {

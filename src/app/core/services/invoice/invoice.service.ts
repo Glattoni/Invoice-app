@@ -28,11 +28,11 @@ export class InvoiceService {
   private selectedFilter = new BehaviorSubject<string | undefined>(undefined);
   private filteredInvoices = new BehaviorSubject<Invoice[]>([]);
 
-  readonly invoice$ = this.invoice.asObservable();
-  readonly invoices$ = this.invoices.asObservable();
-  readonly filteredAmount$ = this.filteredAmount.asObservable();
-  readonly selectedFilter$ = this.selectedFilter.asObservable();
-  readonly filteredInvoices$ = this.filteredInvoices.asObservable();
+  public readonly invoice$ = this.invoice.asObservable();
+  public readonly invoices$ = this.invoices.asObservable();
+  public readonly filteredAmount$ = this.filteredAmount.asObservable();
+  public readonly selectedFilter$ = this.selectedFilter.asObservable();
+  public readonly filteredInvoices$ = this.filteredInvoices.asObservable();
 
   constructor(private http: HttpClient) {
     this.filteredInvoices.subscribe((invoices) => {

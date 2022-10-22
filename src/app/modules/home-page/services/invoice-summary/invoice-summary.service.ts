@@ -32,7 +32,7 @@ export class InvoiceSummaryService implements OnDestroy {
     );
   }
 
-  private transform(amount: number, filter: string = 'total'): string {
+  private transform(amount: number, filter = 'total'): string {
     const article = amount > 1 ? 'are' : 'is';
     const suffix = amount > 1 ? 's' : '';
 

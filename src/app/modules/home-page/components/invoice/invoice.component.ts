@@ -8,10 +8,10 @@ import { InvoiceStatus } from '@shared/constants/invoice.constants';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InvoiceComponent {
-  @Input() id = '';
-  @Input() slug = '';
-  @Input() clientName = '';
-  @Input() paymentDue = '';
-  @Input() total = 0;
-  @Input() status: InvoiceStatus = 'pending';
+  @Input() public id = '';
+  @Input() public slug = '';
+  @Input() public clientName = '';
+  @Input() public paymentDue = '';
+  @Input() public total = 0;
+  @Input() public status: InvoiceStatus = 'pending';
 }

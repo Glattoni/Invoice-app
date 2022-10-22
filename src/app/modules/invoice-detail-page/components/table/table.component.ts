@@ -8,6 +8,6 @@ import { Item } from '@shared/models/invoice.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableComponent {
-  @Input() items: Item[] = [];
-  @Input() total: number = 0;
+  @Input() public items: Item[] = [];
+  @Input() public total = 0;
 }

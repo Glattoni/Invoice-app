@@ -15,13 +15,13 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
   `,
 })
 class TestClickOutsideComponent {
-  isVisible: boolean = false;
+  public isVisible = false;
 
-  toggleVisibility(): void {
+  public toggleVisibility(): void {
     this.isVisible = !this.isVisible;
   }
 
-  clickedOutside(): void {
+  public clickedOutside(): void {
     this.isVisible = false;
   }
 }

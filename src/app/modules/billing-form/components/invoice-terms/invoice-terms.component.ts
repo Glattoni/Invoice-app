@@ -14,7 +14,7 @@ import { BillingForm } from '../../models/billing-form.model';
 export class InvoiceTermsComponent implements OnInit {
   public form?: FormGroup<BillingForm>;
 
-  readonly options = [
+  public readonly options = [
     { id: '1', value: 1, label: 'Next 1 day' },
     { id: '7', value: 7, label: 'Next 7 days' },
     { id: '14', value: 14, label: 'Next 14 days' },
@@ -38,27 +38,11 @@ export class InvoiceTermsComponent implements OnInit {
     return this.form?.get('createdAt');
   }
 
-  public get paymentTerms() {
-    return this.form?.get('paymentTerms');
-  }
-
   public get description() {
     return this.form?.get('description');
   }
 
-  public get invalidDate() {
-    return this.createdAt?.invalid && this.createdAt.touched;
-  }
-
-  public get invalidTerms() {
-    return this.paymentTerms?.invalid && this.paymentTerms.touched;
-  }
-
   public get invalidDescription() {
     return this.description?.invalid && this.description.touched;
-  }
-
-  public get disabledCreatedAt() {
-    return this.createdAt?.disabled;
   }
 }

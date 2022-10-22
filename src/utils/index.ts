@@ -1,16 +1,19 @@
 const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
-const numberToArray = (number: number) => Array.from(Array(number).keys());
+const numberToArray = (number: number): number[] =>
+  Array.from(Array(number).keys());
 
-const getInteger = (length: number) => Math.floor(Math.random() * length);
+const getInteger = (length: number): number =>
+  Math.floor(Math.random() * length);
 
-const getRandomNumber = (digits: number) =>
+const getRandomNumber = (digits: number): string =>
   numberToArray(digits).reduce((acc) => acc + getInteger(10), '');
 
-const getRandomString = (length: number) =>
+const getRandomString = (length: number): string =>
   numberToArray(length).reduce(
     (acc) => acc + ALPHABET[getInteger(ALPHABET.length)],
     ''
   );
 
-export const generateSlug = () => `${getRandomString(2)}${getRandomNumber(4)}`;
+export const generateSlug = (): string =>
+  `${getRandomString(2)}${getRandomNumber(4)}`;

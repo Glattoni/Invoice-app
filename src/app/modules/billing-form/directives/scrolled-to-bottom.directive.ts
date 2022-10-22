@@ -1,3 +1,5 @@
+import { Subject, fromEvent, takeUntil, throttleTime } from 'rxjs';
+
 import {
   Output,
   Directive,
@@ -7,19 +9,17 @@ import {
   AfterViewInit,
 } from '@angular/core';
 
-import { Subject, fromEvent, takeUntil, throttleTime } from 'rxjs';
-
 @Directive({
   selector: '[scrolledToBottom]',
 })
 export class ScrolledToBottomDirective implements AfterViewInit, OnDestroy {
-  @Output() scrolledToBottom = new EventEmitter<boolean>();
+  @Output() public scrolledToBottom = new EventEmitter<boolean>();
 
-  private destroy$ = new Subject<void>();
+  private readonly destroy$ = new Subject<void>();
 
-  constructor(private element: ElementRef) {}
+  constructor(private readonly element: ElementRef) {}
 
-  ngAfterViewInit(): void {
+  public ngAfterViewInit(): void {
     fromEvent(this.element.nativeElement, 'scroll', this.onScroll)
       .pipe(throttleTime(25), takeUntil(this.destroy$))
       .subscribe((value) => {
@@ -27,12 +27,12 @@ export class ScrolledToBottomDirective implements AfterViewInit, OnDestroy {
       });
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
   }
 
-  private onScroll({ target }: Event) {
+  private onScroll({ target }: Event): boolean {
     const { offsetHeight, scrollTop, scrollHeight } = target as HTMLElement;
     return offsetHeight + scrollTop >= scrollHeight - 100;
   }
