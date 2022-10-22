@@ -46,7 +46,7 @@ export class DialogBaseComponent implements OnInit, OnDestroy {
     this.dialogService.removeDialog(this.id);
   }
 
-  public get dialog() {
+  public get dialog(): HTMLDialogElement {
     return this.element.nativeElement.children[0] as HTMLDialogElement;
   }
 

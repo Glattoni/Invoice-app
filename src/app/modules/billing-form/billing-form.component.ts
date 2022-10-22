@@ -65,7 +65,7 @@ export class BillingFormComponent implements OnInit, OnDestroy {
     this.invoice$ = invoiceService.invoice$;
   }
 
-  public get items() {
+  public get items(): FormArray<FormGroup<ListItem>> {
     return this.form.get('items') as FormArray<FormGroup<ListItem>>;
   }
 

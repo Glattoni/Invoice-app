@@ -19,7 +19,7 @@ export class DialogService {
     this.dialogs = this.dialogs.filter((dialog) => dialog.id !== id);
   }
 
-  public getDialog(id: string) {
+  public getDialog(id: string): DialogBaseComponent | undefined {
     return this.dialogs.find((dialog) => dialog.id === id);
   }
 

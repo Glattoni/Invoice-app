@@ -14,29 +14,28 @@ import { BillingFormService } from '@core/services/billing-form/billing-form.ser
   styleUrls: ['./items-list.component.scss'],
 })
 export class ItemsListComponent implements OnInit {
-  form?: FormGroup<BillingForm>;
+  public form?: FormGroup<BillingForm>;
 
-  readonly headers = ['item name', 'qty.', 'price', 'total'];
+  public readonly headers = ['item name', 'qty.', 'price', 'total'];
 
   constructor(
-    private rootFormGroup: FormGroupDirective,
-    private formService: BillingFormService
+    private readonly rootFormGroup: FormGroupDirective,
+    private readonly billingFormService: BillingFormService
   ) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.form = this.rootFormGroup.control;
   }
 
-  deleteItem(index: number): void {
+  public deleteItem(index: number): void {
     this.items.removeAt(index);
   }
 
-  addItem(): void {
-    const item = this.formService.generateListItem();
-    this.items.push(item);
+  public addItem(): void {
+    this.items.push(this.billingFormService.generateListItem());
   }
 
-  calculateItemTotal(index: number) {
+  public calculateItemTotal(index: number): number {
     const item = this.items.controls[index];
     const quantity = item.get('quantity')?.value || 0;
     const price = item.get('price')?.value || 0;
@@ -47,19 +46,19 @@ export class ItemsListComponent implements OnInit {
     return itemTotal;
   }
 
-  invalidItemName(item: AbstractControl) {
+  public invalidItemName(item: AbstractControl): boolean | undefined {
     return item.get('name')?.invalid && item.get('name')?.touched;
   }
 
-  invalidItemQuantity(item: AbstractControl) {
+  public invalidItemQuantity(item: AbstractControl): boolean | undefined {
     return item.get('quantity')?.invalid && item.get('quantity')?.touched;
   }
 
-  invalidItemPrice(item: AbstractControl) {
+  public invalidItemPrice(item: AbstractControl): boolean | undefined {
     return item.get('price')?.invalid && item.get('price')?.touched;
   }
 
-  get items() {
+  public get items(): FormArray<FormGroup<ListItem>> {
     return this.form?.get('items') as FormArray<FormGroup<ListItem>>;
   }
 }

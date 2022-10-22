@@ -50,7 +50,7 @@ type Action = 'INCREMENT' | 'DECREMENT' | 'DATE_SELECTION';
 const LAST_MONTH = 12;
 const MAX_GRID_ITEMS = 35;
 
-const noop = () => undefined;
+const noop = (): any => undefined;
 
 @Component({
   selector: 'app-datepicker',
@@ -193,7 +193,7 @@ export class DatepickerComponent
     this.disabled = isDisabled;
   }
 
-  public selectDay(day: Day) {
+  public selectDay(day: Day): void {
     this.day$.next(day.value);
 
     if (day.next) {

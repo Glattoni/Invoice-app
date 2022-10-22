@@ -68,7 +68,7 @@ export class BillingFormService {
     return DateTime.fromISO(date).plus(duration).toFormat(DATE_FORMAT.DEFAULT);
   }
 
-  public generateListItem(item = newItem) {
+  public generateListItem(item = newItem): FormGroup<ListItem> {
     return this.formBuilder.group({
       name: [item.name, Validators.required],
       quantity: [item.quantity, [Validators.required, Validators.min(1)]],
