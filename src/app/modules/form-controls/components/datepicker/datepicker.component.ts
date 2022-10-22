@@ -264,11 +264,11 @@ export class DatepickerComponent
    * Tracks form control value changes and updates date values
    */
   private onControlValueChanges(): void {
-    const control = this.ngControl.control;
+    const control = this.ngControl?.control;
 
     if (control === null) return;
 
-    merge(of(control.value), control.valueChanges)
+    merge(of(control?.value), control?.valueChanges)
       .pipe(map(this.parseISODate), takeUntil(this.destroyed$))
       .subscribe((value) => {
         this.getControlValue(value);
