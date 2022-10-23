@@ -5,8 +5,8 @@
     <app-header
       [status]="invoice.status"
       (edit)="onEdit()"
-      (delete)="onDelete()"
-      (markAsPaid)="onMarkAsPaid()"
+      (delete)="delete.showModal()"
+      (markAsPaid)="mark.showModal()"
     ></app-header>
 
     <section>
@@ -23,16 +23,20 @@
       <app-table [items]="invoice.items" [total]="invoice.total"></app-table>
     </section>
 
-    <app-delete-dialog
-      [slug]="invoice.slug"
-      [modalId]="'delete-dialog'"
-      [invoiceId]="invoice._id"
-    ></app-delete-dialog>
+    <dialog #delete>
+      <app-delete-invoice
+        [slug]="invoice.slug"
+        (cancel)="delete.close()"
+        (delete)="onDelete(); delete.close()"
+      ></app-delete-invoice>
+    </dialog>
 
-    <app-mark-as-paid-dialog
-      [slug]="invoice.slug"
-      [invoiceId]="invoice._id"
-      [modalId]="'mark-as-paid-dialog'"
-    ></app-mark-as-paid-dialog>
+    <dialog #mark>
+      <app-mark-invoice
+        [slug]="invoice.slug"
+        (cancel)="mark.close()"
+        (markAsPaid)="onMarkAsPaid(); mark.close()"
+      ></app-mark-invoice>
+    </dialog>
   </div>
 </ng-container>

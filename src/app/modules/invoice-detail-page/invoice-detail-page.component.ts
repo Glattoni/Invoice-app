@@ -1,11 +1,10 @@
 import { Observable } from 'rxjs';
 
 import { Location } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 import { Invoice } from '@shared/models/invoice.model';
-import { DialogService } from '@core/services/dialog/dialog.service';
 import { InvoiceService } from '@core/services/invoice/invoice.service';
 import { BillingFormService } from '@core/services/billing-form/billing-form.service';
 
@@ -16,20 +15,21 @@ import { BillingFormService } from '@core/services/billing-form/billing-form.ser
 })
 export class InvoiceDetailPageComponent implements OnInit {
   public invoice$: Observable<Invoice>;
+  public invoiceId = '';
 
   constructor(
+    private readonly router: Router,
     private readonly route: ActivatedRoute,
     private readonly location: Location,
-    private readonly dialogService: DialogService,
     private readonly invoiceService: InvoiceService,
     private readonly billingFormService: BillingFormService
   ) {
     this.invoice$ = invoiceService.invoice$;
+    this.invoiceId = String(this.route.snapshot.paramMap.get('id'));
   }
 
   public ngOnInit(): void {
-    const id = String(this.route.snapshot.paramMap.get('id'));
-    this.invoiceService.getInvoice(id);
+    this.invoiceService.getInvoice(this.invoiceId);
   }
 
   public toPreviousPage(): void {
@@ -41,10 +41,11 @@ export class InvoiceDetailPageComponent implements OnInit {
   }
 
   public onDelete(): void {
-    this.dialogService.openDialog('delete-dialog');
+    this.invoiceService.deleteInvoice(this.invoiceId);
+    this.router.navigate(['']);
   }
 
   public onMarkAsPaid(): void {
-    this.dialogService.openDialog('mark-as-paid-dialog');
+    this.invoiceService.markAsPaidInvoice(this.invoiceId);
   }
 }
