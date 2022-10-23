@@ -1,13 +1,13 @@
-<app-dialog-base [id]="modalId">
+<div class="dialog-body">
   <h2>confirm action</h2>
   <p>
     Are you sure you want to mark the invoice #{{ slug }} as paid? This action
     cannot be undone.
   </p>
   <div class="controls">
-    <button class="app-button neutral" (click)="closeDialog()">Cancel</button>
-    <button class="app-button primary" (click)="markAsPaid()">
+    <button class="app-button neutral" (click)="cancel.emit()">Cancel</button>
+    <button class="app-button primary" (click)="markAsPaid.emit()">
       Mark as paid
     </button>
   </div>
-</app-dialog-base>
+</div>

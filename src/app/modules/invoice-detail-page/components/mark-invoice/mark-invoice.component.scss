@@ -1,0 +1,10 @@
+@use 'breakpoints' as bp;
+@use 'dialog';
+
+.dialog-body {
+  padding: 2rem;
+
+  @include bp.md {
+    padding: 3rem;
+  }
+}
