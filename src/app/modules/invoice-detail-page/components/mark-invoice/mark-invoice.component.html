@@ -1,10 +1,11 @@
-<div class="dialog-body">
-  <h2>confirm action</h2>
-  <p>
-    Are you sure you want to mark the invoice #{{ slug }} as paid? This action
+<div class="mark-invoice">
+  <h2 class="mark-invoice__title">confirm action</h2>
+  <p class="mark-invoice__text">
+    Are you sure you want to mark the invoice
+    <span class="mark-invoice__slug">#{{ slug }}</span> as paid? This action
     cannot be undone.
   </p>
-  <div class="controls">
+  <div class="mark-invoice__action-buttons">
     <button class="app-button neutral" (click)="cancel.emit()">Cancel</button>
     <button class="app-button primary" (click)="markAsPaid.emit()">
       Mark as paid
