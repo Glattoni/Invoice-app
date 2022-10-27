@@ -11,7 +11,7 @@ import {
   InvoiceStatus,
   InvoiceStatues,
 } from '@shared/constants/invoice.constants';
-import { scaleDown } from './dropdown.component.animations';
+import { scaleDown } from '@shared/animations';
 import { InvoiceService } from '@core/services/invoice/invoice.service';
 
 @Component({

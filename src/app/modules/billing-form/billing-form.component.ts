@@ -22,11 +22,11 @@ import {
 import { FormArray, FormGroup } from '@angular/forms';
 
 import { Invoice, Item } from '@shared/models/invoice.model';
+import { fadeInOut, slideInOut } from '@shared/animations';
 import { InvoiceService } from '@core/services/invoice/invoice.service';
 import { BillingFormService } from '@core/services/billing-form/billing-form.service';
 
 import { BillingForm, ListItem } from './models/billing-form.model';
-import { fadeInOut, slideInOut } from './billing-form.animations';
 
 @Component({
   selector: 'app-billing-form',

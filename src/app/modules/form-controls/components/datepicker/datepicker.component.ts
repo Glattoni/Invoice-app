@@ -30,13 +30,7 @@ import {
 
 import { NgControl, ControlValueAccessor } from '@angular/forms';
 
-import {
-  state,
-  style,
-  trigger,
-  animate,
-  transition,
-} from '@angular/animations';
+import { scaleDown } from '@shared/animations';
 import { DATE_FORMAT } from '@shared/constants/date-formats.constants';
 
 interface Day {
@@ -57,26 +51,7 @@ const noop = (): any => undefined;
   templateUrl: './datepicker.component.html',
   styleUrls: ['./datepicker.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [
-    trigger('scaleDown', [
-      state(
-        'open',
-        style({
-          opacity: 1,
-          transform: 'scaleY(1)',
-        })
-      ),
-      state(
-        'close',
-        style({
-          opacity: 0,
-          transform: 'scaleY(0)',
-        })
-      ),
-      transition('open => *', [animate('200ms ease-in')]),
-      transition('* => open', [animate('200ms ease-out')]),
-    ]),
-  ],
+  animations: [scaleDown],
 })
 export class DatepickerComponent
   implements AfterContentInit, OnDestroy, ControlValueAccessor

@@ -1,12 +1,7 @@
-import {
-  state,
-  style,
-  trigger,
-  animate,
-  transition,
-} from '@angular/animations';
 import { Input, Component, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+
+import { scaleDown } from '@shared/animations';
 
 interface Option {
   id: string;
@@ -27,26 +22,7 @@ const noop = (): any => undefined;
   templateUrl: './select-input.component.html',
   styleUrls: ['./select-input.component.scss'],
   providers: [SELECT_INPUT_VALUE_ACCESSOR],
-  animations: [
-    trigger('scaleDown', [
-      state(
-        'open',
-        style({
-          opacity: 1,
-          transform: 'scaleY(1)',
-        })
-      ),
-      state(
-        'close',
-        style({
-          opacity: 0,
-          transform: 'scaleY(0)',
-        })
-      ),
-      transition('open => *', [animate('200ms ease-in')]),
-      transition('* => open', [animate('200ms ease-out')]),
-    ]),
-  ],
+  animations: [scaleDown],
 })
 export class SelectInputComponent implements ControlValueAccessor {
   @Input() public label = '';
