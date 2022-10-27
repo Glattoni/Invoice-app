@@ -12,6 +12,10 @@
   margin: 0;
 }
 
+html:has(dialog[open]) {
+  overflow: hidden;
+}
+
 body {
   &.modal-open,
   &.form-open {
