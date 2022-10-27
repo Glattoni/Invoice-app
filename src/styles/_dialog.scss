@@ -1,23 +1,56 @@
 @use 'breakpoints' as bp;
 
-h2 {
-  margin-bottom: 0.5rem;
-  line-height: 2rem;
-  text-transform: capitalize;
+dialog {
+  width: 87.5vw;
+  max-width: 30rem;
+  margin: auto;
+  background-color: var(--background-tetriary);
+  border: none;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 0 100vw var(--background-overlay);
 
-  @include bp.md {
-    font-size: 1.5rem;
+  &::backdrop {
+    background-color: var(--background-overlay);
+    opacity: 0;
+  }
+
+  &[open] {
+    animation: slide-down 250ms forwards, fade-in 250ms forwards;
+  }
+
+  &[closing] {
+    display: block;
+    pointer-events: none;
+    animation: fade-out 250ms forwards;
   }
 }
 
-p {
-  margin-bottom: 1.5rem;
-  line-height: 1.375rem;
-  color: var(--foreground-primary);
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }
 
-.controls {
-  display: flex;
-  gap: 0.5rem;
-  justify-content: flex-end;
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes slide-down {
+  0% {
+    transform: translateY(-25%);
+  }
+
+  100% {
+    transform: translateY(0%);
+  }
 }
