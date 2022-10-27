@@ -1,8 +1,13 @@
-import { Observable } from 'rxjs';
+import { fromEvent, Observable, Subject, takeUntil } from 'rxjs';
 
+import {
+  OnInit,
+  Component,
+  OnDestroy,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 import { Invoice } from '@shared/models/invoice.model';
 import { InvoiceService } from '@core/services/invoice/invoice.service';
@@ -13,9 +18,11 @@ import { BillingFormService } from '@core/services/billing-form/billing-form.ser
   styleUrls: ['./invoice-detail-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InvoiceDetailPageComponent implements OnInit {
+export class InvoiceDetailPageComponent implements OnInit, OnDestroy {
   public invoice$: Observable<Invoice>;
   public invoiceId = '';
+
+  private readonly destroy$ = new Subject<void>();
 
   constructor(
     private readonly router: Router,
@@ -30,6 +37,11 @@ export class InvoiceDetailPageComponent implements OnInit {
 
   public ngOnInit(): void {
     this.invoiceService.getInvoice(this.invoiceId);
+  }
+
+  public ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   public toPreviousPage(): void {
@@ -47,5 +59,16 @@ export class InvoiceDetailPageComponent implements OnInit {
 
   public onMarkAsPaid(): void {
     this.invoiceService.markAsPaidInvoice(this.invoiceId);
+  }
+
+  public closeDialog(dialog: HTMLDialogElement): void {
+    dialog.setAttribute('closing', '');
+
+    fromEvent(dialog, 'animationend', { once: true })
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
+        dialog.removeAttribute('closing');
+        dialog.close();
+      });
   }
 }

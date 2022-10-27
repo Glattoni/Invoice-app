@@ -5,8 +5,8 @@
     <app-header
       [status]="invoice.status"
       (edit)="onEdit()"
-      (delete)="delete.showModal()"
-      (markAsPaid)="mark.showModal()"
+      (delete)="deleteDialog.showModal()"
+      (markAsPaid)="markDialog.showModal()"
     ></app-header>
 
     <section>
@@ -23,19 +23,19 @@
       <app-table [items]="invoice.items" [total]="invoice.total"></app-table>
     </section>
 
-    <dialog #delete>
+    <dialog #deleteDialog appAnimateDialog>
       <app-delete-invoice
         [slug]="invoice.slug"
-        (cancel)="delete.close()"
-        (delete)="onDelete(); delete.close()"
+        (cancel)="closeDialog(deleteDialog)"
+        (delete)="onDelete()"
       ></app-delete-invoice>
     </dialog>
 
-    <dialog #mark>
+    <dialog #markDialog appAnimateDialog>
       <app-mark-invoice
         [slug]="invoice.slug"
-        (cancel)="mark.close()"
-        (markAsPaid)="onMarkAsPaid(); mark.close()"
+        (cancel)="closeDialog(markDialog)"
+        (markAsPaid)="onMarkAsPaid()"
       ></app-mark-invoice>
     </dialog>
   </div>

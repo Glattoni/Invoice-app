@@ -6,7 +6,11 @@
     This action cannot be undone.
   </p>
   <div class="delete-invoice__action-buttons">
-    <button class="app-button neutral" (click)="cancel.emit()">Cancel</button>
-    <button class="app-button danger" (click)="delete.emit()">Delete</button>
+    <button class="app-button neutral" type="button" (click)="cancel.emit()">
+      Cancel
+    </button>
+    <button class="app-button danger" type="button" (click)="delete.emit()">
+      Delete
+    </button>
   </div>
 </div>
