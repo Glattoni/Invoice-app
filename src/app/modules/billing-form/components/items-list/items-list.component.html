@@ -39,9 +39,11 @@
       <!-- item price -->
 
       <!-- item total -->
-      <div class="total-amount">
-        <label>total</label>
-        <p>{{ calculateItemTotal(i) | currency: '':'' }}</p>
+      <div class="total">
+        <label class="total__label">total</label>
+        <span class="total__value" [title]="calculateItemTotal(i)">
+          {{ calculateItemTotal(i) | currency: '':'' }}
+        </span>
       </div>
       <!-- item total -->
 
