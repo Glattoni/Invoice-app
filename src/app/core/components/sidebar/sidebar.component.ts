@@ -1,5 +1,5 @@
 import { map, Observable } from 'rxjs';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ThemeService } from '@core/services/theme/theme.service';
 import { Theme } from '@core/services/theme/theme.service.constants';
 
@@ -7,12 +7,13 @@ import { Theme } from '@core/services/theme/theme.service.constants';
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SidebarComponent {
   public activeTheme$: Observable<string>;
 
   constructor(private readonly themeService: ThemeService) {
-    this.activeTheme$ = this.themeService.activeTheme$;
+    this.activeTheme$ = themeService.activeTheme$;
   }
 
   public get isDarkTheme$(): Observable<boolean> {
