@@ -7,9 +7,11 @@
   &__text {
     font-weight: bold;
     line-height: 0.9375rem;
+    transition: color var(--transition-secondary);
 
     &:hover {
       color: var(--go-back-hover);
+      transition: color var(--transition-primary);
     }
   }
 }

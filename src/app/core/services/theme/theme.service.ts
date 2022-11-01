@@ -17,7 +17,7 @@ export class ThemeService {
     });
   }
 
-  private get isDarkTheme(): boolean {
+  public get isDarkTheme(): boolean {
     return this.activeTheme.value === Theme.Dark;
   }
 

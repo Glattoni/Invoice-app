@@ -10,7 +10,6 @@
   text-transform: capitalize;
   cursor: pointer;
   border-radius: 0.25rem;
-  transition: background-color 0.125s ease-out;
 
   &__input {
     display: grid;
@@ -20,7 +19,8 @@
     background-color: var(--radio-background);
     border: 1px solid transparent;
     border-radius: 0.125rem;
-    transition: border-color 0.1s ease-in-out;
+    transition: border-color var(--transition-primary),
+      background-color var(--transition-primary);
 
     &:hover {
       border: 2px solid var(--primary);

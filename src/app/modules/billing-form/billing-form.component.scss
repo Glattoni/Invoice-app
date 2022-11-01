@@ -8,6 +8,7 @@ aside {
   padding: 2rem 1.5rem 0;
   overflow-y: scroll;
   background-color: var(--background-quaternary);
+  transition: background-color var(--transition-secondary);
 
   @include bp.md {
     top: 5rem;

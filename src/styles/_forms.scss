@@ -1,6 +1,7 @@
 form label {
   color: var(--label-foreground);
   text-transform: capitalize;
+  transition: color var(--transition-secondary);
 }
 
 legend {
@@ -45,6 +46,8 @@ legend {
     border-radius: 0.25rem;
     caret-color: var(--primary);
     outline: none;
+    transition: background-color var(--transition-secondary),
+      border-color var(--transition-secondary);
 
     &::placeholder {
       color: inherit;
