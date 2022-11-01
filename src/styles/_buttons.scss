@@ -3,6 +3,12 @@
   font-weight: bold;
   letter-spacing: -0.25px;
   border-radius: 1.5rem;
+  transition: background-color var(--transition-secondary),
+    color var(--transition-secondary);
+
+  &:hover {
+    transition: background-color var(--transition-primary);
+  }
 
   &.primary {
     color: var(--white);

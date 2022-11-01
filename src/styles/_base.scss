@@ -17,7 +17,6 @@ html:has(dialog[open]) {
 }
 
 body {
-  &.modal-open,
   &.form-open {
     overflow-y: hidden;
   }
@@ -32,6 +31,8 @@ body {
   color: var(--base);
   letter-spacing: -0.25px;
   background-color: var(--background-primary);
+  transition: background-color var(--transition-secondary),
+    color var(--transition-secondary);
 }
 
 main {
@@ -46,6 +47,7 @@ h5,
 h6 {
   margin: 0;
   color: var(--header-foreground);
+  transition: color var(--transition-secondary);
 }
 
 h1 {
@@ -82,6 +84,12 @@ h5 {
   font-size: var(--font-sm);
   line-height: 0.9375rem;
   letter-spacing: -0.25px;
+}
+
+p,
+a,
+span {
+  transition: color var(--transition-secondary);
 }
 
 fieldset {
@@ -121,11 +129,13 @@ input {
 
 input[type='number'] {
   -moz-appearance: textfield;
+  appearance: textfield;
 }
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
+  appearance: none;
   margin: 0;
 }
 

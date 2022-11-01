@@ -12,6 +12,8 @@
   border: 1px solid transparent;
   border-radius: 0.5rem;
   box-shadow: 0 0.625rem 0.625rem -0.625rem var(--box-shadow-secondary);
+  transition: border-color var(--transition-primary),
+    background-color var(--transition-secondary);
 
   &:hover {
     border-color: var(--primary);

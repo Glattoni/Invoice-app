@@ -14,6 +14,7 @@ section {
   background-color: var(--background-tetriary);
   border-radius: 0.5rem;
   box-shadow: 0 0.625rem 0.625rem -0.625rem var(--box-shadow-secondary);
+  transition: background-color var(--transition-secondary);
 
   @include bp.md {
     gap: 3rem;

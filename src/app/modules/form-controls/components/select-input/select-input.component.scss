@@ -6,14 +6,14 @@ ul {
   background-color: var(--background-secondary);
   border-radius: 0.5rem;
   box-shadow: none;
-  transition: box-shadow 0.2s ease-in-out;
+  transition: box-shadow var(--transition-primary);
   transform-origin: top center;
 }
 
 li {
   padding: 1rem 1.25rem;
   cursor: pointer;
-  transition: color 0.1s ease-in-out;
+  transition: color var(--transition-primary);
 
   &:not(:last-child) {
     border-bottom: 1px solid var(--select-option-divider);
@@ -31,7 +31,7 @@ svg-icon {
   transform: translateY(-50%);
 
   & > svg {
-    transition: transform 0.2s ease-in-out;
+    transition: transform var(--transition-primary);
   }
 
   &.rotated > svg {
@@ -52,7 +52,8 @@ svg-icon {
   background-color: var(--background-tetriary);
   border: 1px solid var(--input-inner-border);
   border-radius: 0.25rem;
-  transition: border-color 0.2s ease-in-out;
+  transition: background-color var(--transition-secondary),
+    border-color var(--transition-secondary), color var(--transition-secondary);
 
   &.focused {
     border-color: var(--primary);
