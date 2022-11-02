@@ -6,13 +6,13 @@ import { InvoiceService } from '@core/services/invoice/invoice.service';
   providedIn: 'root',
 })
 export class InvoiceSummaryService implements OnDestroy {
-  private readonly destroyed$ = new Subject<void>();
+  private readonly destroy$ = new Subject<void>();
 
-  constructor(private invoiceService: InvoiceService) {}
+  constructor(private readonly invoiceService: InvoiceService) {}
 
   public ngOnDestroy(): void {
-    this.destroyed$.next();
-    this.destroyed$.complete();
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   public get invoiceSummary$(): Observable<string> {
@@ -20,19 +20,19 @@ export class InvoiceSummaryService implements OnDestroy {
       this.invoiceService.filteredAmount$,
       this.invoiceService.selectedFilter$,
     ]).pipe(
-      takeUntil(this.destroyed$),
-      map(([amount, filter]) => this.transform(amount, filter))
+      map(([amount, filter]) => this.transform(amount, filter)),
+      takeUntil(this.destroy$)
     );
   }
 
   public get invoiceAmount$(): Observable<string> {
     return this.invoiceService.filteredAmount$.pipe(
-      takeUntil(this.destroyed$),
-      map((amount) => `${amount || 'No'} invoices`)
+      map((amount) => `${amount || 'No'} invoices`),
+      takeUntil(this.destroy$)
     );
   }
 
-  private transform(amount: number, filter: string = 'total'): string {
+  private transform(amount: number, filter = 'total'): string {
     const article = amount > 1 ? 'are' : 'is';
     const suffix = amount > 1 ? 's' : '';
 

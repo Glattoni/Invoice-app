@@ -1,0 +1,17 @@
+.button {
+  display: inline-flex;
+  gap: 1rem;
+  align-items: center;
+  cursor: pointer;
+
+  &__text {
+    font-weight: bold;
+    line-height: 0.9375rem;
+    transition: color var(--transition-secondary);
+
+    &:hover {
+      color: var(--go-back-hover);
+      transition: color var(--transition-primary);
+    }
+  }
+}

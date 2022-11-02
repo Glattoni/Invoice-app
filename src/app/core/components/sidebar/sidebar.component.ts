@@ -1,22 +1,17 @@
-import { map, Observable } from 'rxjs';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ThemeService } from '@core/services/theme/theme.service';
-import { Theme } from '@core/services/theme/theme.service.constants';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SidebarComponent {
-  public activeTheme$: Observable<string>;
+  private readonly themeService = inject(ThemeService);
 
-  constructor(private readonly themeService: ThemeService) {
-    this.activeTheme$ = this.themeService.activeTheme$;
-  }
-
-  public get isDarkTheme$(): Observable<boolean> {
-    return this.activeTheme$.pipe(map((value) => value === Theme.Dark));
+  public get isDarkTheme(): boolean {
+    return this.themeService.isDarkTheme;
   }
 
   public toggleTheme(): void {

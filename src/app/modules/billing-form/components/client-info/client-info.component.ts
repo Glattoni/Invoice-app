@@ -3,40 +3,40 @@ import { FormGroupDirective, FormGroup } from '@angular/forms';
 import { BillingForm } from '../../models/billing-form.model';
 
 @Component({
-  selector: 'form-client-info',
+  selector: 'app-client-info',
   templateUrl: './client-info.component.html',
   styleUrls: ['./client-info.component.scss'],
 })
 export class ClientInfoComponent implements OnInit {
-  form?: FormGroup<BillingForm>;
+  public form?: FormGroup<BillingForm>;
 
   constructor(private rootFormGroup: FormGroupDirective) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.form = this.rootFormGroup.control;
   }
 
-  get invalidEmail() {
+  public get invalidEmail(): boolean | undefined {
     return this.email?.invalid && this.email.touched;
   }
 
-  get invalidName() {
+  public get invalidName(): boolean | undefined {
     return this.name?.invalid && this.name.touched;
   }
 
-  get invalidStreet() {
+  public get invalidStreet(): boolean | undefined {
     return this.street?.invalid && this.street.touched;
   }
 
-  get invalidCity() {
+  public get invalidCity(): boolean | undefined {
     return this.city?.invalid && this.city.touched;
   }
 
-  get invalidPostCode() {
+  public get invalidPostCode(): boolean | undefined {
     return this.postCode?.invalid && this.postCode.touched;
   }
 
-  get invalidCountry() {
+  public get invalidCountry(): boolean | undefined {
     return this.country?.invalid && this.country.touched;
   }
 

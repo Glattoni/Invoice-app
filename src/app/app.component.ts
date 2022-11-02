@@ -1,17 +1,21 @@
-import { Observable } from 'rxjs';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ThemeService } from '@core/services/theme/theme.service';
-import { Theme } from '@core/services/theme/theme.service.constants';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
+  template: `
+    <div id="invoice-app" [attr.data-theme]="activeTheme$ | async">
+      <app-sidebar></app-sidebar>
+
+      <main>
+        <router-outlet></router-outlet>
+      </main>
+
+      <app-billing-form></app-billing-form>
+    </div>
+  `,
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  activeTheme$: Observable<Theme>;
-
-  constructor(private themeService: ThemeService) {
-    this.activeTheme$ = this.themeService.activeTheme$;
-  }
+  public readonly activeTheme$ = inject(ThemeService).activeTheme$;
 }

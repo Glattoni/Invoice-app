@@ -1,6 +1,7 @@
-import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { TestBed, ComponentFixture } from '@angular/core/testing';
+import { CUSTOM_ELEMENTS_SCHEMA, DebugElement } from '@angular/core';
+
 import { CheckboxComponent } from './checkbox.component';
 
 describe('CheckboxComponent', () => {
@@ -11,6 +12,7 @@ describe('CheckboxComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [CheckboxComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
     fixture = TestBed.createComponent(CheckboxComponent);

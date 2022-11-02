@@ -1,0 +1,141 @@
+@use 'fonts';
+@use 'variables';
+@use 'themes';
+@use 'buttons';
+@use 'typography';
+@use 'breakpoints' as bp;
+
+*,
+::after,
+::before {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html:has(dialog[open]) {
+  overflow: hidden;
+}
+
+body.form-open {
+  overflow-y: hidden;
+}
+
+#invoice-app {
+  overflow: scroll;
+  font-family: Spartan, Roboto, Ubuntu, sans-serif;
+  font-size: var(--font-sm);
+  font-weight: 500;
+  line-height: 0.9375rem;
+  color: var(--base);
+  letter-spacing: -0.25px;
+  background-color: var(--background-primary);
+  transition: background-color var(--transition-secondary),
+    color var(--transition-secondary);
+}
+
+main {
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  color: var(--header-foreground);
+  transition: color var(--transition-secondary);
+}
+
+p,
+a,
+span {
+  transition: color var(--transition-secondary);
+}
+
+fieldset {
+  padding: 0;
+  border: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+img {
+  display: block;
+  width: 100%;
+  object-fit: cover;
+}
+
+button {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+input {
+  margin: 0;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+svg,
+svg-icon {
+  pointer-events: none;
+}
+
+address {
+  font-style: normal;
+}
+
+.app-container {
+  width: 87.5vw;
+  max-width: 45.625rem;
+  margin: 0 auto;
+}
+
+@supports (scrollbar-color: rebeccapurple green) {
+  * {
+    scrollbar-color: var(--background-scrollbar) transparent;
+  }
+}
+
+@supports not (scrollbar-color: rebeccapurple green) {
+  * {
+    ::-webkit-scrollbar {
+      width: 0.5rem;
+    }
+
+    ::-webkit-scrollbar-track {
+      background-color: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: var(--background-scrollbar);
+      border-radius: 0.25rem;
+    }
+  }
+}

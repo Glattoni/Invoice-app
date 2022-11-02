@@ -8,7 +8,17 @@ import {
 
 @Component({
   selector: 'app-datepicker-header',
-  templateUrl: './datepicker-header.component.html',
+  template: `
+    <div class="header">
+      <div class="header__icon" (click)="cyclePrev.emit()">
+        <svg-icon src="assets/icons/chevron.svg"></svg-icon>
+      </div>
+      <span>{{ value | date: format }}</span>
+      <div class="header__icon" (click)="cycleNext.emit()">
+        <svg-icon src="assets/icons/chevron.svg"></svg-icon>
+      </div>
+    </div>
+  `,
   styleUrls: ['./datepicker-header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

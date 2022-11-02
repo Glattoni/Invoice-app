@@ -10,19 +10,19 @@ export class ThemeService {
   private activeTheme = new BehaviorSubject<Theme>(Theme.Light);
   public readonly activeTheme$ = this.activeTheme.asObservable();
 
-  constructor(private localStorageService: LocalStorageService) {
-    this.activeTheme.next(this.preservedTheme);
+  constructor(private readonly localStorageService: LocalStorageService) {
+    this.activeTheme.next(this.preservedTheme || Theme.Light);
     this.activeTheme.pipe(distinctUntilChanged()).subscribe((value) => {
       this.localStorageService.setItem('theme', value);
     });
   }
 
-  private get isDarkTheme(): boolean {
+  public get isDarkTheme(): boolean {
     return this.activeTheme.value === Theme.Dark;
   }
 
-  private get preservedTheme(): Theme {
-    return (this.localStorageService.getItem('theme') as Theme) || Theme.Light;
+  private get preservedTheme(): Theme | null {
+    return this.localStorageService.getItem('theme') as Theme;
   }
 
   public toggleTheme(): void {

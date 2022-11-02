@@ -1,0 +1,16 @@
+<div class="delete-invoice">
+  <h2 class="delete-invoice__title">confirm deletion</h2>
+  <p class="delete-invoice__text">
+    Are you sure you want to delete invoice
+    <span class="delete-invoice__slug">#{{ slug }}</span> ?<br />
+    This action cannot be undone.
+  </p>
+  <div class="delete-invoice__action-buttons">
+    <button class="app-button neutral" type="button" (click)="cancel.emit()">
+      Cancel
+    </button>
+    <button class="app-button danger" type="button" (click)="delete.emit()">
+      Delete
+    </button>
+  </div>
+</div>

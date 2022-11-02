@@ -5,6 +5,7 @@
   background-color: var(--background-tetriary);
   border-radius: 0.5rem;
   box-shadow: 0 0.625rem 0.625rem -0.625rem var(--box-shadow-secondary);
+  transition: background-color var(--transition-secondary);
 
   @include bp.md {
     display: flex;
@@ -30,6 +31,7 @@
     padding: 1.25rem 1.5rem;
     background-color: var(--background-tetriary);
     box-shadow: 0 -2.5rem 4.25rem 0 var(--box-shadow-primary);
+    transition: background-color var(--transition-secondary);
 
     @include bp.md {
       position: initial;

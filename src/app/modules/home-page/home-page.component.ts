@@ -21,7 +21,7 @@ export class HomePageComponent implements OnInit {
     this.invoiceService.getInvoices();
   }
 
-  public trackByInvoiceId(_index: number, invoice: Invoice) {
+  public trackByInvoiceId(_index: number, invoice: Invoice): string {
     return invoice._id;
   }
 }

@@ -2,7 +2,7 @@
   <legend>items list</legend>
 
   <header>
-    <p *ngFor="let header of headers">{{ header }}</p>
+    <span *ngFor="let header of headers">{{ header }}</span>
   </header>
 
   <ul formArrayName="items">
@@ -39,9 +39,11 @@
       <!-- item price -->
 
       <!-- item total -->
-      <div class="total-amount">
-        <label>total</label>
-        <p>{{ calculateItemTotal(i) | currency: '':'' }}</p>
+      <div class="total">
+        <label class="total__label">total</label>
+        <span class="total__value" [title]="calculateItemTotal(i)">
+          {{ calculateItemTotal(i) | currency: '':'' }}
+        </span>
       </div>
       <!-- item total -->
 
@@ -53,7 +55,7 @@
     </li>
   </ul>
 
-  <app-button class="add-button" [variant]="'mixed'" (click)="addItem()">
+  <button class="app-button mixed add-button" type="button" (click)="addItem()">
     + add new item
-  </app-button>
+  </button>
 </fieldset>

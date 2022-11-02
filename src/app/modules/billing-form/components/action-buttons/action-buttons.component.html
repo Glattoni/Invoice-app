@@ -1,0 +1,28 @@
+<div class="action-buttons" [class.shadowed]="!reachedBottom">
+  <ng-container *ngIf="editMode; else create">
+    <button class="app-button light small" (click)="cancel.emit()">
+      Cancel
+    </button>
+    <button class="app-button primary small" (click)="saveChanges.emit()">
+      Save Changes
+    </button>
+  </ng-container>
+
+  <ng-template #create>
+    <button
+      class="app-button light small"
+      type="button"
+      (click)="discard.emit()"
+    >
+      Discard
+    </button>
+    <button
+      class="app-button dark small"
+      type="button"
+      (click)="saveAsDraft.emit()"
+    >
+      Save as Draft
+    </button>
+    <button class="app-button primary small" type="submit">Save & Send</button>
+  </ng-template>
+</div>

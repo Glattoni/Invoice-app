@@ -1,0 +1,35 @@
+@use 'breakpoints' as bp;
+
+.delete-invoice {
+  padding: 2rem;
+
+  @include bp.md {
+    padding: 3rem;
+  }
+
+  &__title {
+    margin-bottom: 0.5rem;
+    line-height: 2rem;
+    text-transform: capitalize;
+
+    @include bp.md {
+      font-size: 1.5rem;
+    }
+  }
+
+  &__text {
+    margin-bottom: 1.5rem;
+    line-height: 1.375rem;
+    color: var(--foreground-primary);
+  }
+
+  &__slug {
+    font-weight: bold;
+  }
+
+  &__action-buttons {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+  }
+}

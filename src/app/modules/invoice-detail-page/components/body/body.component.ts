@@ -9,14 +9,14 @@ import { Address } from '@shared/models/invoice.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BodyComponent {
-  @Input() slug = '';
-  @Input() description = '';
-  @Input() createdAt = '';
-  @Input() paymentDue = '';
-  @Input() clientName = '';
-  @Input() clientEmail = '';
-  @Input() senderAddress = {} as Address;
-  @Input() clientAddress = {} as Address;
+  @Input() public slug = '';
+  @Input() public description = '';
+  @Input() public createdAt = '';
+  @Input() public paymentDue = '';
+  @Input() public clientName = '';
+  @Input() public clientEmail = '';
+  @Input() public senderAddress = {} as Address;
+  @Input() public clientAddress = {} as Address;
 
   public get mailTo(): string {
     return `mailto:${this.clientEmail}`;

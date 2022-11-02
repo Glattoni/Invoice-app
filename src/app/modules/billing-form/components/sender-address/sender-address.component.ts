@@ -3,32 +3,32 @@ import { FormGroupDirective, FormGroup } from '@angular/forms';
 import { BillingForm } from '../../models/billing-form.model';
 
 @Component({
-  selector: 'form-sender-address',
+  selector: 'app-sender-address',
   templateUrl: './sender-address.component.html',
   styleUrls: ['./sender-address.component.scss'],
 })
 export class SenderAddressComponent implements OnInit {
-  form?: FormGroup<BillingForm>;
+  public form?: FormGroup<BillingForm>;
 
   constructor(private rootFormGroup: FormGroupDirective) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.form = this.rootFormGroup.control;
   }
 
-  get invalidStreet() {
+  public get invalidStreet(): boolean | undefined {
     return this.street?.invalid && this.street.touched;
   }
 
-  get invalidCity() {
+  public get invalidCity(): boolean | undefined {
     return this.city?.invalid && this.city.touched;
   }
 
-  get invalidPostCode() {
+  public get invalidPostCode(): boolean | undefined {
     return this.postCode?.invalid && this.postCode.touched;
   }
 
-  get invalidCountry() {
+  public get invalidCountry(): boolean | undefined {
     return this.country?.invalid && this.country.touched;
   }
 

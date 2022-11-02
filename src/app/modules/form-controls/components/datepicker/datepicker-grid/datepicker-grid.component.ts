@@ -8,7 +8,19 @@ interface Day {
 
 @Component({
   selector: 'app-datepicker-grid',
-  templateUrl: './datepicker-grid.component.html',
+  template: `
+    <div class="container">
+      <div
+        class="day"
+        *ngFor="let day of days"
+        (click)="selectDay(day)"
+        [class.upcoming]="day.next"
+        [class.selected]="day.selected"
+      >
+        {{ day.value }}
+      </div>
+    </div>
+  `,
   styleUrls: ['./datepicker-grid.component.scss'],
 })
 export class DatepickerGridComponent {

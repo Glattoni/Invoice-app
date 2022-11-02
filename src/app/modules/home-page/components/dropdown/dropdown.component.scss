@@ -31,7 +31,7 @@
     margin-left: 0.5rem;
 
     & > svg {
-      transition: transform 0.2s ease-in-out;
+      transition: transform var(--transition-primary);
     }
 
     &--rotated > svg {
@@ -58,7 +58,7 @@
   background-color: var(--background-secondary);
   border-radius: 0.5rem;
   box-shadow: 0 0.625rem 1.25rem var(--box-shadow-primary);
-  transition: box-shadow 0.2s ease-in-out;
+  transition: box-shadow var(--transition-primary);
   transform-origin: top center;
 
   @include bp.md {

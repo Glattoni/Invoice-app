@@ -1,18 +1,16 @@
 import { DateTime } from 'luxon';
-import { generateSlug } from 'src/utils';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 
-import { BehaviorSubject, ReplaySubject } from 'rxjs';
-
-import { DOCUMENT } from '@angular/common';
-import { Inject, Injectable } from '@angular/core';
 import {
   FormArray,
   FormGroup,
   Validators,
   NonNullableFormBuilder,
 } from '@angular/forms';
+import { DOCUMENT } from '@angular/common';
+import { Inject, Injectable } from '@angular/core';
 
-import { Invoice, Item } from '@shared/models/invoice.model';
+import { Item } from '@shared/models/invoice.model';
 import { DATE_FORMAT } from '@shared/constants/date-formats.constants';
 import {
   Address,
@@ -21,31 +19,30 @@ import {
 } from '@modules/billing-form/models/billing-form.model';
 import { InvoiceStatus } from '@shared/constants/invoice.constants';
 
-const newItem: Item = {
+import { generateSlug } from 'src/utils';
+
+const EMPTY_ITEM: Item = {
   name: '',
   quantity: 0,
   price: 0,
   total: 0,
 };
 
+type Mode = 'CREATE' | 'EDIT';
+
 @Injectable({
   providedIn: 'root',
 })
 export class BillingFormService {
+  private mode = new BehaviorSubject<Mode>('CREATE');
   private visible = new BehaviorSubject<boolean>(false);
-  private payload = new ReplaySubject<Invoice>();
 
   public readonly visible$ = this.visible.asObservable();
-  public readonly payload$ = this.payload.asObservable();
 
   constructor(
     @Inject(DOCUMENT) private readonly document: Document,
     private readonly formBuilder: NonNullableFormBuilder
   ) {}
-
-  public getPaymentDue(date: string, duration: object): string {
-    return DateTime.fromISO(date).plus(duration).toFormat(DATE_FORMAT.DEFAULT);
-  }
 
   public get formControls(): FormGroup<BillingForm> {
     return this.formBuilder.group({
@@ -64,11 +61,19 @@ export class BillingFormService {
     });
   }
 
-  public generateListItem(item = newItem) {
+  public get editMode$(): Observable<boolean> {
+    return this.mode.pipe(map((mode) => mode === 'EDIT'));
+  }
+
+  public getPaymentDue(date: string, duration: object): string {
+    return DateTime.fromISO(date).plus(duration).toFormat(DATE_FORMAT.DEFAULT);
+  }
+
+  public generateListItem(item = EMPTY_ITEM): FormGroup<ListItem> {
     return this.formBuilder.group({
       name: [item.name, Validators.required],
       quantity: [item.quantity, [Validators.required, Validators.min(1)]],
-      price: [item.price, [Validators.required, Validators.min(0)]],
+      price: [item.price, [Validators.required, Validators.min(0.01)]],
       total: [item.total, Validators.required],
     });
   }
@@ -83,13 +88,13 @@ export class BillingFormService {
     this.document.body.classList.remove('form-open');
   }
 
-  public startEditing(invoice: Invoice): void {
-    this.payload.next(invoice);
+  public startEditing(): void {
+    this.mode.next('EDIT');
     this.open();
   }
 
   public finishEditing(): void {
-    this.payload.next(null as any);
+    this.mode.next('CREATE');
     this.close();
   }
 

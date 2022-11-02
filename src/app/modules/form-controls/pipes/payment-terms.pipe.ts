@@ -4,10 +4,7 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'paymentTerms',
 })
 export class PaymentTermsPipe implements PipeTransform {
-  transform(value: number) {
-    if (value === 1) {
-      return `Next ${value} day`;
-    }
-    return `Next ${value} days`;
+  public transform(value: number): string {
+    return `Next ${value} ${value === 1 ? 'day' : 'days'}`;
   }
 }
