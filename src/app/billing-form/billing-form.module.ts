@@ -11,7 +11,7 @@ import { ClientInfoComponent } from './components/client-info/client-info.compon
 import { InvoiceTermsComponent } from './components/invoice-terms/invoice-terms.component';
 import { SenderAddressComponent } from './components/sender-address/sender-address.component';
 import { ScrolledToBottomDirective } from './directives/scrolled-to-bottom.directive';
-import { FormControlsModule } from '@modules/form-controls/form-controls.module';
+import { FormControlsModule } from '../form-controls/form-controls.module';
 import { FormHeaderComponent } from './components/form-header/form-header.component';
 import { ActionButtonsComponent } from './components/action-buttons/action-buttons.component';
 

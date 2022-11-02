@@ -5,14 +5,12 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
-      import('./modules/home-page/home-page.module').then(
-        (m) => m.HomePageModule
-      ),
+      import('./home-page/home-page.module').then((m) => m.HomePageModule),
   },
   {
     path: 'invoices/:id',
     loadChildren: () =>
-      import('./modules/invoice-detail-page/invoice-detail-page.module').then(
+      import('./invoice-detail-page/invoice-detail-page.module').then(
         (m) => m.InvoiceDetailPageModule
       ),
   },

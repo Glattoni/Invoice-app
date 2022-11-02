@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '@shared/shared.module';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { HomeRoutingModule } from './home-page-routing.module';
-import { BillingFormModule } from '@modules/billing-form/billing-form.module';
+import { BillingFormModule } from 'app/billing-form/billing-form.module';
 
 import { HomePageComponent } from './home-page.component';
 
