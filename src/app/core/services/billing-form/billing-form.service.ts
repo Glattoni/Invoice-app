@@ -16,10 +16,10 @@ import {
   Address,
   BillingForm,
   ListItem,
-} from '@modules/billing-form/models/billing-form.model';
+} from 'app/billing-form/models/billing-form.model';
 import { InvoiceStatus } from '@shared/constants/invoice.constants';
 
-import { generateSlug } from 'src/utils';
+import { generateSlug } from 'utils';
 
 const EMPTY_ITEM: Item = {
   name: '',
