@@ -1,14 +1,14 @@
 import { DateTime } from 'luxon';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 
-import { DOCUMENT } from '@angular/common';
-import { Inject, Injectable } from '@angular/core';
 import {
   FormArray,
   FormGroup,
   Validators,
   NonNullableFormBuilder,
 } from '@angular/forms';
+import { DOCUMENT } from '@angular/common';
+import { Inject, Injectable } from '@angular/core';
 
 import { Item } from '@shared/models/invoice.model';
 import { DATE_FORMAT } from '@shared/constants/date-formats.constants';
@@ -18,9 +18,10 @@ import {
   ListItem,
 } from '@modules/billing-form/models/billing-form.model';
 import { InvoiceStatus } from '@shared/constants/invoice.constants';
+
 import { generateSlug } from 'src/utils';
 
-const newItem: Item = {
+const EMPTY_ITEM: Item = {
   name: '',
   quantity: 0,
   price: 0,
@@ -68,7 +69,7 @@ export class BillingFormService {
     return DateTime.fromISO(date).plus(duration).toFormat(DATE_FORMAT.DEFAULT);
   }
 
-  public generateListItem(item = newItem): FormGroup<ListItem> {
+  public generateListItem(item = EMPTY_ITEM): FormGroup<ListItem> {
     return this.formBuilder.group({
       name: [item.name, Validators.required],
       quantity: [item.quantity, [Validators.required, Validators.min(1)]],
