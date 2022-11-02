@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { SelectInputComponent } from './select-input.component';
-import { PaymentTermsPipe } from '@modules/form-controls/pipes/payment-terms.pipe';
+import { PaymentTermsPipe } from 'app/form-controls/pipes/payment-terms.pipe';
 
 describe('CustomSelectComponent', () => {
   let component: SelectInputComponent;
