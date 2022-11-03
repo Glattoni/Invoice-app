@@ -1,5 +1,7 @@
 <aside class="panel">
-  <app-logo></app-logo>
+  <a [routerLink]="['/']">
+    <app-logo></app-logo>
+  </a>
 
   <div class="panel__theme">
     <div *ngIf="isDarkTheme; else moon" (click)="toggleTheme()">
