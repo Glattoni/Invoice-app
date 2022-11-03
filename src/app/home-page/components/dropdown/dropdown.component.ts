@@ -1,3 +1,5 @@
+import { AngularSvgIconModule } from 'angular-svg-icon';
+
 import { filter, ReplaySubject, Subject, takeUntil } from 'rxjs';
 
 import {
@@ -6,6 +8,7 @@ import {
   OnDestroy,
   ChangeDetectionStrategy,
 } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 import {
   InvoiceStatus,
@@ -14,8 +17,12 @@ import {
 import { scaleDown } from '@shared/animations';
 import { InvoiceService } from '@core/services/invoice/invoice.service';
 
+import { CheckboxComponent } from '../checkbox/checkbox.component';
+
 @Component({
   selector: 'app-dropdown',
+  standalone: true,
+  imports: [CommonModule, AngularSvgIconModule, CheckboxComponent],
   templateUrl: './dropdown.component.html',
   styleUrls: ['./dropdown.component.scss'],
   animations: [scaleDown],

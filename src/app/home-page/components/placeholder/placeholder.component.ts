@@ -1,7 +1,11 @@
+import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { AngularSvgIconModule } from 'angular-svg-icon';
 
 @Component({
   selector: 'app-placeholder',
+  standalone: true,
+  imports: [CommonModule, AngularSvgIconModule],
   template: `
     <div class="placeholder">
       <svg-icon
