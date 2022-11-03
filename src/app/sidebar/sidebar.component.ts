@@ -1,8 +1,16 @@
+import { AngularSvgIconModule } from 'angular-svg-icon';
+
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { ThemeService } from '@core/services/theme/theme.service';
+
+import { ThemeService } from './services/theme/theme.service';
+import { LogoComponent } from './components/logo/logo.component';
 
 @Component({
+  standalone: true,
   selector: 'app-sidebar',
+  imports: [AngularSvgIconModule, CommonModule, RouterModule, LogoComponent],
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
