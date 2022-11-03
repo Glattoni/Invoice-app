@@ -1,13 +1,44 @@
-import { enableProdMode } from '@angular/core';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { HttpClientModule } from '@angular/common/http';
+import { bootstrapApplication } from '@angular/platform-browser';
+import { enableProdMode, importProvidersFrom } from '@angular/core';
 
-import { AppModule } from './app/app.module';
+import { AppComponent } from 'app/app.component';
 import { environment } from './environments/environment';
+
+import { RouterModule, Routes } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
+import { AngularSvgIconModule } from 'angular-svg-icon';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+const routes: Routes = [
+  {
+    path: '',
+    loadComponent: () =>
+      import('./app/home-page/home-page.component').then(
+        (module) => module.HomePageComponent
+      ),
+  },
+  {
+    path: 'invoices/:id',
+    loadComponent: () =>
+      import('./app/invoice-detail-page/invoice-detail-page.component').then(
+        (module) => module.InvoiceDetailPageComponent
+      ),
+  },
+];
 
 if (environment.production) {
   enableProdMode();
 }
 
-platformBrowserDynamic()
-  .bootstrapModule(AppModule)
-  .catch((err) => console.error(err));
+bootstrapApplication(AppComponent, {
+  providers: [
+    importProvidersFrom(
+      RouterModule.forRoot(routes),
+      AngularSvgIconModule.forRoot(),
+      HttpClientModule,
+      ReactiveFormsModule,
+      BrowserAnimationsModule
+    ),
+  ],
+}).catch((error) => console.error(error));
