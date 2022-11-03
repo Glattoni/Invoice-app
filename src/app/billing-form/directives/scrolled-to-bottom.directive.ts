@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 
 @Directive({
+  standalone: true,
   selector: '[scrolledToBottom]',
 })
 export class ScrolledToBottomDirective implements AfterViewInit, OnDestroy {

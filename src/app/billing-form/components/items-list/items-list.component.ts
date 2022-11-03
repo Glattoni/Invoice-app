@@ -1,15 +1,29 @@
+import { AngularSvgIconModule } from 'angular-svg-icon';
+
 import {
   FormGroup,
   FormArray,
   AbstractControl,
   FormGroupDirective,
+  ReactiveFormsModule,
 } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+
 import { BillingForm, ListItem } from '../../models/billing-form.model';
+
 import { BillingFormService } from '@core/services/billing-form/billing-form.service';
+import { TextInputComponent } from 'app/form-controls/components/text-input/text-input.component';
 
 @Component({
+  standalone: true,
   selector: 'app-items-list',
+  imports: [
+    CommonModule,
+    TextInputComponent,
+    ReactiveFormsModule,
+    AngularSvgIconModule,
+  ],
   templateUrl: './items-list.component.html',
   styleUrls: ['./items-list.component.scss'],
 })

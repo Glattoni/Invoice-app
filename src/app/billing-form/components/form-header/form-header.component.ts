@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   Input,
   Output,
@@ -5,9 +6,12 @@ import {
   EventEmitter,
   ChangeDetectionStrategy,
 } from '@angular/core';
+import { GoBackComponent } from '@shared/components/go-back/go-back.component';
 
 @Component({
   selector: 'app-form-header',
+  standalone: true,
+  imports: [CommonModule, GoBackComponent],
   templateUrl: './form-header.component.html',
   styleUrls: ['./form-header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
