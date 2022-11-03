@@ -12,6 +12,7 @@ import {
 import { DOCUMENT } from '@angular/common';
 
 @Directive({
+  standalone: true,
   selector: '[clickOutside]',
 })
 export class ClickedOutsideDirective implements AfterViewInit, OnDestroy {

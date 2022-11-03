@@ -1,7 +1,10 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { AngularSvgIconModule } from 'angular-svg-icon';
 
 @Component({
+  standalone: true,
   selector: 'app-go-back',
+  imports: [AngularSvgIconModule],
   template: `
     <button class="button" tabindex="0" [style.margin-bottom.rem]="bottom">
       <svg-icon
