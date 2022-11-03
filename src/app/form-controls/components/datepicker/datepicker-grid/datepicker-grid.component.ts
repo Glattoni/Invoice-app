@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 interface Day {
@@ -7,7 +8,9 @@ interface Day {
 }
 
 @Component({
+  standalone: true,
   selector: 'app-datepicker-grid',
+  imports: [CommonModule],
   template: `
     <div class="container">
       <div

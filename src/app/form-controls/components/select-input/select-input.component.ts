@@ -1,7 +1,10 @@
+import { CommonModule } from '@angular/common';
 import { Input, Component, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { scaleDown } from '@shared/animations';
+import { AngularSvgIconModule } from 'angular-svg-icon';
+import { PaymentTermsPipe } from 'app/form-controls/pipes/payment-terms.pipe';
 
 interface Option {
   id: string;
@@ -18,7 +21,9 @@ const SELECT_INPUT_VALUE_ACCESSOR = {
 const noop = (): any => undefined;
 
 @Component({
+  standalone: true,
   selector: 'app-select-input',
+  imports: [AngularSvgIconModule, CommonModule, PaymentTermsPipe],
   templateUrl: './select-input.component.html',
   styleUrls: ['./select-input.component.scss'],
   providers: [SELECT_INPUT_VALUE_ACCESSOR],
