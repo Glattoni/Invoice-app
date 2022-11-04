@@ -34,12 +34,14 @@ import { InvoiceService } from 'app/services/invoice/invoice.service';
 import { BillingFormService } from 'app/services/billing-form/billing-form.service';
 
 import { BillingForm, ListItem } from './models/billing-form.model';
+
+import { ItemsListComponent } from './components/items-list/items-list.component';
 import { FormHeaderComponent } from './components/form-header/form-header.component';
-import { SenderAddressComponent } from './components/sender-address/sender-address.component';
 import { ClientInfoComponent } from './components/client-info/client-info.component';
 import { InvoiceTermsComponent } from './components/invoice-terms/invoice-terms.component';
-import { ItemsListComponent } from './components/items-list/items-list.component';
+import { SenderAddressComponent } from './components/sender-address/sender-address.component';
 import { ActionButtonsComponent } from './components/action-buttons/action-buttons.component';
+
 import { ScrolledToBottomDirective } from './directives/scrolled-to-bottom.directive';
 
 @Component({
@@ -130,7 +132,7 @@ export class BillingFormComponent implements OnInit, OnDestroy {
     this.editMode$
       .pipe(
         take(1),
-        map((value) => !!value),
+        map((value) => value),
         takeUntil(this.destroy$)
       )
       .subscribe((editMode) => {
@@ -203,25 +205,17 @@ export class BillingFormComponent implements OnInit, OnDestroy {
   }
 
   private onFormValueChanges(): void {
-    if (this.createdAt && this.paymentTerms) {
-      merge(this.createdAt.valueChanges, this.paymentTerms.valueChanges)
-        .pipe(
-          debounceTime(500),
-          distinctUntilChanged(),
-          takeUntil(this.destroy$)
-        )
-        .subscribe(() => {
-          this.calculatePaymentDueDate();
-        });
-    }
+    if (!this.createdAt || !this.paymentTerms) return;
+
+    merge(this.createdAt.valueChanges, this.paymentTerms.valueChanges)
+      .pipe(debounceTime(500), distinctUntilChanged(), takeUntil(this.destroy$))
+      .subscribe(() => this.calculatePaymentDueDate());
   }
 
   private onItemListValueChanges(): void {
     this.items.valueChanges
       .pipe(debounceTime(500), distinctUntilChanged(), takeUntil(this.destroy$))
-      .subscribe(() => {
-        this.calculateAmountDue();
-      });
+      .subscribe(() => this.calculateAmountDue());
   }
 
   private calculateAmountDue(): void {
