@@ -18,7 +18,7 @@ describe('CustomSelectComponent', () => {
         SelectInputComponent,
         PaymentTermsPipe,
         HttpClientModule,
-        AngularSvgIconModule,
+        AngularSvgIconModule.forRoot(),
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();

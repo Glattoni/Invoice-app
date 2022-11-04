@@ -5,7 +5,7 @@ import { enableProdMode, importProvidersFrom } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AngularSvgIconModule } from 'angular-svg-icon';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 import { ROUTES } from 'app/app.routes';
 import { AppComponent } from 'app/app.component';
@@ -21,8 +21,8 @@ bootstrapApplication(AppComponent, {
       RouterModule.forRoot(ROUTES),
       AngularSvgIconModule.forRoot(),
       HttpClientModule,
-      ReactiveFormsModule,
-      BrowserAnimationsModule
+      ReactiveFormsModule
     ),
+    provideAnimations(),
   ],
 }).catch((error) => console.error(error));

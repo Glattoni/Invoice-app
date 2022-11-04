@@ -6,7 +6,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { HeaderComponent } from './header.component';
 import { DropdownComponent } from '../dropdown/dropdown.component';
-import { BillingFormService } from '@core/services/billing-form/billing-form.service';
+import { BillingFormService } from 'app/services/billing-form/billing-form.service';
+import { AngularSvgIconModule } from 'angular-svg-icon';
 
 class BillingFormServiceStub {
   public open = jasmine.createSpy();
@@ -19,6 +20,7 @@ describe('HeaderComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
+        AngularSvgIconModule.forRoot(),
         HttpClientTestingModule,
         BrowserAnimationsModule,
         HeaderComponent,

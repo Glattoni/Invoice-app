@@ -7,12 +7,12 @@ import {
   EventEmitter,
   ChangeDetectionStrategy,
 } from '@angular/core';
-import { DatePipe } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 
 @Component({
-  standalone: true,
   selector: 'app-datepicker-header',
-  imports: [AngularSvgIconModule, DatePipe],
+  standalone: true,
+  imports: [CommonModule, AngularSvgIconModule, DatePipe],
   template: `
     <div class="header">
       <div class="header__icon" (click)="cyclePrev.emit()">

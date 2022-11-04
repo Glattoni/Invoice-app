@@ -1,5 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Input,
+  Output,
+  Component,
+  EventEmitter,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 
 interface Day {
   value: number;
@@ -8,8 +14,8 @@ interface Day {
 }
 
 @Component({
-  standalone: true,
   selector: 'app-datepicker-grid',
+  standalone: true,
   imports: [CommonModule],
   template: `
     <div class="container">
@@ -25,6 +31,7 @@ interface Day {
     </div>
   `,
   styleUrls: ['./datepicker-grid.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DatepickerGridComponent {
   @Input() public days: Day[] = [];

@@ -56,8 +56,8 @@ const noop = (): any => undefined;
   standalone: true,
   selector: 'app-datepicker',
   imports: [
-    AngularSvgIconModule,
     CommonModule,
+    AngularSvgIconModule,
     DatepickerGridComponent,
     DatepickerHeaderComponent,
     ClickedOutsideDirective,

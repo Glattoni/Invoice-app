@@ -16,7 +16,7 @@ describe('DatepickerComponent', () => {
       imports: [
         BrowserAnimationsModule,
         DatepickerComponent,
-        AngularSvgIconModule,
+        AngularSvgIconModule.forRoot(),
         HttpClientModule,
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],

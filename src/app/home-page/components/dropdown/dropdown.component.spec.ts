@@ -1,3 +1,5 @@
+import { AngularSvgIconModule } from 'angular-svg-icon';
+
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
@@ -14,6 +16,7 @@ describe('DropdownComponent', () => {
       imports: [
         HttpClientTestingModule,
         BrowserAnimationsModule,
+        AngularSvgIconModule.forRoot(),
         DropdownComponent,
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
