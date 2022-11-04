@@ -10,8 +10,7 @@ describe('SenderAddressComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [SenderAddressComponent],
-      providers: [FormGroupDirective],
+      providers: [FormGroupDirective, SenderAddressComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   });

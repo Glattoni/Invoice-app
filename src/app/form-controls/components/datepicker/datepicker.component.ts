@@ -37,6 +37,7 @@ import { DATE_FORMAT } from '@shared/constants/date-formats.constants';
 
 import { DatepickerGridComponent } from './datepicker-grid/datepicker-grid.component';
 import { DatepickerHeaderComponent } from './datepicker-header/datepicker-header.component';
+import { ClickedOutsideDirective } from '@shared/directives/clicked-outside/clicked-outside.directive';
 
 interface Day {
   value: number;
@@ -59,6 +60,7 @@ const noop = (): any => undefined;
     CommonModule,
     DatepickerGridComponent,
     DatepickerHeaderComponent,
+    ClickedOutsideDirective,
   ],
   templateUrl: './datepicker.component.html',
   styleUrls: ['./datepicker.component.scss'],

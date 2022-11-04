@@ -11,8 +11,11 @@ describe('DropdownComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [DropdownComponent],
-      imports: [HttpClientTestingModule, BrowserAnimationsModule],
+      imports: [
+        HttpClientTestingModule,
+        BrowserAnimationsModule,
+        DropdownComponent,
+      ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   });

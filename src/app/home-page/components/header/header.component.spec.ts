@@ -18,8 +18,12 @@ describe('HeaderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [HeaderComponent, DropdownComponent],
-      imports: [HttpClientTestingModule, BrowserAnimationsModule],
+      imports: [
+        HttpClientTestingModule,
+        BrowserAnimationsModule,
+        HeaderComponent,
+        DropdownComponent,
+      ],
       providers: [
         NonNullableFormBuilder,
         { provide: BillingFormService, useClass: BillingFormServiceStub },

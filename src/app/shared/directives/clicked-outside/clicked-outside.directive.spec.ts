@@ -1,6 +1,7 @@
 import { Component, ElementRef } from '@angular/core';
 import { ClickedOutsideDirective } from './clicked-outside.directive';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { AngularSvgIconModule } from 'angular-svg-icon';
 
 @Component({
   template: `
@@ -33,7 +34,7 @@ describe('Directive: ClickOutside', () => {
 
   beforeEach(async () => {
     TestBed.configureTestingModule({
-      declarations: [TestClickOutsideComponent, ClickedOutsideDirective],
+      imports: [ClickedOutsideDirective, AngularSvgIconModule],
     }).compileComponents();
   });
 

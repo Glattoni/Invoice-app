@@ -14,8 +14,12 @@ describe('InvoiceDetailPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [GoBackComponent, InvoiceDetailPageComponent],
-      imports: [HttpClientTestingModule, RouterTestingModule],
+      imports: [
+        HttpClientTestingModule,
+        RouterTestingModule,
+        GoBackComponent,
+        InvoiceDetailPageComponent,
+      ],
       providers: [NonNullableFormBuilder],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();

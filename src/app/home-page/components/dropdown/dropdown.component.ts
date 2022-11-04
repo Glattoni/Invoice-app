@@ -18,11 +18,17 @@ import { scaleDown } from '@shared/animations';
 import { InvoiceService } from '@core/services/invoice/invoice.service';
 
 import { CheckboxComponent } from '../checkbox/checkbox.component';
+import { ClickedOutsideDirective } from '@shared/directives/clicked-outside/clicked-outside.directive';
 
 @Component({
   selector: 'app-dropdown',
   standalone: true,
-  imports: [CommonModule, AngularSvgIconModule, CheckboxComponent],
+  imports: [
+    CommonModule,
+    AngularSvgIconModule,
+    CheckboxComponent,
+    ClickedOutsideDirective,
+  ],
   templateUrl: './dropdown.component.html',
   styleUrls: ['./dropdown.component.scss'],
   animations: [scaleDown],
