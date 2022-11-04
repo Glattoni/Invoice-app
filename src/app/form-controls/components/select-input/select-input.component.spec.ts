@@ -4,6 +4,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { SelectInputComponent } from './select-input.component';
 import { PaymentTermsPipe } from 'app/form-controls/pipes/payment-terms.pipe';
+import { AngularSvgIconModule } from 'angular-svg-icon';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('CustomSelectComponent', () => {
   let component: SelectInputComponent;
@@ -11,8 +13,13 @@ describe('CustomSelectComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [SelectInputComponent, PaymentTermsPipe],
-      imports: [BrowserAnimationsModule],
+      imports: [
+        BrowserAnimationsModule,
+        SelectInputComponent,
+        PaymentTermsPipe,
+        HttpClientModule,
+        AngularSvgIconModule.forRoot(),
+      ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   });

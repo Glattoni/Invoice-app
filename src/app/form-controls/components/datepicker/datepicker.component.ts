@@ -1,4 +1,5 @@
 import { DateTime, Info } from 'luxon';
+import { AngularSvgIconModule } from 'angular-svg-icon';
 
 import {
   Subject,
@@ -28,10 +29,15 @@ import {
   ChangeDetectionStrategy,
 } from '@angular/core';
 
+import { CommonModule } from '@angular/common';
 import { NgControl, ControlValueAccessor } from '@angular/forms';
 
 import { scaleDown } from '@shared/animations';
 import { DATE_FORMAT } from '@shared/constants/date-formats.constants';
+
+import { DatepickerGridComponent } from './datepicker-grid/datepicker-grid.component';
+import { DatepickerHeaderComponent } from './datepicker-header/datepicker-header.component';
+import { ClickedOutsideDirective } from '@shared/directives/clicked-outside/clicked-outside.directive';
 
 interface Day {
   value: number;
@@ -47,7 +53,15 @@ const MAX_GRID_ITEMS = 35;
 const noop = (): any => undefined;
 
 @Component({
+  standalone: true,
   selector: 'app-datepicker',
+  imports: [
+    CommonModule,
+    AngularSvgIconModule,
+    DatepickerGridComponent,
+    DatepickerHeaderComponent,
+    ClickedOutsideDirective,
+  ],
   templateUrl: './datepicker.component.html',
   styleUrls: ['./datepicker.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

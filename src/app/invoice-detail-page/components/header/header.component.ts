@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   Input,
   Output,
@@ -7,9 +8,12 @@ import {
 } from '@angular/core';
 
 import { InvoiceStatus } from '@shared/constants/invoice.constants';
+import { InvoiceStatusComponent } from '@shared/components/invoice-status/invoice-status.component';
 
 @Component({
   selector: 'app-header',
+  standalone: true,
+  imports: [CommonModule, InvoiceStatusComponent],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

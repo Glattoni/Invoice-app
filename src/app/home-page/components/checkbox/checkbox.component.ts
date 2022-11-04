@@ -1,3 +1,6 @@
+import { AngularSvgIconModule } from 'angular-svg-icon';
+
+import { CommonModule } from '@angular/common';
 import {
   Input,
   Output,
@@ -9,6 +12,8 @@ import {
 
 @Component({
   selector: 'app-checkbox',
+  standalone: true,
+  imports: [CommonModule, AngularSvgIconModule],
   templateUrl: './checkbox.component.html',
   styleUrls: ['./checkbox.component.scss'],
 })

@@ -1,6 +1,6 @@
 import { combineLatest, map, Observable, Subject, takeUntil } from 'rxjs';
 import { Injectable, OnDestroy } from '@angular/core';
-import { InvoiceService } from '@core/services/invoice/invoice.service';
+import { InvoiceService } from 'app/services/invoice/invoice.service';
 
 @Injectable({
   providedIn: 'root',

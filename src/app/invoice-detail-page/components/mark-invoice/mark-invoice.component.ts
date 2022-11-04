@@ -1,3 +1,5 @@
+import { CommonModule } from '@angular/common';
+
 import {
   Input,
   Output,
@@ -8,6 +10,8 @@ import {
 
 @Component({
   selector: 'app-mark-invoice',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './mark-invoice.component.html',
   styleUrls: ['./mark-invoice.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -1,9 +1,25 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormGroupDirective, FormGroup } from '@angular/forms';
+import {
+  FormGroup,
+  FormGroupDirective,
+  ReactiveFormsModule,
+} from '@angular/forms';
+
 import { BillingForm } from '../../models/billing-form.model';
 
+import { TextInputComponent } from 'app/form-controls/components/text-input/text-input.component';
+import { DisabledControlDirective } from '@shared/directives/disabled-control/disabled-control.directive';
+
 @Component({
+  standalone: true,
   selector: 'app-client-info',
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    TextInputComponent,
+    DisabledControlDirective,
+  ],
   templateUrl: './client-info.component.html',
   styleUrls: ['./client-info.component.scss'],
 })

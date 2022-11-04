@@ -10,7 +10,7 @@ describe('ClientInfoComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ClientInfoComponent],
+      imports: [ClientInfoComponent],
       providers: [FormGroupDirective],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();

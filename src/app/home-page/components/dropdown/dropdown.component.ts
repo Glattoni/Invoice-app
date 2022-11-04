@@ -1,3 +1,5 @@
+import { AngularSvgIconModule } from 'angular-svg-icon';
+
 import { filter, ReplaySubject, Subject, takeUntil } from 'rxjs';
 
 import {
@@ -6,16 +8,27 @@ import {
   OnDestroy,
   ChangeDetectionStrategy,
 } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 import {
   InvoiceStatus,
   InvoiceStatues,
 } from '@shared/constants/invoice.constants';
 import { scaleDown } from '@shared/animations';
-import { InvoiceService } from '@core/services/invoice/invoice.service';
+import { ClickedOutsideDirective } from '@shared/directives/clicked-outside/clicked-outside.directive';
+
+import { CheckboxComponent } from '../checkbox/checkbox.component';
+import { InvoiceService } from 'app/services/invoice/invoice.service';
 
 @Component({
   selector: 'app-dropdown',
+  standalone: true,
+  imports: [
+    CommonModule,
+    AngularSvgIconModule,
+    CheckboxComponent,
+    ClickedOutsideDirective,
+  ],
   templateUrl: './dropdown.component.html',
   styleUrls: ['./dropdown.component.scss'],
   animations: [scaleDown],

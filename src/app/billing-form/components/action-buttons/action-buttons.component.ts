@@ -5,9 +5,12 @@ import {
   EventEmitter,
   ChangeDetectionStrategy,
 } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
+  standalone: true,
   selector: 'app-action-buttons',
+  imports: [CommonModule],
   templateUrl: './action-buttons.component.html',
   styleUrls: ['./action-buttons.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

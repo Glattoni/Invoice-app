@@ -6,14 +6,34 @@ import {
   OnDestroy,
   ChangeDetectionStrategy,
 } from '@angular/core';
-import { Location } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Invoice } from '@shared/models/invoice.model';
-import { InvoiceService } from '@core/services/invoice/invoice.service';
-import { BillingFormService } from '@core/services/billing-form/billing-form.service';
+import { GoBackComponent } from '@shared/components/go-back/go-back.component';
+import { AnimateDialogDirective } from '@shared/directives/animate-dialog/animate-dialog.directive';
+
+import { InvoiceService } from 'app/services/invoice/invoice.service';
+import { BillingFormService } from 'app/services/billing-form/billing-form.service';
+
+import { BodyComponent } from './components/body/body.component';
+import { TableComponent } from './components/table/table.component';
+import { HeaderComponent } from './components/header/header.component';
+import { MarkInvoiceComponent } from './components/mark-invoice/mark-invoice.component';
+import { DeleteInvoiceComponent } from './components/delete-invoice/delete-invoice.component';
 
 @Component({
+  standalone: true,
+  imports: [
+    CommonModule,
+    GoBackComponent,
+    HeaderComponent,
+    BodyComponent,
+    TableComponent,
+    DeleteInvoiceComponent,
+    MarkInvoiceComponent,
+    AnimateDialogDirective,
+  ],
   templateUrl: './invoice-detail-page.component.html',
   styleUrls: ['./invoice-detail-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

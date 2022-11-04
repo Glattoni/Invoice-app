@@ -119,6 +119,17 @@ li {
   }
 }
 
+svg-icon > svg {
+  path {
+    fill: var(--clear-button-color);
+    transition: fill var(--transition-primary);
+  }
+
+  &:hover > path {
+    fill: var(--danger);
+  }
+}
+
 svg-icon svg:hover path {
   fill: var(--danger);
 }

@@ -10,7 +10,7 @@ describe('InvoiceTermsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [InvoiceTermsComponent],
+      imports: [InvoiceTermsComponent],
       providers: [FormGroupDirective, NonNullableFormBuilder],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();

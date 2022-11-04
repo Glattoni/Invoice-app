@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   Input,
   Output,
@@ -8,6 +9,8 @@ import {
 
 @Component({
   selector: 'app-delete-invoice',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './delete-invoice.component.html',
   styleUrls: ['./delete-invoice.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

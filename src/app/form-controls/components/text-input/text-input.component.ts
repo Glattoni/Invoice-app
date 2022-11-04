@@ -1,5 +1,9 @@
 import { Component, Input, forwardRef } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import {
+  FormsModule,
+  NG_VALUE_ACCESSOR,
+  ControlValueAccessor,
+} from '@angular/forms';
 
 const TEXT_INPUT_VALUE_ACCESSOR = {
   provide: NG_VALUE_ACCESSOR,
@@ -10,7 +14,9 @@ const TEXT_INPUT_VALUE_ACCESSOR = {
 const noop = (): any => undefined;
 
 @Component({
+  standalone: true,
   selector: 'app-text-input',
+  imports: [FormsModule],
   templateUrl: './text-input.component.html',
   styleUrls: ['./text-input.component.scss'],
   providers: [TEXT_INPUT_VALUE_ACCESSOR],
