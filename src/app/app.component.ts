@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { BillingFormComponent } from './billing-form/billing-form.component';
-import { ThemeService } from './sidebar/services/theme/theme.service';
+import { Component, inject } from '@angular/core';
+
+import { ThemeService } from './services/theme/theme.service';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { BillingFormComponent } from './billing-form/billing-form.component';
 
 @Component({
   selector: 'app-root',

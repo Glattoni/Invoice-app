@@ -12,12 +12,12 @@ import { Component, OnInit } from '@angular/core';
 
 import { BillingForm, ListItem } from '../../models/billing-form.model';
 
-import { BillingFormService } from '@core/services/billing-form/billing-form.service';
+import { BillingFormService } from 'app/services/billing-form/billing-form.service';
 import { TextInputComponent } from 'app/form-controls/components/text-input/text-input.component';
 
 @Component({
-  standalone: true,
   selector: 'app-items-list',
+  standalone: true,
   imports: [
     CommonModule,
     TextInputComponent,

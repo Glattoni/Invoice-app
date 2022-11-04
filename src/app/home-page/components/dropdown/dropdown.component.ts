@@ -15,10 +15,10 @@ import {
   InvoiceStatues,
 } from '@shared/constants/invoice.constants';
 import { scaleDown } from '@shared/animations';
-import { InvoiceService } from '@core/services/invoice/invoice.service';
+import { ClickedOutsideDirective } from '@shared/directives/clicked-outside/clicked-outside.directive';
 
 import { CheckboxComponent } from '../checkbox/checkbox.component';
-import { ClickedOutsideDirective } from '@shared/directives/clicked-outside/clicked-outside.directive';
+import { InvoiceService } from 'app/services/invoice/invoice.service';
 
 @Component({
   selector: 'app-dropdown',

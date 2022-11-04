@@ -5,13 +5,11 @@ import { RouterModule } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 import { Invoice } from '@shared/models/invoice.model';
-import { InvoiceService } from '@core/services/invoice/invoice.service';
+import { InvoiceService } from 'app/services/invoice/invoice.service';
 
 import { HeaderComponent } from './components/header/header.component';
 import { InvoiceComponent } from './components/invoice/invoice.component';
 import { PlaceholderComponent } from './components/placeholder/placeholder.component';
-
-/* const routes: Routes = [{ path: '', component: HomePageComponent }]; */
 
 @Component({
   standalone: true,

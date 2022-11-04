@@ -6,7 +6,8 @@ import {
   FormGroup,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { BillingFormService } from '@core/services/billing-form/billing-form.service';
+
+import { BillingFormService } from 'app/services/billing-form/billing-form.service';
 
 import { BillingForm } from '../../models/billing-form.model';
 import { CommonModule } from '@angular/common';
@@ -16,8 +17,8 @@ import { DisabledControlDirective } from '@shared/directives/disabled-control/di
 import { DatepickerComponent } from 'app/form-controls/components/datepicker/datepicker.component';
 
 @Component({
-  standalone: true,
   selector: 'app-invoice-terms',
+  standalone: true,
   imports: [
     CommonModule,
     ReactiveFormsModule,

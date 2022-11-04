@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 
-import { ThemeService } from './services/theme/theme.service';
+import { ThemeService } from 'app/services/theme/theme.service';
 import { LogoComponent } from './components/logo/logo.component';
 
 @Component({

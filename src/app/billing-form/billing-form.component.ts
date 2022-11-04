@@ -29,8 +29,9 @@ import { CommonModule } from '@angular/common';
 
 import { Invoice, Item } from '@shared/models/invoice.model';
 import { fadeInOut, slideInOut } from '@shared/animations';
-import { InvoiceService } from '@core/services/invoice/invoice.service';
-import { BillingFormService } from '@core/services/billing-form/billing-form.service';
+
+import { InvoiceService } from 'app/services/invoice/invoice.service';
+import { BillingFormService } from 'app/services/billing-form/billing-form.service';
 
 import { BillingForm, ListItem } from './models/billing-form.model';
 import { FormHeaderComponent } from './components/form-header/form-header.component';

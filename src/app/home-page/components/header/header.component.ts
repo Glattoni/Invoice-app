@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { Component, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 
 import { DropdownComponent } from '../dropdown/dropdown.component';
-import { BillingFormService } from '@core/services/billing-form/billing-form.service';
+import { BillingFormService } from 'app/services/billing-form/billing-form.service';
 import { InvoiceSummaryService } from 'app/home-page/services/invoice-summary/invoice-summary.service';
 
 @Component({
