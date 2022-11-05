@@ -80,4 +80,3 @@ export class ClientInfoComponent implements OnInit {
     return this.form?.get('clientAddress.country');
   }
 }
-Footer;
