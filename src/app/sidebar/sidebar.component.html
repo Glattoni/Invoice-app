@@ -1,0 +1,27 @@
+<aside class="panel">
+  <a [routerLink]="['/']">
+    <app-logo></app-logo>
+  </a>
+
+  <div class="panel__theme">
+    <div *ngIf="isDarkTheme; else moon" (click)="toggleTheme()">
+      <svg-icon
+        class="panel__theme-icon panel__theme-icon--sun"
+        src="assets/icons/sun.svg"
+      ></svg-icon>
+    </div>
+  </div>
+
+  <div class="panel__user-avatar">
+    <img src="assets/images/avatar.png" alt="avatar" />
+  </div>
+</aside>
+
+<ng-template #moon>
+  <div (click)="toggleTheme()">
+    <svg-icon
+      class="panel__theme-icon panel__theme-icon--moon"
+      src="assets/icons/moon.svg"
+    ></svg-icon>
+  </div>
+</ng-template>

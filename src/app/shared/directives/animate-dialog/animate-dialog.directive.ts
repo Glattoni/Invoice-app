@@ -18,6 +18,7 @@ import {
 } from '@angular/core';
 
 @Directive({
+  standalone: true,
   selector: '[appAnimateDialog]',
 })
 export class AnimateDialogDirective implements AfterViewInit, OnDestroy {
