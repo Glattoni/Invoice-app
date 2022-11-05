@@ -35,7 +35,7 @@
       <app-mark-invoice
         [slug]="invoice.slug"
         (cancel)="closeDialog(markDialog)"
-        (markAsPaid)="onMarkAsPaid()"
+        (markAsPaid)="onMarkAsPaid(); markDialog.close()"
       ></app-mark-invoice>
     </dialog>
   </div>

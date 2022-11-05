@@ -35,8 +35,8 @@ import { NgControl, ControlValueAccessor } from '@angular/forms';
 import { scaleDown } from '@shared/animations';
 import { DATE_FORMAT } from '@shared/constants/date-formats.constants';
 
-import { DatepickerGridComponent } from './datepicker-grid/datepicker-grid.component';
-import { DatepickerHeaderComponent } from './datepicker-header/datepicker-header.component';
+import { DatepickerGridComponent } from '../datepicker-grid/datepicker-grid.component';
+import { DatepickerHeaderComponent } from '../datepicker-header/datepicker-header.component';
 import { ClickedOutsideDirective } from '@shared/directives/clicked-outside/clicked-outside.directive';
 
 interface Day {
