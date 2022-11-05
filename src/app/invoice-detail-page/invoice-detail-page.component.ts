@@ -1,4 +1,11 @@
-import { fromEvent, Observable, Subject, takeUntil } from 'rxjs';
+import {
+  fromEvent,
+  filter,
+  Observable,
+  Subject,
+  takeUntil,
+  switchMap,
+} from 'rxjs';
 
 import {
   OnInit,
@@ -7,7 +14,12 @@ import {
   ChangeDetectionStrategy,
 } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
+import {
+  ActivatedRoute,
+  NavigationEnd,
+  NavigationStart,
+  Router,
+} from '@angular/router';
 
 import { Invoice } from '@shared/models/invoice.model';
 import { GoBackComponent } from '@shared/components/go-back/go-back.component';
@@ -57,6 +69,15 @@ export class InvoiceDetailPageComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.invoiceService.getInvoice(this.invoiceId);
+
+    this.router.events
+      .pipe(
+        filter((event) => event instanceof NavigationStart),
+        takeUntil(this.destroy$)
+      )
+      .subscribe(() => {
+        this.billingFormService.finishEditing();
+      });
   }
 
   public ngOnDestroy(): void {
