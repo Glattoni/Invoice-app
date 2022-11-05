@@ -1,4 +1,5 @@
 import {
+  tap,
   map,
   take,
   merge,
@@ -165,7 +166,7 @@ export class BillingFormComponent implements OnInit, OnDestroy {
     if (this.valid) {
       this.invoiceService.updateInvoice(invoiceId, this.formData);
       this.resetForm();
-      this.billingFormService.close();
+      this.billingFormService.finishEditing();
     }
   }
 
@@ -176,8 +177,10 @@ export class BillingFormComponent implements OnInit, OnDestroy {
   private patchFormValue(): void {
     this.editMode$
       .pipe(
-        filter((value) => !!value),
-        switchMap(() => this.invoice$)
+        tap((value) => !value && this.resetForm()),
+        filter((value) => value),
+        switchMap(() => this.invoice$),
+        takeUntil(this.destroy$)
       )
       .subscribe((invoice) => {
         this.form.patchValue({
