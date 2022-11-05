@@ -8,12 +8,13 @@ _Note: If you are a firefox user, you might need to set this flag `layout.css.ha
 You will need to have `Node.js` installed. You can get it by visiting https://nodejs.org or by using any of the node version managers. It is recommended to use [fnm](https://github.com/Schniz/fnm).
 
 ## Architecture
+Data is stored in the `MongoDB` database. `Express.js` and `Mongoose` are used to communicate with a database.
+
 
 <div align="center">
   <img src="./src/assets/images/architecture.svg" alt="i use arch btw">
 </div>
 
-Data is stored in the `MongoDB` database. `Express.js` and `Mongoose` are used to communicate with a database.
 
 ## Development
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
