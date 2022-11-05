@@ -15,6 +15,45 @@ Data is stored in the `MongoDB` database. `Express.js` and `Mongoose` are used t
   <img src="./src/assets/images/architecture.svg" alt="i use arch btw">
 </div>
 
+## Structure
+
+<pre>
+├── app
+│   ├── billing-form
+│   │   ├── components
+│   │   ├── directives
+│   │   └── models
+│   ├── form-controls
+│   │   ├── components
+│   │   └── pipes
+│   ├── home-page
+│   │   ├── components
+│   │   └── services
+│   ├── invoice-detail-page
+│   │   └── components
+│   ├── services
+│   │   ├── billing-form
+│   │   ├── invoice
+│   │   ├── local-storage
+│   │   └── theme
+│   ├── shared
+│   │   ├── animations
+│   │   ├── components
+│   │   ├── constants
+│   │   ├── directives
+│   │   └── models
+│   └── sidebar
+│       └── components
+├── assets
+│   ├── fonts
+│   │   ├── Bold
+│   │   └── Medium
+│   ├── icons
+│   └── images
+├── environments
+├── styles
+└── utils
+</pre>
 
 ## Development
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
