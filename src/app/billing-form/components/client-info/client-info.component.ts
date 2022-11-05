@@ -12,8 +12,8 @@ import { TextInputComponent } from 'app/form-controls/components/text-input/text
 import { DisabledControlDirective } from '@shared/directives/disabled-control/disabled-control.directive';
 
 @Component({
-  standalone: true,
   selector: 'app-client-info',
+  standalone: true,
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -80,3 +80,4 @@ export class ClientInfoComponent implements OnInit {
     return this.form?.get('clientAddress.country');
   }
 }
+Footer;

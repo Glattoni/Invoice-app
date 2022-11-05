@@ -13,11 +13,9 @@ import { BillingFormComponent } from './billing-form/billing-form.component';
   template: `
     <div id="invoice-app" [attr.data-theme]="activeTheme$ | async">
       <app-sidebar></app-sidebar>
-
       <main>
         <router-outlet></router-outlet>
       </main>
-
       <app-billing-form></app-billing-form>
     </div>
   `,
