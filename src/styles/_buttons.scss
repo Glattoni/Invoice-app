@@ -6,6 +6,11 @@
   transition: background-color var(--transition-secondary),
     color var(--transition-secondary);
 
+  &:disabled {
+    pointer-events: none;
+    opacity: 0.25;
+  }
+
   &:hover {
     transition: background-color var(--transition-primary);
   }

@@ -8,7 +8,7 @@
     <button class="app-button neutral" (click)="edit.emit()">Edit</button>
     <button class="app-button danger" (click)="delete.emit()">Delete</button>
     <button
-      *ngIf="!isPaid"
+      [disabled]="isPaid"
       class="app-button primary"
       (click)="markAsPaid.emit()"
     >

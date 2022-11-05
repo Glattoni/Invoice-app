@@ -1,11 +1,4 @@
-import {
-  fromEvent,
-  filter,
-  Observable,
-  Subject,
-  takeUntil,
-  switchMap,
-} from 'rxjs';
+import { fromEvent, filter, Observable, Subject, takeUntil } from 'rxjs';
 
 import {
   OnInit,
@@ -14,12 +7,7 @@ import {
   ChangeDetectionStrategy,
 } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
-import {
-  ActivatedRoute,
-  NavigationEnd,
-  NavigationStart,
-  Router,
-} from '@angular/router';
+import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
 
 import { Invoice } from '@shared/models/invoice.model';
 import { GoBackComponent } from '@shared/components/go-back/go-back.component';
