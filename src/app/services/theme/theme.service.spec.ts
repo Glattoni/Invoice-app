@@ -7,15 +7,15 @@ describe('ThemeExperimentalService', () => {
   let service: ThemeService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
     service = TestBed.inject(ThemeService);
   });
 
   it('should toggle active theme', (done) => {
-    Reflect.defineProperty(service, 'activeTheme', {
-      value: new BehaviorSubject(Theme.Light),
-    });
-    service.toggleTheme();
+    const theme = new BehaviorSubject(Theme.Light);
+    Reflect.defineProperty(service, 'activeTheme', { value: theme });
+
+    service.toggle();
+
     service['activeTheme'].subscribe((theme) => {
       expect(theme).toBe(Theme.Dark);
       done();
