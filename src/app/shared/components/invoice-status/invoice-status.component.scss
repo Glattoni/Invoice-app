@@ -50,12 +50,14 @@ span {
 
 .draft {
   background-color: var(--draft-background);
+  transition: background-color var(--transition-secondary);
 
   span {
     color: var(--draft-foreground);
 
     &::after {
       background-color: var(--draft-foreground);
+      transition: background-color var(--transition-secondary);
     }
   }
 }
