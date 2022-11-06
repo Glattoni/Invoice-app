@@ -8,8 +8,8 @@ import { ThemeService } from 'app/services/theme/theme.service';
 import { LogoComponent } from './components/logo/logo.component';
 
 @Component({
-  standalone: true,
   selector: 'app-sidebar',
+  standalone: true,
   imports: [AngularSvgIconModule, CommonModule, RouterModule, LogoComponent],
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
@@ -23,6 +23,6 @@ export class SidebarComponent {
   }
 
   public toggleTheme(): void {
-    this.themeService.toggleTheme();
+    this.themeService.toggle();
   }
 }
