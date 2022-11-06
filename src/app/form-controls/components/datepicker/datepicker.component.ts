@@ -130,9 +130,9 @@ export class DatepickerComponent
   private day = 0;
 
   /**
-   * Represents the most recent action (increment | decrement | date selection)
+   * Represents the last action (increment | decrement | date selection)
    */
-  private readonly recentAction$ = new ReplaySubject<Action>();
+  private readonly lastAction$ = new ReplaySubject<Action>();
 
   private readonly destroyed$ = new Subject<void>();
 
@@ -187,12 +187,12 @@ export class DatepickerComponent
 
     if (day.next) {
       this.operateMonth('INCREMENT');
-      this.recentAction$.next('DATE_SELECTION');
+      this.lastAction$.next('DATE_SELECTION');
     }
   }
 
   public selectDate(): void {
-    this.recentAction$.next('DATE_SELECTION');
+    this.lastAction$.next('DATE_SELECTION');
 
     this.onChange(this.ISODate);
     this.writeValue(this.ISODate);
@@ -204,7 +204,7 @@ export class DatepickerComponent
   public operateMonth(action: Action): void {
     of(this.month$.value)
       .pipe(
-        tap(() => this.recentAction$.next(action)),
+        tap(() => this.lastAction$.next(action)),
         map((month) => (action === 'INCREMENT' ? month + 1 : month - 1)),
         map((month) => month % LAST_MONTH || LAST_MONTH),
         takeUntil(this.destroyed$)
@@ -271,7 +271,7 @@ export class DatepickerComponent
     this.month$
       .pipe(
         filter(this.isJanuary),
-        withLatestFrom(this.recentAction$),
+        withLatestFrom(this.lastAction$),
         filter(([, action]) => action === 'INCREMENT'),
         takeUntil(this.destroyed$)
       )
@@ -287,7 +287,7 @@ export class DatepickerComponent
     this.month$
       .pipe(
         filter(this.isDecember),
-        withLatestFrom(this.recentAction$),
+        withLatestFrom(this.lastAction$),
         filter(([, action]) => action === 'DECREMENT'),
         takeUntil(this.destroyed$)
       )
