@@ -3,8 +3,8 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { InvoiceStatus } from '@shared/constants/invoice.constants';
 
 @Component({
-  standalone: true,
   selector: 'app-invoice-status',
+  standalone: true,
   imports: [CommonModule],
   template: `
     <div [ngClass]="variant">
